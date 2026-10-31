@@ -134,7 +134,7 @@ export function FreelanceRateCalculator() {
           </span>
 
           <div className="my-4 space-y-4">
-            <div className="rounded-lg bg-[#faf5ea] p-4 text-center">
+            <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Recommended Hourly Rate</span>
               <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
                 {fmtUSD(calc.hourlyRate, 0)}
@@ -174,19 +174,19 @@ export function FreelanceRateCalculator() {
           Annual Revenue Allocation Breakdown
         </h4>
         <div className="grid gap-3 sm:grid-cols-4 text-xs">
-          <div className="rounded-lg bg-[#faf5ea] p-3">
+          <div className="rounded-lg bg-muted/50 p-3">
             <span className="text-muted-foreground block">Target Net Take-Home</span>
             <span className="text-sm font-bold text-[#1f5f45] mt-1 block">{fmtUSD(targetIncome, 0)}</span>
           </div>
-          <div className="rounded-lg bg-[#faf5ea] p-3">
+          <div className="rounded-lg bg-muted/50 p-3">
             <span className="text-muted-foreground block">Estimated Tax Reserve</span>
             <span className="text-sm font-bold text-[#a4502c] mt-1 block">{fmtUSD(calc.taxOwed, 0)}</span>
           </div>
-          <div className="rounded-lg bg-[#faf5ea] p-3">
+          <div className="rounded-lg bg-muted/50 p-3">
             <span className="text-muted-foreground block">Business Overhead</span>
             <span className="text-sm font-bold text-foreground mt-1 block">{fmtUSD(expenses, 0)}</span>
           </div>
-          <div className="rounded-lg bg-[#faf5ea] p-3">
+          <div className="rounded-lg bg-muted/50 p-3">
             <span className="text-muted-foreground block">Weeks Worked / Year</span>
             <span className="text-sm font-bold text-foreground mt-1 block">{calc.workingWeeks} weeks ({52 - calc.workingWeeks} off)</span>
           </div>

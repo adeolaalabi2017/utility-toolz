@@ -135,7 +135,7 @@ export function HreflangGenerator() {
             <span>{copied ? "Copied" : "Copy Tags"}</span>
           </Button>
         </div>
-        <pre className="overflow-x-auto rounded bg-[#faf5ea] p-3 font-mono text-xs text-foreground leading-relaxed">
+        <pre className="overflow-x-auto rounded bg-muted/50 p-3 font-mono text-xs text-foreground leading-relaxed">
           {generatedTags}
         </pre>
       </div>

@@ -110,8 +110,8 @@ export function ToolPage({
 
         {/* Worked example */}
         <section className="mt-10 max-w-3xl" aria-labelledby="example">
-          <div className="rounded-xl border border-border bg-[#fff6e0] p-5 shadow-lark-sm sm:p-6">
-            <p className="flex items-center gap-2 text-sm font-semibold text-[#a4502c]">
+          <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm sm:p-6">
+            <p className="flex items-center gap-2 text-sm font-semibold text-[#a4502c] dark:text-[#fb923c]">
               <Lightbulb className="h-4 w-4" /> Worked example
             </p>
             <p className="mt-3 leading-relaxed text-foreground/85">{tool.example}</p>

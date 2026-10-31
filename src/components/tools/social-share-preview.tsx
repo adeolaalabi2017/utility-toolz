@@ -162,7 +162,7 @@ export function SocialSharePreview() {
             <span>{copied ? "Copied" : "Copy Meta Tags"}</span>
           </Button>
         </div>
-        <pre className="overflow-x-auto rounded bg-[#faf5ea] p-3 font-mono text-xs text-foreground">
+        <pre className="overflow-x-auto rounded bg-muted/50 p-3 font-mono text-xs text-foreground">
           {metaTags}
         </pre>
       </div>

@@ -87,7 +87,7 @@ export function NpsCalculator() {
           </span>
 
           <div className="my-4 space-y-4">
-            <div className="rounded-lg bg-[#faf5ea] p-4 text-center">
+            <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Net Promoter Score (NPS)</span>
               <p className={`tnum font-display text-display-lg mt-1 font-bold ${
                 calc.nps >= 50 ? "text-[#1f5f45]" : calc.nps >= 0 ? "text-[#3f346f]" : "text-[#cf4f43]"

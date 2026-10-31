@@ -68,7 +68,7 @@ export function UtmBuilder() {
           </Button>
         </div>
 
-        <div className="rounded-lg bg-[#faf5ea] p-3.5 font-mono text-xs text-foreground break-all leading-relaxed">
+        <div className="rounded-lg bg-muted/50 p-3.5 font-mono text-xs text-foreground break-all leading-relaxed">
           {fullUrl || "Enter a valid website URL below to generate UTM tracking link."}
         </div>
 
@@ -175,7 +175,7 @@ export function UtmBuilder() {
                   setSource(p.source);
                   setMedium(p.medium);
                 }}
-                className="w-full text-left rounded-lg border border-border bg-background p-2.5 text-xs transition-colors hover:border-[#6b5faf] hover:bg-[#faf5ea]"
+                className="w-full text-left rounded-lg border border-border bg-background p-2.5 text-xs transition-colors hover:border-[#6b5faf] hover:bg-muted/50"
               >
                 <span className="font-semibold text-foreground block">{p.name}</span>
                 <span className="font-mono text-[11px] text-muted-foreground">

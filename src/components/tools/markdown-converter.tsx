@@ -158,7 +158,7 @@ export function MarkdownConverter() {
             readOnly
             value={converted}
             rows={12}
-            className="w-full flex-1 resize-y rounded-md border border-border bg-[#faf5ea] p-3 font-mono text-xs leading-relaxed text-foreground focus-visible:outline-none"
+            className="w-full flex-1 resize-y rounded-md border border-border bg-muted/50 p-3 font-mono text-xs leading-relaxed text-foreground focus-visible:outline-none"
           />
         </div>
       </div>

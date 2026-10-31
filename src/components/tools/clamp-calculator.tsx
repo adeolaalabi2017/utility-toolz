@@ -103,7 +103,7 @@ export function ClampCalculator() {
             </div>
           </div>
 
-          <div className="rounded-lg bg-[#faf5ea] p-3 text-xs text-muted-foreground">
+          <div className="rounded-lg bg-muted/50 p-3 text-xs text-muted-foreground">
             Root font size reference: <strong className="text-foreground">{rootSize}px (1rem)</strong>. Formula converts px to relative rem units for accessibility.
           </div>
         </div>
@@ -135,7 +135,7 @@ export function ClampCalculator() {
           </div>
 
           {/* Sample Typography Box */}
-          <div className="my-4 rounded-lg border border-border bg-[#fff6e0]/60 p-5 flex items-center justify-center min-h-[140px] overflow-hidden text-center">
+          <div className="my-4 rounded-lg border border-border bg-muted/60 p-5 flex items-center justify-center min-h-[140px] overflow-hidden text-center">
             <span
               style={{ fontSize: `${currentCalculatedSize}px`, lineHeight: 1.2 }}
               className="font-display font-semibold text-foreground transition-all duration-75"
@@ -168,7 +168,7 @@ export function ClampCalculator() {
                 <span>{copiedType === "css" ? "Copied" : "Copy CSS"}</span>
               </Button>
             </div>
-            <pre className="mt-2 overflow-x-auto rounded bg-[#faf5ea] p-3 font-mono text-xs text-foreground">
+            <pre className="mt-2 overflow-x-auto rounded bg-muted/50 p-3 font-mono text-xs text-foreground">
               font-size: {formula.cssClamp};
             </pre>
           </div>
@@ -188,7 +188,7 @@ export function ClampCalculator() {
                 <span>{copiedType === "tw" ? "Copied" : "Copy Tailwind"}</span>
               </Button>
             </div>
-            <pre className="mt-2 overflow-x-auto rounded bg-[#faf5ea] p-3 font-mono text-xs text-foreground">
+            <pre className="mt-2 overflow-x-auto rounded bg-muted/50 p-3 font-mono text-xs text-foreground">
               {formula.twText}
             </pre>
           </div>

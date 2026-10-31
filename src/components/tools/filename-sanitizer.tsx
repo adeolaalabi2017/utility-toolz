@@ -109,7 +109,7 @@ export function FilenameSanitizer() {
                 <span>{copiedType === item.id ? "Copied" : "Copy"}</span>
               </Button>
             </div>
-            <div className="rounded bg-[#faf5ea] p-2.5 font-mono text-xs text-foreground font-medium break-all">
+            <div className="rounded bg-muted/50 p-2.5 font-mono text-xs text-foreground font-medium break-all">
               {item.val || "—"}
             </div>
           </div>

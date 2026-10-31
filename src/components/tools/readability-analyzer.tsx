@@ -94,19 +94,19 @@ export function ReadabilityAnalyzer() {
           />
 
           <div className="grid grid-cols-4 gap-2 text-center text-xs text-muted-foreground">
-            <div className="rounded bg-[#faf5ea] p-2">
+            <div className="rounded bg-muted/50 p-2">
               <span className="block font-bold text-foreground">{stats.words}</span>
               <span className="text-[10px]">Words</span>
             </div>
-            <div className="rounded bg-[#faf5ea] p-2">
+            <div className="rounded bg-muted/50 p-2">
               <span className="block font-bold text-foreground">{stats.sentences}</span>
               <span className="text-[10px]">Sentences</span>
             </div>
-            <div className="rounded bg-[#faf5ea] p-2">
+            <div className="rounded bg-muted/50 p-2">
               <span className="block font-bold text-foreground">{stats.complexWords}</span>
               <span className="text-[10px]">Complex</span>
             </div>
-            <div className="rounded bg-[#faf5ea] p-2">
+            <div className="rounded bg-muted/50 p-2">
               <span className="block font-bold text-foreground">{stats.avgWordsPerSentence ? stats.avgWordsPerSentence.toFixed(1) : 0}</span>
               <span className="text-[10px]">Words/Sent</span>
             </div>
@@ -120,7 +120,7 @@ export function ReadabilityAnalyzer() {
           </span>
 
           <div className="my-4 space-y-4">
-            <div className="rounded-lg bg-[#faf5ea] p-4 text-center">
+            <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Flesch Reading Ease Score</span>
               <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
                 {stats.fleschEase.toFixed(1)}

@@ -162,7 +162,7 @@ export function JwtDecoder() {
           )}
 
           {expInfo && (
-            <div className="mt-4 rounded-lg border border-border bg-[#faf5ea] p-4 text-xs space-y-2">
+            <div className="mt-4 rounded-lg border border-border bg-muted/50 p-4 text-xs space-y-2">
               <div className="flex items-center justify-between">
                 <span className="font-semibold text-foreground flex items-center gap-1.5">
                   <Clock className="h-3.5 w-3.5 text-muted-foreground" />
@@ -215,7 +215,7 @@ export function JwtDecoder() {
               </Button>
             )}
           </div>
-          <pre className="mt-3 overflow-x-auto rounded-md bg-[#fff6e0]/60 p-3 font-mono text-xs text-foreground">
+          <pre className="mt-3 overflow-x-auto rounded-md bg-muted/60 p-3 font-mono text-xs text-foreground">
             {parsed.header ? JSON.stringify(parsed.header, null, 2) : "—"}
           </pre>
         </div>
@@ -242,13 +242,13 @@ export function JwtDecoder() {
               </Button>
             )}
           </div>
-          <pre className="mt-3 overflow-x-auto rounded-md bg-[#fff6e0]/60 p-3 font-mono text-xs text-foreground max-h-72">
+          <pre className="mt-3 overflow-x-auto rounded-md bg-muted/60 p-3 font-mono text-xs text-foreground max-h-72">
             {parsed.payload ? JSON.stringify(parsed.payload, null, 2) : "—"}
           </pre>
         </div>
 
         {/* Signature note */}
-        <div className="rounded-xl border border-border bg-[#faf5ea] p-4 text-xs text-muted-foreground flex items-center justify-between">
+        <div className="rounded-xl border border-border bg-muted/50 p-4 text-xs text-muted-foreground flex items-center justify-between">
           <span>Client-side decoder — your tokens never leave your browser.</span>
           <span className="font-mono text-[11px] text-[#1f5f45] font-semibold">100% Private</span>
         </div>

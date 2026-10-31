@@ -140,7 +140,7 @@ export function RedirectGenerator() {
               </Button>
             </div>
 
-            <pre className="mt-2 min-h-[220px] overflow-x-auto rounded bg-[#faf5ea] p-3.5 font-mono text-xs text-foreground leading-relaxed">
+            <pre className="mt-2 min-h-[220px] overflow-x-auto rounded bg-muted/50 p-3.5 font-mono text-xs text-foreground leading-relaxed">
               {outputRules || "# No redirect pairs provided"}
             </pre>
           </div>

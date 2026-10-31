@@ -7,13 +7,13 @@ import { cn } from "@/lib/utils";
 
 export function Footer() {
   return (
-    <footer className="mt-auto border-t bg-[#faf5ea]">
+    <footer className="mt-auto border-t border-border bg-card">
       <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-2" aria-label="Utility Toolz home">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink">
+              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink border border-transparent dark:border-border/60">
                 <LayoutGrid className="h-4.5 w-4.5 text-[#7fbb92]" />
               </span>
               <span className="font-display text-xl font-semibold tracking-tight">
@@ -24,7 +24,7 @@ export function Footer() {
               Professional tools organized by domain — finance, marketing, advertising, business
               and beyond. Built for people whose work depends on the numbers.
             </p>
-            <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-card px-3 py-1 text-xs text-muted-foreground">
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs text-muted-foreground">
               <span className="h-1.5 w-1.5 rounded-full bg-[#308f68]" />
               Catalogue complete · {TOOLS.length} tools live
             </p>
@@ -39,7 +39,7 @@ export function Footer() {
                   <Link
                     href={`/${d.slug}`}
                     className={cn(
-                      "text-sm transition-colors hover:text-[#a4502c]",
+                      "text-sm transition-colors hover:text-[#a4502c] dark:hover:text-[#fb923c]",
                       d.status === "live" ? "text-foreground/80" : "text-foreground/45"
                     )}
                   >
@@ -65,7 +65,7 @@ export function Footer() {
                 <li key={p.slug}>
                   <Link
                     href={`/professions/${p.slug}`}
-                    className="text-sm text-foreground/80 transition-colors hover:text-[#a4502c]"
+                    className="text-sm text-foreground/80 transition-colors hover:text-[#a4502c] dark:hover:text-[#fb923c]"
                   >
                     {p.name}
                   </Link>

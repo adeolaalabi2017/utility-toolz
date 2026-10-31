@@ -173,7 +173,7 @@ export function CronBuilder() {
               </Button>
             </div>
           </div>
-          <div className="rounded-lg bg-[#fff6e0] p-4 sm:max-w-xs">
+          <div className="rounded-lg bg-muted/60 p-4 sm:max-w-xs">
             <span className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
               <Sparkles className="h-3.5 w-3.5 text-[#a4502c]" /> Plain English
             </span>

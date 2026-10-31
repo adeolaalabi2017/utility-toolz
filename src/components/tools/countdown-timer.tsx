@@ -124,7 +124,7 @@ export function CountdownTimer() {
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
-            <div className="rounded-xl bg-[#faf5ea] p-4 shadow-lark-sm">
+            <div className="rounded-xl bg-muted/50 p-4 shadow-lark-sm">
               <span className="tnum font-display text-display-lg text-[#1f5f45] font-bold block">
                 {time.days}
               </span>
@@ -133,7 +133,7 @@ export function CountdownTimer() {
               </span>
             </div>
 
-            <div className="rounded-xl bg-[#faf5ea] p-4 shadow-lark-sm">
+            <div className="rounded-xl bg-muted/50 p-4 shadow-lark-sm">
               <span className="tnum font-display text-display-lg text-[#1f5f45] font-bold block">
                 {String(time.hours).padStart(2, "0")}
               </span>
@@ -142,7 +142,7 @@ export function CountdownTimer() {
               </span>
             </div>
 
-            <div className="rounded-xl bg-[#faf5ea] p-4 shadow-lark-sm">
+            <div className="rounded-xl bg-muted/50 p-4 shadow-lark-sm">
               <span className="tnum font-display text-display-lg text-[#1f5f45] font-bold block">
                 {String(time.minutes).padStart(2, "0")}
               </span>
@@ -151,7 +151,7 @@ export function CountdownTimer() {
               </span>
             </div>
 
-            <div className="rounded-xl bg-[#faf5ea] p-4 shadow-lark-sm">
+            <div className="rounded-xl bg-muted/50 p-4 shadow-lark-sm">
               <span className="tnum font-display text-display-lg text-[#a4502c] font-bold block">
                 {String(time.seconds).padStart(2, "0")}
               </span>

@@ -118,7 +118,7 @@ export function FinalExamCalculator() {
           </span>
 
           <div className="my-4 space-y-4">
-            <div className="rounded-lg bg-[#faf5ea] p-4 text-center">
+            <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Required Exam Score</span>
               <p className={`tnum font-display text-display-lg mt-1 font-bold ${calc.color}`}>
                 {calc.requiredScore <= 0 ? "0%" : `${calc.requiredScore.toFixed(1)}%`}

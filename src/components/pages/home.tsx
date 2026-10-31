@@ -636,7 +636,7 @@ export function HomePage() {
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
             <button
               onClick={() => setOpen(true)}
-              className="flex w-full items-center justify-between gap-3 rounded-full border border-input bg-card px-5 py-3.5 text-left text-muted-foreground shadow-lark-sm transition-all hover:border-primary/50 hover:bg-[#fffcf2] sm:w-auto sm:min-w-[280px]"
+              className="flex w-full items-center justify-between gap-3 rounded-full border border-input bg-card px-5 py-3.5 text-left text-muted-foreground shadow-lark-sm transition-all hover:border-primary/50 hover:bg-accent sm:w-auto sm:min-w-[280px]"
             >
               <div className="flex items-center gap-2.5">
                 <Search className="h-4 w-4 shrink-0 text-[#a4502c]" />
@@ -805,16 +805,16 @@ export function HomePage() {
 
       {/* --------------------- 8. ACTION / PREMIUM PROMO --------------------- */}
       <section className="mx-auto max-w-6xl px-4 pb-28 sm:px-6" aria-labelledby="premium">
-        <div className="overflow-hidden rounded-2xl bg-ink px-7 py-12 text-[#fef5de] shadow-lark sm:px-12 sm:py-16">
+        <div className="overflow-hidden rounded-2xl bg-ink px-7 py-12 text-[#fef5de] shadow-lark sm:px-12 sm:py-16 border border-transparent dark:border-[#24443b]">
           <div className="grid items-center gap-10 lg:grid-cols-[1.5fr_1fr]">
             <div>
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#f0a469]">
                 <Crown className="h-4 w-4" /> Utility Toolz Pro
               </p>
-              <h2 id="premium" className="mt-4 font-display text-3xl sm:text-4xl tracking-tight">
+              <h2 id="premium" className="mt-4 font-display text-3xl sm:text-4xl tracking-tight text-[#fef5de]">
                 Ad-free, with your presets saved — $5/month
               </h2>
-              <p className="mt-4 max-w-xl text-lg leading-relaxed text-[#fef5de]/75">
+              <p className="mt-4 max-w-xl text-lg leading-relaxed text-[#fef5de]/80">
                 The tools stay free forever. Pro removes ads, remembers your saved scenarios
                 across devices, and unlocks bulk exports across the full {liveCount}-tool catalogue.
               </p>
@@ -829,12 +829,12 @@ export function HomePage() {
                   <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e07a3c]/25">
                     <Check className="h-3 w-3 text-[#f0a469]" />
                   </span>
-                  <span className="text-[#fef5de]/85">{b}</span>
+                  <span className="text-[#fef5de]/90">{b}</span>
                 </li>
               ))}
               <li>
                 <Button
-                  className="mt-3 w-full bg-[#fef5de] text-[#1f4a3f] hover:bg-white sm:w-auto font-semibold px-6 shadow-sm"
+                  className="mt-3 w-full bg-[#fef5de] text-[#1f4a3f] hover:bg-white sm:w-auto font-semibold px-6 shadow-sm dark:bg-[#fef5de] dark:text-[#11261f]"
                   onClick={() =>
                     toast({
                       title: "You're on the waitlist",

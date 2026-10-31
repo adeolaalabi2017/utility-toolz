@@ -93,7 +93,7 @@ export function SvgToCss() {
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pb-3">
             Rendered Preview
           </span>
-          <div className="flex-1 rounded-lg border border-dashed border-border bg-[#fff6e0]/60 p-6 flex flex-col items-center justify-center min-h-[200px]">
+          <div className="flex-1 rounded-lg border border-dashed border-border bg-muted/60 p-6 flex flex-col items-center justify-center min-h-[200px]">
             {cleanSvg.includes("<svg") ? (
               <div
                 className="h-24 w-24 flex items-center justify-center p-2 rounded-lg bg-card border border-border shadow-lark-sm"
@@ -129,7 +129,7 @@ export function SvgToCss() {
               <span>{copiedType === "css" ? "Copied" : "Copy CSS"}</span>
             </Button>
           </div>
-          <pre className="mt-2 overflow-x-auto rounded bg-[#faf5ea] p-3 font-mono text-xs text-foreground">
+          <pre className="mt-2 overflow-x-auto rounded bg-muted/50 p-3 font-mono text-xs text-foreground">
             {cssUrl}
           </pre>
         </div>
@@ -151,7 +151,7 @@ export function SvgToCss() {
               <span>{copiedType === "b64" ? "Copied" : "Copy Data URI"}</span>
             </Button>
           </div>
-          <pre className="mt-2 overflow-x-auto rounded bg-[#faf5ea] p-3 font-mono text-xs text-foreground">
+          <pre className="mt-2 overflow-x-auto rounded bg-muted/50 p-3 font-mono text-xs text-foreground">
             {base64Uri || "—"}
           </pre>
         </div>

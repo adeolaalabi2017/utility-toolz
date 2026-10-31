@@ -271,7 +271,7 @@ export function BoxShadowGenerator() {
             <div
               className={`flex-1 min-h-[260px] rounded-lg border border-border/80 flex items-center justify-center p-8 transition-colors ${
                 previewBg === "cream"
-                  ? "bg-[#fff6e0]"
+                  ? "bg-muted/60"
                   : previewBg === "white"
                   ? "bg-white"
                   : "bg-ink text-[#fef5de]"
@@ -310,7 +310,7 @@ export function BoxShadowGenerator() {
               <span>{copiedType === "css" ? "Copied" : "Copy CSS"}</span>
             </Button>
           </div>
-          <pre className="mt-2 overflow-x-auto rounded bg-[#fff6e0]/60 p-3 font-mono text-xs text-foreground">
+          <pre className="mt-2 overflow-x-auto rounded bg-muted/60 p-3 font-mono text-xs text-foreground">
             box-shadow: {cssValue};
           </pre>
         </div>
@@ -330,7 +330,7 @@ export function BoxShadowGenerator() {
               <span>{copiedType === "tw" ? "Copied" : "Copy Tailwind"}</span>
             </Button>
           </div>
-          <pre className="mt-2 overflow-x-auto rounded bg-[#fff6e0]/60 p-3 font-mono text-xs text-foreground">
+          <pre className="mt-2 overflow-x-auto rounded bg-muted/60 p-3 font-mono text-xs text-foreground">
             {tailwindValue}
           </pre>
         </div>

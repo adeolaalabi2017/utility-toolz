@@ -133,7 +133,7 @@ export function TimestampConverter() {
           </div>
 
           {parsedFromEpoch ? (
-            <div className="space-y-3 rounded-lg bg-[#faf5ea] p-4 text-xs">
+            <div className="space-y-3 rounded-lg bg-muted/50 p-4 text-xs">
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Local Time:</span>
                 <div className="flex items-center gap-1.5 font-semibold text-foreground">
@@ -187,7 +187,7 @@ export function TimestampConverter() {
           </div>
 
           {parsedFromDate ? (
-            <div className="space-y-3 rounded-lg bg-[#faf5ea] p-4 text-xs">
+            <div className="space-y-3 rounded-lg bg-muted/50 p-4 text-xs">
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Epoch (Seconds):</span>
                 <div className="flex items-center gap-1.5 font-mono font-bold text-base text-[#1f5f45]">

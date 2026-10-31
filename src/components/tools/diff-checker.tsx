@@ -231,7 +231,7 @@ export function DiffChecker() {
               </Button>
             </div>
 
-            <div className="max-h-80 overflow-auto rounded-lg border border-border bg-[#faf5ea] p-2 font-mono text-xs leading-5">
+            <div className="max-h-80 overflow-auto rounded-lg border border-border bg-muted/50 p-2 font-mono text-xs leading-5">
               {diff.length === 0 ? (
                 <div className="p-6 text-center">
                   <p className="font-medium text-foreground">No text to compare yet</p>

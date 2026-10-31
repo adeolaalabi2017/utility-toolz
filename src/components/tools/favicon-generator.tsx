@@ -207,7 +207,7 @@ export function FaviconGenerator() {
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {SIZES.map((s) => (
-            <div key={s.name} className="flex items-center justify-between rounded-lg border border-border bg-[#faf5ea] p-3 text-xs">
+            <div key={s.name} className="flex items-center justify-between rounded-lg border border-border bg-muted/50 p-3 text-xs">
               <div>
                 <span className="font-semibold text-foreground block">{s.label}</span>
                 <span className="text-[11px] text-muted-foreground">{s.desc}</span>
@@ -244,7 +244,7 @@ export function FaviconGenerator() {
             <span>{copiedSnippet ? "Copied" : "Copy Tags"}</span>
           </Button>
         </div>
-        <pre className="overflow-x-auto rounded bg-[#faf5ea] p-3 font-mono text-xs text-foreground">
+        <pre className="overflow-x-auto rounded bg-muted/50 p-3 font-mono text-xs text-foreground">
           {htmlSnippet}
         </pre>
       </div>

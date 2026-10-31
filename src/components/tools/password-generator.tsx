@@ -125,7 +125,7 @@ export function PasswordGenerator() {
             />
           </div>
 
-          <div className="space-y-2.5 rounded-lg border border-border bg-[#faf5ea] p-4 text-xs">
+          <div className="space-y-2.5 rounded-lg border border-border bg-muted/50 p-4 text-xs">
             <p className="font-semibold uppercase tracking-wider text-muted-foreground">
               Character Sets
             </p>

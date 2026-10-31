@@ -274,7 +274,7 @@ export function CurlToCode() {
           </Button>
         </div>
 
-        <pre className="mt-4 flex-1 overflow-x-auto rounded-md bg-[#fff6e0]/60 p-4 font-mono text-xs leading-relaxed text-foreground">
+        <pre className="mt-4 flex-1 overflow-x-auto rounded-md bg-muted/60 p-4 font-mono text-xs leading-relaxed text-foreground">
           <code>{outputCode}</code>
         </pre>
       </div>

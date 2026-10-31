@@ -85,7 +85,7 @@ export function PinnedToolsBar() {
   if (validTools.length === 0) return null;
 
   return (
-    <div className="mb-6 rounded-xl border border-border bg-[#faf5ea] p-4 shadow-lark-sm">
+    <div className="mb-6 rounded-xl border border-border bg-card p-4 shadow-lark-sm">
       <div className="flex items-center gap-2 mb-3">
         <Star className="h-4 w-4 fill-[#e07a3c] text-[#e07a3c]" />
         <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/80">

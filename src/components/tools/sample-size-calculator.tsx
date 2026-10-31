@@ -111,7 +111,7 @@ export function SampleSizeCalculator() {
           </span>
 
           <div className="my-4 space-y-4">
-            <div className="rounded-lg bg-[#faf5ea] p-4 text-center">
+            <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Required Sample Size</span>
               <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
                 {fmtNum(calc.roundedSize, 0)}
@@ -154,7 +154,7 @@ export function SampleSizeCalculator() {
             <div
               key={c.err}
               className={`rounded-lg border p-3 ${
-                c.err === marginOfError ? "border-[#1f5f45] bg-[#faf5ea] font-bold" : "border-border bg-background"
+                c.err === marginOfError ? "border-[#1f5f45] bg-muted/50 font-bold" : "border-border bg-background"
               }`}
             >
               <span className="text-muted-foreground block">±{c.err}% Error</span>

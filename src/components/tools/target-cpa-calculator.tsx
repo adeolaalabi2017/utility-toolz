@@ -103,7 +103,7 @@ export function TargetCpaCalculator() {
           </span>
 
           <div className="my-4 space-y-4">
-            <div className="rounded-lg bg-[#faf5ea] p-4 text-center">
+            <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Target Cost Per Acquisition (CPA)</span>
               <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
                 {fmtUSD(calc.targetCpa, 2)}

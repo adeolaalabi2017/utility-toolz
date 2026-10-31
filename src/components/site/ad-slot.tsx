@@ -16,7 +16,7 @@ export function AdSlot({ slot, className }: AdSlotProps) {
     <aside
       data-ad-slot={slot}
       className={cn(
-        "my-6 flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-[#faf5ea]/80 p-4 text-center transition-all",
+        "my-6 flex flex-col items-center justify-center rounded-xl border border-dashed border-border bg-card/80 p-4 text-center transition-all",
         slot === "below-tool" && "min-h-[120px] sm:min-h-[140px] w-full",
         slot === "beside-faq" && "min-h-[260px] w-full",
         slot === "inline" && "min-h-[90px] w-full",
