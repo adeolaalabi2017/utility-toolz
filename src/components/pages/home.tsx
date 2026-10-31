@@ -283,6 +283,9 @@ function HeroWorkbench() {
 }
 
 function DomainTicker() {
+  const tickerRef = useRef<HTMLDivElement>(null);
+  const tweenRef = useRef<gsap.core.Tween | null>(null);
+
   const tickerItems = DOMAINS.map((d) => {
     const tools = toolsByDomain(d.slug);
     const sample = tools
@@ -299,9 +302,32 @@ function DomainTicker() {
     };
   });
 
+  useGSAP(
+    () => {
+      if (!tickerRef.current) return;
+
+      // GSAP hardware-accelerated continuous infinite scroll
+      tweenRef.current = gsap.to(tickerRef.current, {
+        xPercent: -50,
+        ease: "none",
+        duration: 45,
+        repeat: -1,
+      });
+    },
+    { scope: tickerRef }
+  );
+
   return (
-    <div className="w-full overflow-hidden border-y border-border/80 bg-card/40 py-3.5 backdrop-blur-xs select-none">
-      <div className="animate-marquee flex items-center gap-6 whitespace-nowrap">
+    <div
+      className="w-full overflow-hidden border-y border-border/80 bg-card/40 py-3.5 backdrop-blur-xs select-none"
+      onMouseEnter={() => tweenRef.current?.pause()}
+      onMouseLeave={() => tweenRef.current?.play()}
+    >
+      <div
+        ref={tickerRef}
+        className="flex items-center gap-6 whitespace-nowrap will-change-transform"
+        style={{ width: "max-content" }}
+      >
         {[...tickerItems, ...tickerItems].map((item, idx) => {
           const Icon = item.icon;
           const acc = domainAccent(item.slug);
