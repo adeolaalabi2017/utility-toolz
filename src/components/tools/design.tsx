@@ -199,7 +199,7 @@ export function ImageCompressor() {
               </div>
               <Button
                 className="w-full gap-2"
-                onClick={() => downloadBlob(`${base}-compressed.${ext}`, fetchBlob(outputUrl))}
+                onClick={async () => downloadBlob(`${base}-compressed.${ext}`, await fetchBlob(outputUrl))}
               >
                 <Download className="h-4 w-4" /> Download compressed image
               </Button>

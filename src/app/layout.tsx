@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Geist, Outfit } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
@@ -6,6 +7,18 @@ import { SearchProvider } from "@/components/site/search-dialog";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { PwaRegister } from "@/components/site/pwa-register";
+
+const geistSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+  display: "swap",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://utilitytoolz.com";
 
@@ -74,13 +87,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={`${geistSans.variable} ${outfit.variable}`} suppressHydrationWarning>
       <body className="antialiased bg-background text-foreground font-sans">
         <ThemeProvider>
           <SearchProvider>
             <div className="flex min-h-screen flex-col bg-background text-foreground">
               <Header />
-              <main className="flex-1">{children}</main>
+              <main className="flex-1 overflow-x-hidden w-full max-w-full">{children}</main>
               <Footer />
             </div>
           </SearchProvider>

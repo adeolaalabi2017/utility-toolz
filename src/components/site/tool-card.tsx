@@ -16,7 +16,7 @@ export function ToolCard({ tool, compact }: { tool: Tool; compact?: boolean }) {
     <Link
       href={`/${tool.domain}/${tool.slug}`}
       className={cn(
-        "group flex flex-col rounded-xl border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lark sm:p-5",
+        "group relative flex flex-col overflow-hidden rounded-xl border bg-card p-4 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-lark sm:p-5",
         compact && "p-3.5 sm:p-4"
       )}
     >
@@ -24,7 +24,7 @@ export function ToolCard({ tool, compact }: { tool: Tool; compact?: boolean }) {
         {Icon && (
           <span
             className={cn(
-              "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
+              "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg transition-transform duration-500 ease-out group-hover:scale-110",
               acc.soft
             )}
           >
@@ -33,10 +33,15 @@ export function ToolCard({ tool, compact }: { tool: Tool; compact?: boolean }) {
         )}
         <div className="flex items-center gap-1">
           <BookmarkButton slug={tool.slug} />
-          <ArrowUpRight className="h-4 w-4 text-muted-foreground/40 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#c9603c]" />
+          <ArrowUpRight className="h-4 w-4 text-muted-foreground/40 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#c9603c]" />
         </div>
       </div>
-      <h3 className={cn("mt-3 font-display leading-snug tracking-tight", compact ? "text-base" : "text-display-sm")}>
+      <h3
+        className={cn(
+          "mt-3 font-display leading-snug tracking-tight transition-colors duration-300 group-hover:text-primary",
+          compact ? "text-base" : "text-display-sm"
+        )}
+      >
         {tool.name}
       </h3>
       {!compact && (
@@ -44,7 +49,7 @@ export function ToolCard({ tool, compact }: { tool: Tool; compact?: boolean }) {
           {tool.tagline}
         </p>
       )}
-      <div className="mt-3 flex items-center gap-1.5 text-[11px] text-muted-foreground">
+      <div className="mt-auto pt-3 flex items-center gap-1.5 text-[11px] text-muted-foreground">
         <span className="rounded-full bg-muted px-2 py-0.5">{domain?.shortName}</span>
         <span className="rounded-full bg-muted px-2 py-0.5">{tool.category}</span>
       </div>

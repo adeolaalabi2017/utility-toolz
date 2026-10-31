@@ -172,10 +172,12 @@ export function ResultHero({
   label,
   value,
   sub,
+  copyText,
 }: {
   label: string;
   value: string;
   sub?: string;
+  copyText?: string;
 }) {
   return (
     <div className="rounded-lg bg-ink px-4 py-5 text-[#fef5de] mb-4">

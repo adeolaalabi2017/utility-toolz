@@ -1,11 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Link from "next/link";
 import { useToast } from "@/hooks/use-toast";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ArrowRight, BookOpen, Check, Crown, Search, Sparkles } from "lucide-react";
+import { ArrowRight, BookOpen, Check, Crown, Search } from "lucide-react";
 import {
   DOMAINS,
   PLANNED_TOOLS,
@@ -22,6 +22,13 @@ import { useSearch } from "@/components/site/search-dialog";
 import { PinnedToolsBar } from "@/components/site/bookmarks";
 import { cn } from "@/lib/utils";
 import { fmtPct, fmtUSD } from "@/lib/format";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useGSAP } from "@gsap/react";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger, useGSAP);
+}
 
 const GUIDES = [
   {
@@ -70,8 +77,8 @@ function HeroWorkbench() {
   const finalPrice = Math.max(0, originalPrice - savings);
 
   return (
-    <div className="rounded-xl border border-border bg-card p-5 shadow-lark sm:p-6">
-      <div className="flex items-center justify-between border-b border-border/60 pb-3">
+    <div className="rounded-2xl border border-border/80 bg-card p-6 shadow-lark sm:p-7 backdrop-blur-xs">
+      <div className="flex items-center justify-between border-b border-border/60 pb-3.5">
         <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
           Live quick calculator
         </span>
@@ -80,7 +87,7 @@ function HeroWorkbench() {
             type="button"
             onClick={() => setTab("margin")}
             className={cn(
-              "rounded-md px-2.5 py-1 transition-colors",
+              "rounded-md px-3 py-1 transition-colors",
               tab === "margin"
                 ? "bg-card text-foreground shadow-xs font-semibold"
                 : "text-muted-foreground hover:text-foreground"
@@ -92,7 +99,7 @@ function HeroWorkbench() {
             type="button"
             onClick={() => setTab("tax")}
             className={cn(
-              "rounded-md px-2.5 py-1 transition-colors",
+              "rounded-md px-3 py-1 transition-colors",
               tab === "tax"
                 ? "bg-card text-foreground shadow-xs font-semibold"
                 : "text-muted-foreground hover:text-foreground"
@@ -104,7 +111,7 @@ function HeroWorkbench() {
             type="button"
             onClick={() => setTab("discount")}
             className={cn(
-              "rounded-md px-2.5 py-1 transition-colors",
+              "rounded-md px-3 py-1 transition-colors",
               tab === "discount"
                 ? "bg-card text-foreground shadow-xs font-semibold"
                 : "text-muted-foreground hover:text-foreground"
@@ -116,8 +123,8 @@ function HeroWorkbench() {
       </div>
 
       {tab === "margin" && (
-        <div className="mt-4 space-y-4">
-          <div className="grid grid-cols-2 gap-3">
+        <div className="mt-5 space-y-4">
+          <div className="grid grid-cols-2 gap-3.5">
             <div>
               <label className="text-xs font-medium text-muted-foreground">Cost ($)</label>
               <input
@@ -125,7 +132,7 @@ function HeroWorkbench() {
                 min="0"
                 value={cost}
                 onChange={(e) => setCost(Number(e.target.value) || 0)}
-                className="mt-1 w-full rounded-md border border-input bg-background px-2.5 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
             <div>
@@ -135,11 +142,11 @@ function HeroWorkbench() {
                 min="0"
                 value={price}
                 onChange={(e) => setPrice(Number(e.target.value) || 0)}
-                className="mt-1 w-full rounded-md border border-input bg-background px-2.5 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
           </div>
-          <div className="rounded-lg bg-muted/40 p-4">
+          <div className="rounded-xl bg-muted/40 p-4">
             <div className="flex items-baseline justify-between">
               <span className="text-xs text-muted-foreground">Gross margin</span>
               <span className="tnum font-display text-display-sm text-[#1f5f45]">
@@ -156,7 +163,7 @@ function HeroWorkbench() {
             </div>
           </div>
           <div className="flex items-center justify-between pt-1 text-xs">
-            <span className="text-muted-foreground">Runs client-side instant math</span>
+            <span className="text-muted-foreground">Client-side instant formula</span>
             <Link
               href="/finance/profit-margin-calculator"
               className="inline-flex items-center gap-1 font-semibold text-[#a4502c] hover:underline"
@@ -168,8 +175,8 @@ function HeroWorkbench() {
       )}
 
       {tab === "tax" && (
-        <div className="mt-4 space-y-4">
-          <div className="grid grid-cols-2 gap-3">
+        <div className="mt-5 space-y-4">
+          <div className="grid grid-cols-2 gap-3.5">
             <div>
               <label className="text-xs font-medium text-muted-foreground">Net amount ($)</label>
               <input
@@ -177,7 +184,7 @@ function HeroWorkbench() {
                 min="0"
                 value={subtotal}
                 onChange={(e) => setSubtotal(Number(e.target.value) || 0)}
-                className="mt-1 w-full rounded-md border border-input bg-background px-2.5 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
             <div>
@@ -187,11 +194,11 @@ function HeroWorkbench() {
                 min="0"
                 value={taxRate}
                 onChange={(e) => setTaxRate(Number(e.target.value) || 0)}
-                className="mt-1 w-full rounded-md border border-input bg-background px-2.5 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
           </div>
-          <div className="rounded-lg bg-muted/40 p-4">
+          <div className="rounded-xl bg-muted/40 p-4">
             <div className="flex items-baseline justify-between">
               <span className="text-xs text-muted-foreground">Total with tax</span>
               <span className="tnum font-display text-display-sm text-[#3f346f]">
@@ -220,8 +227,8 @@ function HeroWorkbench() {
       )}
 
       {tab === "discount" && (
-        <div className="mt-4 space-y-4">
-          <div className="grid grid-cols-2 gap-3">
+        <div className="mt-5 space-y-4">
+          <div className="grid grid-cols-2 gap-3.5">
             <div>
               <label className="text-xs font-medium text-muted-foreground">Original price ($)</label>
               <input
@@ -229,7 +236,7 @@ function HeroWorkbench() {
                 min="0"
                 value={originalPrice}
                 onChange={(e) => setOriginalPrice(Number(e.target.value) || 0)}
-                className="mt-1 w-full rounded-md border border-input bg-background px-2.5 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
             <div>
@@ -240,11 +247,11 @@ function HeroWorkbench() {
                 max="100"
                 value={discountPct}
                 onChange={(e) => setDiscountPct(Number(e.target.value) || 0)}
-                className="mt-1 w-full rounded-md border border-input bg-background px-2.5 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background px-3 py-1.5 text-sm font-medium focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
           </div>
-          <div className="rounded-lg bg-muted/40 p-4">
+          <div className="rounded-xl bg-muted/40 p-4">
             <div className="flex items-baseline justify-between">
               <span className="text-xs text-muted-foreground">Final price to pay</span>
               <span className="tnum font-display text-display-sm text-[#a4502c]">
@@ -275,6 +282,295 @@ function HeroWorkbench() {
   );
 }
 
+function DomainTicker() {
+  const tickerItems = [
+    { title: "Finance", count: 16, desc: "ROI, Margin & Amortization" },
+    { title: "Marketing", count: 14, desc: "ROAS, CAC & Churn" },
+    { title: "Advertising", count: 12, desc: "Target CPA & CTOR" },
+    { title: "Development", count: 11, desc: "Cron, Diff & JWT" },
+    { title: "Business", count: 13, desc: "Runway & Unit Economics" },
+    { title: "Design", count: 8, desc: "Contrast & Fluid Type" },
+    { title: "Data", count: 9, desc: "Correlation & Sample Size" },
+    { title: "Productivity", count: 10, desc: "Priority Matrix & Timesheets" },
+    { title: "SEO", count: 9, desc: "Hreflang & Redirects" },
+    { title: "Everyday", count: 12, desc: "Fuel, Split & Countdown" },
+  ];
+
+  return (
+    <div className="w-full overflow-hidden border-y border-border/80 bg-card/40 py-4 backdrop-blur-xs select-none">
+      <div className="animate-marquee flex items-center gap-10 whitespace-nowrap">
+        {[...tickerItems, ...tickerItems].map((item, idx) => (
+          <div key={idx} className="flex items-center gap-3 text-xs sm:text-sm font-medium">
+            <span className="font-display font-semibold tracking-wide text-foreground">
+              {item.title}
+            </span>
+            <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">
+              {item.count} tools
+            </span>
+            <span className="text-muted-foreground/70">{item.desc}</span>
+            <span className="text-border mx-2">•</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function ScrubbingTextManifesto() {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const textRef = useRef<HTMLParagraphElement>(null);
+
+  useGSAP(
+    () => {
+      if (!textRef.current) return;
+      const words = textRef.current.querySelectorAll(".scrub-word");
+      gsap.fromTo(
+        words,
+        { opacity: 0.15 },
+        {
+          opacity: 1,
+          stagger: 0.08,
+          scrollTrigger: {
+            trigger: containerRef.current,
+            start: "top 75%",
+            end: "bottom 55%",
+            scrub: 0.8,
+          },
+        }
+      );
+    },
+    { scope: containerRef }
+  );
+
+  const manifestoText =
+    "Every calculation runs entirely in your browser. Zero tracking. Zero server latency. Deterministic mathematical models built for professionals whose decisions depend on absolute accuracy.";
+
+  return (
+    <section
+      ref={containerRef}
+      className="my-28 md:my-36 rounded-2xl border border-border bg-card/60 p-8 sm:p-14 md:p-20 shadow-lark text-center relative overflow-hidden backdrop-blur-sm"
+    >
+      <div className="absolute inset-0 ambient-radial-glow pointer-events-none" />
+      <span className="text-xs font-semibold uppercase tracking-widest text-[#a4502c]">
+        Architecture & Principles
+      </span>
+      <p
+        ref={textRef}
+        className="mt-6 font-display text-2xl sm:text-3xl md:text-4xl lg:text-5xl leading-tight sm:leading-snug max-w-4xl mx-auto text-foreground font-medium"
+      >
+        {manifestoText.split(" ").map((word, i) => (
+          <span key={i} className="scrub-word inline-block mr-2.5 transition-opacity duration-300">
+            {word}
+          </span>
+        ))}
+      </p>
+    </section>
+  );
+}
+
+function DomainBentoGrid() {
+  const [showAll, setShowAll] = useState(false);
+  const finance = DOMAINS.find((d) => d.slug === "finance")!;
+  const marketing = DOMAINS.find((d) => d.slug === "marketing")!;
+  const advertising = DOMAINS.find((d) => d.slug === "advertising")!;
+  const developer = DOMAINS.find((d) => d.slug === "developer")!;
+  const business = DOMAINS.find((d) => d.slug === "business")!;
+
+  const otherDomains = DOMAINS.filter(
+    (d) => !["finance", "marketing", "advertising", "developer", "business"].includes(d.slug)
+  );
+
+  return (
+    <div className="mt-12 space-y-8">
+      {/* 6-Column Mathematically Verified Gapless Bento Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-4 lg:grid-cols-6 grid-flow-dense gap-6">
+        {/* Card 1: Finance Flagship (Area: 4 cols x 2 rows = 8 units) */}
+        <Link
+          href={`/${finance.slug}`}
+          className="group relative col-span-1 md:col-span-4 lg:col-span-4 row-span-2 flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-8 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-lark"
+        >
+          <div className="flex items-start justify-between">
+            <span className="flex h-14 w-14 items-center justify-center rounded-xl bg-ink text-[#7fbb92] transition-transform duration-500 group-hover:scale-110">
+              <finance.icon className="h-7 w-7" />
+            </span>
+            <Badge variant="secondary" className="font-semibold text-xs px-3 py-1">
+              16 tools live
+            </Badge>
+          </div>
+          <div className="my-6">
+            <h3 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+              {finance.name} Workspace
+            </h3>
+            <p className="mt-3 max-w-xl text-base text-muted-foreground leading-relaxed">
+              {finance.description}
+            </p>
+            <div className="mt-6 flex flex-wrap gap-2">
+              {["Loan Amortization", "VAT & Sales Tax", "Compound Interest", "Break-Even Revenue", "Profit Margin"].map((tool) => (
+                <span
+                  key={tool}
+                  className="rounded-lg border border-border/80 bg-background/80 px-3 py-1.5 text-xs font-medium text-foreground/85 transition-colors group-hover:border-primary/30"
+                >
+                  {tool}
+                </span>
+              ))}
+            </div>
+          </div>
+          <div className="flex items-center gap-1.5 text-sm font-semibold text-[#a4502c]">
+            Explore complete financial suite
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </div>
+        </Link>
+
+        {/* Card 2: Marketing (Area: 2 cols x 1 row = 2 units) */}
+        <Link
+          href={`/${marketing.slug}`}
+          className="group relative col-span-1 md:col-span-2 lg:col-span-2 row-span-1 flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-lark"
+        >
+          <div className="flex items-start justify-between">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#faecd6] text-[#c9603c] transition-transform duration-500 group-hover:scale-110">
+              <marketing.icon className="h-5 w-5" />
+            </span>
+            <Badge variant="secondary" className="font-medium text-xs">
+              14 tools
+            </Badge>
+          </div>
+          <div className="my-4">
+            <h3 className="font-display text-xl font-semibold tracking-tight text-foreground">
+              {marketing.name}
+            </h3>
+            <p className="mt-1.5 line-clamp-2 text-sm text-muted-foreground leading-relaxed">
+              {marketing.description}
+            </p>
+          </div>
+          <div className="flex items-center gap-1 text-xs font-semibold text-[#a4502c]">
+            Open marketing suite <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </div>
+        </Link>
+
+        {/* Card 3: Advertising (Area: 2 cols x 1 row = 2 units) */}
+        <Link
+          href={`/${advertising.slug}`}
+          className="group relative col-span-1 md:col-span-2 lg:col-span-2 row-span-1 flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-lark"
+        >
+          <div className="flex items-start justify-between">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#fbe6da] text-[#c9603c] transition-transform duration-500 group-hover:scale-110">
+              <advertising.icon className="h-5 w-5" />
+            </span>
+            <Badge variant="secondary" className="font-medium text-xs">
+              12 tools
+            </Badge>
+          </div>
+          <div className="my-4">
+            <h3 className="font-display text-xl font-semibold tracking-tight text-foreground">
+              {advertising.name}
+            </h3>
+            <p className="mt-1.5 line-clamp-2 text-sm text-muted-foreground leading-relaxed">
+              {advertising.description}
+            </p>
+          </div>
+          <div className="flex items-center gap-1 text-xs font-semibold text-[#a4502c]">
+            Open advertising suite <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </div>
+        </Link>
+
+        {/* Card 4: Developer (Area: 3 cols x 1 row = 3 units) */}
+        <Link
+          href={`/${developer.slug}`}
+          className="group relative col-span-1 md:col-span-2 lg:col-span-3 row-span-1 flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-6 sm:p-7 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-lark"
+        >
+          <div className="flex items-start justify-between">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#e3f2fd] text-[#1f4a3f] transition-transform duration-500 group-hover:scale-110">
+              <developer.icon className="h-5 w-5" />
+            </span>
+            <Badge variant="secondary" className="font-medium text-xs">
+              11 tools
+            </Badge>
+          </div>
+          <div className="my-4">
+            <h3 className="font-display text-xl font-semibold tracking-tight text-foreground">
+              Developer & Engineering
+            </h3>
+            <p className="mt-1.5 line-clamp-2 text-sm text-muted-foreground leading-relaxed">
+              {developer.description}
+            </p>
+          </div>
+          <div className="flex items-center gap-1 text-xs font-semibold text-[#a4502c]">
+            Explore developer utilities <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </div>
+        </Link>
+
+        {/* Card 5: Business Operations (Area: 3 cols x 1 row = 3 units) */}
+        <Link
+          href={`/${business.slug}`}
+          className="group relative col-span-1 md:col-span-2 lg:col-span-3 row-span-1 flex flex-col justify-between overflow-hidden rounded-2xl border border-border bg-card p-6 sm:p-7 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-lark"
+        >
+          <div className="flex items-start justify-between">
+            <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#e6f4ea] text-[#1f5f45] transition-transform duration-500 group-hover:scale-110">
+              <business.icon className="h-5 w-5" />
+            </span>
+            <Badge variant="secondary" className="font-medium text-xs">
+              13 tools
+            </Badge>
+          </div>
+          <div className="my-4">
+            <h3 className="font-display text-xl font-semibold tracking-tight text-foreground">
+              Business Operations
+            </h3>
+            <p className="mt-1.5 line-clamp-2 text-sm text-muted-foreground leading-relaxed">
+              {business.description}
+            </p>
+          </div>
+          <div className="flex items-center gap-1 text-xs font-semibold text-[#a4502c]">
+            Explore business models <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+          </div>
+        </Link>
+      </div>
+
+      {/* Toggle to browse all remaining 7 domains */}
+      <div className="pt-4 text-center">
+        <Button
+          variant="outline"
+          size="lg"
+          onClick={() => setShowAll(!showAll)}
+          className="rounded-full px-6 text-sm font-semibold transition-all hover:bg-card"
+        >
+          {showAll ? "Collapse additional domains" : "Browse all 12 professional domains"}
+        </Button>
+      </div>
+
+      {showAll && (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 pt-4">
+          {otherDomains.map((d) => {
+            const Icon = d.icon;
+            const count = toolsByDomain(d.slug).length;
+            const acc = domainAccent(d.slug);
+            return (
+              <Link
+                key={d.slug}
+                href={`/${d.slug}`}
+                className="group rounded-xl border border-border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lark"
+              >
+                <div className="flex items-start justify-between">
+                  <span className={cn("flex h-10 w-10 items-center justify-center rounded-lg", acc.chip)}>
+                    <Icon className="h-5 w-5" />
+                  </span>
+                  <Badge variant="secondary" className="font-medium">
+                    {count} tools
+                  </Badge>
+                </div>
+                <h4 className="mt-4 font-display text-lg font-semibold tracking-tight">{d.name}</h4>
+                <p className="mt-1 line-clamp-2 text-xs leading-relaxed text-muted-foreground">
+                  {d.description}
+                </p>
+              </Link>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function HomePage() {
   const { setOpen } = useSearch();
   const { toast } = useToast();
@@ -284,184 +580,121 @@ export function HomePage() {
 
   return (
     <div>
-      {/* ------------------------------ 1. HERO ------------------------------ */}
-      <section className="border-b">
-        <div className="mx-auto max-w-6xl px-4 pb-14 pt-12 sm:px-6 sm:pb-16 sm:pt-16 lg:pb-20 lg:pt-20">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.15fr_1fr]">
-            <div>
-              <Badge className="mb-5 border border-border bg-card text-muted-foreground hover:bg-card">
-                <Sparkles className="mr-1 h-3 w-3 text-[#308f68]" />
-                Catalogue complete · {liveCount} professional tools live
-              </Badge>
-              <h1 className="font-display text-display-xl tracking-tight text-foreground">
-                Professional calculators and tools, organized by domain.
-              </h1>
-              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-                No random list of widgets. Twelve complete professional domains — finance to
-                development, productivity to everyday utilities — each one a full toolkit. Free, no
-                signup, and every calculation runs in your browser.
-              </p>
+      {/* ------------------------------ 1. HERO (Cinematic Center) ------------------------------ */}
+      <section className="relative overflow-hidden border-b pb-20 pt-16 sm:pb-28 sm:pt-24 lg:pb-36 lg:pt-32">
+        <div className="absolute inset-0 ambient-radial-glow pointer-events-none" />
+        <div className="relative mx-auto max-w-5xl px-4 sm:px-6 text-center">
+          <h1 className="mx-auto max-w-4xl font-display text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-foreground leading-[1.12]">
+            Professional calculators and tools, organized by domain.
+          </h1>
+          <p className="mx-auto mt-6 max-w-2xl text-lg sm:text-xl leading-relaxed text-muted-foreground font-normal">
+            No random list of widgets. Twelve complete professional domains covering finance, marketing, development, and everyday operations. Free, private, and calculated entirely inside your browser.
+          </p>
 
-              {/* Hero search */}
-              <button
-                onClick={() => setOpen(true)}
-                className="mt-8 flex w-full max-w-xl items-center gap-3 rounded-md border border-input bg-card px-4 py-3.5 text-left text-muted-foreground shadow-lark-sm transition-colors hover:bg-[#fffcf2]"
-              >
-                <Search className="h-5 w-5 shrink-0 text-[#a4502c]" />
-                <span className="flex-1 text-[15px]">
-                  Search {liveCount} tools — try “margin”, “pomodoro” or “gpa”…
-                </span>
-                <kbd className="hidden rounded-sm border border-border bg-card px-1.5 py-0.5 text-[10px] font-medium sm:inline">
-                  ⌘K
-                </kbd>
-              </button>
-
-              {/* Quick links */}
-              <div className="mt-5 flex flex-wrap items-center gap-2">
-                <span className="text-xs font-medium uppercase tracking-wider text-muted-foreground/80">
-                  Popular:
-                </span>
-                {["roas-calculator", "loan-mortgage-calculator", "profit-margin-calculator", "cac-calculator", "income-tax-calculator"].map(
-                  (slug) => {
-                    const t = toolBySlug(slug);
-                    if (!t) return null;
-                    return (
-                      <Link
-                        key={slug}
-                        href={`/${t.domain}/${slug}`}
-                        className="rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground/80 transition-colors hover:border-[#6b5faf] hover:text-[#3f346f]"
-                      >
-                        {t.name.replace(" Calculator", "")}
-                      </Link>
-                    );
-                  }
-                )}
+          {/* Centered Action Bar */}
+          <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto">
+            <button
+              onClick={() => setOpen(true)}
+              className="flex w-full items-center justify-between gap-3 rounded-full border border-input bg-card px-5 py-3.5 text-left text-muted-foreground shadow-lark-sm transition-all hover:border-primary/50 hover:bg-[#fffcf2] sm:w-auto sm:min-w-[280px]"
+            >
+              <div className="flex items-center gap-2.5">
+                <Search className="h-4 w-4 shrink-0 text-[#a4502c]" />
+                <span className="text-sm font-medium">Search {liveCount} tools...</span>
               </div>
-            </div>
+              <kbd className="rounded-sm border border-border bg-muted/60 px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
+                ⌘K
+              </kbd>
+            </button>
+            <Button
+              size="lg"
+              asChild
+              className="w-full sm:w-auto rounded-full bg-primary text-primary-foreground hover:bg-[#173b32] font-semibold px-6 shadow-lark-sm"
+            >
+              <a href="#browse-domains">Explore Workspaces</a>
+            </Button>
+          </div>
 
-            {/* Live interactive hero calculator workbench */}
-            <div>
-              <HeroWorkbench />
-            </div>
+          {/* Centered Live Interactive Hero Calculator Workbench */}
+          <div className="mt-14 max-w-2xl mx-auto text-left">
+            <HeroWorkbench />
           </div>
         </div>
       </section>
 
+      {/* Infinite Marquee Component */}
+      <DomainTicker />
+
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="pt-8">
+        <div className="pt-10">
           <PinnedToolsBar />
         </div>
-        {/* --------------------- 2. BROWSE BY DOMAIN --------------------- */}
-        <section className="py-14 sm:py-16" aria-labelledby="browse-domains">
+
+        {/* --------------------- 2. BROWSE BY DOMAIN (Gapless Bento Grid) --------------------- */}
+        <section className="py-24 sm:py-32" aria-labelledby="browse-domains">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <h2 id="browse-domains" className="font-display text-display-md tracking-tight">
+              <h2 id="browse-domains" className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight text-foreground">
                 Browse by professional domain
               </h2>
-              <p className="mt-2 max-w-2xl text-muted-foreground">
-                Each domain is a complete workspace: one hub, every tool the profession needs,
-                organized into categories.
+              <p className="mt-3 max-w-2xl text-base sm:text-lg text-muted-foreground">
+                Each domain is an integrated workstation: comprehensive formulas, verified models, and instant browser execution.
               </p>
             </div>
           </div>
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {DOMAINS.map((d) => {
-              const Icon = d.icon;
-              const live = d.status === "live";
-              const count = live ? toolsByDomain(d.slug).length : null;
-              const planned = PLANNED_TOOLS.filter((p) => p.domain === d.slug).length;
-              const acc = domainAccent(d.slug);
-              return (
-                <Link
-                  key={d.slug}
-                  href={`/${d.slug}`}
-                  className={cn(
-                    "group rounded-xl border p-5 transition-all",
-                    live
-                      ? "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lark"
-                      : "border-dashed bg-muted/30 hover:border-primary/40 hover:bg-muted/50"
-                  )}
-                >
-                  <div className="flex items-start justify-between">
-                    <span
-                      className={cn(
-                        "flex h-10 w-10 items-center justify-center rounded-lg",
-                        live ? acc.chip : "bg-muted text-muted-foreground"
-                      )}
-                    >
-                      <Icon className="h-5 w-5" />
-                    </span>
-                    {live ? (
-                      <Badge variant="secondary" className="font-medium">
-                        {count} tools
-                      </Badge>
-                    ) : (
-                      <Badge variant="outline" className="text-muted-foreground">
-                        Phase {d.phase}
-                      </Badge>
-                    )}
-                  </div>
-                  <h3 className="mt-4 font-display text-display-sm tracking-tight">{d.name}</h3>
-                  <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
-                    {d.description}
-                  </p>
-                  {!live && (
-                    <p className="mt-2 text-xs font-medium text-muted-foreground/70">
-                      {planned} tools planned
-                    </p>
-                  )}
-                </Link>
-              );
-            })}
-          </div>
+          <DomainBentoGrid />
         </section>
 
-        {/* ------------------------ 3. POPULAR TOOLS ------------------------ */}
-        <section className="border-t py-14 sm:py-16" aria-labelledby="popular-tools">
-          <h2 id="popular-tools" className="font-display text-display-md tracking-tight">
+        {/* --------------------- 3. DESIRE SECTION (GSAP Scrubbing Text Reveal) --------------------- */}
+        <ScrubbingTextManifesto />
+
+        {/* ------------------------ 4. POPULAR TOOLS ------------------------ */}
+        <section className="border-t border-border/80 py-24 sm:py-32" aria-labelledby="popular-tools">
+          <h2 id="popular-tools" className="font-display text-3xl sm:text-4xl tracking-tight text-foreground">
             Popular tools right now
           </h2>
-          <p className="mt-2 max-w-2xl text-muted-foreground">
+          <p className="mt-3 max-w-2xl text-base text-muted-foreground">
             The calculators professionals open most — from ad efficiency to the true cost of a mortgage.
           </p>
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {popular.map((t) => (
               <ToolCard key={t.slug} tool={t} />
             ))}
           </div>
         </section>
 
-        {/* --------------------- 4. TOOLS FOR PROFESSION --------------------- */}
-        <section className="border-t py-14 sm:py-16" aria-labelledby="professions">
-          <h2 id="professions" className="font-display text-display-md tracking-tight">
+        {/* --------------------- 5. TOOLS FOR PROFESSION --------------------- */}
+        <section className="border-t border-border/80 py-24 sm:py-32" aria-labelledby="professions">
+          <h2 id="professions" className="font-display text-3xl sm:text-4xl tracking-tight text-foreground">
             Tools for your profession
           </h2>
-          <p className="mt-2 max-w-2xl text-muted-foreground">
+          <p className="mt-3 max-w-2xl text-base text-muted-foreground">
             Start from what you do, not from what the tool is called. Each hub collects your whole
             toolkit — live tools first, roadmap items next.
           </p>
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {PROFESSIONS.map((p) => {
               const Icon = p.icon;
-              const liveCount = p.liveSlugs.filter((s) => toolBySlug(s)).length;
+              const liveCategoryCount = p.liveSlugs.filter((s) => toolBySlug(s)).length;
               return (
                 <Link
                   key={p.slug}
                   href={`/professions/${p.slug}`}
-                  className="group rounded-xl border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lark"
+                  className="group relative overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-lark"
                 >
-                  <div className="flex items-center gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#fbe6da] text-[#3f346f]">
+                  <div className="flex items-center gap-3.5">
+                    <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-[#fbe6da] text-[#3f346f] transition-transform duration-500 group-hover:scale-110">
                       <Icon className="h-5 w-5" />
                     </span>
-                    <h3 className="font-display text-display-sm tracking-tight">{p.name}</h3>
+                    <h3 className="font-display text-xl font-semibold tracking-tight text-foreground">
+                      {p.name}
+                    </h3>
                   </div>
                   <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
                     {p.blurb}
                   </p>
-                  <p className="mt-3 flex items-center gap-1 text-xs font-semibold text-[#a4502c]">
-                    {liveCount > 0 ? `${liveCount} tools ready now` : "Toolkit coming soon"}
-                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                  <p className="mt-4 flex items-center gap-1 text-xs font-semibold text-[#a4502c]">
+                    {liveCategoryCount > 0 ? `${liveCategoryCount} tools ready now` : "Toolkit roadmap"}
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
                   </p>
                 </Link>
               );
@@ -469,15 +702,15 @@ export function HomePage() {
           </div>
         </section>
 
-        {/* ---------------------- 5. RECENTLY ADDED ---------------------- */}
-        <section className="border-t py-14 sm:py-16" aria-labelledby="recent">
+        {/* ---------------------- 6. RECENTLY ADDED ---------------------- */}
+        <section className="border-t border-border/80 py-24 sm:py-32" aria-labelledby="recent">
           <div className="flex items-end justify-between gap-4">
             <div>
-              <h2 id="recent" className="font-display text-display-md tracking-tight">
+              <h2 id="recent" className="font-display text-3xl sm:text-4xl tracking-tight text-foreground">
                 Recently added
               </h2>
-              <p className="mt-2 text-muted-foreground">
-                Fresh from the build roadmap — new batches land every sprint.
+              <p className="mt-3 text-base text-muted-foreground">
+                Fresh from the build roadmap — new tools landing continuously.
               </p>
             </div>
             <Link
@@ -487,40 +720,40 @@ export function HomePage() {
               All everyday tools <ArrowRight className="h-4 w-4" />
             </Link>
           </div>
-          <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {recent.map((t) => (
               <ToolCard key={t.slug} tool={t} compact />
             ))}
           </div>
         </section>
 
-        {/* ------------------------- 6. GUIDES ------------------------- */}
-        <section className="border-t py-14 sm:py-16" aria-labelledby="guides">
-          <h2 id="guides" className="font-display text-display-md tracking-tight">
+        {/* ------------------------- 7. GUIDES ------------------------- */}
+        <section className="border-t border-border/80 py-24 sm:py-32" aria-labelledby="guides">
+          <h2 id="guides" className="font-display text-3xl sm:text-4xl tracking-tight text-foreground">
             Featured guides & tutorials
           </h2>
-          <p className="mt-2 max-w-2xl text-muted-foreground">
-            Short, practical explainers — each paired with the calculator that does the math.
+          <p className="mt-3 max-w-2xl text-base text-muted-foreground">
+            Short, practical explainers — each paired directly with the calculator that does the math.
           </p>
-          <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+          <div className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-3">
             {GUIDES.map((g) => {
               const t = toolBySlug(g.tool);
               return (
                 <Link
                   key={g.title}
                   href={`/${t?.domain}/${g.tool}`}
-                  className="group flex flex-col rounded-xl border bg-card p-5 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lark"
+                  className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-card p-6 transition-all duration-500 ease-out hover:-translate-y-1 hover:border-primary/50 hover:shadow-lark"
                 >
-                  <BookOpen className="h-5 w-5 text-[#6b5faf]" />
-                  <h3 className="mt-3 font-display text-display-sm leading-snug tracking-tight">
+                  <BookOpen className="h-5 w-5 text-[#6b5faf] transition-transform duration-500 group-hover:scale-110" />
+                  <h3 className="mt-4 font-display text-lg font-semibold leading-snug tracking-tight text-foreground">
                     {g.title}
                   </h3>
                   <p className="mt-2 line-clamp-3 flex-1 text-sm leading-relaxed text-muted-foreground">
                     {g.excerpt}
                   </p>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[#a4502c]">
+                  <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[#a4502c]">
                     Open the calculator
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                   </span>
                 </Link>
               );
@@ -529,23 +762,23 @@ export function HomePage() {
         </section>
       </div>
 
-      {/* --------------------- 7. PREMIUM PROMO --------------------- */}
-      <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6" aria-labelledby="premium">
-        <div className="overflow-hidden rounded-xl bg-ink px-6 py-10 text-[#fef5de] shadow-lark sm:px-10 sm:py-12">
-          <div className="grid items-center gap-8 lg:grid-cols-[1.5fr_1fr]">
+      {/* --------------------- 8. ACTION / PREMIUM PROMO --------------------- */}
+      <section className="mx-auto max-w-6xl px-4 pb-28 sm:px-6" aria-labelledby="premium">
+        <div className="overflow-hidden rounded-2xl bg-ink px-7 py-12 text-[#fef5de] shadow-lark sm:px-12 sm:py-16">
+          <div className="grid items-center gap-10 lg:grid-cols-[1.5fr_1fr]">
             <div>
-              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[#f0a469]">
+              <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#f0a469]">
                 <Crown className="h-4 w-4" /> Utility Toolz Pro
               </p>
-              <h2 id="premium" className="mt-3 font-display text-display-md tracking-tight">
+              <h2 id="premium" className="mt-4 font-display text-3xl sm:text-4xl tracking-tight">
                 Ad-free, with your presets saved — $5/month
               </h2>
-              <p className="mt-3 max-w-xl text-lg leading-relaxed text-[#fef5de]/75">
+              <p className="mt-4 max-w-xl text-lg leading-relaxed text-[#fef5de]/75">
                 The tools stay free forever. Pro removes ads, remembers your saved scenarios
                 across devices, and unlocks bulk exports across the full {liveCount}-tool catalogue.
               </p>
             </div>
-            <ul className="space-y-3">
+            <ul className="space-y-3.5">
               {[
                 `Zero ads across all ${liveCount} tools`,
                 "Saved presets and calculation history",
@@ -560,7 +793,7 @@ export function HomePage() {
               ))}
               <li>
                 <Button
-                  className="mt-2 w-full bg-[#fef5de] text-[#1f4a3f] hover:bg-white sm:w-auto"
+                  className="mt-3 w-full bg-[#fef5de] text-[#1f4a3f] hover:bg-white sm:w-auto font-semibold px-6 shadow-sm"
                   onClick={() =>
                     toast({
                       title: "You're on the waitlist",

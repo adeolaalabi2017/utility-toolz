@@ -3,7 +3,8 @@
 import * as React from "react";
 import Link from "next/link";
 import { Star } from "lucide-react";
-import { Tool, toolBySlug } from "@/lib/registry";
+import type { Tool } from "@/lib/registry/types";
+import { toolBySlug } from "@/lib/registry";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "utility_toolz_favorites";

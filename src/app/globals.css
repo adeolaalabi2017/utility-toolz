@@ -105,11 +105,11 @@
 }
 
 :root {
-  /* font stacks (design.md: system sans, zero webfont cost) */
-  --font-app-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+  /* font stacks (gpt-taste compliant: Geist Sans + Outfit Display) */
+  --font-app-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
-  --font-app-serif: ui-serif, Georgia, Cambria, "Times New Roman",
-    "Liberation Serif", "Noto Serif SC", serif;
+  --font-app-serif: var(--font-outfit), var(--font-geist-sans), ui-sans-serif, system-ui,
+    sans-serif;
 
   /* Larkfield surfaces */
   --background: #fff6e0; /* surface.strong — page */
@@ -324,4 +324,50 @@
   thead {
     display: table-header-group;
   }
+}
+
+/* ------------------------------------------------------------------ */
+/* gpt-taste motion & ambient enhancements                            */
+/* ------------------------------------------------------------------ */
+
+@keyframes marquee {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+    transform: none;
+  }
+}
+
+.ambient-radial-glow {
+  background-image: radial-gradient(
+    ellipse 80% 50% at 50% -20%,
+    rgba(48, 143, 104, 0.12),
+    transparent 70%
+  );
+}
+
+.dark .ambient-radial-glow {
+  background-image: radial-gradient(
+    ellipse 80% 50% at 50% -20%,
+    rgba(48, 143, 104, 0.18),
+    transparent 70%
+  );
 }
