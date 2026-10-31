@@ -1,0 +1,53 @@
+"use client";
+
+import Link from "next/link";
+import { ArrowUpRight } from "lucide-react";
+import type { Tool } from "@/lib/registry/types";
+import { domainBySlug } from "@/lib/registry";
+import { domainAccent } from "@/lib/registry/accents";
+import { cn } from "@/lib/utils";
+import { BookmarkButton } from "./bookmarks";
+
+export function ToolCard({ tool, compact }: { tool: Tool; compact?: boolean }) {
+  const domain = domainBySlug(tool.domain);
+  const Icon = domain?.icon;
+  const acc = domainAccent(tool.domain);
+  return (
+    <Link
+      href={`/${tool.domain}/${tool.slug}`}
+      className={cn(
+        "group flex flex-col rounded-xl border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-lark sm:p-5",
+        compact && "p-3.5 sm:p-4"
+      )}
+    >
+      <div className="flex items-start justify-between gap-2">
+        {Icon && (
+          <span
+            className={cn(
+              "flex h-9 w-9 shrink-0 items-center justify-center rounded-lg",
+              acc.soft
+            )}
+          >
+            <Icon className="h-4.5 w-4.5" />
+          </span>
+        )}
+        <div className="flex items-center gap-1">
+          <BookmarkButton slug={tool.slug} />
+          <ArrowUpRight className="h-4 w-4 text-muted-foreground/40 transition-all group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-[#c9603c]" />
+        </div>
+      </div>
+      <h3 className={cn("mt-3 font-display leading-snug tracking-tight", compact ? "text-base" : "text-display-sm")}>
+        {tool.name}
+      </h3>
+      {!compact && (
+        <p className="mt-1.5 line-clamp-2 text-sm leading-relaxed text-muted-foreground">
+          {tool.tagline}
+        </p>
+      )}
+      <div className="mt-3 flex items-center gap-1.5 text-[11px] text-muted-foreground">
+        <span className="rounded-full bg-muted px-2 py-0.5">{domain?.shortName}</span>
+        <span className="rounded-full bg-muted px-2 py-0.5">{tool.category}</span>
+      </div>
+    </Link>
+  );
+}

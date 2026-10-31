@@ -1,0 +1,62 @@
+// Prisma schema for Utility Toolz
+// Configured for PostgreSQL (Neon / Supabase)
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  email         String    @unique
+  name          String?
+  emailVerified DateTime?
+  image         String?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  subscriptions     Subscription[]
+  savedCalculations SavedCalculation[]
+}
+
+model Subscription {
+  id                   String    @id @default(cuid())
+  userId               String
+  user                 User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  stripeCustomerId     String?   @unique
+  stripeSubscriptionId String?   @unique
+  stripePriceId        String?
+  status               String    @default("active")
+  plan                 String    @default("pro_monthly") // pro_monthly ($5/mo), pro_annual ($48/yr), lifetime ($39)
+  currentPeriodEnd     DateTime?
+  createdAt            DateTime  @default(now())
+  updatedAt            DateTime  @updatedAt
+
+  @@index([userId])
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  source    String?  @default("homepage")
+  active    Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+model SavedCalculation {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  toolSlug  String
+  domain    String
+  title     String?
+  inputs    String   // JSON stringified inputs
+  outputs   String   // JSON stringified outputs
+  createdAt DateTime @default(now())
+
+  @@index([userId, toolSlug])
+}
