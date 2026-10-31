@@ -805,16 +805,16 @@ export function HomePage() {
 
       {/* --------------------- 8. ACTION / PREMIUM PROMO --------------------- */}
       <section className="mx-auto max-w-6xl px-4 pb-28 sm:px-6" aria-labelledby="premium">
-        <div className="overflow-hidden rounded-2xl bg-ink px-7 py-12 text-[#fef5de] shadow-lark sm:px-12 sm:py-16 border border-transparent dark:border-[#24443b]">
+        <div className="overflow-hidden rounded-2xl bg-[#1f4a3f] dark:bg-[#122820] px-7 py-12 text-[#fef5de] shadow-lark sm:px-12 sm:py-16 border border-[#24443b] dark:border-[#22503d]">
           <div className="grid items-center gap-10 lg:grid-cols-[1.5fr_1fr]">
             <div>
               <p className="flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-[#f0a469]">
-                <Crown className="h-4 w-4" /> Utility Toolz Pro
+                <Crown className="h-4 w-4 text-[#f0a469]" /> Utility Toolz Pro
               </p>
-              <h2 id="premium" className="mt-4 font-display text-3xl sm:text-4xl tracking-tight text-[#fef5de]">
+              <h2 id="premium" className="mt-4 font-display text-3xl sm:text-4xl tracking-tight text-[#fef5de] font-semibold">
                 Ad-free, with your presets saved — $5/month
               </h2>
-              <p className="mt-4 max-w-xl text-lg leading-relaxed text-[#fef5de]/80">
+              <p className="mt-4 max-w-xl text-lg leading-relaxed text-[#fef5de]/90">
                 The tools stay free forever. Pro removes ads, remembers your saved scenarios
                 across devices, and unlocks bulk exports across the full {liveCount}-tool catalogue.
               </p>
@@ -826,10 +826,10 @@ export function HomePage() {
                 "CSV export on every calculator",
               ].map((b) => (
                 <li key={b} className="flex items-start gap-3 text-sm">
-                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e07a3c]/25">
+                  <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#e07a3c]/30 text-[#f0a469]">
                     <Check className="h-3 w-3 text-[#f0a469]" />
                   </span>
-                  <span className="text-[#fef5de]/90">{b}</span>
+                  <span className="text-[#fef5de]/95 font-medium">{b}</span>
                 </li>
               ))}
               <li>

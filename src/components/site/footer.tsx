@@ -16,15 +16,15 @@ export function Footer() {
               <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink border border-transparent dark:border-border/60">
                 <LayoutGrid className="h-4.5 w-4.5 text-[#7fbb92]" />
               </span>
-              <span className="font-display text-xl font-semibold tracking-tight">
+              <span className="font-display text-xl font-semibold tracking-tight text-foreground">
                 Utility<span className="text-[#c9603c]">Toolz</span>
               </span>
             </Link>
-            <p className="mt-3 max-w-xs text-sm leading-relaxed text-foreground/70">
+            <p className="mt-3 max-w-xs text-sm leading-relaxed text-foreground/80 dark:text-foreground/85">
               Professional tools organized by domain — finance, marketing, advertising, business
               and beyond. Built for people whose work depends on the numbers.
             </p>
-            <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs text-muted-foreground">
+            <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/80 dark:text-foreground/85">
               <span className="h-1.5 w-1.5 rounded-full bg-[#308f68]" />
               Catalogue complete · {TOOLS.length} tools live
             </p>
@@ -32,20 +32,20 @@ export function Footer() {
 
           {/* Domains */}
           <nav aria-label="Domains">
-            <p className="text-xs font-semibold uppercase tracking-wider text-foreground/50">Domains</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-foreground/75 dark:text-foreground/85">Domains</p>
             <ul className="mt-3 space-y-2">
               {DOMAINS.map((d) => (
                 <li key={d.slug}>
                   <Link
                     href={`/${d.slug}`}
                     className={cn(
-                      "text-sm transition-colors hover:text-[#a4502c] dark:hover:text-[#fb923c]",
-                      d.status === "live" ? "text-foreground/80" : "text-foreground/45"
+                      "text-sm transition-colors hover:text-[#c9603c] dark:hover:text-[#fb923c]",
+                      d.status === "live" ? "text-foreground/90 font-medium" : "text-foreground/60"
                     )}
                   >
                     {d.shortName}
                     {d.status === "planned" && (
-                      <span className="ml-2 text-[10px] uppercase tracking-wide text-foreground/40">
+                      <span className="ml-2 text-[10px] uppercase tracking-wide text-foreground/50">
                         Phase {d.phase}
                       </span>
                     )}
@@ -57,7 +57,7 @@ export function Footer() {
 
           {/* Professions */}
           <nav aria-label="Professions">
-            <p className="text-xs font-semibold uppercase tracking-wider text-foreground/50">
+            <p className="text-xs font-semibold uppercase tracking-wider text-foreground/75 dark:text-foreground/85">
               For your profession
             </p>
             <ul className="mt-3 space-y-2">
@@ -65,7 +65,7 @@ export function Footer() {
                 <li key={p.slug}>
                   <Link
                     href={`/professions/${p.slug}`}
-                    className="text-sm text-foreground/80 transition-colors hover:text-[#a4502c] dark:hover:text-[#fb923c]"
+                    className="text-sm text-foreground/90 font-medium transition-colors hover:text-[#c9603c] dark:hover:text-[#fb923c]"
                   >
                     {p.name}
                   </Link>
@@ -76,10 +76,10 @@ export function Footer() {
 
           {/* About */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-foreground/50">
+            <p className="text-xs font-semibold uppercase tracking-wider text-foreground/75 dark:text-foreground/85">
               The platform
             </p>
-            <ul className="mt-3 space-y-2 text-sm text-foreground/70">
+            <ul className="mt-3 space-y-2 text-sm text-foreground/80 dark:text-foreground/85">
               <li>Free to use, no signup</li>
               <li>Runs entirely in your browser</li>
               <li>New tools every sprint</li>
@@ -88,16 +88,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-6 text-xs text-muted-foreground sm:flex-row">
+        <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/80 pt-6 text-xs text-foreground/75 dark:text-foreground/80 sm:flex-row">
           <p>© {new Date().getFullYear()} Utility Toolz. All rights reserved.</p>
           <div className="flex gap-4">
-            <Link href="/" className="hover:text-foreground">
+            <Link href="/" className="hover:text-foreground transition-colors">
               Privacy
             </Link>
-            <Link href="/" className="hover:text-foreground">
+            <Link href="/" className="hover:text-foreground transition-colors">
               Terms
             </Link>
-            <Link href="/" className="hover:text-foreground">
+            <Link href="/" className="hover:text-foreground transition-colors">
               Status
             </Link>
           </div>
