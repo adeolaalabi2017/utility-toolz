@@ -7,13 +7,12 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { ChevronDown, LayoutGrid, Menu, Search } from "lucide-react";
-import { DOMAINS, PROFESSIONS } from "@/lib/registry";
+import { ArrowRight, ChevronDown, LayoutGrid, Menu, Search } from "lucide-react";
+import { DOMAINS, PROFESSIONS, toolsByDomain } from "@/lib/registry";
+import { domainAccent } from "@/lib/registry/accents";
 import { useSearch } from "./search-dialog";
 import { ThemeToggle } from "./theme-toggle";
 import { cn } from "@/lib/utils";
@@ -22,8 +21,7 @@ export function Header() {
   const { setOpen } = useSearch();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const liveDomains = DOMAINS.filter((d) => d.status === "live");
-  const inlineDomains = liveDomains.slice(0, 5);
-  const overflowLive = liveDomains.slice(5);
+  const inlineDomains = liveDomains.slice(0, 4);
   const plannedDomains = DOMAINS.filter((d) => d.status === "planned");
 
   return (
@@ -40,7 +38,7 @@ export function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-0.5 md:flex" aria-label="Main">
+        <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
           <Link
             href="/"
             className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
@@ -56,44 +54,89 @@ export function Header() {
               {d.shortName}
             </Link>
           ))}
+
+          {/* Redesigned Workspaces Mega-Flyout Panel */}
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
-              <Button variant="ghost" size="sm" className="gap-1 text-sm font-medium text-foreground/80">
-                More <ChevronDown className="h-3.5 w-3.5" />
+              <Button
+                variant="ghost"
+                size="sm"
+                className="gap-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-accent rounded-md px-3 py-2"
+              >
+                <span>Workspaces</span>
+                <span className="rounded-full bg-muted px-1.5 py-0.2 text-[10px] font-semibold text-muted-foreground">
+                  12
+                </span>
+                <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
               </Button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="start" className="w-72">
-              {overflowLive.length > 0 && (
-                <>
-                  <DropdownMenuLabel>More live domains</DropdownMenuLabel>
-                  {overflowLive.map((d) => (
-                    <DropdownMenuItem key={d.slug} asChild>
-                      <Link href={`/${d.slug}`} className="flex cursor-pointer items-center justify-between">
-                        <span>{d.name}</span>
-                        <span className="text-xs font-medium text-primary">Live</span>
+            <DropdownMenuContent
+              align="start"
+              className="w-[640px] max-w-[calc(100vw-2rem)] rounded-2xl border border-border/80 bg-card/98 p-4 shadow-xl backdrop-blur-md"
+            >
+              <div className="mb-3 flex items-center justify-between border-b border-border/60 px-2 pb-3">
+                <div>
+                  <span className="font-display text-sm font-semibold text-foreground">
+                    All Professional Workspaces
+                  </span>
+                  <p className="mt-0.5 text-xs text-muted-foreground">
+                    119 client-side tools organized across 12 domains
+                  </p>
+                </div>
+                <span className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground">
+                  Client-side Math
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-1.5">
+                {DOMAINS.map((d) => {
+                  const Icon = d.icon;
+                  const count = toolsByDomain(d.slug).length;
+                  const acc = domainAccent(d.slug);
+                  return (
+                    <DropdownMenuItem key={d.slug} asChild className="p-0 focus:bg-transparent">
+                      <Link
+                        href={`/${d.slug}`}
+                        className="group flex items-start gap-2.5 rounded-xl p-2.5 transition-all hover:bg-muted/70 cursor-pointer"
+                      >
+                        <span
+                          className={cn(
+                            "mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-transform duration-300 group-hover:scale-110",
+                            acc.soft
+                          )}
+                        >
+                          <Icon className="h-4 w-4" />
+                        </span>
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center justify-between gap-1">
+                            <span className="font-display text-sm font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary truncate">
+                              {d.shortName}
+                            </span>
+                            <span className="shrink-0 text-[11px] font-medium text-muted-foreground/80">
+                              {count} tools
+                            </span>
+                          </div>
+                          <p className="mt-0.5 line-clamp-1 text-[11px] leading-snug text-muted-foreground">
+                            {d.description}
+                          </p>
+                        </div>
                       </Link>
                     </DropdownMenuItem>
-                  ))}
-                  <DropdownMenuSeparator />
-                </>
-              )}
-              <DropdownMenuLabel>All domains</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {DOMAINS.map((d) => (
-                <DropdownMenuItem key={d.slug} asChild>
-                  <Link href={`/${d.slug}`} className="flex cursor-pointer items-center justify-between">
-                    <span>{d.name}</span>
-                    <span
-                      className={cn(
-                        "text-xs",
-                        d.status === "live" ? "font-medium text-primary" : "text-muted-foreground"
-                      )}
-                    >
-                      {d.status === "live" ? "Live" : `Phase ${d.phase}`}
-                    </span>
-                  </Link>
-                </DropdownMenuItem>
-              ))}
+                  );
+                })}
+              </div>
+
+              <div className="mt-3 flex items-center justify-between border-t border-border/60 px-2 pt-3 text-xs">
+                <Link
+                  href="/professions/marketer"
+                  className="flex items-center gap-1 font-medium text-muted-foreground transition-colors hover:text-foreground"
+                >
+                  Explore toolkits by profession <ArrowRight className="h-3 w-3" />
+                </Link>
+                <span className="text-[11px] text-muted-foreground/70">
+                  Zero signup · Instant calculations
+                </span>
+              </div>
             </DropdownMenuContent>
           </DropdownMenu>
         </nav>

@@ -283,34 +283,49 @@ function HeroWorkbench() {
 }
 
 function DomainTicker() {
-  const tickerItems = [
-    { title: "Finance", count: 16, desc: "ROI, Margin & Amortization" },
-    { title: "Marketing", count: 14, desc: "ROAS, CAC & Churn" },
-    { title: "Advertising", count: 12, desc: "Target CPA & CTOR" },
-    { title: "Development", count: 11, desc: "Cron, Diff & JWT" },
-    { title: "Business", count: 13, desc: "Runway & Unit Economics" },
-    { title: "Design", count: 8, desc: "Contrast & Fluid Type" },
-    { title: "Data", count: 9, desc: "Correlation & Sample Size" },
-    { title: "Productivity", count: 10, desc: "Priority Matrix & Timesheets" },
-    { title: "SEO", count: 9, desc: "Hreflang & Redirects" },
-    { title: "Everyday", count: 12, desc: "Fuel, Split & Countdown" },
-  ];
+  const tickerItems = DOMAINS.map((d) => {
+    const tools = toolsByDomain(d.slug);
+    const sample = tools
+      .slice(0, 3)
+      .map((t) => t.name.replace(/ Calculator| Generator| Converter| Analyzer| Estimator/g, ""))
+      .join(" • ");
+    return {
+      slug: d.slug,
+      shortName: d.shortName,
+      name: d.name,
+      count: tools.length,
+      icon: d.icon,
+      desc: sample,
+    };
+  });
 
   return (
-    <div className="w-full overflow-hidden border-y border-border/80 bg-card/40 py-4 backdrop-blur-xs select-none">
-      <div className="animate-marquee flex items-center gap-10 whitespace-nowrap">
-        {[...tickerItems, ...tickerItems].map((item, idx) => (
-          <div key={idx} className="flex items-center gap-3 text-xs sm:text-sm font-medium">
-            <span className="font-display font-semibold tracking-wide text-foreground">
-              {item.title}
-            </span>
-            <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">
-              {item.count} tools
-            </span>
-            <span className="text-muted-foreground/70">{item.desc}</span>
-            <span className="text-border mx-2">•</span>
-          </div>
-        ))}
+    <div className="w-full overflow-hidden border-y border-border/80 bg-card/40 py-3.5 backdrop-blur-xs select-none">
+      <div className="animate-marquee flex items-center gap-6 whitespace-nowrap">
+        {[...tickerItems, ...tickerItems].map((item, idx) => {
+          const Icon = item.icon;
+          const acc = domainAccent(item.slug);
+          return (
+            <Link
+              key={`${item.slug}-${idx}`}
+              href={`/${item.slug}`}
+              className="group flex items-center gap-3 rounded-full border border-border/70 bg-background/80 px-4 py-1.5 transition-all duration-300 hover:border-primary/50 hover:bg-card hover:shadow-xs"
+            >
+              <span className={cn("flex h-6 w-6 items-center justify-center rounded-full text-xs", acc.soft)}>
+                <Icon className="h-3.5 w-3.5" />
+              </span>
+              <span className="font-display font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary text-xs sm:text-sm">
+                {item.shortName}
+              </span>
+              <span className="rounded-full bg-muted px-2 py-0.5 text-[11px] font-semibold text-muted-foreground">
+                {item.count} tools
+              </span>
+              <span className="text-muted-foreground/70 text-xs hidden sm:inline">
+                {item.desc}
+              </span>
+            </Link>
+          );
+        })}
       </div>
     </div>
   );
