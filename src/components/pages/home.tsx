@@ -306,11 +306,11 @@ function DomainTicker() {
     () => {
       if (!tickerRef.current) return;
 
-      // GSAP hardware-accelerated continuous infinite scroll
+      // GSAP hardware-accelerated continuous infinite scroll (calibrated to editorial ~43px/sec)
       tweenRef.current = gsap.to(tickerRef.current, {
         xPercent: -50,
         ease: "none",
-        duration: 45,
+        duration: 100,
         repeat: -1,
       });
     },

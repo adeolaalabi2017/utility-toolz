@@ -333,7 +333,7 @@
 @utility animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 45s linear infinite;
+  animation: marquee 100s linear infinite;
 }
 
 @keyframes marquee {
@@ -348,7 +348,7 @@
 .animate-marquee {
   display: flex;
   width: max-content;
-  animation: marquee 45s linear infinite;
+  animation: marquee 100s linear infinite;
 }
 
 .animate-marquee:hover {
