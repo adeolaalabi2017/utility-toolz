@@ -7,6 +7,11 @@ import { SearchProvider } from "@/components/site/search-dialog";
 import { Header } from "@/components/site/header";
 import { Footer } from "@/components/site/footer";
 import { PwaRegister } from "@/components/site/pwa-register";
+import { CurrencyProvider } from "@/components/site/currency";
+import { DOMAINS, TOOLS } from "@/lib/registry";
+
+const TOOL_COUNT = TOOLS.length;
+const DOMAIN_COUNT = DOMAINS.length;
 
 const geistSans = Geist({
   subsets: ["latin"],
@@ -48,7 +53,7 @@ export const metadata: Metadata = {
     template: "%s | Utility Toolz",
   },
   description:
-    "A domain-first platform of professional calculators and utilities for marketers, accountants, business owners, media buyers, developers, designers, project managers and students. 119 free tools live across 12 domains.",
+    `A domain-first platform of professional calculators and utilities for marketers, accountants, business owners, media buyers, developers, designers, project managers and students. ${TOOL_COUNT} free tools across ${DOMAIN_COUNT} domains.`,
   keywords: [
     "calculators",
     "marketing tools",
@@ -71,7 +76,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Utility Toolz — Professional tools, organized by domain",
     description:
-      "Every tool your work needs — organized by professional domain, not buried in a random list. 119 tools across finance, marketing, advertising, business, SEO, content, design, data, development, productivity, education and everyday utilities.",
+      `Every tool your work needs — organized by professional domain, not buried in a random list. ${TOOL_COUNT} tools across finance, marketing, advertising, business, SEO, content, design, data, development, productivity, education and everyday utilities.`,
     siteName: "Utility Toolz",
     type: "website",
     url: siteUrl,
@@ -90,13 +95,23 @@ export default function RootLayout({
     <html lang="en" className={`${geistSans.variable} ${outfit.variable}`} suppressHydrationWarning>
       <body className="antialiased bg-background text-foreground font-sans">
         <ThemeProvider>
-          <SearchProvider>
-            <div className="flex min-h-screen flex-col bg-background text-foreground">
-              <Header />
-              <main className="flex-1 overflow-x-hidden w-full max-w-full">{children}</main>
-              <Footer />
-            </div>
-          </SearchProvider>
+          <CurrencyProvider>
+            <SearchProvider>
+              <a
+                href="#main"
+                className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-3 focus:z-50 focus:rounded-md focus:bg-card focus:px-4 focus:py-2 focus:text-sm focus:font-semibold focus:shadow-lark"
+              >
+                Skip to content
+              </a>
+              <div className="flex min-h-screen flex-col bg-background text-foreground">
+                <Header />
+                <main id="main" tabIndex={-1} className="flex-1 overflow-x-hidden w-full max-w-full focus:outline-none">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+            </SearchProvider>
+          </CurrencyProvider>
           <Toaster />
           <PwaRegister />
         </ThemeProvider>

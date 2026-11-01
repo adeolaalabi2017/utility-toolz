@@ -7,6 +7,8 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { num } from "@/lib/format";
+import { useCurrencySymbol } from "@/components/site/currency";
 import {
   Select,
   SelectContent,
@@ -19,6 +21,9 @@ import {
 /* Layout: inputs + results side by side (stacked on mobile)           */
 /* ------------------------------------------------------------------ */
 
+/** Lets fields inside a CalcLayout report invalid input so results can be held back. */
+const CalcValidityContext = React.createContext<((id: string, invalid: boolean) => void) | null>(null);
+
 export function CalcLayout({
   inputs,
   results,
@@ -28,34 +33,68 @@ export function CalcLayout({
   results: React.ReactNode;
   actions?: React.ReactNode;
 }) {
+  const [invalid, setInvalid] = React.useState<Record<string, boolean>>({});
+  const report = React.useCallback((id: string, bad: boolean) => {
+    setInvalid((prev) => (Boolean(prev[id]) === bad ? prev : { ...prev, [id]: bad }));
+  }, []);
+  const hasInvalid = Object.values(invalid).some(Boolean);
+
   return (
-    <div className="space-y-4">
-      {actions && <div className="no-print flex items-center justify-end gap-2">{actions}</div>}
-      <div className="grid gap-5 lg:grid-cols-5">
-        <div className="lg:col-span-3">
-          <div className="rounded-xl border bg-card p-4 shadow-lark-sm sm:p-5">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Inputs
-            </p>
-            {inputs}
+    <CalcValidityContext.Provider value={report}>
+      <div className="space-y-4">
+        {actions && <div className="no-print flex flex-wrap items-center justify-end gap-2">{actions}</div>}
+        <div className="grid gap-5 lg:grid-cols-5">
+          <div className="lg:col-span-3">
+            <section
+              aria-label="Inputs"
+              className="rounded-xl border bg-card p-4 shadow-lark-sm sm:p-5"
+            >
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Inputs
+              </p>
+              {inputs}
+            </section>
           </div>
-        </div>
-        <div className="lg:col-span-2">
-          <div className="rounded-xl border bg-card p-4 shadow-lark-sm h-full sm:p-5">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Results
-            </p>
-            {results}
+          <div className="lg:col-span-2">
+            <section
+              aria-label="Results"
+              className="relative rounded-xl border bg-card p-4 shadow-lark-sm h-full sm:p-5"
+            >
+              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                Results
+              </p>
+              {hasInvalid ? (
+                <div
+                  role="status"
+                  className="rounded-lg border border-dashed border-lf-coral/40 bg-lf-coral/10 px-4 py-6 text-sm leading-relaxed text-deep-coral"
+                >
+                  Results are paused until every highlighted field holds a valid number.
+                </div>
+              ) : (
+                results
+              )}
+            </section>
           </div>
         </div>
       </div>
-    </div>
+    </CalcValidityContext.Provider>
   );
 }
 
 /* ------------------------------------------------------------------ */
 /* Inputs                                                              */
 /* ------------------------------------------------------------------ */
+
+const NUMERIC_CHARS = /[^0-9.,\-\s]/g;
+const VALID_NUMBER = /^-?(\d{1,3}(,\d{3})+|\d+)?(\.\d+)?$/;
+
+/** True when the text is empty, mid-typing ("-", "."), or a well-formed number. */
+export function isValidNumberText(v: string): boolean {
+  const t = v.replace(/\s/g, "");
+  if (t === "" || t === "-" || t === "." || t === "-.") return true;
+  if (/\d\.$/.test(t)) return VALID_NUMBER.test(t.slice(0, -1));
+  return VALID_NUMBER.test(t) && /\d/.test(t);
+}
 
 export function NumberField({
   label,
@@ -68,6 +107,7 @@ export function NumberField({
   min,
   step,
   className,
+  ariaLabel,
 }: {
   label?: string;
   value: string;
@@ -79,32 +119,94 @@ export function NumberField({
   min?: number;
   step?: number;
   className?: string;
+  /** Accessible name when there is no visible label (e.g. table-style rows). */
+  ariaLabel?: string;
 }) {
+  const id = React.useId();
+  const report = React.useContext(CalcValidityContext);
+  const currency = useCurrencySymbol();
+  const shownPrefix = prefix === "$" ? currency : prefix;
+  const [rejected, setRejected] = React.useState(false);
+  const formatInvalid = !isValidNumberText(String(value ?? ""));
+  const belowMin = !formatInvalid && min !== undefined && String(value).trim() !== "" && num(value) < min;
+  const invalid = formatInvalid || belowMin;
+
+  React.useEffect(() => {
+    report?.(id, invalid);
+    return () => report?.(id, false);
+  }, [report, id, invalid]);
+
+  const errorText = formatInvalid
+    ? "Enter a number, like 1,250 or 12.5"
+    : belowMin
+      ? `Must be at least ${min}`
+      : rejected
+        ? "Only numbers can go in this field"
+        : null;
+  const describedBy = [hint ? `${id}-hint` : null, errorText ? `${id}-error` : null]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <div className={cn("space-y-1.5", className)}>
-      {label && <Label className="text-sm font-medium">{label}</Label>}
+      {label && (
+        <Label htmlFor={id} className="text-sm font-medium">
+          {label}
+        </Label>
+      )}
       <div className="relative">
-        {prefix && (
-          <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
-            {prefix}
+        {shownPrefix && (
+          <span
+            aria-hidden
+            className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground"
+          >
+            {shownPrefix}
           </span>
         )}
         <Input
+          id={id}
           type="text"
           inputMode="decimal"
-          min={min}
+          autoComplete="off"
           value={value}
           placeholder={placeholder}
-          onChange={(e) => onChange(e.target.value)}
-          className={cn("tnum", prefix && "pl-7", suffix && "pr-12")}
+          step={step}
+          aria-label={label ? undefined : ariaLabel}
+          aria-invalid={invalid || undefined}
+          aria-describedby={describedBy || undefined}
+          onChange={(e) => {
+            const raw = e.target.value;
+            const clean = raw.replace(NUMERIC_CHARS, "");
+            setRejected(clean !== raw);
+            onChange(clean);
+          }}
+          onBlur={() => setRejected(false)}
+          className={cn(
+            "tnum",
+            shownPrefix && (shownPrefix.length > 1 ? "pl-11" : "pl-7"),
+            suffix && "pr-12",
+            invalid && "border-lf-coral focus-visible:outline-lf-coral"
+          )}
         />
         {suffix && (
-          <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground">
+          <span
+            aria-hidden
+            className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground"
+          >
             {suffix}
           </span>
         )}
       </div>
-      {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+      {hint && (
+        <p id={`${id}-hint`} className="text-xs text-muted-foreground">
+          {hint}
+        </p>
+      )}
+      {errorText && (
+        <p id={`${id}-error`} role="alert" className="text-xs font-medium text-deep-coral">
+          {errorText}
+        </p>
+      )}
     </div>
   );
 }
@@ -115,18 +217,25 @@ export function SelectField({
   onChange,
   options,
   className,
+  ariaLabel,
 }: {
+  ariaLabel?: string;
   label?: string;
   value: string;
   onChange: (v: string) => void;
   options: { value: string; label: string }[];
   className?: string;
 }) {
+  const id = React.useId();
   return (
     <div className={cn("space-y-1.5", className)}>
-      {label && <Label className="text-sm font-medium">{label}</Label>}
+      {label && (
+        <Label htmlFor={id} className="text-sm font-medium">
+          {label}
+        </Label>
+      )}
       <Select value={value} onValueChange={onChange}>
-        <SelectTrigger className="w-full">
+        <SelectTrigger id={id} aria-label={label ? undefined : ariaLabel} className="w-full">
           <SelectValue />
         </SelectTrigger>
         <SelectContent>
@@ -180,10 +289,15 @@ export function ResultHero({
   copyText?: string;
 }) {
   return (
-    <div className="rounded-lg bg-ink px-4 py-5 text-[#fef5de] mb-4">
-      <p className="text-xs font-medium uppercase tracking-wider text-[#fef5de]/60">{label}</p>
+    <div
+      className="rounded-lg bg-ink px-4 py-5 text-[#fef5de] mb-4"
+      role="status"
+      aria-live="polite"
+      aria-atomic="true"
+    >
+      <p className="text-xs font-medium uppercase tracking-wider text-[#fef5de]/75">{label}</p>
       <p className="tnum mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{value}</p>
-      {sub && <p className="mt-1.5 text-sm text-[#fef5de]/70">{sub}</p>}
+      {sub && <p className="mt-1.5 text-sm text-[#fef5de]/80">{sub}</p>}
     </div>
   );
 }
@@ -217,9 +331,9 @@ export function Verdict({
   children: React.ReactNode;
 }) {
   const styles = {
-    good: "bg-[#308f68]/10 text-[#1f5f45] border-[#308f68]/30",
-    warn: "bg-[#e07a3c]/10 text-[#a4502c] border-[#e07a3c]/30",
-    bad: "bg-[#cf4f43]/10 text-[#a83a30] border-[#cf4f43]/30",
+    good: "bg-lf-green/10 text-deep-green border-lf-green/30",
+    warn: "bg-lf-orange/10 text-deep-orange border-lf-orange/30",
+    bad: "bg-lf-coral/10 text-deep-coral border-lf-coral/30",
     neutral: "bg-muted text-foreground border-border",
   } as const;
   return (
@@ -250,7 +364,7 @@ export function ShareBar({
       <div className="flex items-baseline justify-between text-sm">
         <span className="font-medium">{label}</span>
         <span className="tnum text-muted-foreground">
-          {actualLabel} <span className="text-muted-foreground/70">vs target {targetLabel}</span>
+          {actualLabel} <span className="text-muted-foreground">vs target {targetLabel}</span>
         </span>
       </div>
       <div className="relative h-3 w-full overflow-hidden rounded-full bg-muted">
@@ -320,6 +434,7 @@ export function MiniTable({
 /* ------------------------------------------------------------------ */
 
 export function TextAreaField({
+  ariaLabel,
   label,
   value,
   onChange,
@@ -337,11 +452,20 @@ export function TextAreaField({
   hint?: string;
   mono?: boolean;
   className?: string;
+  ariaLabel?: string;
 }) {
+  const id = React.useId();
   return (
     <div className={cn("space-y-1.5", className)}>
-      {label && <Label className="text-sm font-medium">{label}</Label>}
+      {label && (
+        <Label htmlFor={id} className="text-sm font-medium">
+          {label}
+        </Label>
+      )}
       <Textarea
+        id={id}
+        aria-label={label ? undefined : ariaLabel}
+        aria-describedby={hint ? `${id}-hint` : undefined}
         value={value}
         rows={rows}
         placeholder={placeholder}
@@ -349,7 +473,11 @@ export function TextAreaField({
         spellCheck={false}
         className={cn("resize-y", mono && "font-mono text-[13px]")}
       />
-      {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
+      {hint && (
+        <p id={`${id}-hint`} className="text-xs text-muted-foreground">
+          {hint}
+        </p>
+      )}
     </div>
   );
 }
@@ -392,7 +520,7 @@ export function CopyButton({
       type="button"
       variant="outline"
       size={size === "xs" ? "sm" : "sm"}
-      className={cn("h-8 gap-1.5", size === "xs" && "h-7 px-2 text-xs", className)}
+      className={cn("h-10 gap-1.5 sm:h-8", size === "xs" && "px-2 text-xs sm:h-7", className)}
       onClick={async () => {
         if (await copyToClipboard(text)) {
           setCopied(true);
@@ -462,7 +590,7 @@ export function OutputPanel({
             type="button"
             variant="outline"
             size="sm"
-            className="h-8 gap-1.5"
+            className="h-10 sm:h-8 gap-1.5"
             onClick={() => downloadText(filename, value, mime)}
           >
             <Download className="h-3.5 w-3.5" /> {downloadLabel}
@@ -479,10 +607,10 @@ export function LengthPill({ value, min, max }: { value: number; min: number; ma
     value === 0
       ? "bg-muted text-muted-foreground"
       : value > max
-        ? "bg-[#cf4f43]/10 text-[#a83a30] border border-[#cf4f43]/30"
+        ? "bg-lf-coral/10 text-deep-coral border border-lf-coral/30"
         : value < min
-          ? "bg-[#e07a3c]/10 text-[#a4502c] border border-[#e07a3c]/30"
-          : "bg-[#308f68]/10 text-[#1f5f45] border border-[#308f68]/30";
+          ? "bg-lf-orange/10 text-deep-orange border border-lf-orange/30"
+          : "bg-lf-green/10 text-deep-green border border-lf-green/30";
   return (
     <span className={cn("tnum rounded-full px-2 py-0.5 text-xs font-medium", tone)}>
       {value} chars

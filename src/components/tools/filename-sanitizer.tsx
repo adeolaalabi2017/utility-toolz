@@ -63,20 +63,20 @@ export function FilenameSanitizer() {
     <div className="space-y-6">
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <FileCheck className="h-4 w-4 text-[#a4502c]" /> Original String or Filename
+          <span id="filename-sanitizer-heading-1" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+            <FileCheck className="h-4 w-4 text-deep-orange" /> Original String or Filename
           </span>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setInput(SAMPLE_FILENAME)}
-            className="h-7 text-xs"
+            className="h-10 sm:h-7 text-xs"
           >
             Load Sample
           </Button>
         </div>
 
-        <input
+        <input aria-labelledby="filename-sanitizer-heading-1"
           type="text"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -103,9 +103,9 @@ export function FilenameSanitizer() {
                 variant="outline"
                 size="sm"
                 onClick={() => copyVal(item.val, item.id)}
-                className="h-7 text-xs gap-1"
+                className="h-10 sm:h-7 text-xs gap-1"
               >
-                {copiedType === item.id ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+                {copiedType === item.id ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
                 <span>{copiedType === item.id ? "Copied" : "Copy"}</span>
               </Button>
             </div>

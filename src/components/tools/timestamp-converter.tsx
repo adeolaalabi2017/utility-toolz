@@ -75,7 +75,7 @@ export function TimestampConverter() {
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#308f68]/15 text-[#1f5f45]">
+            <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-lf-green/15 text-deep-green">
               <Clock className="h-5 w-5" />
             </span>
             <div>
@@ -96,16 +96,16 @@ export function TimestampConverter() {
               variant="outline"
               size="sm"
               onClick={() => copyVal(String(currentEpoch), "live")}
-              className="h-8 gap-1 text-xs"
+              className="h-10 sm:h-8 gap-1 text-xs"
             >
-              {copiedField === "live" ? <Check className="h-3.5 w-3.5 text-[#1f5f45]" /> : <Copy className="h-3.5 w-3.5" />}
+              {copiedField === "live" ? <Check className="h-3.5 w-3.5 text-deep-green" /> : <Copy className="h-3.5 w-3.5" />}
               <span>{copiedField === "live" ? "Copied" : "Copy Epoch"}</span>
             </Button>
             <Button
               variant="outline"
               size="sm"
               onClick={() => setEpochInput(String(currentEpoch))}
-              className="h-8 gap-1 text-xs"
+              className="h-10 sm:h-8 gap-1 text-xs"
             >
               <RefreshCw className="h-3.5 w-3.5" />
               <span>Use as Input</span>
@@ -122,8 +122,8 @@ export function TimestampConverter() {
             1. Convert Epoch to Human Date
           </span>
           <div>
-            <label className="text-xs font-medium text-foreground">Unix Timestamp (seconds or ms)</label>
-            <input
+            <label htmlFor="timestamp-converter-1" className="text-xs font-medium text-foreground">Unix Timestamp (seconds or ms)</label>
+            <input id="timestamp-converter-1"
               type="text"
               value={epochInput}
               onChange={(e) => setEpochInput(e.target.value)}
@@ -138,8 +138,8 @@ export function TimestampConverter() {
                 <span className="text-muted-foreground">Local Time:</span>
                 <div className="flex items-center gap-1.5 font-semibold text-foreground">
                   <span>{parsedFromEpoch.local}</span>
-                  <button onClick={() => copyVal(parsedFromEpoch.local, "local")} className="text-muted-foreground hover:text-foreground">
-                    {copiedField === "local" ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+                  <button type="button" onClick={() => copyVal(parsedFromEpoch.local, "local")} aria-label="Copy local time" className="flex h-10 w-10 items-center justify-center text-muted-foreground hover:text-foreground sm:h-6 sm:w-6">
+                    {copiedField === "local" ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
                   </button>
                 </div>
               </div>
@@ -147,8 +147,8 @@ export function TimestampConverter() {
                 <span className="text-muted-foreground">UTC Time:</span>
                 <div className="flex items-center gap-1.5 font-semibold text-foreground">
                   <span>{parsedFromEpoch.utc}</span>
-                  <button onClick={() => copyVal(parsedFromEpoch.utc, "utc")} className="text-muted-foreground hover:text-foreground">
-                    {copiedField === "utc" ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+                  <button type="button" onClick={() => copyVal(parsedFromEpoch.utc, "utc")} aria-label="Copy UTC time" className="flex h-10 w-10 items-center justify-center text-muted-foreground hover:text-foreground sm:h-6 sm:w-6">
+                    {copiedField === "utc" ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
                   </button>
                 </div>
               </div>
@@ -156,14 +156,14 @@ export function TimestampConverter() {
                 <span className="text-muted-foreground">ISO 8601:</span>
                 <div className="flex items-center gap-1.5 font-mono font-semibold text-foreground">
                   <span>{parsedFromEpoch.iso}</span>
-                  <button onClick={() => copyVal(parsedFromEpoch.iso, "iso")} className="text-muted-foreground hover:text-foreground">
-                    {copiedField === "iso" ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+                  <button type="button" onClick={() => copyVal(parsedFromEpoch.iso, "iso")} aria-label="Copy ISO 8601 value" className="flex h-10 w-10 items-center justify-center text-muted-foreground hover:text-foreground sm:h-6 sm:w-6">
+                    {copiedField === "iso" ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
                   </button>
                 </div>
               </div>
               <div className="flex items-center justify-between border-t border-border/60 pt-2 text-muted-foreground">
                 <span>Relative:</span>
-                <span className="font-medium text-[#1f5f45]">{parsedFromEpoch.relative}</span>
+                <span className="font-medium text-deep-green">{parsedFromEpoch.relative}</span>
               </div>
             </div>
           ) : (
@@ -177,8 +177,8 @@ export function TimestampConverter() {
             2. Convert Date & Time to Epoch
           </span>
           <div>
-            <label className="text-xs font-medium text-foreground">Select Date and Time</label>
-            <input
+            <label htmlFor="timestamp-converter-2" className="text-xs font-medium text-foreground">Select Date and Time</label>
+            <input id="timestamp-converter-2"
               type="datetime-local"
               value={dateInput}
               onChange={(e) => setDateInput(e.target.value)}
@@ -190,10 +190,10 @@ export function TimestampConverter() {
             <div className="space-y-3 rounded-lg bg-muted/50 p-4 text-xs">
               <div className="flex items-center justify-between">
                 <span className="text-muted-foreground">Epoch (Seconds):</span>
-                <div className="flex items-center gap-1.5 font-mono font-bold text-base text-[#1f5f45]">
+                <div className="flex items-center gap-1.5 font-mono font-bold text-base text-deep-green">
                   <span>{parsedFromDate.sec}</span>
-                  <button onClick={() => copyVal(String(parsedFromDate.sec), "sec")} className="text-muted-foreground hover:text-foreground">
-                    {copiedField === "sec" ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+                  <button type="button" onClick={() => copyVal(String(parsedFromDate.sec), "sec")} aria-label="Copy seconds timestamp" className="flex h-10 w-10 items-center justify-center text-muted-foreground hover:text-foreground sm:h-6 sm:w-6">
+                    {copiedField === "sec" ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
                   </button>
                 </div>
               </div>
@@ -201,8 +201,8 @@ export function TimestampConverter() {
                 <span className="text-muted-foreground">Epoch (Milliseconds):</span>
                 <div className="flex items-center gap-1.5 font-mono font-semibold text-foreground">
                   <span>{parsedFromDate.ms}</span>
-                  <button onClick={() => copyVal(String(parsedFromDate.ms), "ms")} className="text-muted-foreground hover:text-foreground">
-                    {copiedField === "ms" ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+                  <button type="button" onClick={() => copyVal(String(parsedFromDate.ms), "ms")} aria-label="Copy milliseconds timestamp" className="flex h-10 w-10 items-center justify-center text-muted-foreground hover:text-foreground sm:h-6 sm:w-6">
+                    {copiedField === "ms" ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
                   </button>
                 </div>
               </div>

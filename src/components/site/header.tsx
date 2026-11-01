@@ -11,10 +11,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
 import { ArrowRight, ChevronDown, LayoutGrid, Menu, Search } from "lucide-react";
-import { DOMAINS, PROFESSIONS, toolsByDomain } from "@/lib/registry";
+import { DOMAINS, PROFESSIONS, TOOLS, toolsByDomain } from "@/lib/registry";
 import { domainAccent } from "@/lib/registry/accents";
 import { useSearch } from "./search-dialog";
 import { ThemeToggle } from "./theme-toggle";
+import { CurrencySelect } from "./currency";
 import { cn } from "@/lib/utils";
 
 export function Header() {
@@ -28,12 +29,12 @@ export function Header() {
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
       <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:px-6">
         {/* Brand */}
-        <Link href="/" className="mr-2 flex items-center gap-2" aria-label="Utility Toolz home">
+        <Link href="/" className="mr-2 flex min-h-11 items-center gap-2" aria-label="Utility Toolz home">
           <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink">
-            <LayoutGrid className="h-4.5 w-4.5 text-[#7fbb92]" />
+            <LayoutGrid className="h-4.5 w-4.5 text-[#7fbb92]" aria-hidden />
           </span>
           <span className="font-display text-xl font-semibold tracking-tight">
-            Utility<span className="text-[#c9603c]">Toolz</span>
+            Utility<span className="text-deep-rust">Toolz</span>
           </span>
         </Link>
 
@@ -63,9 +64,9 @@ export function Header() {
                 size="sm"
                 className="gap-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-accent rounded-md px-3 py-2"
               >
-                <span>Workspaces</span>
-                <span className="rounded-full bg-muted px-1.5 py-0.2 text-[10px] font-semibold text-muted-foreground">
-                  12
+                <span>All domains</span>
+                <span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">
+                  {DOMAINS.length}
                 </span>
                 <ChevronDown className="h-3.5 w-3.5 text-muted-foreground" />
               </Button>
@@ -77,15 +78,13 @@ export function Header() {
               <div className="mb-3 flex items-center justify-between border-b border-border/60 px-2 pb-3">
                 <div>
                   <span className="font-display text-sm font-semibold text-foreground">
-                    All Professional Workspaces
+                    All professional domains
                   </span>
                   <p className="mt-0.5 text-xs text-muted-foreground">
-                    119 client-side tools organized across 12 domains
+                    {TOOLS.length} tools organized across {DOMAINS.length} domains
                   </p>
                 </div>
-                <span className="rounded-full bg-secondary px-2.5 py-0.5 text-xs font-semibold text-secondary-foreground">
-                  Client-side Math
-                </span>
+
               </div>
 
               <div className="grid grid-cols-2 gap-1.5">
@@ -112,7 +111,7 @@ export function Header() {
                             <span className="font-display text-sm font-semibold tracking-tight text-foreground transition-colors group-hover:text-primary truncate">
                               {d.shortName}
                             </span>
-                            <span className="shrink-0 text-[11px] font-medium text-muted-foreground/80">
+                            <span className="shrink-0 text-[11px] font-medium text-muted-foreground">
                               {count} tools
                             </span>
                           </div>
@@ -128,14 +127,12 @@ export function Header() {
 
               <div className="mt-3 flex items-center justify-between border-t border-border/60 px-2 pt-3 text-xs">
                 <Link
-                  href="/professions/marketer"
+                  href="/#professions"
                   className="flex items-center gap-1 font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
-                  Explore toolkits by profession <ArrowRight className="h-3 w-3" />
+                  Browse tools by profession <ArrowRight className="h-3 w-3" aria-hidden />
                 </Link>
-                <span className="text-[11px] text-muted-foreground/70">
-                  Zero signup · Instant calculations
-                </span>
+                <span className="text-[11px] text-muted-foreground">No signup needed</span>
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -145,44 +142,53 @@ export function Header() {
           {/* Search trigger */}
           <button
             onClick={() => setOpen(true)}
-            className="flex h-9 items-center gap-2 rounded-md border border-input bg-card px-3 text-sm text-muted-foreground transition-colors hover:bg-accent"
+            type="button"
+            className="flex h-11 min-w-11 items-center justify-center gap-2 rounded-md border border-input bg-card px-3 text-sm text-muted-foreground transition-colors hover:bg-accent sm:h-9 sm:min-w-0"
             aria-label="Search tools"
+            aria-keyshortcuts="Meta+K Control+K /"
           >
-            <Search className="h-4 w-4" />
+            <Search className="h-4 w-4" aria-hidden />
             <span className="hidden sm:inline">Search tools…</span>
             <kbd className="hidden rounded-sm border border-border bg-card px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground sm:inline">
               ⌘K
             </kbd>
           </button>
 
+          <div className="hidden md:block">
+            <CurrencySelect />
+          </div>
           <ThemeToggle />
 
           {/* Mobile menu */}
           <Sheet open={mobileOpen} onOpenChange={setMobileOpen}>
             <SheetTrigger asChild>
-              <Button variant="outline" size="icon" className="md:hidden" aria-label="Open menu">
+              <Button variant="outline" size="icon" className="size-11 md:hidden" aria-label="Open menu">
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-80 overflow-y-auto" aria-describedby={undefined}>
               <SheetTitle className="sr-only">Navigation</SheetTitle>
+              <div className="mt-12 flex items-center justify-between rounded-lg border border-border px-3 py-1">
+                <span className="text-sm text-muted-foreground">Currency</span>
+                <CurrencySelect />
+              </div>
               <nav className="mt-2 flex flex-col gap-1" aria-label="Mobile">
                 <Link
                   href="/"
                   onClick={() => setMobileOpen(false)}
-                  className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
+                  className="flex min-h-11 items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
                 >
                   Home
                 </Link>
                 <p className="mt-4 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Live domains
+                  Domains
                 </p>
                 {liveDomains.map((d) => (
                   <Link
                     key={d.slug}
                     href={`/${d.slug}`}
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
+                    className="flex min-h-11 items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
                   >
                     {d.name}
                   </Link>
@@ -213,7 +219,7 @@ export function Header() {
                     key={p.slug}
                     href={`/professions/${p.slug}`}
                     onClick={() => setMobileOpen(false)}
-                    className="rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
+                    className="flex min-h-11 items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent"
                   >
                     For {p.name.toLowerCase()}
                   </Link>

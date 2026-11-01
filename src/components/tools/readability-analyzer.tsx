@@ -61,9 +61,9 @@ export function ReadabilityAnalyzer() {
   }, [text]);
 
   const level = useMemo(() => {
-    if (stats.fleschEase >= 70) return { title: "Easy Reading", desc: "Conversational plain English (7th-8th grade level)", color: "text-[#1f5f45]" };
-    if (stats.fleschEase >= 50) return { title: "Standard Professional", desc: "High school / professional audience (10th-12th grade)", color: "text-[#a4502c]" };
-    return { title: "Dense & Technical", desc: "College graduate level; consider shortening sentences", color: "text-[#cf4f43]" };
+    if (stats.fleschEase >= 70) return { title: "Easy Reading", desc: "Conversational plain English (7th-8th grade level)", color: "text-deep-green" };
+    if (stats.fleschEase >= 50) return { title: "Standard Professional", desc: "High school / professional audience (10th-12th grade)", color: "text-deep-orange" };
+    return { title: "Dense & Technical", desc: "College graduate level; consider shortening sentences", color: "text-deep-coral" };
   }, [stats.fleschEase]);
 
   return (
@@ -73,19 +73,20 @@ export function ReadabilityAnalyzer() {
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <BookOpen className="h-4 w-4 text-[#a4502c]" /> Content Text Input
+              <BookOpen className="h-4 w-4 text-deep-orange" /> Content Text Input
             </span>
             <Button
               variant="outline"
               size="sm"
               onClick={() => setText(SAMPLE_TEXT)}
-              className="h-7 text-xs"
+              className="h-10 sm:h-7 text-xs"
             >
               Load Sample
             </Button>
           </div>
 
           <textarea
+            aria-label="Text to analyse"
             value={text}
             onChange={(e) => setText(e.target.value)}
             rows={10}
@@ -122,7 +123,7 @@ export function ReadabilityAnalyzer() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Flesch Reading Ease Score</span>
-              <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                 {stats.fleschEase.toFixed(1)}
                 <span className="text-xs text-muted-foreground font-normal"> / 100</span>
               </p>
@@ -141,7 +142,7 @@ export function ReadabilityAnalyzer() {
               </div>
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Gunning Fog</span>
-                <span className="tnum font-display text-display-sm text-[#3f346f] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {stats.gunningFog.toFixed(1)}
                 </span>
               </div>

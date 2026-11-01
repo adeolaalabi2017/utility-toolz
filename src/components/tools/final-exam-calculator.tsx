@@ -17,16 +17,16 @@ export function FinalExamCalculator() {
     const requiredScore = (targetGrade - currentContribution) / w;
 
     let verdict = "Achievable";
-    let color = "text-[#1f5f45]";
+    let color = "text-deep-green";
     if (requiredScore <= 0) {
       verdict = "Guaranteed — target already achieved without final";
-      color = "text-[#1f5f45]";
+      color = "text-deep-green";
     } else if (requiredScore > 100) {
       verdict = "Difficult — requires extra credit (> 100%)";
-      color = "text-[#cf4f43]";
+      color = "text-deep-coral";
     } else if (requiredScore > 85) {
       verdict = "Challenging — requires high test score";
-      color = "text-[#a4502c]";
+      color = "text-deep-orange";
     }
 
     // Letter target comparisons
@@ -60,16 +60,16 @@ export function FinalExamCalculator() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <GraduationCap className="h-4 w-4 text-[#a4502c]" /> Grade & Exam Weighting (%)
+            <GraduationCap className="h-4 w-4 text-deep-orange" /> Grade & Exam Weighting (%)
           </span>
 
           <div className="space-y-4">
             <div>
               <div className="flex justify-between text-xs font-medium text-foreground">
-                <label>Current Course Grade: {currentGrade}%</label>
+                <label htmlFor="final-exam-calculator-1">Current Course Grade: {currentGrade}%</label>
                 <span className="text-muted-foreground font-mono">Pre-final standing</span>
               </div>
-              <input
+              <input id="final-exam-calculator-1"
                 type="range"
                 min="30"
                 max="100"
@@ -81,10 +81,10 @@ export function FinalExamCalculator() {
 
             <div>
               <div className="flex justify-between text-xs font-medium text-foreground">
-                <label>Desired Course Grade Target: {targetGrade}%</label>
+                <label htmlFor="final-exam-calculator-2">Desired Course Grade Target: {targetGrade}%</label>
                 <span className="text-muted-foreground font-mono">Goal letter grade</span>
               </div>
-              <input
+              <input id="final-exam-calculator-2"
                 type="range"
                 min="50"
                 max="100"
@@ -96,10 +96,10 @@ export function FinalExamCalculator() {
 
             <div>
               <div className="flex justify-between text-xs font-medium text-foreground">
-                <label>Final Exam Weight: {examWeight}%</label>
+                <label htmlFor="final-exam-calculator-3">Final Exam Weight: {examWeight}%</label>
                 <span className="text-muted-foreground font-mono">Syllabus percentage</span>
               </div>
-              <input
+              <input id="final-exam-calculator-3"
                 type="range"
                 min="5"
                 max="70"

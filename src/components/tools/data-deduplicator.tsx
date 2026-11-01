@@ -92,11 +92,11 @@ export function DataDeduplicator() {
         </div>
 
         <div className="flex items-center gap-2">
-          <Button onClick={copyOutput} variant="outline" size="sm" className="h-7 text-xs gap-1">
-            {copied ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+          <Button onClick={copyOutput} variant="outline" size="sm" className="h-10 sm:h-7 text-xs gap-1">
+            {copied ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
             <span>{copied ? "Copied" : "Copy Unique"}</span>
           </Button>
-          <Button onClick={downloadFile} variant="outline" size="sm" className="h-7 text-xs gap-1">
+          <Button onClick={downloadFile} variant="outline" size="sm" className="h-10 sm:h-7 text-xs gap-1">
             <Download className="h-3 w-3" />
             <span>Download</span>
           </Button>
@@ -107,7 +107,7 @@ export function DataDeduplicator() {
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3 flex flex-col">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <span id="data-deduplicator-heading-1" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Input Lines ({result.originalCount})
             </span>
             <Button
@@ -119,7 +119,7 @@ export function DataDeduplicator() {
               Load Sample
             </Button>
           </div>
-          <textarea
+          <textarea aria-labelledby="data-deduplicator-heading-1"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             rows={12}
@@ -130,14 +130,14 @@ export function DataDeduplicator() {
 
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3 flex flex-col">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <span id="data-deduplicator-heading-2" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
               Deduplicated Unique Output ({result.uniqueCount})
             </span>
-            <span className="text-xs font-bold text-[#1f5f45]">
+            <span className="text-xs font-bold text-deep-green">
               Removed {result.duplicateCount} duplicates
             </span>
           </div>
-          <textarea
+          <textarea aria-labelledby="data-deduplicator-heading-2"
             readOnly
             value={result.output}
             rows={12}

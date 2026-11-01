@@ -56,6 +56,13 @@
   --color-lf-orange: var(--lf-orange);
   --color-lf-rust: var(--lf-rust);
   --color-lf-cream: var(--lf-cream);
+  /* Text-safe deep accents: dark on cream, light on Night Desk (WCAG AA both) */
+  --color-deep-green: var(--deep-green);
+  --color-deep-purple: var(--deep-purple);
+  --color-deep-coral: var(--deep-coral);
+  --color-deep-orange: var(--deep-orange);
+  --color-deep-pink: var(--deep-pink);
+  --color-deep-rust: var(--deep-rust);
 }
 
 /* Design.md scale + display sizes (serif). Mapping documented in DESIGN.md:
@@ -146,6 +153,13 @@
   --lf-rust: #c9603c;
   --lf-cream: #fef5de; /* warm text on dark green / colored cards */
 
+  --deep-green: #1f5f45;
+  --deep-purple: #3f346f;
+  --deep-coral: #a83a30;
+  --deep-orange: #a4502c;
+  --deep-pink: #a83a67;
+  --deep-rust: #9c4726;
+
   --chart-1: #1f4a3f;
   --chart-2: #308f68;
   --chart-3: #e07a3c;
@@ -175,7 +189,7 @@
   --card-foreground: #fef5de;
   --popover: #131f2d;
   --popover-foreground: #fef5de;
-  --primary: #308f68;
+  --primary: #24805b;
   --primary-foreground: #ffffff;
   --secondary: #1a2a3b;
   --secondary-foreground: #fef5de;
@@ -188,7 +202,8 @@
   --input: #233649;
   --ring: #8b7ed8;
 
-  --ink: #11261f;
+  /* Result panels and brand tiles keep the deep green surface in both themes */
+  --ink: #1f4a3f;
   --teal: #4ade80;
 
   --lf-purple: #8b7ed8;
@@ -201,6 +216,13 @@
   --lf-rust: #ea580c;
   --lf-cream: #fef5de;
 
+  --deep-green: #6fd3a2;
+  --deep-purple: #b9aff2;
+  --deep-coral: #f7a097;
+  --deep-orange: #f5a66e;
+  --deep-pink: #f290bd;
+  --deep-rust: #f2a481;
+
   --chart-1: #308f68;
   --chart-2: #8b7ed8;
   --chart-3: #fb923c;
@@ -209,7 +231,7 @@
 
   --sidebar: #131f2d;
   --sidebar-foreground: #fef5de;
-  --sidebar-primary: #308f68;
+  --sidebar-primary: #24805b;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #1e3247;
   --sidebar-accent-foreground: #fef5de;
@@ -272,7 +294,7 @@
   height: 8px;
 }
 .thin-scroll::-webkit-scrollbar-thumb {
-  background: #ddd2b4;
+  background: var(--input);
   border-radius: 8px;
 }
 .dark .thin-scroll::-webkit-scrollbar-thumb {

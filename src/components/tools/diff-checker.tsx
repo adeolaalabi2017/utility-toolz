@@ -165,7 +165,7 @@ export function DiffChecker() {
               </label>
             </div>
             <div className="flex items-center gap-2">
-              <Button variant="outline" size="sm" onClick={swap} className="h-7 text-xs gap-1">
+              <Button variant="outline" size="sm" onClick={swap} className="h-10 sm:h-7 text-xs gap-1">
                 <ArrowLeftRight className="h-3 w-3" /> Swap
               </Button>
               <Button
@@ -175,7 +175,7 @@ export function DiffChecker() {
                   setOriginal("");
                   setModified("");
                 }}
-                className="h-7 text-xs gap-1 text-muted-foreground"
+                className="h-10 sm:h-7 text-xs gap-1 text-muted-foreground"
               >
                 <RotateCcw className="h-3 w-3" /> Clear
               </Button>
@@ -185,14 +185,14 @@ export function DiffChecker() {
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <Label htmlFor="diff-checker-1" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Original Text
                 </Label>
                 <span className="text-[11px] text-muted-foreground">
                   {original.split("\n").length} lines
                 </span>
               </div>
-              <Textarea
+              <Textarea id="diff-checker-1"
                 rows={10}
                 value={original}
                 onChange={(e) => setOriginal(e.target.value)}
@@ -203,14 +203,14 @@ export function DiffChecker() {
 
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <Label className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <Label htmlFor="diff-checker-2" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   Modified Text
                 </Label>
                 <span className="text-[11px] text-muted-foreground">
                   {modified.split("\n").length} lines
                 </span>
               </div>
-              <Textarea
+              <Textarea id="diff-checker-2"
                 rows={10}
                 value={modified}
                 onChange={(e) => setModified(e.target.value)}
@@ -226,7 +226,7 @@ export function DiffChecker() {
               <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Unified Diff View
               </p>
-              <Button variant="outline" size="sm" onClick={copyDiff} className="h-7 text-xs gap-1">
+              <Button variant="outline" size="sm" onClick={copyDiff} className="h-10 sm:h-7 text-xs gap-1">
                 <Copy className="h-3 w-3" /> Copy Diff
               </Button>
             </div>
@@ -240,16 +240,16 @@ export function DiffChecker() {
                   </p>
                 </div>
               ) : additions === 0 && deletions === 0 ? (
-                <p className="p-4 text-center text-[#308f68] font-medium">Texts are identical.</p>
+                <p className="p-4 text-center text-deep-green font-medium">Texts are identical.</p>
               ) : (
                 diff.map((line, idx) => {
                   if (line.type === "add") {
                     return (
                       <div
                         key={idx}
-                        className="flex items-start gap-2 bg-[#308f68]/15 px-2 py-0.5 text-[#1f5f45] rounded"
+                        className="flex items-start gap-2 bg-lf-green/15 px-2 py-0.5 text-deep-green rounded"
                       >
-                        <span className="w-4 select-none font-bold text-[#308f68]">+</span>
+                        <span className="w-4 select-none font-bold text-deep-green">+</span>
                         <span className="whitespace-pre-wrap break-all">{line.text || " "}</span>
                       </div>
                     );
@@ -258,9 +258,9 @@ export function DiffChecker() {
                     return (
                       <div
                         key={idx}
-                        className="flex items-start gap-2 bg-[#cf4f43]/15 px-2 py-0.5 text-[#a83a30] rounded"
+                        className="flex items-start gap-2 bg-lf-coral/15 px-2 py-0.5 text-deep-coral rounded"
                       >
-                        <span className="w-4 select-none font-bold text-[#cf4f43]">-</span>
+                        <span className="w-4 select-none font-bold text-deep-coral">-</span>
                         <span className="whitespace-pre-wrap break-all">{line.text || " "}</span>
                       </div>
                     );

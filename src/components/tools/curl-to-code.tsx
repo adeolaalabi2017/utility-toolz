@@ -205,19 +205,20 @@ export function CurlToCode() {
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
         <div className="flex items-center justify-between pb-3">
           <span className="text-sm font-semibold text-foreground flex items-center gap-2">
-            <Terminal className="h-4 w-4 text-[#a4502c]" />
+            <Terminal className="h-4 w-4 text-deep-orange" />
             cURL Command
           </span>
           <Button
             variant="outline"
             size="sm"
             onClick={() => setCurl(SAMPLE_CURL)}
-            className="text-xs h-7"
+            className="h-10 text-xs sm:h-7"
           >
             Load Sample
           </Button>
         </div>
         <textarea
+            aria-label="cURL command"
           value={curl}
           onChange={(e) => setCurl(e.target.value)}
           rows={12}
@@ -234,7 +235,7 @@ export function CurlToCode() {
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col">
         <div className="flex items-center justify-between border-b border-border/60 pb-3">
           <div className="flex rounded-lg bg-muted/60 p-0.5 text-xs font-medium">
-            <button
+            <button aria-pressed={tab === "fetch"} type="button"
               onClick={() => setTab("fetch")}
               className={`rounded-md px-2.5 py-1 transition-colors ${
                 tab === "fetch" ? "bg-card text-foreground shadow-xs font-semibold" : "text-muted-foreground"
@@ -242,7 +243,7 @@ export function CurlToCode() {
             >
               JS Fetch
             </button>
-            <button
+            <button aria-pressed={tab === "axios"} type="button"
               onClick={() => setTab("axios")}
               className={`rounded-md px-2.5 py-1 transition-colors ${
                 tab === "axios" ? "bg-card text-foreground shadow-xs font-semibold" : "text-muted-foreground"
@@ -250,7 +251,7 @@ export function CurlToCode() {
             >
               Node Axios
             </button>
-            <button
+            <button aria-pressed={tab === "python"} type="button"
               onClick={() => setTab("python")}
               className={`rounded-md px-2.5 py-1 transition-colors ${
                 tab === "python" ? "bg-card text-foreground shadow-xs font-semibold" : "text-muted-foreground"
@@ -258,7 +259,7 @@ export function CurlToCode() {
             >
               Python
             </button>
-            <button
+            <button aria-pressed={tab === "go"} type="button"
               onClick={() => setTab("go")}
               className={`rounded-md px-2.5 py-1 transition-colors ${
                 tab === "go" ? "bg-card text-foreground shadow-xs font-semibold" : "text-muted-foreground"
@@ -268,8 +269,8 @@ export function CurlToCode() {
             </button>
           </div>
 
-          <Button onClick={copyCode} variant="outline" size="sm" className="h-7 gap-1 text-xs">
-            {copied ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+          <Button onClick={copyCode} variant="outline" size="sm" className="h-10 sm:h-7 gap-1 text-xs">
+            {copied ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
             <span>{copied ? "Copied" : "Copy Code"}</span>
           </Button>
         </div>

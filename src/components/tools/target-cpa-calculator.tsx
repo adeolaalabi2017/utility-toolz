@@ -1,5 +1,6 @@
 "use client";
 
+import { Cur } from "@/components/site/currency";
 import React, { useMemo } from "react";
 import { fmtUSD, fmtPct, fmtNum } from "@/lib/format";
 import { Target, Megaphone, DollarSign, ShieldAlert } from "lucide-react";
@@ -7,7 +8,7 @@ import { useToolState } from "@/hooks/use-tool-state";
 import { ToolShareBar } from "@/components/site/tool-share-bar";
 
 export function TargetCpaCalculator() {
-  const [params, setParams, resetParams] = useToolState({
+  const [params, setParams] = useToolState({
     aov: 120,
     cogs: 38,
     shippingAndFees: 12,
@@ -42,15 +43,15 @@ export function TargetCpaCalculator() {
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Target className="h-4 w-4 text-[#a4502c]" /> Product Unit Economics ($)
+              <Target className="h-4 w-4 text-deep-orange" /> Product Unit Economics (<Cur />)
             </span>
-            <ToolShareBar onReset={resetParams} />
+            <ToolShareBar />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-foreground">Average Order Value (AOV / Price)</label>
-              <input
+              <label htmlFor="target-cpa-calculator-1" className="text-xs font-medium text-foreground">Average Order Value (AOV / Price)</label>
+              <input id="target-cpa-calculator-1"
                 type="number"
                 value={aov}
                 onChange={(e) => setParams({ aov: Number(e.target.value) || 0 })}
@@ -60,36 +61,36 @@ export function TargetCpaCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Product COGS ($)</label>
-              <input
+              <label htmlFor="target-cpa-calculator-2" className="text-xs font-medium text-foreground">Product COGS (<Cur />)</label>
+              <input id="target-cpa-calculator-2"
                 type="number"
                 value={cogs}
                 onChange={(e) => setParams({ cogs: Number(e.target.value) || 0 })}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-[#cf4f43] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-deep-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               <span className="text-[11px] text-muted-foreground mt-0.5 block">Direct manufacturing / product cost</span>
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Shipping & Processing Fees ($)</label>
-              <input
+              <label htmlFor="target-cpa-calculator-3" className="text-xs font-medium text-foreground">Shipping & Processing Fees (<Cur />)</label>
+              <input id="target-cpa-calculator-3"
                 type="number"
                 value={shippingAndFees}
                 onChange={(e) => setParams({ shippingAndFees: Number(e.target.value) || 0 })}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-[#cf4f43] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-deep-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               <span className="text-[11px] text-muted-foreground mt-0.5 block">Payment gateway + delivery fee</span>
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Desired Net Profit Margin (%)</label>
-              <input
+              <label htmlFor="target-cpa-calculator-4" className="text-xs font-medium text-foreground">Desired Net Profit Margin (%)</label>
+              <input id="target-cpa-calculator-4"
                 type="number"
                 min="0"
                 max="90"
                 value={targetMarginPct}
                 onChange={(e) => setParams({ targetMarginPct: Number(e.target.value) || 0 })}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-[#1f5f45] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-deep-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               <span className="text-[11px] text-muted-foreground mt-0.5 block">Target profit margin after ad spend</span>
             </div>
@@ -105,7 +106,7 @@ export function TargetCpaCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Target Cost Per Acquisition (CPA)</span>
-              <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                 {fmtUSD(calc.targetCpa, 2)}
               </p>
               <span className="text-xs text-muted-foreground mt-1 block">
@@ -116,7 +117,7 @@ export function TargetCpaCalculator() {
             <div className="grid grid-cols-2 gap-3 text-center">
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Break-Even CPA</span>
-                <span className="tnum font-display text-display-sm text-[#cf4f43] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-coral font-bold">
                   {fmtUSD(calc.breakEvenCpa, 2)}
                 </span>
                 <span className="text-[10px] text-muted-foreground block mt-0.5">0% profit ceiling</span>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Cur } from "@/components/site/currency";
 import React, { useMemo } from "react";
 import { fmtUSD, fmtPct, fmtNum } from "@/lib/format";
 import { DollarSign, Layers, ArrowDownRight, CheckCircle2 } from "lucide-react";
@@ -7,7 +8,7 @@ import { useToolState } from "@/hooks/use-tool-state";
 import { ToolShareBar } from "@/components/site/tool-share-bar";
 
 export function UnitEconomicsCalculator() {
-  const [params, setParams, resetParams] = useToolState({
+  const [params, setParams] = useToolState({
     price: 85,
     cogs: 24,
     shipping: 7.5,
@@ -48,15 +49,15 @@ export function UnitEconomicsCalculator() {
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <DollarSign className="h-4 w-4 text-[#a4502c]" /> Per-Unit Cost Breakdown ($)
+              <DollarSign className="h-4 w-4 text-deep-orange" /> Per-Unit Cost Breakdown (<Cur />)
             </span>
-            <ToolShareBar onReset={resetParams} />
+            <ToolShareBar />
           </div>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-foreground">Selling Price per Order ($)</label>
-              <input
+              <label htmlFor="unit-economics-calculator-1" className="text-xs font-medium text-foreground">Selling Price per Order (<Cur />)</label>
+              <input id="unit-economics-calculator-1"
                 type="number"
                 value={price}
                 onChange={(e) => setParams({ price: Number(e.target.value) || 0 })}
@@ -65,48 +66,48 @@ export function UnitEconomicsCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Direct Product COGS ($)</label>
-              <input
+              <label htmlFor="unit-economics-calculator-2" className="text-xs font-medium text-foreground">Direct Product COGS (<Cur />)</label>
+              <input id="unit-economics-calculator-2"
                 type="number"
                 value={cogs}
                 onChange={(e) => setParams({ cogs: Number(e.target.value) || 0 })}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-[#cf4f43] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-deep-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Packaging & Inbound ($)</label>
-              <input
+              <label htmlFor="unit-economics-calculator-3" className="text-xs font-medium text-foreground">Packaging & Inbound (<Cur />)</label>
+              <input id="unit-economics-calculator-3"
                 type="number"
                 value={packaging}
                 onChange={(e) => setParams({ packaging: Number(e.target.value) || 0 })}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-[#cf4f43] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-deep-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Outbound Fulfillment / Shipping ($)</label>
-              <input
+              <label htmlFor="unit-economics-calculator-4" className="text-xs font-medium text-foreground">Outbound Fulfillment / Shipping (<Cur />)</label>
+              <input id="unit-economics-calculator-4"
                 type="number"
                 value={shipping}
                 onChange={(e) => setParams({ shipping: Number(e.target.value) || 0 })}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-[#cf4f43] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-deep-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Customer Acquisition Cost (CAC) ($)</label>
-              <input
+              <label htmlFor="unit-economics-calculator-5" className="text-xs font-medium text-foreground">Customer Acquisition Cost (CAC) (<Cur />)</label>
+              <input id="unit-economics-calculator-5"
                 type="number"
                 value={cac}
                 onChange={(e) => setParams({ cac: Number(e.target.value) || 0 })}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-[#6b5faf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-lf-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Return / Loss Rate (%)</label>
-              <input
+              <label htmlFor="unit-economics-calculator-6" className="text-xs font-medium text-foreground">Return / Loss Rate (%)</label>
+              <input id="unit-economics-calculator-6"
                 type="number"
                 value={returnPct}
                 onChange={(e) => setParams({ returnPct: Number(e.target.value) || 0 })}
@@ -126,7 +127,7 @@ export function UnitEconomicsCalculator() {
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Net Unit Profit (After CAC)</span>
               <p className={`tnum font-display text-display-lg mt-1 font-bold ${
-                calc.netUnitProfit >= 0 ? "text-[#1f5f45]" : "text-[#cf4f43]"
+                calc.netUnitProfit >= 0 ? "text-deep-green" : "text-deep-coral"
               }`}>
                 {fmtUSD(calc.netUnitProfit, 2)}
               </p>
@@ -138,7 +139,7 @@ export function UnitEconomicsCalculator() {
             <div className="grid grid-cols-2 gap-3 text-center">
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">CM1 (Before Ads)</span>
-                <span className="tnum font-display text-display-sm text-[#1f5f45] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-green font-bold">
                   {fmtUSD(calc.cm1, 2)}
                 </span>
                 <span className="text-[10px] text-muted-foreground block mt-0.5">{fmtPct(calc.cm1Pct, 1)} margin</span>

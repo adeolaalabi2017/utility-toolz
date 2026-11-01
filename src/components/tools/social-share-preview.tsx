@@ -30,16 +30,16 @@ export function SocialSharePreview() {
         {/* Inputs (6 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-6">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Share2 className="h-4 w-4 text-[#a4502c]" /> Open Graph & Twitter Card Metadata
+            <Share2 className="h-4 w-4 text-deep-orange" /> Open Graph & Twitter Card Metadata
           </span>
 
           <div className="space-y-3">
             <div>
               <div className="flex justify-between text-xs font-medium text-foreground">
-                <label>Page Title (`og:title`)</label>
+                <label htmlFor="social-share-preview-1">Page Title (`og:title`)</label>
                 <span className="text-muted-foreground">{title.length} chars (aim for 50-60)</span>
               </div>
-              <input
+              <input id="social-share-preview-1"
                 type="text"
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -49,10 +49,10 @@ export function SocialSharePreview() {
 
             <div>
               <div className="flex justify-between text-xs font-medium text-foreground">
-                <label>Description (`og:description`)</label>
+                <label htmlFor="social-share-preview-2">Description (`og:description`)</label>
                 <span className="text-muted-foreground">{description.length} chars (aim for 120-155)</span>
               </div>
-              <textarea
+              <textarea id="social-share-preview-2"
                 rows={3}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
@@ -61,8 +61,8 @@ export function SocialSharePreview() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Canonical URL (`og:url`)</label>
-              <input
+              <label htmlFor="social-share-preview-3" className="text-xs font-medium text-foreground">Canonical URL (`og:url`)</label>
+              <input id="social-share-preview-3"
                 type="text"
                 value={url}
                 onChange={(e) => setUrl(e.target.value)}
@@ -71,8 +71,8 @@ export function SocialSharePreview() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Image URL (`og:image` 1200×630px recommended)</label>
-              <input
+              <label htmlFor="social-share-preview-4" className="text-xs font-medium text-foreground">Image URL (`og:image` 1200×630px recommended)</label>
+              <input id="social-share-preview-4"
                 type="text"
                 value={imageUrl}
                 onChange={(e) => setImageUrl(e.target.value)}
@@ -89,19 +89,19 @@ export function SocialSharePreview() {
               Social Platform Mockup
             </span>
             <div className="flex rounded-md bg-muted/60 p-0.5 text-xs font-medium">
-              <button
+              <button aria-pressed={platform === "twitter"} type="button"
                 onClick={() => setPlatform("twitter")}
                 className={`rounded px-2.5 py-1 ${platform === "twitter" ? "bg-card font-semibold shadow-xs" : "text-muted-foreground"}`}
               >
                 X / Twitter
               </button>
-              <button
+              <button aria-pressed={platform === "linkedin"} type="button"
                 onClick={() => setPlatform("linkedin")}
                 className={`rounded px-2.5 py-1 ${platform === "linkedin" ? "bg-card font-semibold shadow-xs" : "text-muted-foreground"}`}
               >
                 LinkedIn
               </button>
-              <button
+              <button aria-pressed={platform === "facebook"} type="button"
                 onClick={() => setPlatform("facebook")}
                 className={`rounded px-2.5 py-1 ${platform === "facebook" ? "bg-card font-semibold shadow-xs" : "text-muted-foreground"}`}
               >
@@ -156,9 +156,9 @@ export function SocialSharePreview() {
               setCopied(true);
               setTimeout(() => setCopied(false), 2000);
             }}
-            className="h-7 text-xs gap-1"
+            className="h-10 sm:h-7 text-xs gap-1"
           >
-            {copied ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+            {copied ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
             <span>{copied ? "Copied" : "Copy Meta Tags"}</span>
           </Button>
         </div>

@@ -29,18 +29,19 @@ export function NpsCalculator() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Smile className="h-4 w-4 text-[#a4502c]" /> Survey Response Counts
+            <Smile className="h-4 w-4 text-deep-orange" /> Survey Response Counts
           </span>
 
           <div className="space-y-3">
             <div>
               <div className="flex items-center justify-between text-xs font-medium text-foreground">
-                <span className="flex items-center gap-1.5 text-[#1f5f45]">
+                <span className="flex items-center gap-1.5 text-deep-green">
                   <Smile className="h-4 w-4" /> Promoters (Scores 9–10)
                 </span>
                 <span className="text-muted-foreground">{calc.pPct.toFixed(1)}%</span>
               </div>
               <input
+                aria-label="Promoters (scores 9–10)"
                 type="number"
                 value={promoters}
                 onChange={(e) => setPromoters(Number(e.target.value) || 0)}
@@ -56,6 +57,7 @@ export function NpsCalculator() {
                 <span className="text-muted-foreground">{calc.passPct.toFixed(1)}%</span>
               </div>
               <input
+                aria-label="Passives (scores 7–8)"
                 type="number"
                 value={passives}
                 onChange={(e) => setPassives(Number(e.target.value) || 0)}
@@ -65,12 +67,13 @@ export function NpsCalculator() {
 
             <div>
               <div className="flex items-center justify-between text-xs font-medium text-foreground">
-                <span className="flex items-center gap-1.5 text-[#cf4f43]">
+                <span className="flex items-center gap-1.5 text-deep-coral">
                   <Frown className="h-4 w-4" /> Detractors (Scores 0–6)
                 </span>
                 <span className="text-muted-foreground">{calc.dPct.toFixed(1)}%</span>
               </div>
               <input
+                aria-label="Detractors (scores 0–6)"
                 type="number"
                 value={detractors}
                 onChange={(e) => setDetractors(Number(e.target.value) || 0)}
@@ -90,7 +93,7 @@ export function NpsCalculator() {
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Net Promoter Score (NPS)</span>
               <p className={`tnum font-display text-display-lg mt-1 font-bold ${
-                calc.nps >= 50 ? "text-[#1f5f45]" : calc.nps >= 0 ? "text-[#3f346f]" : "text-[#cf4f43]"
+                calc.nps >= 50 ? "text-deep-green" : calc.nps >= 0 ? "text-deep-purple" : "text-deep-coral"
               }`}>
                 {calc.nps > 0 ? `+${calc.nps}` : calc.nps}
               </p>
@@ -108,7 +111,7 @@ export function NpsCalculator() {
               </div>
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Promoter Ratio</span>
-                <span className="tnum font-display text-display-sm text-[#1f5f45] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-green font-bold">
                   {calc.pPct.toFixed(0)}%
                 </span>
               </div>
@@ -128,14 +131,14 @@ export function NpsCalculator() {
           Respondent Audience Distribution
         </h4>
         <div className="h-4 w-full overflow-hidden rounded-full flex bg-muted">
-          <div style={{ width: `${calc.pPct}%` }} className="bg-[#308f68]" title="Promoters" />
+          <div style={{ width: `${calc.pPct}%` }} className="bg-lf-green" title="Promoters" />
           <div style={{ width: `${calc.passPct}%` }} className="bg-muted-foreground/40" title="Passives" />
-          <div style={{ width: `${calc.dPct}%` }} className="bg-[#cf4f43]" title="Detractors" />
+          <div style={{ width: `${calc.dPct}%` }} className="bg-lf-coral" title="Detractors" />
         </div>
         <div className="flex justify-between text-xs text-muted-foreground pt-1">
-          <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-[#308f68]" /> Promoters: {calc.pPct.toFixed(1)}%</span>
+          <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-lf-green" /> Promoters: {calc.pPct.toFixed(1)}%</span>
           <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-muted-foreground/40" /> Passives: {calc.passPct.toFixed(1)}%</span>
-          <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-[#cf4f43]" /> Detractors: {calc.dPct.toFixed(1)}%</span>
+          <span className="flex items-center gap-1.5"><span className="h-2.5 w-2.5 rounded-full bg-lf-coral" /> Detractors: {calc.dPct.toFixed(1)}%</span>
         </div>
       </div>
     </div>

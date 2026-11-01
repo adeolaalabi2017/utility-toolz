@@ -19,7 +19,7 @@ export async function generateMetadata({
 
   if (!d) {
     return {
-      title: "Domain Not Found | Utility Toolz",
+      title: "Domain not found",
     };
   }
 

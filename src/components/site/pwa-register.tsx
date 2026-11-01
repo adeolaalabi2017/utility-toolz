@@ -55,14 +55,14 @@ export function PwaRegister() {
     >
       {isOffline ? (
         <>
-          <span className="flex h-2 w-2 rounded-full bg-amber-500 animate-pulse" />
-          <WifiOff className="h-3.5 w-3.5 text-amber-500" />
+          <span className="flex h-2 w-2 rounded-full bg-lf-orange animate-pulse" />
+          <WifiOff className="h-3.5 w-3.5 text-deep-orange" />
           <span>Offline mode · Tools run 100% locally</span>
         </>
       ) : (
         <>
-          <span className="flex h-2 w-2 rounded-full bg-emerald-500" />
-          <Wifi className="h-3.5 w-3.5 text-emerald-500" />
+          <span className="flex h-2 w-2 rounded-full bg-lf-green" />
+          <Wifi className="h-3.5 w-3.5 text-deep-green" />
           <span>Connected back online</span>
         </>
       )}

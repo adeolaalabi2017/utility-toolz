@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import Link from "next/link";
 import {
   Breadcrumb,
@@ -16,7 +17,9 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Lightbulb } from "lucide-react";
+import { ArrowLeft, Lightbulb, RotateCcw } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { BookmarkButton } from "@/components/site/bookmarks";
 import type { Tool, ToolContent } from "@/lib/registry/types";
 import { domainBySlug, relatedTools, toolBySlug } from "@/lib/registry";
 import { TOOL_COMPONENTS } from "@/lib/registry/tool-components";
@@ -44,6 +47,16 @@ export function ToolPage({
   const Icon = domain?.icon;
   const related = relatedTools(tool, 6);
   const ToolWidget = TOOL_COMPONENTS[tool.slug];
+  const [resetKey, setResetKey] = React.useState(0);
+
+  // Every tool gets the same "start over": clear any inputs saved in the URL
+  // and remount the tool so it returns to its worked-example defaults.
+  const resetTool = () => {
+    if (typeof window !== "undefined" && window.location.search) {
+      window.history.replaceState(null, "", window.location.pathname);
+    }
+    setResetKey((k) => k + 1);
+  };
 
   return (
     <article>
@@ -77,20 +90,33 @@ export function ToolPage({
         <div className="flex items-start gap-4">
           {Icon && (
             <span className="mt-1 hidden h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ink text-[#7fbb92] sm:flex">
-              <Icon className="h-6 w-6" />
+              <Icon className="h-6 w-6" aria-hidden />
             </span>
           )}
-          <div>
+          <div className="min-w-0 flex-1">
             <h1 className="font-display text-display-lg tracking-tight">{tool.name}</h1>
             <p className="mt-2 max-w-2xl text-lg leading-relaxed text-muted-foreground">
               {tool.tagline}
             </p>
           </div>
+          <div className="no-print flex shrink-0 items-center gap-1">
+            <BookmarkButton slug={tool.slug} name={tool.name} />
+            <Button
+              type="button"
+              variant="ghost"
+              size="sm"
+              onClick={resetTool}
+              className="gap-1.5 text-muted-foreground hover:text-foreground"
+            >
+              <RotateCcw className="h-3.5 w-3.5" aria-hidden />
+              <span>Reset</span>
+            </Button>
+          </div>
         </div>
 
         {/* Working tool above the fold */}
         <div className="mt-8">
-          {ToolWidget && <ToolWidget />}
+          {ToolWidget && <ToolWidget key={resetKey} />}
         </div>
 
         {/* Section 7.1: Ad placement strictly between result and explanation */}
@@ -115,13 +141,13 @@ export function ToolPage({
         {/* Worked example */}
         <section className="mt-10 max-w-3xl" aria-labelledby="example">
           <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm sm:p-6">
-            <p className="flex items-center gap-2 text-sm font-semibold text-[#a4502c] dark:text-[#fb923c]">
+            <p className="flex items-center gap-2 text-sm font-semibold text-deep-orange">
               <Lightbulb className="h-4 w-4" /> Worked example
             </p>
             <p className="mt-3 leading-relaxed text-foreground/85">{content.example}</p>
             <p className="mt-3 text-sm text-muted-foreground">
-              The calculator above ships preloaded with these exact numbers — change them to run
-              your own scenario.
+              The tool above opens with these numbers — change them to run your own scenario, or
+              press Reset to come back to this example.
             </p>
           </div>
         </section>
@@ -161,7 +187,7 @@ export function ToolPage({
           </div>
           <Link
             href={`/${tool.domain}`}
-            className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-[#a4502c] hover:underline"
+            className="mt-6 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-deep-orange hover:underline"
           >
             <ArrowLeft className="h-4 w-4" /> Back to {domain?.name}
           </Link>

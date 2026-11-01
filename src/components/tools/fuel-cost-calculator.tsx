@@ -44,16 +44,16 @@ export function FuelCostCalculator() {
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Fuel className="h-4 w-4 text-[#a4502c]" /> Journey & Vehicle Economy
+              <Fuel className="h-4 w-4 text-deep-orange" /> Journey & Vehicle Economy
             </span>
             <div className="flex rounded-md bg-muted/60 p-0.5 text-xs font-medium">
-              <button
+              <button aria-pressed={unitSystem === "us"} type="button"
                 onClick={() => setUnitSystem("us")}
                 className={`rounded px-2.5 py-1 ${unitSystem === "us" ? "bg-card font-semibold shadow-xs" : "text-muted-foreground"}`}
               >
                 US (Miles / Gal)
               </button>
-              <button
+              <button aria-pressed={unitSystem === "metric"} type="button"
                 onClick={() => setUnitSystem("metric")}
                 className={`rounded px-2.5 py-1 ${unitSystem === "metric" ? "bg-card font-semibold shadow-xs" : "text-muted-foreground"}`}
               >
@@ -64,10 +64,10 @@ export function FuelCostCalculator() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-foreground">
+              <label htmlFor="fuel-cost-calculator-1" className="text-xs font-medium text-foreground">
                 Trip Distance ({unitSystem === "us" ? "Miles" : "Kilometers"})
               </label>
-              <input
+              <input id="fuel-cost-calculator-1"
                 type="number"
                 value={distance}
                 onChange={(e) => setDistance(Number(e.target.value) || 0)}
@@ -76,11 +76,11 @@ export function FuelCostCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">
+              <label htmlFor="fuel-cost-calculator-2" className="text-xs font-medium text-foreground">
                 Fuel Economy ({unitSystem === "us" ? "MPG" : "L / 100km"})
               </label>
               {unitSystem === "us" ? (
-                <input
+                <input id="fuel-cost-calculator-2"
                   type="number"
                   value={mpg}
                   onChange={(e) => setMpg(Number(e.target.value) || 0)}
@@ -98,10 +98,10 @@ export function FuelCostCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">
+              <label htmlFor="fuel-cost-calculator-3" className="text-xs font-medium text-foreground">
                 Fuel Price ({unitSystem === "us" ? "$ / Gallon" : "$ / Liter"})
               </label>
-              <input
+              <input id="fuel-cost-calculator-3"
                 type="number"
                 step="0.01"
                 value={fuelPrice}
@@ -111,8 +111,8 @@ export function FuelCostCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Number of Passengers</label>
-              <input
+              <label htmlFor="fuel-cost-calculator-4" className="text-xs font-medium text-foreground">Number of Passengers</label>
+              <input id="fuel-cost-calculator-4"
                 type="number"
                 min="1"
                 max="10"
@@ -145,7 +145,7 @@ export function FuelCostCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Estimated Total Fuel Cost</span>
-              <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                 {fmtUSD(calc.totalCost, 2)}
               </p>
               <span className="text-xs text-muted-foreground mt-1 block">
@@ -162,7 +162,7 @@ export function FuelCostCalculator() {
               </div>
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Cost / {unitSystem === "us" ? "Mile" : "Km"}</span>
-                <span className="tnum font-display text-display-sm text-[#3f346f] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {fmtUSD(calc.costPerDistance, 2)}
                 </span>
               </div>

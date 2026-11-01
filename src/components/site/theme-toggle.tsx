@@ -24,7 +24,7 @@ export function ThemeToggle() {
       <Button
         variant="ghost"
         size="icon"
-        className="h-9 w-9 text-muted-foreground"
+        className="size-11 text-muted-foreground sm:size-9"
         aria-label="Toggle theme"
       >
         <span className="h-4 w-4" />
@@ -38,7 +38,7 @@ export function ThemeToggle() {
         <Button
           variant="ghost"
           size="icon"
-          className="h-9 w-9 text-foreground/80 hover:bg-accent hover:text-foreground"
+          className="size-11 text-foreground/80 hover:bg-accent hover:text-foreground sm:size-9"
           aria-label="Select theme"
         >
           {theme === "dark" ? (

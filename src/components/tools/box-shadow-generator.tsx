@@ -89,17 +89,17 @@ export function BoxShadowGenerator() {
           {/* Presets */}
           <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Sparkles className="h-3.5 w-3.5 text-[#a4502c]" /> Presets
+              <Sparkles className="h-3.5 w-3.5 text-deep-orange" /> Presets
             </span>
             <div className="mt-2.5 flex flex-wrap gap-2">
               {Object.keys(PRESETS).map((pName) => (
-                <button
+                <button type="button"
                   key={pName}
                   onClick={() => {
                     setLayers(PRESETS[pName]);
                     setActiveLayer(0);
                   }}
-                  className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground transition-colors hover:border-[#6b5faf] hover:text-[#3f346f]"
+                  className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground transition-colors hover:border-lf-purple hover:text-deep-purple"
                 >
                   {pName}
                 </button>
@@ -111,19 +111,19 @@ export function BoxShadowGenerator() {
           <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
             <div className="flex items-center justify-between border-b border-border/60 pb-3">
               <div className="flex items-center gap-2">
-                <Layers className="h-4 w-4 text-[#6b5faf]" />
+                <Layers className="h-4 w-4 text-lf-purple" />
                 <span className="text-xs font-semibold uppercase tracking-wider text-foreground">
                   Shadow Layers ({layers.length})
                 </span>
               </div>
               <div className="flex gap-1.5">
                 {layers.map((_, i) => (
-                  <button
+                  <button aria-pressed={activeLayer === i} type="button"
                     key={i}
                     onClick={() => setActiveLayer(i)}
                     className={`rounded-md px-2.5 py-1 text-xs font-semibold transition-colors ${
                       activeLayer === i
-                        ? "bg-[#6b5faf] text-white"
+                        ? "bg-lf-purple text-white"
                         : "border border-border bg-background text-muted-foreground"
                     }`}
                   >
@@ -140,7 +140,7 @@ export function BoxShadowGenerator() {
                   <span>Horizontal Offset (X)</span>
                   <span className="font-mono text-muted-foreground">{current.x}px</span>
                 </div>
-                <input
+                <input aria-label="Horizontal Offset (X)"
                   type="range"
                   min="-50"
                   max="50"
@@ -155,7 +155,7 @@ export function BoxShadowGenerator() {
                   <span>Vertical Offset (Y)</span>
                   <span className="font-mono text-muted-foreground">{current.y}px</span>
                 </div>
-                <input
+                <input aria-label="Vertical Offset (Y)"
                   type="range"
                   min="-50"
                   max="50"
@@ -170,7 +170,7 @@ export function BoxShadowGenerator() {
                   <span>Blur Radius</span>
                   <span className="font-mono text-muted-foreground">{current.blur}px</span>
                 </div>
-                <input
+                <input aria-label="Blur Radius"
                   type="range"
                   min="0"
                   max="80"
@@ -185,7 +185,7 @@ export function BoxShadowGenerator() {
                   <span>Spread Radius</span>
                   <span className="font-mono text-muted-foreground">{current.spread}px</span>
                 </div>
-                <input
+                <input aria-label="Spread Radius"
                   type="range"
                   min="-30"
                   max="40"
@@ -202,7 +202,7 @@ export function BoxShadowGenerator() {
                     {Math.round(current.opacity * 100)}%
                   </span>
                 </div>
-                <input
+                <input aria-label="Opacity"
                   type="range"
                   min="0"
                   max="1"
@@ -215,12 +215,12 @@ export function BoxShadowGenerator() {
 
               <div className="flex items-center justify-between pt-2">
                 <div className="flex items-center gap-2">
-                  <label className="text-xs font-medium text-foreground">Shadow Color:</label>
-                  <input
+                  <label htmlFor="box-shadow-generator-1" className="text-xs font-medium text-foreground">Shadow Color:</label>
+                  <input id="box-shadow-generator-1"
                     type="color"
                     value={current.color}
                     onChange={(e) => updateCurrent({ color: e.target.value })}
-                    className="h-7 w-12 cursor-pointer rounded border border-input p-0.5"
+                    className="h-10 sm:h-7 w-12 cursor-pointer rounded border border-input p-0.5"
                   />
                 </div>
 
@@ -246,19 +246,19 @@ export function BoxShadowGenerator() {
                 Live Preview
               </span>
               <div className="flex rounded-md bg-muted/60 p-0.5 text-[11px] font-medium">
-                <button
+                <button aria-pressed={previewBg === "cream"} type="button"
                   onClick={() => setPreviewBg("cream")}
                   className={`rounded px-2 py-0.5 ${previewBg === "cream" ? "bg-card shadow-xs font-bold" : "text-muted-foreground"}`}
                 >
                   Cream
                 </button>
-                <button
+                <button aria-pressed={previewBg === "white"} type="button"
                   onClick={() => setPreviewBg("white")}
                   className={`rounded px-2 py-0.5 ${previewBg === "white" ? "bg-card shadow-xs font-bold" : "text-muted-foreground"}`}
                 >
                   White
                 </button>
-                <button
+                <button aria-pressed={previewBg === "dark"} type="button"
                   onClick={() => setPreviewBg("dark")}
                   className={`rounded px-2 py-0.5 ${previewBg === "dark" ? "bg-card shadow-xs font-bold" : "text-muted-foreground"}`}
                 >
@@ -304,9 +304,9 @@ export function BoxShadowGenerator() {
               variant="outline"
               size="sm"
               onClick={() => copyCode(`box-shadow: ${cssValue};`, "css")}
-              className="h-7 text-xs gap-1"
+              className="h-10 sm:h-7 text-xs gap-1"
             >
-              {copiedType === "css" ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+              {copiedType === "css" ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
               <span>{copiedType === "css" ? "Copied" : "Copy CSS"}</span>
             </Button>
           </div>
@@ -324,9 +324,9 @@ export function BoxShadowGenerator() {
               variant="outline"
               size="sm"
               onClick={() => copyCode(tailwindValue, "tw")}
-              className="h-7 text-xs gap-1"
+              className="h-10 sm:h-7 text-xs gap-1"
             >
-              {copiedType === "tw" ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+              {copiedType === "tw" ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
               <span>{copiedType === "tw" ? "Copied" : "Copy Tailwind"}</span>
             </Button>
           </div>

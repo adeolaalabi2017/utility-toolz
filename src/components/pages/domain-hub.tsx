@@ -104,7 +104,7 @@ export function DomainHub({
             {planned.length > 0 && (
               <section className="mt-12 rounded-xl border border-dashed bg-muted/30 p-5 sm:p-6">
                 <h2 className="flex items-center gap-2 font-display text-display-sm tracking-tight">
-                  <Clock className="h-4.5 w-4.5 text-[#c9603c]" /> Next up in {domain.shortName}
+                  <Clock className="h-4.5 w-4.5 text-lf-rust" /> Next up in {domain.shortName}
                 </h2>
                 <p className="mt-1.5 text-sm text-muted-foreground">
                   From the build roadmap — each batch ships as a sprint, ordered by search demand.

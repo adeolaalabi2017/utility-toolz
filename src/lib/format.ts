@@ -7,16 +7,61 @@ function toDigits(digits: unknown, fallback = 0): number {
   return fallback;
 }
 
+/* ------------------------------------------------------------------ */
+/* Display currency (set by CurrencyProvider; USD until the visitor picks) */
+/* ------------------------------------------------------------------ */
+
+export const CURRENCIES: { code: string; name: string }[] = [
+  { code: "USD", name: "US dollar" },
+  { code: "EUR", name: "Euro" },
+  { code: "GBP", name: "British pound" },
+  { code: "NGN", name: "Nigerian naira" },
+  { code: "GHS", name: "Ghanaian cedi" },
+  { code: "KES", name: "Kenyan shilling" },
+  { code: "ZAR", name: "South African rand" },
+  { code: "INR", name: "Indian rupee" },
+  { code: "CAD", name: "Canadian dollar" },
+  { code: "AUD", name: "Australian dollar" },
+  { code: "JPY", name: "Japanese yen" },
+];
+
+let currentCurrency = "USD";
+
+export const getCurrency = () => currentCurrency;
+
+export function setCurrency(code: string) {
+  if (CURRENCIES.some((c) => c.code === code)) currentCurrency = code;
+}
+
+export function currencySymbol(code: string = currentCurrency): string {
+  try {
+    const part = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: code,
+      currencyDisplay: "narrowSymbol",
+    })
+      .formatToParts(0)
+      .find((p) => p.type === "currency");
+    return part?.value ?? code;
+  } catch {
+    return code;
+  }
+}
+
+/** Money in the visitor's display currency (name kept for existing call sites). */
 export function fmtUSD(n: number, digits: unknown = 0): string {
   if (!isFinite(n)) return "—";
   const d = toDigits(digits, 0);
   return n.toLocaleString("en-US", {
     style: "currency",
-    currency: "USD",
+    currency: currentCurrency,
+    currencyDisplay: "narrowSymbol",
     minimumFractionDigits: d,
     maximumFractionDigits: d,
   });
 }
+
+export const fmtMoneyCur = fmtUSD;
 
 export function fmtMoney(n: number, symbol = "$", digits: unknown = 0): string {
   if (!isFinite(n)) return "—";
@@ -24,7 +69,7 @@ export function fmtMoney(n: number, symbol = "$", digits: unknown = 0): string {
   const sign = n < 0 ? "-" : "";
   return (
     sign +
-    symbol +
+    (symbol === "$" ? currencySymbol() : symbol) +
     Math.abs(n).toLocaleString("en-US", {
       minimumFractionDigits: d,
       maximumFractionDigits: d,

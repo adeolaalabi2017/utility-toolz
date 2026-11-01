@@ -8,71 +8,89 @@ import { toolBySlug } from "@/lib/registry";
 import { cn } from "@/lib/utils";
 
 const STORAGE_KEY = "utility_toolz_favorites";
+const EMPTY: string[] = [];
+
+/* One shared store, so starring a card updates every star and the pinned bar at once. */
+let cache: string[] | null = null;
+const listeners = new Set<() => void>();
+
+function read(): string[] {
+  if (cache) return cache;
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    const parsed = raw ? JSON.parse(raw) : [];
+    cache = Array.isArray(parsed) ? parsed.filter((s): s is string => typeof s === "string") : [];
+  } catch {
+    cache = [];
+  }
+  return cache;
+}
+
+function write(next: string[]) {
+  cache = next;
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+  } catch {}
+  listeners.forEach((l) => l());
+}
+
+function subscribe(listener: () => void) {
+  listeners.add(listener);
+  const onStorage = (e: StorageEvent) => {
+    if (e.key === STORAGE_KEY) {
+      cache = null;
+      listener();
+    }
+  };
+  window.addEventListener("storage", onStorage);
+  return () => {
+    listeners.delete(listener);
+    window.removeEventListener("storage", onStorage);
+  };
+}
 
 export function useBookmarks() {
-  const [bookmarks, setBookmarks] = React.useState<string[]>([]);
+  const bookmarks = React.useSyncExternalStore(subscribe, read, () => EMPTY);
   const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    try {
-      const stored = localStorage.getItem(STORAGE_KEY);
-      if (stored) {
-        setBookmarks(JSON.parse(stored));
-      }
-    } catch (e) {
-      // ignore
-    }
-    setMounted(true);
-  }, []);
+  React.useEffect(() => setMounted(true), []);
 
   const toggleBookmark = React.useCallback((slug: string) => {
-    setBookmarks((prev) => {
-      const exists = prev.includes(slug);
-      const updated = exists ? prev.filter((s) => s !== slug) : [...prev, slug];
-      try {
-        localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
-      } catch (e) {}
-      return updated;
-    });
+    const current = read();
+    write(current.includes(slug) ? current.filter((s) => s !== slug) : [...current, slug]);
   }, []);
 
-  const isBookmarked = React.useCallback(
-    (slug: string) => bookmarks.includes(slug),
-    [bookmarks]
-  );
+  const isBookmarked = React.useCallback((slug: string) => bookmarks.includes(slug), [bookmarks]);
 
   return { bookmarks, isBookmarked, toggleBookmark, mounted };
 }
 
 export function BookmarkButton({
   slug,
+  name,
   className,
 }: {
   slug: string;
+  name?: string;
   className?: string;
 }) {
   const { isBookmarked, toggleBookmark, mounted } = useBookmarks();
-  if (!mounted) return null;
-
-  const active = isBookmarked(slug);
+  const active = mounted && isBookmarked(slug);
+  const label = name ? `Star ${name}` : "Star this tool";
 
   return (
     <button
-      onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        toggleBookmark(slug);
-      }}
-      aria-label={active ? "Remove from starred tools" : "Star this tool"}
+      type="button"
+      onClick={() => toggleBookmark(slug)}
+      aria-pressed={active}
+      aria-label={label}
+      title={active ? "Starred — click to remove" : "Star to pin on the home page"}
       className={cn(
-        "rounded-full p-1.5 transition-colors focus-visible:outline-2 focus-visible:outline-primary",
-        active
-          ? "text-[#e07a3c] hover:text-[#c9603c]"
-          : "text-muted-foreground/40 hover:text-foreground/80",
+        "flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-accent sm:h-8 sm:w-8",
+        active ? "text-lf-orange" : "text-muted-foreground hover:text-foreground",
         className
       )}
     >
-      <Star className={cn("h-4 w-4", active && "fill-[#e07a3c]")} />
+      <Star className={cn("h-4 w-4", active && "fill-lf-orange")} aria-hidden />
     </button>
   );
 }
@@ -85,24 +103,25 @@ export function PinnedToolsBar() {
   if (validTools.length === 0) return null;
 
   return (
-    <div className="mb-6 rounded-xl border border-border bg-card p-4 shadow-lark-sm">
-      <div className="flex items-center gap-2 mb-3">
-        <Star className="h-4 w-4 fill-[#e07a3c] text-[#e07a3c]" />
-        <h3 className="text-xs font-semibold uppercase tracking-wider text-foreground/80">
-          Pinned Tools ({validTools.length})
-        </h3>
+    <section aria-labelledby="pinned-title" className="mb-6 rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+      <div className="mb-3 flex items-center gap-2">
+        <Star className="h-4 w-4 fill-lf-orange text-lf-orange" aria-hidden />
+        <h2 id="pinned-title" className="font-sans text-xs font-semibold uppercase tracking-wider text-foreground/80">
+          Starred tools ({validTools.length})
+        </h2>
       </div>
-      <div className="flex flex-wrap gap-2">
+      <ul className="flex flex-wrap gap-2">
         {validTools.map((t) => (
-          <Link
-            key={t.slug}
-            href={`/${t.domain}/${t.slug}`}
-            className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1.5 text-xs font-medium text-foreground transition-colors hover:border-[#6b5faf] hover:text-[#3f346f]"
-          >
-            <span>{t.name}</span>
-          </Link>
+          <li key={t.slug}>
+            <Link
+              href={`/${t.domain}/${t.slug}`}
+              className="inline-flex min-h-10 items-center rounded-full border border-border bg-card px-3 text-xs font-medium text-foreground transition-colors hover:border-lf-purple hover:text-deep-purple"
+            >
+              {t.name}
+            </Link>
+          </li>
         ))}
-      </div>
-    </div>
+      </ul>
+    </section>
   );
 }

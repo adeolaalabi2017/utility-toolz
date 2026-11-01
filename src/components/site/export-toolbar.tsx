@@ -79,7 +79,7 @@ export function ExportToolbar<T>({
           variant="outline"
           size="sm"
           onClick={handleCsv}
-          className="h-8 gap-1.5 text-xs font-medium"
+          className="h-10 sm:h-8 gap-1.5 text-xs font-medium"
         >
           <Download className="h-3.5 w-3.5 text-primary" />
           <span>Export CSV</span>
@@ -92,10 +92,10 @@ export function ExportToolbar<T>({
           variant="outline"
           size="sm"
           onClick={handleCopyMarkdown}
-          className="h-8 gap-1.5 text-xs font-medium"
+          className="h-10 sm:h-8 gap-1.5 text-xs font-medium"
         >
           {copied ? (
-            <Check className="h-3.5 w-3.5 text-green-600" />
+            <Check className="h-3.5 w-3.5 text-deep-green" />
           ) : (
             <Copy className="h-3.5 w-3.5 text-muted-foreground" />
           )}
@@ -109,7 +109,7 @@ export function ExportToolbar<T>({
           variant="ghost"
           size="sm"
           onClick={handlePrint}
-          className="h-8 gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground"
+          className="h-10 sm:h-8 gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground"
           title="Print or Save as PDF"
         >
           <Printer className="h-3.5 w-3.5" />

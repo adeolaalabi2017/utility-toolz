@@ -84,16 +84,16 @@ export function GpaCalculator() {
             <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Credits</p>
             <span />
           </div>
-          {rows.map((r) => (
-            <div key={r.id} className="grid grid-cols-[1.4fr_1fr_36px] items-end gap-2">
-              <SelectField value={r.grade} onChange={(v) => update(r.id, { grade: v })} options={GRADE_OPTIONS} />
-              <NumberField value={r.credits} onChange={(v) => update(r.id, { credits: v })} placeholder="3" />
+          {rows.map((r, idx) => (
+            <div key={r.id} className="grid grid-cols-[1.4fr_1fr_44px] items-end gap-2 sm:grid-cols-[1.4fr_1fr_36px]">
+              <SelectField ariaLabel={`Course ${idx + 1} grade`} value={r.grade} onChange={(v) => update(r.id, { grade: v })} options={GRADE_OPTIONS} />
+              <NumberField ariaLabel={`Course ${idx + 1} credits`} value={r.credits} onChange={(v) => update(r.id, { credits: v })} placeholder="3" />
               <Button
                 variant="outline"
                 size="icon"
                 className="mb-0.5 h-9 w-9 shrink-0"
                 onClick={() => remove(r.id)}
-                aria-label={`Remove course ${r.id}`}
+                aria-label={`Remove course ${idx + 1}`}
               >
                 <X className="h-4 w-4" />
               </Button>
@@ -499,21 +499,21 @@ export function CitationFormatter() {
           />
           <FieldGrid>
             <div className="space-y-1.5">
-              <Label className="text-sm font-medium">Title</Label>
-              <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+              <Label htmlFor="education-1" className="text-sm font-medium">Title</Label>
+              <Input id="education-1" value={title} onChange={(e) => setTitle(e.target.value)} />
             </div>
             {sourceType !== "book" && (
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium">{containerLabel}</Label>
-                <Input value={container} onChange={(e) => setContainer(e.target.value)} />
+                <Label htmlFor="education-2" className="text-sm font-medium">{containerLabel}</Label>
+                <Input id="education-2" value={container} onChange={(e) => setContainer(e.target.value)} />
               </div>
             )}
           </FieldGrid>
           <FieldGrid>
             {sourceType === "book" ? (
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium">Publisher</Label>
-                <Input value={publisher} onChange={(e) => setPublisher(e.target.value)} placeholder="Charles Babbage Press" />
+                <Label htmlFor="education-3" className="text-sm font-medium">Publisher</Label>
+                <Input id="education-3" value={publisher} onChange={(e) => setPublisher(e.target.value)} placeholder="Charles Babbage Press" />
               </div>
             ) : (
               <>
@@ -531,13 +531,13 @@ export function CitationFormatter() {
           {sourceType !== "book" && (
             <FieldGrid>
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium">URL</Label>
-                <Input value={url} onChange={(e) => setUrl(e.target.value)} />
+                <Label htmlFor="education-4" className="text-sm font-medium">URL</Label>
+                <Input id="education-4" value={url} onChange={(e) => setUrl(e.target.value)} />
               </div>
               {style === "mla" && sourceType === "website" && (
                 <div className="space-y-1.5">
-                  <Label className="text-sm font-medium">Access date</Label>
-                  <Input type="date" value={accessed} onChange={(e) => setAccessed(e.target.value)} className="tnum" />
+                  <Label htmlFor="education-5" className="text-sm font-medium">Access date</Label>
+                  <Input id="education-5" type="date" value={accessed} onChange={(e) => setAccessed(e.target.value)} className="tnum" />
                 </div>
               )}
             </FieldGrid>

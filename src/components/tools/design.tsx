@@ -61,7 +61,12 @@ function FilePicker({
         tabIndex={0}
         aria-label="Choose an image"
         onClick={() => inputRef.current?.click()}
-        onKeyDown={(e) => e.key === "Enter" && inputRef.current?.click()}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            inputRef.current?.click();
+          }
+        }}
         className="flex cursor-pointer flex-col items-center justify-center gap-2 rounded-xl border border-dashed bg-card p-6 text-center transition-colors hover:border-primary/50 hover:bg-accent/40"
       >
         <ImageUp className="h-6 w-6 text-muted-foreground" />
@@ -77,6 +82,8 @@ function FilePicker({
         type="file"
         accept={accept}
         className="hidden"
+        tabIndex={-1}
+        aria-hidden
         onChange={(e) => onFile(e.target.files?.[0] ?? null)}
       />
     </div>
@@ -146,10 +153,10 @@ export function ImageCompressor() {
           <FilePicker file={file} onFile={setFile} />
           <div>
             <div className="mb-1.5 flex items-center justify-between">
-              <Label className="text-sm font-medium">Quality</Label>
+              <Label htmlFor="design-1" className="text-sm font-medium">Quality</Label>
               <span className="tnum text-sm font-semibold">{quality}%</span>
             </div>
-            <Slider
+            <Slider id="design-1"
               value={[quality]}
               min={10}
               max={100}
@@ -307,6 +314,7 @@ export function ImageResizer() {
                 variant="ghost"
                 size="icon"
                 className="absolute -right-1 top-7 h-7 w-7"
+                aria-pressed={lock}
                 onClick={() => setLock((l) => !l)}
                 aria-label={lock ? "Unlock aspect ratio" : "Lock aspect ratio"}
               >
@@ -315,14 +323,14 @@ export function ImageResizer() {
             </div>
           </FieldGrid>
           <div>
-            <Label className="mb-1.5 block text-sm font-medium">Quick presets</Label>
-            <div className="flex flex-wrap gap-2">
+            <p id="design-presets-label" className="mb-1.5 block text-sm font-medium">Quick presets</p>
+            <div role="group" aria-labelledby="design-presets-label" className="flex flex-wrap gap-2">
               {presets.map((p) => (
                 <Button
                   key={p}
                   variant="outline"
                   size="sm"
-                  className="tnum h-8"
+                  className="tnum h-10 sm:h-8"
                   onClick={() => {
                     setWidth(String(p));
                     setHeight(String(Math.max(1, Math.round(p / ratio))));
@@ -551,18 +559,18 @@ export function ColourPaletteGenerator() {
       inputs={
         <div className="space-y-4">
           <div className="space-y-1.5">
-            <Label className="text-sm font-medium">Base colour (hex)</Label>
+            <Label htmlFor="design-2" className="text-sm font-medium">Base colour (hex)</Label>
             <div className="flex items-center gap-2">
-              <input
+              <input id="design-2"
                 type="color"
                 value={base}
                 onChange={(e) => setRaw(e.target.value.toUpperCase())}
                 aria-label="Pick base colour"
                 className="h-10 w-14 cursor-pointer rounded-md border bg-card p-1"
               />
-              <Input value={raw} onChange={(e) => setRaw(e.target.value)} className="font-mono" />
+              <Input aria-label="Base colour hex code" value={raw} onChange={(e) => setRaw(e.target.value)} className="font-mono" />
             </div>
-            {!valid && <p className="text-xs text-red-600">Using #308f68 until the hex is valid.</p>}
+            {!valid && <p className="text-xs text-deep-coral">Using #308f68 until the hex is valid.</p>}
           </div>
           <div className="flex items-center gap-3 rounded-lg border bg-card p-3">
             <span className="h-12 w-12 rounded-md border" style={{ background: base }} aria-hidden />
@@ -640,18 +648,18 @@ export function HexRgbConverter() {
       inputs={
         <div className="space-y-4">
           <div className="space-y-1.5">
-            <Label className="text-sm font-medium">HEX</Label>
+            <Label htmlFor="design-3" className="text-sm font-medium">HEX</Label>
             <div className="flex items-center gap-2">
-              <input
+              <input id="design-3"
                 type="color"
                 value={hex}
                 onChange={(e) => setRaw(e.target.value.toUpperCase())}
                 aria-label="Pick colour"
                 className="h-10 w-14 cursor-pointer rounded-md border bg-card p-1"
               />
-              <Input value={raw} onChange={(e) => setRaw(e.target.value)} className="font-mono" />
+              <Input aria-label="Hex colour code" value={raw} onChange={(e) => setRaw(e.target.value)} className="font-mono" />
             </div>
-            {!valid && <p className="text-xs text-red-600">Enter a 6-digit hex like #1A2B3C.</p>}
+            {!valid && <p className="text-xs text-deep-coral">Enter a 6-digit hex like #1A2B3C.</p>}
           </div>
           <FieldGrid>
             {(

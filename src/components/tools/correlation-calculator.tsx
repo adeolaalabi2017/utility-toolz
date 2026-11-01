@@ -77,7 +77,7 @@ export function CorrelationCalculator() {
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <TrendingUp className="h-4 w-4 text-[#a4502c]" /> Paired Data Series (X and Y)
+              <TrendingUp className="h-4 w-4 text-deep-orange" /> Paired Data Series (X and Y)
             </span>
             <Button
               variant="outline"
@@ -86,7 +86,7 @@ export function CorrelationCalculator() {
                 setXInput(SAMPLE_X);
                 setYInput(SAMPLE_Y);
               }}
-              className="h-7 text-xs"
+              className="h-10 sm:h-7 text-xs"
             >
               Load Sample
             </Button>
@@ -94,8 +94,8 @@ export function CorrelationCalculator() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="text-xs font-medium text-foreground">Variable X (Independent)</label>
-              <textarea
+              <label htmlFor="correlation-calculator-1" className="text-xs font-medium text-foreground">Variable X (Independent)</label>
+              <textarea id="correlation-calculator-1"
                 rows={5}
                 value={xInput}
                 onChange={(e) => setXInput(e.target.value)}
@@ -106,8 +106,8 @@ export function CorrelationCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Variable Y (Dependent)</label>
-              <textarea
+              <label htmlFor="correlation-calculator-2" className="text-xs font-medium text-foreground">Variable Y (Dependent)</label>
+              <textarea id="correlation-calculator-2"
                 rows={5}
                 value={yInput}
                 onChange={(e) => setYInput(e.target.value)}
@@ -129,7 +129,7 @@ export function CorrelationCalculator() {
             <div className="my-4 space-y-4">
               <div className="rounded-lg bg-muted/50 p-4 text-center">
                 <span className="text-xs text-muted-foreground">Correlation Coefficient (r)</span>
-                <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+                <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                   {stats.r >= 0 ? `+${stats.r.toFixed(3)}` : stats.r.toFixed(3)}
                 </p>
                 <span className="text-xs font-semibold text-foreground mt-1 block">
@@ -140,7 +140,7 @@ export function CorrelationCalculator() {
               <div className="grid grid-cols-2 gap-3 text-center">
                 <div className="rounded-lg border border-border bg-background p-3">
                   <span className="text-[11px] text-muted-foreground block">Variance Explained (R²)</span>
-                  <span className="tnum font-display text-display-sm text-[#3f346f] font-bold">
+                  <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                     {(stats.r2 * 100).toFixed(1)}%
                   </span>
                 </div>

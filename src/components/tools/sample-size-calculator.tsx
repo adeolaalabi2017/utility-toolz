@@ -47,13 +47,13 @@ export function SampleSizeCalculator() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <BarChart3 className="h-4 w-4 text-[#a4502c]" /> Statistical Confidence Parameters
+            <BarChart3 className="h-4 w-4 text-deep-orange" /> Statistical Confidence Parameters
           </span>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-foreground">Population Size (N)</label>
-              <input
+              <label htmlFor="sample-size-calculator-1" className="text-xs font-medium text-foreground">Population Size (N)</label>
+              <input id="sample-size-calculator-1"
                 type="number"
                 value={population}
                 onChange={(e) => setPopulation(Number(e.target.value) || 0)}
@@ -63,8 +63,8 @@ export function SampleSizeCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Margin of Error (±%)</label>
-              <input
+              <label htmlFor="sample-size-calculator-2" className="text-xs font-medium text-foreground">Margin of Error (±%)</label>
+              <input id="sample-size-calculator-2"
                 type="number"
                 min="0.1"
                 max="20"
@@ -77,8 +77,8 @@ export function SampleSizeCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Confidence Level</label>
-              <select
+              <label htmlFor="sample-size-calculator-3" className="text-xs font-medium text-foreground">Confidence Level</label>
+              <select id="sample-size-calculator-3"
                 value={confidence}
                 onChange={(e) => setConfidence(Number(e.target.value) as any)}
                 className="mt-1 w-full rounded-md border border-input bg-background p-2 text-xs font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -90,8 +90,8 @@ export function SampleSizeCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Expected Proportion (%): {proportion}%</label>
-              <input
+              <label htmlFor="sample-size-calculator-4" className="text-xs font-medium text-foreground">Expected Proportion (%): {proportion}%</label>
+              <input id="sample-size-calculator-4"
                 type="range"
                 min="10"
                 max="90"
@@ -113,7 +113,7 @@ export function SampleSizeCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Required Sample Size</span>
-              <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                 {fmtNum(calc.roundedSize, 0)}
               </p>
               <span className="text-xs text-muted-foreground mt-1 block">
@@ -124,7 +124,7 @@ export function SampleSizeCalculator() {
             <div className="grid grid-cols-2 gap-3 text-center">
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Confidence Level</span>
-                <span className="tnum font-display text-display-sm text-[#3f346f] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {confidence}%
                 </span>
               </div>
@@ -154,7 +154,7 @@ export function SampleSizeCalculator() {
             <div
               key={c.err}
               className={`rounded-lg border p-3 ${
-                c.err === marginOfError ? "border-[#1f5f45] bg-muted/50 font-bold" : "border-border bg-background"
+                c.err === marginOfError ? "border-deep-green bg-muted/50 font-bold" : "border-border bg-background"
               }`}
             >
               <span className="text-muted-foreground block">±{c.err}% Error</span>

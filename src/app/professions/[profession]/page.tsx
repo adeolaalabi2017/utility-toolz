@@ -19,7 +19,7 @@ export async function generateMetadata({
 
   if (!p) {
     return {
-      title: "Profession Not Found | Utility Toolz",
+      title: "Profession not found",
     };
   }
 

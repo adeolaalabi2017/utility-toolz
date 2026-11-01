@@ -579,7 +579,7 @@ export function TimeZoneConverter() {
                     <p className="tnum text-xs text-muted-foreground">
                       {r.abbrev} · {r.offset}
                       {r.dayShift !== 0 && (
-                        <span className="ml-1 font-medium text-amber-700">
+                        <span className="ml-1 font-medium text-deep-orange">
                           ({r.dayShift > 0 ? "+" : "−"}
                           {Math.abs(r.dayShift) === 1
                             ? "1 day"

@@ -1,5 +1,6 @@
 "use client";
 
+import { Cur } from "@/components/site/currency";
 import React, { useState, useMemo } from "react";
 import { fmtUSD, fmtPct, fmtNum } from "@/lib/format";
 import { Calculator, Calendar, FileSpreadsheet } from "lucide-react";
@@ -83,13 +84,13 @@ export function DepreciationCalculator() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Calculator className="h-4 w-4 text-[#a4502c]" /> Asset Cost & Depreciation Method
+            <Calculator className="h-4 w-4 text-deep-orange" /> Asset Cost & Depreciation Method
           </span>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-foreground">Asset Purchase Cost ($)</label>
-              <input
+              <label htmlFor="depreciation-calculator-1" className="text-xs font-medium text-foreground">Asset Purchase Cost (<Cur />)</label>
+              <input id="depreciation-calculator-1"
                 type="number"
                 value={cost}
                 onChange={(e) => setCost(Number(e.target.value) || 0)}
@@ -99,8 +100,8 @@ export function DepreciationCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Salvage / Scrap Value ($)</label>
-              <input
+              <label htmlFor="depreciation-calculator-2" className="text-xs font-medium text-foreground">Salvage / Scrap Value (<Cur />)</label>
+              <input id="depreciation-calculator-2"
                 type="number"
                 value={salvage}
                 onChange={(e) => setSalvage(Number(e.target.value) || 0)}
@@ -110,8 +111,8 @@ export function DepreciationCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Useful Life (Years)</label>
-              <input
+              <label htmlFor="depreciation-calculator-3" className="text-xs font-medium text-foreground">Useful Life (Years)</label>
+              <input id="depreciation-calculator-3"
                 type="number"
                 min="1"
                 max="50"
@@ -123,8 +124,8 @@ export function DepreciationCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Depreciation Method</label>
-              <select
+              <label htmlFor="depreciation-calculator-4" className="text-xs font-medium text-foreground">Depreciation Method</label>
+              <select id="depreciation-calculator-4"
                 value={method}
                 onChange={(e) => setMethod(e.target.value as any)}
                 className="mt-1 w-full rounded-md border border-input bg-background p-2 text-xs font-medium text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
@@ -146,7 +147,7 @@ export function DepreciationCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Year 1 Write-Off Expense</span>
-              <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                 {fmtUSD(calc.year1Expense, 0)}
               </p>
               <span className="text-xs text-muted-foreground mt-1 block">
@@ -163,7 +164,7 @@ export function DepreciationCalculator() {
               </div>
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Residual Book Value</span>
-                <span className="tnum font-display text-display-sm text-[#3f346f] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {fmtUSD(calc.endingBookValue, 0)}
                 </span>
               </div>
@@ -182,7 +183,7 @@ export function DepreciationCalculator() {
       {/* Schedule Table */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
         <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-          <FileSpreadsheet className="h-4 w-4 text-[#6b5faf]" /> Annual Depreciation Schedule
+          <FileSpreadsheet className="h-4 w-4 text-lf-purple" /> Annual Depreciation Schedule
         </h4>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">
@@ -200,7 +201,7 @@ export function DepreciationCalculator() {
                 <tr key={r.year} className="py-1.5">
                   <td className="py-2 font-semibold">Year {r.year}</td>
                   <td className="py-2 font-mono">{fmtUSD(r.startValue, 0)}</td>
-                  <td className="py-2 font-mono font-bold text-[#cf4f43]">−{fmtUSD(r.expense, 0)}</td>
+                  <td className="py-2 font-mono font-bold text-deep-coral">−{fmtUSD(r.expense, 0)}</td>
                   <td className="py-2 font-mono text-muted-foreground">{fmtUSD(r.accumulated, 0)}</td>
                   <td className="py-2 font-mono font-semibold text-right text-foreground">
                     {fmtUSD(r.endValue, 0)}

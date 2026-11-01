@@ -75,7 +75,7 @@ export function TimesheetCalculator() {
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-8">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/60 pb-3">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Calendar className="h-4 w-4 text-[#a4502c]" /> Weekly Working Hours
+              <Calendar className="h-4 w-4 text-deep-orange" /> Weekly Working Hours
             </span>
             <div className="flex items-center gap-2">
               <ExportToolbar
@@ -93,7 +93,7 @@ export function TimesheetCalculator() {
                 variant="outline"
                 size="sm"
                 onClick={() => setDays(DEFAULT_DAYS)}
-                className="h-8 text-xs"
+                className="h-10 sm:h-8 text-xs"
               >
                 Reset Week
               </Button>
@@ -107,15 +107,15 @@ export function TimesheetCalculator() {
                 <div key={row.day} className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-lg border border-border bg-background p-2.5 text-xs">
                   <span className="w-24 font-semibold text-foreground">{row.day}</span>
                   <div className="flex items-center gap-2">
-                    <label className="text-[11px] text-muted-foreground">In:</label>
-                    <input
+                    <label htmlFor={`timesheet-calculator-1-${i}`} className="text-[11px] text-muted-foreground">In:</label>
+                    <input id={`timesheet-calculator-1-${i}`}
                       type="time"
                       value={row.start}
                       onChange={(e) => updateDay(i, { start: e.target.value })}
                       className="rounded border border-input p-1 font-mono text-xs"
                     />
-                    <label className="text-[11px] text-muted-foreground">Out:</label>
-                    <input
+                    <label htmlFor={`timesheet-calculator-2-${i}`} className="text-[11px] text-muted-foreground">Out:</label>
+                    <input id={`timesheet-calculator-2-${i}`}
                       type="time"
                       value={row.end}
                       onChange={(e) => updateDay(i, { end: e.target.value })}
@@ -123,8 +123,8 @@ export function TimesheetCalculator() {
                     />
                   </div>
                   <div className="flex items-center gap-2">
-                    <label className="text-[11px] text-muted-foreground">Break (m):</label>
-                    <input
+                    <label htmlFor={`timesheet-calculator-3-${i}`} className="text-[11px] text-muted-foreground">Break (m):</label>
+                    <input id={`timesheet-calculator-3-${i}`}
                       type="number"
                       min="0"
                       step="5"
@@ -151,7 +151,7 @@ export function TimesheetCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Gross Weekly Earnings</span>
-              <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                 {fmtUSD(calc.totalPay, 2)}
               </p>
               <span className="text-xs text-muted-foreground mt-1 block">
@@ -166,14 +166,14 @@ export function TimesheetCalculator() {
               </div>
               <div className="flex justify-between border-b border-border/60 pb-1.5">
                 <span className="text-muted-foreground">Overtime ({calc.overtimeHours.toFixed(2)}h @ {otMultiplier}x):</span>
-                <span className="font-mono font-semibold text-[#1f5f45]">{fmtUSD(calc.overtimePay, 2)}</span>
+                <span className="font-mono font-semibold text-deep-green">{fmtUSD(calc.overtimePay, 2)}</span>
               </div>
             </div>
 
             <div className="space-y-2 pt-2">
               <div>
-                <label className="text-xs font-medium text-foreground">Hourly Rate ($/hr)</label>
-                <input
+                <label htmlFor="timesheet-calculator-4" className="text-xs font-medium text-foreground">Hourly Rate ($/hr)</label>
+                <input id="timesheet-calculator-4"
                   type="number"
                   value={hourlyRate}
                   onChange={(e) => setHourlyRate(Number(e.target.value) || 0)}

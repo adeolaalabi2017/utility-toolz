@@ -22,16 +22,16 @@ export function AdFatigueEstimator() {
 
     // Fatigue risk score
     let risk = "Low";
-    let riskColor = "text-[#1f5f45]";
+    let riskColor = "text-deep-green";
     let refreshDays = Math.round(campaignDays * 1.5);
 
     if (avgFrequency >= 4.5 || saturationPct >= 75) {
       risk = "Critical Fatigue";
-      riskColor = "text-[#cf4f43]";
+      riskColor = "text-deep-coral";
       refreshDays = 7;
     } else if (avgFrequency >= 2.8 || saturationPct >= 45) {
       risk = "Moderate Fatigue";
-      riskColor = "text-[#a4502c]";
+      riskColor = "text-deep-orange";
       refreshDays = 14;
     }
 
@@ -52,13 +52,13 @@ export function AdFatigueEstimator() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Flame className="h-4 w-4 text-[#a4502c]" /> Audience & Ad Delivery
+            <Flame className="h-4 w-4 text-deep-orange" /> Audience & Ad Delivery
           </span>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-foreground">Total Addressable Audience</label>
-              <input
+              <label htmlFor="ad-fatigue-estimator-1" className="text-xs font-medium text-foreground">Total Addressable Audience</label>
+              <input id="ad-fatigue-estimator-1"
                 type="number"
                 value={audienceSize}
                 onChange={(e) => setAudienceSize(Number(e.target.value) || 0)}
@@ -68,8 +68,8 @@ export function AdFatigueEstimator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Daily Ad Impressions</label>
-              <input
+              <label htmlFor="ad-fatigue-estimator-2" className="text-xs font-medium text-foreground">Daily Ad Impressions</label>
+              <input id="ad-fatigue-estimator-2"
                 type="number"
                 value={dailyImpressions}
                 onChange={(e) => setDailyImpressions(Number(e.target.value) || 0)}
@@ -79,8 +79,8 @@ export function AdFatigueEstimator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Campaign Duration (Days)</label>
-              <input
+              <label htmlFor="ad-fatigue-estimator-3" className="text-xs font-medium text-foreground">Campaign Duration (Days)</label>
+              <input id="ad-fatigue-estimator-3"
                 type="number"
                 min="1"
                 max="180"
@@ -91,8 +91,8 @@ export function AdFatigueEstimator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Algorithm Retargeting Weight: {repeatRatio}%</label>
-              <input
+              <label htmlFor="ad-fatigue-estimator-4" className="text-xs font-medium text-foreground">Algorithm Retargeting Weight: {repeatRatio}%</label>
+              <input id="ad-fatigue-estimator-4"
                 type="range"
                 min="20"
                 max="90"
@@ -114,7 +114,7 @@ export function AdFatigueEstimator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Average Ad Frequency</span>
-              <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                 {calc.avgFrequency.toFixed(1)}x
               </p>
               <span className={`text-xs font-semibold mt-1 block ${calc.riskColor}`}>
@@ -125,7 +125,7 @@ export function AdFatigueEstimator() {
             <div className="grid grid-cols-2 gap-3 text-center">
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Audience Saturation</span>
-                <span className="tnum font-display text-display-sm text-[#3f346f] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {fmtPct(calc.saturationPct, 1)}
                 </span>
               </div>

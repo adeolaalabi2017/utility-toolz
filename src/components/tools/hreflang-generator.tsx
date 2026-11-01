@@ -54,16 +54,16 @@ export function HreflangGenerator() {
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
         <div className="flex items-center justify-between border-b border-border/60 pb-3">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Globe className="h-4 w-4 text-[#308f68]" /> Regional URL Variants
+            <Globe className="h-4 w-4 text-deep-green" /> Regional URL Variants
           </span>
-          <Button onClick={addRow} variant="outline" size="sm" className="h-7 text-xs gap-1">
+          <Button onClick={addRow} variant="outline" size="sm" className="h-10 sm:h-7 text-xs gap-1">
             <Plus className="h-3.5 w-3.5" />
             <span>Add Locale</span>
           </Button>
         </div>
 
         <div className="space-y-3">
-          {rows.map((r) => (
+          {rows.map((r, idx) => (
             <div key={r.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-2 rounded-lg border border-border bg-background p-2.5 text-xs">
               <div className="w-28 shrink-0">
                 <input
@@ -72,6 +72,7 @@ export function HreflangGenerator() {
                   disabled={r.isDefault}
                   onChange={(e) => updateRow(r.id, { lang: e.target.value })}
                   placeholder="Language (en)"
+                  aria-label={`Locale ${idx + 1} language code`}
                   className="w-full rounded border border-input p-1.5 text-center font-mono uppercase"
                 />
               </div>
@@ -83,6 +84,7 @@ export function HreflangGenerator() {
                   disabled={r.isDefault}
                   onChange={(e) => updateRow(r.id, { region: e.target.value })}
                   placeholder="Region (US)"
+                  aria-label={`Locale ${idx + 1} region code`}
                   className="w-full rounded border border-input p-1.5 text-center font-mono uppercase"
                 />
               </div>
@@ -93,6 +95,7 @@ export function HreflangGenerator() {
                   value={r.url}
                   onChange={(e) => updateRow(r.id, { url: e.target.value })}
                   placeholder="https://example.com/path"
+                  aria-label={`Locale ${idx + 1} URL`}
                   className="w-full rounded border border-input p-1.5 font-mono"
                 />
               </div>
@@ -108,7 +111,7 @@ export function HreflangGenerator() {
                   <span>x-default</span>
                 </label>
 
-                <button onClick={() => removeRow(r.id)} className="p-1 text-muted-foreground hover:text-destructive">
+                <button type="button" onClick={() => removeRow(r.id)} aria-label={`Remove locale ${idx + 1}`} className="flex h-10 w-10 items-center justify-center text-muted-foreground hover:text-destructive sm:h-7 sm:w-7">
                   <Trash2 className="h-3.5 w-3.5" />
                 </button>
               </div>
@@ -129,9 +132,9 @@ export function HreflangGenerator() {
               setCopied(true);
               setTimeout(() => setCopied(false), 2000);
             }}
-            className="h-7 text-xs gap-1"
+            className="h-10 sm:h-7 text-xs gap-1"
           >
-            {copied ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+            {copied ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
             <span>{copied ? "Copied" : "Copy Tags"}</span>
           </Button>
         </div>

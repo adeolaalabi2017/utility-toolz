@@ -59,8 +59,8 @@ export function ClampCalculator() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-foreground">Min Viewport Width (px)</label>
-              <input
+              <label htmlFor="clamp-calculator-1" className="text-xs font-medium text-foreground">Min Viewport Width (px)</label>
+              <input id="clamp-calculator-1"
                 type="number"
                 value={minVw}
                 onChange={(e) => setMinVw(Number(e.target.value) || 0)}
@@ -70,8 +70,8 @@ export function ClampCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Max Viewport Width (px)</label>
-              <input
+              <label htmlFor="clamp-calculator-2" className="text-xs font-medium text-foreground">Max Viewport Width (px)</label>
+              <input id="clamp-calculator-2"
                 type="number"
                 value={maxVw}
                 onChange={(e) => setMaxVw(Number(e.target.value) || 0)}
@@ -81,8 +81,8 @@ export function ClampCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Min Size (px)</label>
-              <input
+              <label htmlFor="clamp-calculator-3" className="text-xs font-medium text-foreground">Min Size (px)</label>
+              <input id="clamp-calculator-3"
                 type="number"
                 value={minSize}
                 onChange={(e) => setMinSize(Number(e.target.value) || 0)}
@@ -92,8 +92,8 @@ export function ClampCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Max Size (px)</label>
-              <input
+              <label htmlFor="clamp-calculator-4" className="text-xs font-medium text-foreground">Max Size (px)</label>
+              <input id="clamp-calculator-4"
                 type="number"
                 value={maxSize}
                 onChange={(e) => setMaxSize(Number(e.target.value) || 0)}
@@ -115,12 +115,13 @@ export function ClampCalculator() {
               <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                 Simulated Screen Width
               </span>
-              <span className="font-mono text-xs font-bold text-[#1f5f45]">
+              <span className="font-mono text-xs font-bold text-deep-green">
                 {testViewport}px width → {currentCalculatedSize.toFixed(1)}px font size
               </span>
             </div>
 
             <input
+              aria-label="Preview viewport width in pixels"
               type="range"
               min={minVw}
               max={maxVw}
@@ -162,9 +163,9 @@ export function ClampCalculator() {
                 variant="outline"
                 size="sm"
                 onClick={() => copyVal(`font-size: ${formula.cssClamp};`, "css")}
-                className="h-7 text-xs gap-1"
+                className="h-10 sm:h-7 text-xs gap-1"
               >
-                {copiedType === "css" ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+                {copiedType === "css" ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
                 <span>{copiedType === "css" ? "Copied" : "Copy CSS"}</span>
               </Button>
             </div>
@@ -182,9 +183,9 @@ export function ClampCalculator() {
                 variant="outline"
                 size="sm"
                 onClick={() => copyVal(formula.twText, "tw")}
-                className="h-7 text-xs gap-1"
+                className="h-10 sm:h-7 text-xs gap-1"
               >
-                {copiedType === "tw" ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+                {copiedType === "tw" ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
                 <span>{copiedType === "tw" ? "Copied" : "Copy Tailwind"}</span>
               </Button>
             </div>

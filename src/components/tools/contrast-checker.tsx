@@ -85,16 +85,16 @@ export function ContrastChecker() {
         <div className="space-y-5">
           <FieldGrid>
             <div className="space-y-1.5">
-              <Label className="text-sm font-medium">Text Color (Foreground)</Label>
+              <Label htmlFor="contrast-checker-1" className="text-sm font-medium">Text Color (Foreground)</Label>
               <div className="flex gap-2 items-center">
-                <input
+                <input id="contrast-checker-1"
                   type="color"
                   value={fg}
                   onChange={(e) => setFg(e.target.value)}
                   className="h-9 w-10 cursor-pointer rounded-md border border-input p-0.5 bg-card"
                   aria-label="Foreground color picker"
                 />
-                <Input
+                <Input aria-label="Text colour hex code"
                   value={fg}
                   onChange={(e) => setFg(e.target.value)}
                   placeholder="#1f4a3f"
@@ -104,16 +104,16 @@ export function ContrastChecker() {
             </div>
 
             <div className="space-y-1.5">
-              <Label className="text-sm font-medium">Background Color</Label>
+              <Label htmlFor="contrast-checker-2" className="text-sm font-medium">Background Color</Label>
               <div className="flex gap-2 items-center">
-                <input
+                <input id="contrast-checker-2"
                   type="color"
                   value={bg}
                   onChange={(e) => setBg(e.target.value)}
                   className="h-9 w-10 cursor-pointer rounded-md border border-input p-0.5 bg-card"
                   aria-label="Background color picker"
                 />
-                <Input
+                <Input aria-label="Background colour hex code"
                   value={bg}
                   onChange={(e) => setBg(e.target.value)}
                   placeholder="#fff6e0"
@@ -136,13 +136,13 @@ export function ContrastChecker() {
             </p>
             <div className="flex flex-wrap gap-2">
               {PRESETS.map((p) => (
-                <button
+                <button type="button"
                   key={p.name}
                   onClick={() => {
                     setFg(p.fg);
                     setBg(p.bg);
                   }}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-foreground/80 hover:border-[#6b5faf] transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-foreground/80 hover:border-lf-purple transition-colors"
                 >
                   <span
                     className="h-2.5 w-2.5 rounded-full border border-black/10"
@@ -207,35 +207,35 @@ export function ContrastChecker() {
             <div className="space-y-2 text-xs">
               <div className="flex items-center justify-between py-1 border-b border-border/40">
                 <span>Normal Text AA (≥ 4.5:1)</span>
-                <span className={`inline-flex items-center gap-1 font-semibold ${passNormalAA ? "text-[#308f68]" : "text-[#cf4f43]"}`}>
+                <span className={`inline-flex items-center gap-1 font-semibold ${passNormalAA ? "text-deep-green" : "text-deep-coral"}`}>
                   {passNormalAA ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
                   {passNormalAA ? "Pass" : "Fail"}
                 </span>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-border/40">
                 <span>Large Text AA (≥ 3.0:1)</span>
-                <span className={`inline-flex items-center gap-1 font-semibold ${passLargeAA ? "text-[#308f68]" : "text-[#cf4f43]"}`}>
+                <span className={`inline-flex items-center gap-1 font-semibold ${passLargeAA ? "text-deep-green" : "text-deep-coral"}`}>
                   {passLargeAA ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
                   {passLargeAA ? "Pass" : "Fail"}
                 </span>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-border/40">
                 <span>Normal Text AAA (≥ 7.0:1)</span>
-                <span className={`inline-flex items-center gap-1 font-semibold ${passNormalAAA ? "text-[#308f68]" : "text-[#cf4f43]"}`}>
+                <span className={`inline-flex items-center gap-1 font-semibold ${passNormalAAA ? "text-deep-green" : "text-deep-coral"}`}>
                   {passNormalAAA ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
                   {passNormalAAA ? "Pass" : "Fail"}
                 </span>
               </div>
               <div className="flex items-center justify-between py-1 border-b border-border/40">
                 <span>Large Text AAA (≥ 4.5:1)</span>
-                <span className={`inline-flex items-center gap-1 font-semibold ${passLargeAAA ? "text-[#308f68]" : "text-[#cf4f43]"}`}>
+                <span className={`inline-flex items-center gap-1 font-semibold ${passLargeAAA ? "text-deep-green" : "text-deep-coral"}`}>
                   {passLargeAAA ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
                   {passLargeAAA ? "Pass" : "Fail"}
                 </span>
               </div>
               <div className="flex items-center justify-between py-1">
                 <span>UI Components & Icons (≥ 3.0:1)</span>
-                <span className={`inline-flex items-center gap-1 font-semibold ${passUI ? "text-[#308f68]" : "text-[#cf4f43]"}`}>
+                <span className={`inline-flex items-center gap-1 font-semibold ${passUI ? "text-deep-green" : "text-deep-coral"}`}>
                   {passUI ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />}
                   {passUI ? "Pass" : "Fail"}
                 </span>

@@ -33,7 +33,7 @@ function ModeToggle({
   return (
     <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${modes.length}, minmax(0, 1fr))` }}>
       {modes.map((m) => (
-        <button
+        <button aria-pressed={mode === m.id} type="button"
           key={m.id}
           onClick={() => onMode(m.id)}
           className={`rounded-lg border px-3 py-2.5 text-sm font-medium transition-colors ${
@@ -656,29 +656,29 @@ ${items
           <div className="space-y-4">
             <FieldGrid>
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium">From (your business)</Label>
-                <Input value={sellerName} onChange={(e) => setSellerName(e.target.value)} />
+                <Label htmlFor="business-1" className="text-sm font-medium">From (your business)</Label>
+                <Input id="business-1" value={sellerName} onChange={(e) => setSellerName(e.target.value)} />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium">Billing email</Label>
-                <Input value={sellerEmail} onChange={(e) => setSellerEmail(e.target.value)} />
+                <Label htmlFor="business-2" className="text-sm font-medium">Billing email</Label>
+                <Input id="business-2" value={sellerEmail} onChange={(e) => setSellerEmail(e.target.value)} />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium">Bill to (client)</Label>
-                <Input value={clientName} onChange={(e) => setClientName(e.target.value)} />
+                <Label htmlFor="business-3" className="text-sm font-medium">Bill to (client)</Label>
+                <Input id="business-3" value={clientName} onChange={(e) => setClientName(e.target.value)} />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium">Client email</Label>
-                <Input value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} />
+                <Label htmlFor="business-4" className="text-sm font-medium">Client email</Label>
+                <Input id="business-4" value={clientEmail} onChange={(e) => setClientEmail(e.target.value)} />
               </div>
               <FieldGrid>
                 <div className="space-y-1.5">
-                  <Label className="text-sm font-medium">Invoice #</Label>
-                  <Input value={invoiceNo} onChange={(e) => setInvoiceNo(e.target.value)} />
+                  <Label htmlFor="business-5" className="text-sm font-medium">Invoice #</Label>
+                  <Input id="business-5" value={invoiceNo} onChange={(e) => setInvoiceNo(e.target.value)} />
                 </div>
                 <div className="space-y-1.5">
-                  <Label className="text-sm font-medium">Issue date</Label>
-                  <Input type="date" value={date} onChange={(e) => setDate(e.target.value)} />
+                  <Label htmlFor="business-6" className="text-sm font-medium">Issue date</Label>
+                  <Input id="business-6" type="date" value={date} onChange={(e) => setDate(e.target.value)} />
                 </div>
                 <NumberField label="Due in (days)" value={dueDays} onChange={setDueDays} />
                 <NumberField label="Tax rate" value={taxRate} onChange={setTaxRate} suffix="%" />
@@ -686,14 +686,14 @@ ${items
             </FieldGrid>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label className="text-sm font-medium">Line items</Label>
+                <p id="invoice-items-label" className="text-sm font-medium">Line items</p>
                 <Button
                   variant="outline"
                   size="sm"
-                  className="h-8 gap-1.5"
+                  className="h-10 sm:h-8 gap-1.5"
                   onClick={() => setItems((l) => [...l, { desc: "", qty: "1", rate: "0" }])}
                 >
-                  <Plus className="h-4 w-4" /> Add item
+                  <Plus className="h-4 w-4" aria-hidden /> Add item
                 </Button>
               </div>
               <div className="grid grid-cols-[1fr_64px_88px_32px] gap-2 px-1 text-xs font-medium text-muted-foreground">
@@ -703,7 +703,7 @@ ${items
                 <span />
               </div>
               {items.map((it, i) => (
-                <div key={i} className="grid grid-cols-[1fr_64px_88px_32px] items-center gap-2">
+                <div key={i} role="group" aria-labelledby="invoice-items-label" className="grid grid-cols-[1fr_64px_88px_44px] items-center gap-2 sm:grid-cols-[1fr_64px_88px_32px]">
                   <Input
                     value={it.desc}
                     onChange={(e) => updateItem(i, { desc: e.target.value })}
@@ -727,7 +727,7 @@ ${items
                   <Button
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8"
+                    className="h-10 w-10 sm:h-8 sm:w-8"
                     onClick={() => setItems((l) => l.filter((_, li) => li !== i))}
                     aria-label={`Remove item ${i + 1}`}
                   >
@@ -737,8 +737,8 @@ ${items
               ))}
             </div>
             <div className="space-y-1.5">
-              <Label className="text-sm font-medium">Payment notes</Label>
-              <Textarea
+              <Label htmlFor="business-8" className="text-sm font-medium">Payment notes</Label>
+              <Textarea id="business-8"
                 value={notes}
                 onChange={(e) => setNotes(e.target.value)}
                 rows={2}
@@ -773,7 +773,7 @@ ${items
                   <p className="text-sm font-bold">{sellerName || "Your business"}</p>
                   <p className="text-xs text-muted-foreground">{sellerEmail}</p>
                 </div>
-                <div className="rounded-full bg-[#1f4a3f] px-2.5 py-1 text-[10px] font-semibold text-white">
+                <div className="rounded-full bg-primary px-2.5 py-1 text-[10px] font-semibold text-white">
                   {invoiceNo}
                 </div>
               </div>

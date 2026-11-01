@@ -71,7 +71,7 @@ export function ProfessionHub({
         {live.length > 0 ? (
           <section className="mt-10" aria-labelledby="ready">
             <h2 id="ready" className="flex items-center gap-2 font-display text-display-sm tracking-tight">
-              <Sparkles className="h-4.5 w-4.5 text-[#c9603c]" /> Ready now — {live.length} tools
+              <Sparkles className="h-4.5 w-4.5 text-lf-rust" /> Ready now — {live.length} tools
             </h2>
             <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {live.map((t) => (

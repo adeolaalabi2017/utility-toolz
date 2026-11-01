@@ -53,6 +53,7 @@ export function WordCounter() {
             Input text
           </p>
           <TextAreaField
+            ariaLabel="Text to analyse"
             value={text}
             onChange={setText}
             rows={14}
@@ -116,7 +117,7 @@ export function CharacterCounter() {
           <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             Input text
           </p>
-          <TextAreaField value={text} onChange={setText} rows={10} placeholder="Paste your post, title or caption…" />
+          <TextAreaField ariaLabel="Text to analyse" value={text} onChange={setText} rows={10} placeholder="Paste your post, title or caption…" />
           <p className="tnum mt-3 text-3xl font-bold">
             {text.length.toLocaleString()}
             <span className="ml-2 text-sm font-medium text-muted-foreground">characters</span>
@@ -136,14 +137,14 @@ export function CharacterCounter() {
                 <div key={p.name}>
                   <div className="mb-1 flex items-baseline justify-between text-sm">
                     <span className="font-medium">{p.name}</span>
-                    <span className={cn("tnum text-xs", over ? "font-semibold text-red-600" : "text-muted-foreground")}>
+                    <span className={cn("tnum text-xs", over ? "font-semibold text-deep-coral" : "text-muted-foreground")}>
                       {text.length}/{p.limit}
                       {over ? ` · ${text.length - p.limit} over` : ""}
                     </span>
                   </div>
                   <div className="h-2 overflow-hidden rounded-full bg-muted">
                     <div
-                      className={cn("h-full rounded-full transition-all", over ? "bg-red-500" : pct > 90 ? "bg-amber-500" : "bg-primary")}
+                      className={cn("h-full rounded-full transition-all", over ? "bg-lf-coral" : pct > 90 ? "bg-lf-orange" : "bg-primary")}
                       style={{ width: `${pct}%` }}
                     />
                   </div>
@@ -285,7 +286,7 @@ export function TextCaseConverter() {
           <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
             Input text
           </p>
-          <TextAreaField value={text} onChange={setText} rows={6} />
+          <TextAreaField ariaLabel="Text to analyse" value={text} onChange={setText} rows={6} />
         </div>
       </div>
       <div className="lg:col-span-2 space-y-3">
@@ -475,8 +476,8 @@ export function HeadlineAnalyser() {
       inputs={
         <div className="space-y-3">
           <div className="space-y-1.5">
-            <Label className="text-sm font-medium">Headline</Label>
-            <Input value={headline} onChange={(e) => setHeadline(e.target.value)} className="text-base" />
+            <Label htmlFor="content-1" className="text-sm font-medium">Headline</Label>
+            <Input id="content-1" value={headline} onChange={(e) => setHeadline(e.target.value)} className="text-base" />
           </div>
           <p className="text-xs text-muted-foreground">
             Paste one headline — or test variants A/B against each other by swapping them in.
@@ -486,7 +487,7 @@ export function HeadlineAnalyser() {
       results={
         <div className="space-y-4">
           <div className="flex items-baseline gap-3">
-            <p className={cn("tnum text-5xl font-bold tracking-tight", score >= 70 ? "text-primary" : score >= 40 ? "text-amber-600" : "text-red-600")}>
+            <p className={cn("tnum text-5xl font-bold tracking-tight", score >= 70 ? "text-primary" : score >= 40 ? "text-deep-orange" : "text-deep-coral")}>
               {score}
             </p>
             <p className="text-sm text-muted-foreground">/ 100 headline score</p>

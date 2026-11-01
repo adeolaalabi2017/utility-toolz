@@ -54,16 +54,16 @@ export function UtmBuilder() {
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Link2 className="h-4 w-4 text-[#a4502c]" /> Generated Campaign Tracking URL
+            <Link2 className="h-4 w-4 text-deep-orange" /> Generated Campaign Tracking URL
           </span>
           <Button
             onClick={copyUrl}
             disabled={!fullUrl}
             variant="outline"
             size="sm"
-            className="h-8 gap-1.5 text-xs font-semibold"
+            className="h-10 sm:h-8 gap-1.5 text-xs font-semibold"
           >
-            {copied ? <Check className="h-3.5 w-3.5 text-[#1f5f45]" /> : <Copy className="h-3.5 w-3.5" />}
+            {copied ? <Check className="h-3.5 w-3.5 text-deep-green" /> : <Copy className="h-3.5 w-3.5" />}
             <span>{copied ? "Copied" : "Copy Campaign URL"}</span>
           </Button>
         </div>
@@ -75,9 +75,9 @@ export function UtmBuilder() {
         {/* Active parameter chips */}
         <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px]">
           <span className="text-muted-foreground font-medium">Tracking tags:</span>
-          {source && <span className="rounded bg-[#308f68]/15 px-2 py-0.5 font-semibold text-[#1f5f45]">source: {source}</span>}
-          {medium && <span className="rounded bg-[#6b5faf]/15 px-2 py-0.5 font-semibold text-[#3f346f]">medium: {medium}</span>}
-          {campaign && <span className="rounded bg-[#e07a3c]/15 px-2 py-0.5 font-semibold text-[#a4502c]">campaign: {campaign}</span>}
+          {source && <span className="rounded bg-lf-green/15 px-2 py-0.5 font-semibold text-deep-green">source: {source}</span>}
+          {medium && <span className="rounded bg-lf-purple/15 px-2 py-0.5 font-semibold text-deep-purple">medium: {medium}</span>}
+          {campaign && <span className="rounded bg-lf-orange/15 px-2 py-0.5 font-semibold text-deep-orange">campaign: {campaign}</span>}
         </div>
       </div>
 
@@ -85,8 +85,8 @@ export function UtmBuilder() {
       <div className="grid gap-6 lg:grid-cols-12">
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-8">
           <div>
-            <label className="text-xs font-medium text-foreground">Target Destination URL</label>
-            <input
+            <label htmlFor="utm-builder-1" className="text-xs font-medium text-foreground">Target Destination URL</label>
+            <input id="utm-builder-1"
               type="text"
               value={baseUrl}
               onChange={(e) => setBaseUrl(e.target.value)}
@@ -97,8 +97,8 @@ export function UtmBuilder() {
 
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
-              <label className="text-xs font-medium text-foreground">Campaign Source (`utm_source`)*</label>
-              <input
+              <label htmlFor="utm-builder-2" className="text-xs font-medium text-foreground">Campaign Source (`utm_source`)*</label>
+              <input id="utm-builder-2"
                 type="text"
                 value={source}
                 onChange={(e) => setSource(e.target.value)}
@@ -109,8 +109,8 @@ export function UtmBuilder() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Campaign Medium (`utm_medium`)*</label>
-              <input
+              <label htmlFor="utm-builder-3" className="text-xs font-medium text-foreground">Campaign Medium (`utm_medium`)*</label>
+              <input id="utm-builder-3"
                 type="text"
                 value={medium}
                 onChange={(e) => setMedium(e.target.value)}
@@ -121,8 +121,8 @@ export function UtmBuilder() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Campaign Name (`utm_campaign`)*</label>
-              <input
+              <label htmlFor="utm-builder-4" className="text-xs font-medium text-foreground">Campaign Name (`utm_campaign`)*</label>
+              <input id="utm-builder-4"
                 type="text"
                 value={campaign}
                 onChange={(e) => setCampaign(e.target.value)}
@@ -133,8 +133,8 @@ export function UtmBuilder() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Campaign Term (`utm_term`)</label>
-              <input
+              <label htmlFor="utm-builder-5" className="text-xs font-medium text-foreground">Campaign Term (`utm_term`)</label>
+              <input id="utm-builder-5"
                 type="text"
                 value={term}
                 onChange={(e) => setTerm(e.target.value)}
@@ -145,8 +145,8 @@ export function UtmBuilder() {
             </div>
 
             <div className="sm:col-span-2">
-              <label className="text-xs font-medium text-foreground">Campaign Content (`utm_content`)</label>
-              <input
+              <label htmlFor="utm-builder-6" className="text-xs font-medium text-foreground">Campaign Content (`utm_content`)</label>
+              <input id="utm-builder-6"
                 type="text"
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
@@ -161,7 +161,7 @@ export function UtmBuilder() {
         {/* Quick Channel Presets (4 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3 lg:col-span-4">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Sparkles className="h-4 w-4 text-[#a4502c]" /> Channel Presets
+            <Sparkles className="h-4 w-4 text-deep-orange" /> Channel Presets
           </span>
           <p className="text-xs text-muted-foreground">
             Apply standardized naming conventions to avoid analytics fragmentation.
@@ -169,13 +169,13 @@ export function UtmBuilder() {
 
           <div className="space-y-2 pt-2">
             {CHANNEL_PRESETS.map((p) => (
-              <button
+              <button type="button"
                 key={p.name}
                 onClick={() => {
                   setSource(p.source);
                   setMedium(p.medium);
                 }}
-                className="w-full text-left rounded-lg border border-border bg-background p-2.5 text-xs transition-colors hover:border-[#6b5faf] hover:bg-muted/50"
+                className="w-full text-left rounded-lg border border-border bg-background p-2.5 text-xs transition-colors hover:border-lf-purple hover:bg-muted/50"
               >
                 <span className="font-semibold text-foreground block">{p.name}</span>
                 <span className="font-mono text-[11px] text-muted-foreground">

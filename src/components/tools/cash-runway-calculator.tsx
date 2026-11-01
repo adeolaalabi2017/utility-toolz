@@ -1,5 +1,7 @@
 "use client";
 
+import { currencySymbol } from "@/lib/format";
+import { Cur } from "@/components/site/currency";
 import React, { useState, useMemo } from "react";
 import { fmtUSD, fmtPct, fmtNum } from "@/lib/format";
 import { Landmark, AlertOctagon, TrendingDown, Calendar } from "lucide-react";
@@ -70,13 +72,13 @@ export function CashRunwayCalculator() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Landmark className="h-4 w-4 text-[#a4502c]" /> Cash & Burn Parameters
+            <Landmark className="h-4 w-4 text-deep-orange" /> Cash & Burn Parameters
           </span>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
-              <label className="text-xs font-medium text-foreground">Current Cash Reserves ($)</label>
-              <input
+              <label htmlFor="cash-runway-calculator-1" className="text-xs font-medium text-foreground">Current Cash Reserves (<Cur />)</label>
+              <input id="cash-runway-calculator-1"
                 type="number"
                 value={cashBalance}
                 onChange={(e) => setCashBalance(Number(e.target.value) || 0)}
@@ -85,30 +87,30 @@ export function CashRunwayCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Monthly Gross Burn ($)</label>
-              <input
+              <label htmlFor="cash-runway-calculator-2" className="text-xs font-medium text-foreground">Monthly Gross Burn (<Cur />)</label>
+              <input id="cash-runway-calculator-2"
                 type="number"
                 value={grossBurn}
                 onChange={(e) => setGrossBurn(Number(e.target.value) || 0)}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-[#cf4f43] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-deep-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               <span className="text-[11px] text-muted-foreground mt-0.5 block">Total monthly expenses</span>
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Monthly Inflows / Revenue ($)</label>
-              <input
+              <label htmlFor="cash-runway-calculator-3" className="text-xs font-medium text-foreground">Monthly Inflows / Revenue (<Cur />)</label>
+              <input id="cash-runway-calculator-3"
                 type="number"
                 value={monthlyRevenue}
                 onChange={(e) => setMonthlyRevenue(Number(e.target.value) || 0)}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-[#1f5f45] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-deep-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               <span className="text-[11px] text-muted-foreground mt-0.5 block">Cash receipts / month</span>
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Monthly Revenue Growth (%)</label>
-              <input
+              <label htmlFor="cash-runway-calculator-4" className="text-xs font-medium text-foreground">Monthly Revenue Growth (%)</label>
+              <input id="cash-runway-calculator-4"
                 type="number"
                 min="0"
                 max="50"
@@ -119,8 +121,8 @@ export function CashRunwayCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Monthly Expense Growth (%)</label>
-              <input
+              <label htmlFor="cash-runway-calculator-5" className="text-xs font-medium text-foreground">Monthly Expense Growth (%)</label>
+              <input id="cash-runway-calculator-5"
                 type="number"
                 min="0"
                 max="50"
@@ -142,7 +144,7 @@ export function CashRunwayCalculator() {
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Cash Depletion Horizon</span>
               <p className={`tnum font-display text-display-lg mt-1 font-bold ${
-                calc.dynamicRunwayMonths >= 18 ? "text-[#1f5f45]" : calc.dynamicRunwayMonths >= 6 ? "text-[#a4502c]" : "text-[#cf4f43]"
+                calc.dynamicRunwayMonths >= 18 ? "text-deep-green" : calc.dynamicRunwayMonths >= 6 ? "text-deep-orange" : "text-deep-coral"
               }`}>
                 {calc.dynamicRunwayMonths >= 60 ? "60+ Months" : `${calc.dynamicRunwayMonths.toFixed(1)} Months`}
               </p>
@@ -154,7 +156,7 @@ export function CashRunwayCalculator() {
             <div className="grid grid-cols-2 gap-3 text-center">
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Net Monthly Burn</span>
-                <span className="tnum font-display text-display-sm text-[#cf4f43] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-coral font-bold">
                   {fmtUSD(calc.initialNetBurn, 0)}
                 </span>
               </div>
@@ -186,10 +188,10 @@ export function CashRunwayCalculator() {
             filename="cash-runway-trajectory"
             columns={[
               { header: "Month", key: (r) => `Month +${r.month}` },
-              { header: "Revenue ($)", key: (r) => Math.round(r.revenue) },
-              { header: "Expenses ($)", key: (r) => Math.round(r.expenses) },
-              { header: "Net Burn ($)", key: (r) => Math.round(r.netBurn) },
-              { header: "Ending Cash ($)", key: (r) => Math.round(r.cashEnding) },
+              { header: `Revenue (${currencySymbol()})`, key: (r) => Math.round(r.revenue) },
+              { header: `Expenses (${currencySymbol()})`, key: (r) => Math.round(r.expenses) },
+              { header: `Net Burn (${currencySymbol()})`, key: (r) => Math.round(r.netBurn) },
+              { header: `Ending Cash (${currencySymbol()})`, key: (r) => Math.round(r.cashEnding) },
             ]}
             rows={calc.schedule}
           />
@@ -209,8 +211,8 @@ export function CashRunwayCalculator() {
               {calc.schedule.map((row) => (
                 <tr key={row.month} className="py-1.5">
                   <td className="py-2 font-mono font-medium">Month +{row.month}</td>
-                  <td className="py-2 text-[#1f5f45]">{fmtUSD(row.revenue, 0)}</td>
-                  <td className="py-2 text-[#cf4f43]">{fmtUSD(row.expenses, 0)}</td>
+                  <td className="py-2 text-deep-green">{fmtUSD(row.revenue, 0)}</td>
+                  <td className="py-2 text-deep-coral">{fmtUSD(row.expenses, 0)}</td>
                   <td className="py-2 font-medium">{fmtUSD(row.netBurn, 0)}</td>
                   <td className="py-2 font-mono font-bold text-right text-foreground">
                     {fmtUSD(row.cashEnding, 0)}

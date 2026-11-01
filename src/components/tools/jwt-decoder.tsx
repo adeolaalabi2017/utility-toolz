@@ -119,19 +119,20 @@ export function JwtDecoder() {
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
           <div className="flex items-center justify-between pb-3">
             <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
-              <KeyRound className="h-4 w-4 text-[#a4502c]" />
+              <KeyRound className="h-4 w-4 text-deep-orange" />
               Encoded JSON Web Token
             </h3>
             <Button
               variant="outline"
               size="sm"
               onClick={() => setToken(SAMPLE_JWT)}
-              className="text-xs h-7"
+              className="h-10 text-xs sm:h-7"
             >
               Load Sample
             </Button>
           </div>
           <textarea
+            aria-label="JWT token"
             value={token}
             onChange={(e) => setToken(e.target.value)}
             rows={10}
@@ -141,15 +142,15 @@ export function JwtDecoder() {
 
           <div className="mt-4 flex flex-wrap items-center gap-2 text-xs">
             <span className="font-medium text-muted-foreground">Token parts:</span>
-            <span className="rounded bg-[#cf4f43]/15 px-2 py-0.5 font-mono text-[#a83a30] font-semibold">
+            <span className="rounded bg-lf-coral/15 px-2 py-0.5 font-mono text-deep-coral font-semibold">
               Header
             </span>
             <span>·</span>
-            <span className="rounded bg-[#6b5faf]/15 px-2 py-0.5 font-mono text-[#3f346f] font-semibold">
+            <span className="rounded bg-lf-purple/15 px-2 py-0.5 font-mono text-deep-purple font-semibold">
               Payload
             </span>
             <span>·</span>
-            <span className="rounded bg-[#308f68]/15 px-2 py-0.5 font-mono text-[#1f5f45] font-semibold">
+            <span className="rounded bg-lf-green/15 px-2 py-0.5 font-mono text-deep-green font-semibold">
               Signature
             </span>
           </div>
@@ -173,7 +174,7 @@ export function JwtDecoder() {
                     <ShieldAlert className="h-3 w-3" /> Expired ({expInfo.relative} ago)
                   </Badge>
                 ) : (
-                  <Badge className="bg-[#1f5f45] text-[#fef5de] hover:bg-[#1f5f45] flex items-center gap-1">
+                  <Badge className="bg-lf-green/15 text-deep-green hover:bg-lf-green/15 flex items-center gap-1">
                     <ShieldCheck className="h-3 w-3" /> Valid (Expires in {expInfo.relative})
                   </Badge>
                 )}
@@ -196,18 +197,18 @@ export function JwtDecoder() {
         {/* Header */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
           <div className="flex items-center justify-between pb-2 border-b border-border/60">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#a83a30]">
+            <span className="text-xs font-semibold uppercase tracking-wider text-deep-coral">
               Header: Algorithm & Token Type
             </span>
             {parsed.header && (
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 px-2 text-xs"
+                className="h-10 sm:h-7 px-2 text-xs"
                 onClick={() => copyText(JSON.stringify(parsed.header, null, 2), "header")}
               >
                 {copiedSection === "header" ? (
-                  <Check className="h-3 w-3 text-[#1f5f45]" />
+                  <Check className="h-3 w-3 text-deep-green" />
                 ) : (
                   <Copy className="h-3 w-3 text-muted-foreground" />
                 )}
@@ -223,18 +224,18 @@ export function JwtDecoder() {
         {/* Payload */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
           <div className="flex items-center justify-between pb-2 border-b border-border/60">
-            <span className="text-xs font-semibold uppercase tracking-wider text-[#3f346f]">
+            <span className="text-xs font-semibold uppercase tracking-wider text-deep-purple">
               Payload: Claims & Data
             </span>
             {parsed.payload && (
               <Button
                 variant="ghost"
                 size="sm"
-                className="h-7 px-2 text-xs"
+                className="h-10 sm:h-7 px-2 text-xs"
                 onClick={() => copyText(JSON.stringify(parsed.payload, null, 2), "payload")}
               >
                 {copiedSection === "payload" ? (
-                  <Check className="h-3 w-3 text-[#1f5f45]" />
+                  <Check className="h-3 w-3 text-deep-green" />
                 ) : (
                   <Copy className="h-3 w-3 text-muted-foreground" />
                 )}
@@ -250,7 +251,7 @@ export function JwtDecoder() {
         {/* Signature note */}
         <div className="rounded-xl border border-border bg-muted/50 p-4 text-xs text-muted-foreground flex items-center justify-between">
           <span>Client-side decoder — your tokens never leave your browser.</span>
-          <span className="font-mono text-[11px] text-[#1f5f45] font-semibold">100% Private</span>
+          <span className="font-mono text-[11px] text-deep-green font-semibold">100% Private</span>
         </div>
       </div>
     </div>

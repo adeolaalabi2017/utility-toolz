@@ -72,13 +72,13 @@ export function SigFigCalculator() {
         {/* Input (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Binary className="h-4 w-4 text-[#a4502c]" /> Number & Precision
+            <Binary className="h-4 w-4 text-deep-orange" /> Number & Precision
           </span>
 
           <div className="space-y-4">
             <div>
-              <label className="text-xs font-medium text-foreground">Input Number</label>
-              <input
+              <label htmlFor="sig-fig-calculator-1" className="text-xs font-medium text-foreground">Input Number</label>
+              <input id="sig-fig-calculator-1"
                 type="text"
                 value={inputVal}
                 onChange={(e) => setInputVal(e.target.value)}
@@ -92,10 +92,10 @@ export function SigFigCalculator() {
 
             <div>
               <div className="flex justify-between text-xs font-medium text-foreground">
-                <label>Round to Target Sig Figs: {targetSigFigs}</label>
+                <label htmlFor="sig-fig-calculator-2">Round to Target Sig Figs: {targetSigFigs}</label>
                 <span className="text-muted-foreground font-mono">1 to 8 digits</span>
               </div>
-              <input
+              <input id="sig-fig-calculator-2"
                 type="range"
                 min="1"
                 max="8"
@@ -117,7 +117,7 @@ export function SigFigCalculator() {
             <div className="my-4 space-y-4">
               <div className="rounded-lg bg-muted/50 p-4 text-center">
                 <span className="text-xs text-muted-foreground">Significant Figures Count</span>
-                <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+                <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                   {stats.detectedSigFigs}
                   <span className="text-xs text-muted-foreground font-normal"> Sig Figs</span>
                 </p>
@@ -130,7 +130,7 @@ export function SigFigCalculator() {
                 <span className="text-[11px] text-muted-foreground block">
                   Rounded to {targetSigFigs} Sig Figs
                 </span>
-                <span className="tnum font-display text-display-sm text-[#3f346f] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {stats.roundedSci}
                 </span>
               </div>

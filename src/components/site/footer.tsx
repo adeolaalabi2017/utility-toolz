@@ -17,7 +17,7 @@ export function Footer() {
                 <LayoutGrid className="h-4.5 w-4.5 text-[#7fbb92]" />
               </span>
               <span className="font-display text-xl font-semibold tracking-tight text-foreground">
-                Utility<span className="text-[#c9603c]">Toolz</span>
+                Utility<span className="text-deep-rust">Toolz</span>
               </span>
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-foreground/80 dark:text-foreground/85">
@@ -25,8 +25,8 @@ export function Footer() {
               and beyond. Built for people whose work depends on the numbers.
             </p>
             <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/80 dark:text-foreground/85">
-              <span className="h-1.5 w-1.5 rounded-full bg-[#308f68]" />
-              Catalogue complete · {TOOLS.length} tools live
+              <span className="h-1.5 w-1.5 rounded-full bg-lf-green" aria-hidden />
+              {TOOLS.length} tools across {DOMAINS.length} domains
             </p>
           </div>
 
@@ -39,7 +39,7 @@ export function Footer() {
                   <Link
                     href={`/${d.slug}`}
                     className={cn(
-                      "text-sm transition-colors hover:text-[#c9603c] dark:hover:text-[#fb923c]",
+                      "text-sm transition-colors hover:text-deep-orange",
                       d.status === "live" ? "text-foreground/90 font-medium" : "text-foreground/60"
                     )}
                   >
@@ -65,7 +65,7 @@ export function Footer() {
                 <li key={p.slug}>
                   <Link
                     href={`/professions/${p.slug}`}
-                    className="text-sm text-foreground/90 font-medium transition-colors hover:text-[#c9603c] dark:hover:text-[#fb923c]"
+                    className="text-sm text-foreground/90 font-medium transition-colors hover:text-deep-orange"
                   >
                     {p.name}
                   </Link>
@@ -81,9 +81,8 @@ export function Footer() {
             </p>
             <ul className="mt-3 space-y-2 text-sm text-foreground/80 dark:text-foreground/85">
               <li>Free to use, no signup</li>
-              <li>Runs entirely in your browser</li>
-              <li>New tools every sprint</li>
-              <li>Premium ad-free plan — $5/mo, waitlist open</li>
+              <li>Your inputs stay in your browser</li>
+              <li>New tools added regularly</li>
             </ul>
           </div>
         </div>
@@ -91,14 +90,11 @@ export function Footer() {
         <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border/80 pt-6 text-xs text-foreground/75 dark:text-foreground/80 sm:flex-row">
           <p>© {new Date().getFullYear()} Utility Toolz. All rights reserved.</p>
           <div className="flex gap-4">
-            <Link href="/" className="hover:text-foreground transition-colors">
+            <Link href="/privacy" className="inline-flex min-h-10 items-center hover:text-foreground hover:underline">
               Privacy
             </Link>
-            <Link href="/" className="hover:text-foreground transition-colors">
+            <Link href="/terms" className="inline-flex min-h-10 items-center hover:text-foreground hover:underline">
               Terms
-            </Link>
-            <Link href="/" className="hover:text-foreground transition-colors">
-              Status
             </Link>
           </div>
         </div>

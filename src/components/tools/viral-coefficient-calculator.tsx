@@ -51,13 +51,13 @@ export function ViralCoefficientCalculator() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Share2 className="h-4 w-4 text-[#a4502c]" /> Referral & Loop Parameters
+            <Share2 className="h-4 w-4 text-deep-orange" /> Referral & Loop Parameters
           </span>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-foreground">Initial User Cohort</label>
-              <input
+              <label htmlFor="viral-coefficient-calculator-1" className="text-xs font-medium text-foreground">Initial User Cohort</label>
+              <input id="viral-coefficient-calculator-1"
                 type="number"
                 value={initialCohort}
                 onChange={(e) => setInitialCohort(Number(e.target.value) || 0)}
@@ -67,8 +67,8 @@ export function ViralCoefficientCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Invites Sent per User</label>
-              <input
+              <label htmlFor="viral-coefficient-calculator-2" className="text-xs font-medium text-foreground">Invites Sent per User</label>
+              <input id="viral-coefficient-calculator-2"
                 type="number"
                 step="0.1"
                 value={invitesPerUser}
@@ -79,8 +79,8 @@ export function ViralCoefficientCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Referral Conversion Rate (%)</label>
-              <input
+              <label htmlFor="viral-coefficient-calculator-3" className="text-xs font-medium text-foreground">Referral Conversion Rate (%)</label>
+              <input id="viral-coefficient-calculator-3"
                 type="number"
                 min="0"
                 max="100"
@@ -92,8 +92,8 @@ export function ViralCoefficientCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Cycle Time (Days)</label>
-              <input
+              <label htmlFor="viral-coefficient-calculator-4" className="text-xs font-medium text-foreground">Cycle Time (Days)</label>
+              <input id="viral-coefficient-calculator-4"
                 type="number"
                 min="1"
                 max="60"
@@ -116,7 +116,7 @@ export function ViralCoefficientCalculator() {
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Viral Coefficient (K)</span>
               <p className={`tnum font-display text-display-lg mt-1 font-bold ${
-                calc.k >= 1 ? "text-[#1f5f45]" : calc.k >= 0.5 ? "text-[#a4502c]" : "text-foreground"
+                calc.k >= 1 ? "text-deep-green" : calc.k >= 0.5 ? "text-deep-orange" : "text-foreground"
               }`}>
                 {calc.k.toFixed(2)}
               </p>
@@ -128,7 +128,7 @@ export function ViralCoefficientCalculator() {
             <div className="grid grid-cols-2 gap-3 text-center">
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Viral Multiplier</span>
-                <span className="tnum font-display text-display-sm text-[#3f346f] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {calc.isExponential ? "∞" : `${calc.multiplier.toFixed(2)}x`}
                 </span>
               </div>
@@ -170,7 +170,7 @@ export function ViralCoefficientCalculator() {
                 <tr key={row.cycle} className="py-1.5">
                   <td className="py-2 font-semibold">Cycle #{row.cycle}</td>
                   <td className="py-2 text-muted-foreground">Day {row.day}</td>
-                  <td className="py-2 font-mono text-[#1f5f45]">+{fmtNum(row.newUsers, 0)}</td>
+                  <td className="py-2 font-mono text-deep-green">+{fmtNum(row.newUsers, 0)}</td>
                   <td className="py-2 font-mono font-bold text-right text-foreground">
                     {fmtNum(row.totalUsers, 0)}
                   </td>

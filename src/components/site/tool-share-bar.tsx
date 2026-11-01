@@ -47,11 +47,11 @@ export function ToolShareBar({
         variant="outline"
         size="sm"
         onClick={handleShare}
-        className="h-8 gap-1.5 text-xs font-medium text-foreground hover:bg-accent"
+        className="h-10 sm:h-8 gap-1.5 text-xs font-medium text-foreground hover:bg-accent"
         title="Copy shareable link with current inputs"
       >
         {copied ? (
-          <Check className="h-3.5 w-3.5 text-green-600" />
+          <Check className="h-3.5 w-3.5 text-deep-green" />
         ) : (
           <Share2 className="h-3.5 w-3.5 text-primary" />
         )}
@@ -64,7 +64,7 @@ export function ToolShareBar({
           variant="ghost"
           size="sm"
           onClick={onReset}
-          className="h-8 gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground"
+          className="h-10 sm:h-8 gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground"
           title="Reset to default values"
         >
           <RotateCcw className="h-3.5 w-3.5" />

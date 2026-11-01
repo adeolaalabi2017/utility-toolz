@@ -27,7 +27,7 @@ function ModeToggle({
   return (
     <div className="grid gap-2" style={{ gridTemplateColumns: `repeat(${modes.length}, minmax(0, 1fr))` }}>
       {modes.map((m) => (
-        <button
+        <button aria-pressed={mode === m.id} type="button"
           key={m.id}
           onClick={() => onMode(m.id)}
           className={`rounded-lg border px-3 py-2.5 text-sm font-medium transition-colors ${
@@ -261,7 +261,7 @@ export function CTRCalculator() {
 /* ================================================================== */
 
 export function ROASCalculator() {
-  const [params, setParams, resetParams] = useToolState({
+  const [params, setParams] = useToolState({
     revenue: "45,000",
     spend: "9,000",
     margin: "55",
@@ -283,7 +283,7 @@ export function ROASCalculator() {
 
   return (
     <CalcLayout
-      actions={<ToolShareBar onReset={resetParams} />}
+      actions={<ToolShareBar />}
       inputs={
         <FieldGrid>
           <NumberField

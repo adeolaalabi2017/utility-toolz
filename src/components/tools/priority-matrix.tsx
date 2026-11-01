@@ -104,12 +104,14 @@ export function PriorityMatrix() {
                 className="group flex items-start justify-between gap-2 rounded-lg border border-border/60 bg-background p-2 text-xs"
               >
                 <div className="flex items-start gap-2 flex-1">
-                  <button
+                  <button type="button"
                     onClick={() => toggleTask(t.id)}
-                    className="mt-0.5 text-muted-foreground hover:text-foreground shrink-0"
+                    aria-pressed={t.completed}
+                    aria-label={`Mark "${t.text}" as ${t.completed ? "not done" : "done"}`}
+                    className="-m-2 flex h-10 w-10 shrink-0 items-center justify-center text-muted-foreground hover:text-foreground sm:m-0 sm:mt-0.5 sm:h-auto sm:w-auto"
                   >
                     {t.completed ? (
-                      <CheckCircle2 className="h-3.5 w-3.5 text-[#1f5f45]" />
+                      <CheckCircle2 className="h-3.5 w-3.5 text-deep-green" />
                     ) : (
                       <Circle className="h-3.5 w-3.5" />
                     )}
@@ -119,8 +121,9 @@ export function PriorityMatrix() {
                   </span>
                 </div>
 
-                <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-1 transition-opacity sm:opacity-0 sm:group-hover:opacity-100 sm:group-focus-within:opacity-100">
                   <select
+                    aria-label={`Move "${t.text}" to quadrant`}
                     value={t.quadrant}
                     onChange={(e) => moveTask(t.id, e.target.value as any)}
                     className="text-[10px] bg-muted rounded border border-border px-1 py-0.5"
@@ -130,9 +133,10 @@ export function PriorityMatrix() {
                     <option value="q3">Q3</option>
                     <option value="q4">Q4</option>
                   </select>
-                  <button
+                  <button type="button"
                     onClick={() => deleteTask(t.id)}
-                    className="text-muted-foreground hover:text-destructive p-0.5"
+                    aria-label={`Delete "${t.text}"`}
+                    className="flex h-10 w-10 items-center justify-center text-muted-foreground hover:text-destructive sm:h-auto sm:w-auto sm:p-0.5"
                   >
                     <Trash2 className="h-3 w-3" />
                   </button>
@@ -150,6 +154,7 @@ export function PriorityMatrix() {
       {/* Add Task Bar */}
       <form onSubmit={addTask} className="rounded-xl border border-border bg-card p-4 shadow-lark-sm flex flex-col sm:flex-row gap-3 items-center">
         <input
+          aria-label="New task"
           type="text"
           value={newText}
           onChange={(e) => setNewText(e.target.value)}
@@ -158,6 +163,7 @@ export function PriorityMatrix() {
         />
 
         <select
+          aria-label="Quadrant for the new task"
           value={newQuadrant}
           onChange={(e) => setNewQuadrant(e.target.value as any)}
           className="w-full sm:w-auto rounded-md border border-input bg-background p-2 text-xs font-semibold text-foreground"
@@ -168,7 +174,7 @@ export function PriorityMatrix() {
           <option value="q4">Q4: Neither (Eliminate)</option>
         </select>
 
-        <Button type="submit" size="sm" className="h-8 gap-1 text-xs shrink-0 w-full sm:w-auto">
+        <Button type="submit" size="sm" className="h-10 sm:h-8 gap-1 text-xs shrink-0 w-full sm:w-auto">
           <Plus className="h-3.5 w-3.5" />
           <span>Add Task</span>
         </Button>
@@ -178,18 +184,18 @@ export function PriorityMatrix() {
           onClick={copyMarkdown}
           variant="outline"
           size="sm"
-          className="h-8 gap-1 text-xs shrink-0 w-full sm:w-auto"
+          className="h-10 sm:h-8 gap-1 text-xs shrink-0 w-full sm:w-auto"
         >
-          {copied ? <Check className="h-3.5 w-3.5 text-[#1f5f45]" /> : <Copy className="h-3.5 w-3.5" />}
+          {copied ? <Check className="h-3.5 w-3.5 text-deep-green" /> : <Copy className="h-3.5 w-3.5" />}
           <span>{copied ? "Copied" : "Export List"}</span>
         </Button>
       </form>
 
       {/* 2x2 Matrix Grid */}
       <div className="grid gap-4 sm:grid-cols-2">
-        {renderQuadrant("q1", "1. Urgent & Important", "DO FIRST — Crisis & Deadlines", "text-[#cf4f43]")}
-        {renderQuadrant("q2", "2. Important & Not Urgent", "SCHEDULE — Strategic Value & Focus", "text-[#1f5f45]")}
-        {renderQuadrant("q3", "3. Urgent & Not Important", "DELEGATE — Interruptions & Meetings", "text-[#a4502c]")}
+        {renderQuadrant("q1", "1. Urgent & Important", "DO FIRST — Crisis & Deadlines", "text-deep-coral")}
+        {renderQuadrant("q2", "2. Important & Not Urgent", "SCHEDULE — Strategic Value & Focus", "text-deep-green")}
+        {renderQuadrant("q3", "3. Urgent & Not Important", "DELEGATE — Interruptions & Meetings", "text-deep-orange")}
         {renderQuadrant("q4", "4. Neither Urgent nor Important", "ELIMINATE — Distractions & Busywork", "text-muted-foreground")}
       </div>
     </div>

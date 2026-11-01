@@ -23,7 +23,7 @@ export async function generateMetadata({
 
   if (!t || t.domain !== domain) {
     return {
-      title: "Tool Not Found | Utility Toolz",
+      title: "Tool not found",
     };
   }
 

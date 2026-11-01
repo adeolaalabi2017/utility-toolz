@@ -1,5 +1,6 @@
 "use client";
 
+import { Cur } from "@/components/site/currency";
 import React, { useState, useMemo } from "react";
 import { fmtUSD, fmtPct, fmtNum } from "@/lib/format";
 import { DollarSign, Briefcase, Calendar, ShieldCheck } from "lucide-react";
@@ -47,13 +48,13 @@ export function FreelanceRateCalculator() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Briefcase className="h-4 w-4 text-[#a4502c]" /> Income, Tax & Working Capacity
+            <Briefcase className="h-4 w-4 text-deep-orange" /> Income, Tax & Working Capacity
           </span>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-foreground">Target Take-Home Net Income ($)</label>
-              <input
+              <label htmlFor="freelance-rate-calculator-1" className="text-xs font-medium text-foreground">Target Take-Home Net Income (<Cur />)</label>
+              <input id="freelance-rate-calculator-1"
                 type="number"
                 value={targetIncome}
                 onChange={(e) => setTargetIncome(Number(e.target.value) || 0)}
@@ -63,8 +64,8 @@ export function FreelanceRateCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Annual Business Overhead ($)</label>
-              <input
+              <label htmlFor="freelance-rate-calculator-2" className="text-xs font-medium text-foreground">Annual Business Overhead (<Cur />)</label>
+              <input id="freelance-rate-calculator-2"
                 type="number"
                 value={expenses}
                 onChange={(e) => setExpenses(Number(e.target.value) || 0)}
@@ -74,8 +75,8 @@ export function FreelanceRateCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Estimated Tax Rate (%)</label>
-              <input
+              <label htmlFor="freelance-rate-calculator-3" className="text-xs font-medium text-foreground">Estimated Tax Rate (%)</label>
+              <input id="freelance-rate-calculator-3"
                 type="number"
                 min="0"
                 max="60"
@@ -87,8 +88,8 @@ export function FreelanceRateCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Weeks Off per Year</label>
-              <input
+              <label htmlFor="freelance-rate-calculator-4" className="text-xs font-medium text-foreground">Weeks Off per Year</label>
+              <input id="freelance-rate-calculator-4"
                 type="number"
                 min="0"
                 max="20"
@@ -100,8 +101,8 @@ export function FreelanceRateCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Work Hours / Week</label>
-              <input
+              <label htmlFor="freelance-rate-calculator-5" className="text-xs font-medium text-foreground">Work Hours / Week</label>
+              <input id="freelance-rate-calculator-5"
                 type="number"
                 min="10"
                 max="80"
@@ -113,8 +114,8 @@ export function FreelanceRateCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Billable Ratio (%): {billablePct}%</label>
-              <input
+              <label htmlFor="freelance-rate-calculator-6" className="text-xs font-medium text-foreground">Billable Ratio (%): {billablePct}%</label>
+              <input id="freelance-rate-calculator-6"
                 type="range"
                 min="30"
                 max="90"
@@ -136,7 +137,7 @@ export function FreelanceRateCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Recommended Hourly Rate</span>
-              <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                 {fmtUSD(calc.hourlyRate, 0)}
                 <span className="text-base text-foreground font-normal"> / hr</span>
               </p>
@@ -154,7 +155,7 @@ export function FreelanceRateCalculator() {
               </div>
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Monthly Invoice Target</span>
-                <span className="tnum font-display text-display-sm text-[#3f346f] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {fmtUSD(calc.monthlyTarget, 0)}
                 </span>
               </div>
@@ -176,11 +177,11 @@ export function FreelanceRateCalculator() {
         <div className="grid gap-3 sm:grid-cols-4 text-xs">
           <div className="rounded-lg bg-muted/50 p-3">
             <span className="text-muted-foreground block">Target Net Take-Home</span>
-            <span className="text-sm font-bold text-[#1f5f45] mt-1 block">{fmtUSD(targetIncome, 0)}</span>
+            <span className="text-sm font-bold text-deep-green mt-1 block">{fmtUSD(targetIncome, 0)}</span>
           </div>
           <div className="rounded-lg bg-muted/50 p-3">
             <span className="text-muted-foreground block">Estimated Tax Reserve</span>
-            <span className="text-sm font-bold text-[#a4502c] mt-1 block">{fmtUSD(calc.taxOwed, 0)}</span>
+            <span className="text-sm font-bold text-deep-orange mt-1 block">{fmtUSD(calc.taxOwed, 0)}</span>
           </div>
           <div className="rounded-lg bg-muted/50 p-3">
             <span className="text-muted-foreground block">Business Overhead</span>

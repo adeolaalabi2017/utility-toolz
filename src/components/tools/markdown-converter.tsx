@@ -95,7 +95,7 @@ export function MarkdownConverter() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex rounded-lg bg-muted/60 p-0.5 text-xs font-medium">
-          <button
+          <button aria-pressed={direction === "md2html"} type="button"
             onClick={() => {
               setDirection("md2html");
               setInput(SAMPLE_MD);
@@ -106,7 +106,7 @@ export function MarkdownConverter() {
           >
             Markdown → HTML
           </button>
-          <button
+          <button aria-pressed={direction === "html2md"} type="button"
             onClick={() => {
               setDirection("html2md");
               setInput(mdToHtml(SAMPLE_MD));
@@ -127,9 +127,9 @@ export function MarkdownConverter() {
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
           }}
-          className="h-8 text-xs gap-1"
+          className="h-10 sm:h-8 text-xs gap-1"
         >
-          {copied ? <Check className="h-3.5 w-3.5 text-[#1f5f45]" /> : <Copy className="h-3.5 w-3.5" />}
+          {copied ? <Check className="h-3.5 w-3.5 text-deep-green" /> : <Copy className="h-3.5 w-3.5" />}
           <span>{copied ? "Copied" : "Copy Output"}</span>
         </Button>
       </div>
@@ -137,10 +137,10 @@ export function MarkdownConverter() {
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Input */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pb-2">
+          <span id="markdown-converter-heading-1" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pb-2">
             {direction === "md2html" ? "Input Markdown" : "Input Raw HTML"}
           </span>
-          <textarea
+          <textarea aria-labelledby="markdown-converter-heading-1"
             value={input}
             onChange={(e) => setInput(e.target.value)}
             rows={12}
@@ -151,10 +151,10 @@ export function MarkdownConverter() {
 
         {/* Output */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pb-2">
+          <span id="markdown-converter-heading-2" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pb-2">
             {direction === "md2html" ? "Generated HTML" : "Generated Markdown"}
           </span>
-          <textarea
+          <textarea aria-labelledby="markdown-converter-heading-2"
             readOnly
             value={converted}
             rows={12}

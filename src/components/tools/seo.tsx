@@ -46,8 +46,8 @@ export function MetaTitleGenerator() {
       inputs={
         <FieldGrid>
           <div className="space-y-1.5">
-            <Label className="text-sm font-medium">Primary keyword</Label>
-            <Input
+            <Label htmlFor="seo-1" className="text-sm font-medium">Primary keyword</Label>
+            <Input id="seo-1"
               value={keyword}
               onChange={(e) => setKeyword(e.target.value)}
               placeholder="e.g. Email marketing"
@@ -55,8 +55,8 @@ export function MetaTitleGenerator() {
             <p className="text-xs text-muted-foreground">The head term this page should rank for.</p>
           </div>
           <div className="space-y-1.5">
-            <Label className="text-sm font-medium">Brand / site name</Label>
-            <Input
+            <Label htmlFor="seo-2" className="text-sm font-medium">Brand / site name</Label>
+            <Input id="seo-2"
               value={brand}
               onChange={(e) => setBrand(e.target.value)}
               placeholder="e.g. Brightlist"
@@ -118,20 +118,20 @@ export function MetaDescriptionGenerator() {
       inputs={
         <div className="space-y-4">
           <div className="space-y-1.5">
-            <Label className="text-sm font-medium">Primary keyword</Label>
-            <Input value={keyword} onChange={(e) => setKeyword(e.target.value)} />
+            <Label htmlFor="seo-3" className="text-sm font-medium">Primary keyword</Label>
+            <Input id="seo-3" value={keyword} onChange={(e) => setKeyword(e.target.value)} />
           </div>
           <div className="space-y-1.5">
-            <Label className="text-sm font-medium">Key benefit (finish the phrase)</Label>
-            <Input
+            <Label htmlFor="seo-4" className="text-sm font-medium">Key benefit (finish the phrase)</Label>
+            <Input id="seo-4"
               value={benefit}
               onChange={(e) => setBenefit(e.target.value)}
               placeholder="e.g. ship projects 2 weeks faster"
             />
           </div>
           <div className="space-y-1.5">
-            <Label className="text-sm font-medium">Call to action</Label>
-            <Input value={cta} onChange={(e) => setCta(e.target.value)} />
+            <Label htmlFor="seo-5" className="text-sm font-medium">Call to action</Label>
+            <Input id="seo-5" value={cta} onChange={(e) => setCta(e.target.value)} />
           </div>
         </div>
       }
@@ -192,10 +192,10 @@ export function SerpSnippetPreview() {
         <div className="space-y-4">
           <div className="space-y-1.5">
             <div className="flex items-center justify-between">
-              <Label className="text-sm font-medium">Title tag</Label>
+              <Label htmlFor="seo-6" className="text-sm font-medium">Title tag</Label>
               <LengthPill value={title.length} min={30} max={60} />
             </div>
-            <Input value={title} onChange={(e) => setTitle(e.target.value)} />
+            <Input id="seo-6" value={title} onChange={(e) => setTitle(e.target.value)} />
           </div>
           <TextAreaField
             label="Meta description"
@@ -205,8 +205,8 @@ export function SerpSnippetPreview() {
           />
           <div className="flex items-center justify-between">
             <div className="flex-1 space-y-1.5">
-              <Label className="text-sm font-medium">Page URL</Label>
-              <Input value={url} onChange={(e) => setUrl(e.target.value)} />
+              <Label htmlFor="seo-7" className="text-sm font-medium">Page URL</Label>
+              <Input id="seo-7" value={url} onChange={(e) => setUrl(e.target.value)} />
             </div>
           </div>
         </div>
@@ -218,7 +218,7 @@ export function SerpSnippetPreview() {
           </p>
           <div className="rounded-xl border bg-white p-4 shadow-sm">
             <div className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#1f4a3f] text-[10px] font-bold text-white">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
                 {domain.charAt(0).toUpperCase() || "A"}
               </span>
               <div className="min-w-0">
@@ -313,6 +313,7 @@ export function KeywordDensityChecker() {
             Paste your content
           </p>
           <TextAreaField
+            ariaLabel="Text to analyse"
             value={text}
             onChange={setText}
             rows={12}
@@ -440,8 +441,8 @@ export function RobotsTxtGenerator() {
             </>
           )}
           <div className="space-y-1.5">
-            <Label className="text-sm font-medium">Sitemap URL</Label>
-            <Input value={sitemap} onChange={(e) => setSitemap(e.target.value)} />
+            <Label htmlFor="seo-8" className="text-sm font-medium">Sitemap URL</Label>
+            <Input id="seo-8" value={sitemap} onChange={(e) => setSitemap(e.target.value)} />
           </div>
         </div>
       }
@@ -667,14 +668,14 @@ export function SchemaMarkupGenerator() {
   const [headline, setHeadline] = React.useState("Email Marketing: The Complete Guide");
   const [author, setAuthor] = React.useState("Jordan Ellis");
   const [datePublished, setDatePublished] = React.useState(new Date().toISOString().slice(0, 10));
-  const [product, setProduct] = React.useState("Utility Toolz Pro");
+  const [product, setProduct] = React.useState("Brightlist Studio Planner");
   const [price, setPrice] = React.useState("5.00");
   const [currency, setCurrency] = React.useState("USD");
   const [bizName, setBizName] = React.useState("Brightlist Studio");
   const [phone, setPhone] = React.useState("+1-555-0100");
   const [address, setAddress] = React.useState("220 Market St, San Francisco, CA 94103");
   const [faqs, setFaqs] = React.useState<FaqRow[]>([
-    { q: "Is Utility Toolz free to use?", a: "Yes — all 119 tools are free, with an optional $5/month premium tier." },
+    { q: "Is Utility Toolz free to use?", a: "Yes — every tool is free to use." },
     { q: "Do I need an account?", a: "No. Every tool runs instantly in your browser without signup." },
   ]);
 
@@ -759,33 +760,33 @@ export function SchemaMarkupGenerator() {
           {type === "Article" && (
             <FieldGrid>
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium">Headline</Label>
-                <Input value={headline} onChange={(e) => setHeadline(e.target.value)} />
+                <Label htmlFor="seo-9" className="text-sm font-medium">Headline</Label>
+                <Input id="seo-9" value={headline} onChange={(e) => setHeadline(e.target.value)} />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium">Author</Label>
-                <Input value={author} onChange={(e) => setAuthor(e.target.value)} />
+                <Label htmlFor="seo-10" className="text-sm font-medium">Author</Label>
+                <Input id="seo-10" value={author} onChange={(e) => setAuthor(e.target.value)} />
               </div>
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium">Published date</Label>
-                <Input type="date" value={datePublished} onChange={(e) => setDatePublished(e.target.value)} />
+                <Label htmlFor="seo-11" className="text-sm font-medium">Published date</Label>
+                <Input id="seo-11" type="date" value={datePublished} onChange={(e) => setDatePublished(e.target.value)} />
               </div>
             </FieldGrid>
           )}
           {type === "Product" && (
             <FieldGrid>
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium">Product name</Label>
-                <Input value={product} onChange={(e) => setProduct(e.target.value)} />
+                <Label htmlFor="seo-12" className="text-sm font-medium">Product name</Label>
+                <Input id="seo-12" value={product} onChange={(e) => setProduct(e.target.value)} />
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="space-y-1.5">
-                  <Label className="text-sm font-medium">Price</Label>
-                  <Input value={price} onChange={(e) => setPrice(e.target.value)} />
+                  <Label htmlFor="seo-13" className="text-sm font-medium">Price</Label>
+                  <Input id="seo-13" value={price} onChange={(e) => setPrice(e.target.value)} />
                 </div>
                 <div className="space-y-1.5">
-                  <Label className="text-sm font-medium">Currency</Label>
-                  <Input value={currency} onChange={(e) => setCurrency(e.target.value)} />
+                  <Label htmlFor="seo-14" className="text-sm font-medium">Currency</Label>
+                  <Input id="seo-14" value={currency} onChange={(e) => setCurrency(e.target.value)} />
                 </div>
               </div>
             </FieldGrid>
@@ -793,17 +794,17 @@ export function SchemaMarkupGenerator() {
           {type === "LocalBusiness" && (
             <div className="space-y-3">
               <div className="space-y-1.5">
-                <Label className="text-sm font-medium">Business name</Label>
-                <Input value={bizName} onChange={(e) => setBizName(e.target.value)} />
+                <Label htmlFor="seo-15" className="text-sm font-medium">Business name</Label>
+                <Input id="seo-15" value={bizName} onChange={(e) => setBizName(e.target.value)} />
               </div>
               <FieldGrid>
                 <div className="space-y-1.5">
-                  <Label className="text-sm font-medium">Phone</Label>
-                  <Input value={phone} onChange={(e) => setPhone(e.target.value)} />
+                  <Label htmlFor="seo-16" className="text-sm font-medium">Phone</Label>
+                  <Input id="seo-16" value={phone} onChange={(e) => setPhone(e.target.value)} />
                 </div>
                 <div className="space-y-1.5">
-                  <Label className="text-sm font-medium">Street address</Label>
-                  <Input value={address} onChange={(e) => setAddress(e.target.value)} />
+                  <Label htmlFor="seo-17" className="text-sm font-medium">Street address</Label>
+                  <Input id="seo-17" value={address} onChange={(e) => setAddress(e.target.value)} />
                 </div>
               </FieldGrid>
             </div>
@@ -820,7 +821,7 @@ export function SchemaMarkupGenerator() {
                       <Button
                         variant="ghost"
                         size="sm"
-                        className="h-7 px-2 text-muted-foreground"
+                        className="h-10 sm:h-7 px-2 text-muted-foreground"
                         onClick={() => setFaqs((rows) => rows.filter((_, ri) => ri !== i))}
                         aria-label={`Remove question ${i + 1}`}
                       >

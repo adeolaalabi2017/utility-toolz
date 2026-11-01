@@ -162,20 +162,21 @@ export function CronBuilder() {
             </span>
             <div className="mt-2 flex items-center gap-3">
               <input
+                aria-label="Cron expression (5 fields)"
                 type="text"
                 value={cron}
                 onChange={(e) => setCron(e.target.value)}
                 className="w-full max-w-md rounded-lg border border-input bg-background px-4 py-2.5 font-mono text-lg font-bold tracking-wider text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               <Button onClick={copyCron} variant="outline" className="shrink-0 gap-1.5">
-                {copied ? <Check className="h-4 w-4 text-[#1f5f45]" /> : <Copy className="h-4 w-4" />}
+                {copied ? <Check className="h-4 w-4 text-deep-green" /> : <Copy className="h-4 w-4" />}
                 <span>{copied ? "Copied" : "Copy"}</span>
               </Button>
             </div>
           </div>
           <div className="rounded-lg bg-muted/60 p-4 sm:max-w-xs">
             <span className="text-xs font-medium text-muted-foreground flex items-center gap-1.5">
-              <Sparkles className="h-3.5 w-3.5 text-[#a4502c]" /> Plain English
+              <Sparkles className="h-3.5 w-3.5 text-deep-orange" /> Plain English
             </span>
             <p className="mt-1 text-sm font-semibold text-foreground leading-snug">
               {description}
@@ -188,10 +189,10 @@ export function CronBuilder() {
           <span className="text-xs font-medium text-muted-foreground mr-2">Quick Presets:</span>
           <div className="mt-2 flex flex-wrap gap-2">
             {PRESETS.map((p) => (
-              <button
+              <button type="button"
                 key={p.label}
                 onClick={() => setCron(p.expr)}
-                className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground transition-colors hover:border-[#6b5faf] hover:text-[#3f346f]"
+                className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground transition-colors hover:border-lf-purple hover:text-deep-purple"
               >
                 {p.label} ({p.expr})
               </button>
@@ -212,6 +213,7 @@ export function CronBuilder() {
           <div key={f.label} className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
             <span className="text-xs font-semibold text-foreground">{f.label}</span>
             <input
+              aria-label={`${f.label} field`}
               type="text"
               value={f.val}
               onChange={(e) => updatePart(f.idx, e.target.value)}
@@ -225,7 +227,7 @@ export function CronBuilder() {
       {/* Next scheduled runs */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
         <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-          <Calendar className="h-4 w-4 text-[#308f68]" /> Next 5 Scheduled Executions
+          <Calendar className="h-4 w-4 text-deep-green" /> Next 5 Scheduled Executions
         </h4>
         <div className="mt-4 divide-y divide-border/60">
           {nextRuns.length > 0 ? (
@@ -235,7 +237,7 @@ export function CronBuilder() {
                   <Clock className="h-3.5 w-3.5 text-muted-foreground" />
                   Run #{i + 1}: {r.toLocaleDateString(undefined, { weekday: "short", year: "numeric", month: "short", day: "numeric" })}
                 </span>
-                <span className="font-mono font-semibold text-[#1f5f45]">
+                <span className="font-mono font-semibold text-deep-green">
                   {r.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
                 </span>
               </div>

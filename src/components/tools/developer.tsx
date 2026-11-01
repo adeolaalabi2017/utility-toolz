@@ -15,7 +15,7 @@ import { cn } from "@/lib/utils";
 
 export function JsonFormatter() {
   const [input, setInput] = React.useState(
-    '{"site":"Utility Toolz","domains":12,"tools":{"live":119,"roadmap":119},"tags":["seo","finance","developer"],"premium":{"price":0,"currency":"USD"}}'
+    '{"site":"Utility Toolz","domains":12,"tools":{"live":119,"roadmap":119},"tags":["seo","finance","developer"],"pricing":{"price":0,"currency":"USD"}}'
   );
   const [indent, setIndent] = React.useState("2");
 
@@ -64,7 +64,7 @@ export function JsonFormatter() {
           />
           <div className="flex items-center gap-2">
             {error ? (
-              <span className="rounded-full bg-red-50 px-3 py-1 text-xs font-medium text-red-700">
+              <span className="rounded-full bg-lf-coral/10 px-3 py-1 text-xs font-medium text-deep-coral">
                 Invalid JSON
               </span>
             ) : (
@@ -192,10 +192,10 @@ export function RegexTester() {
       inputs={
         <div className="space-y-4">
           <div className="space-y-1.5">
-            <Label className="text-sm font-medium">Pattern</Label>
+            <Label htmlFor="developer-1" className="text-sm font-medium">Pattern</Label>
             <div className="flex items-center gap-2">
               <span className="font-mono text-muted-foreground">/</span>
-              <Input value={pattern} onChange={(e) => setPattern(e.target.value)} className="font-mono" />
+              <Input id="developer-1" value={pattern} onChange={(e) => setPattern(e.target.value)} className="font-mono" />
               <span className="font-mono text-muted-foreground">/</span>
               <Input
                 value={flags}
@@ -228,7 +228,7 @@ export function RegexTester() {
             <p className="mb-1.5 text-sm font-medium">Presets</p>
             <div className="flex flex-wrap gap-2">
               {REGEX_PRESETS.map((p) => (
-                <Button key={p.label} variant="outline" size="sm" className="h-8" onClick={() => applyPreset(p)}>
+                <Button key={p.label} variant="outline" size="sm" className="h-10 sm:h-8" onClick={() => applyPreset(p)}>
                   <Wand2 className="h-3.5 w-3.5" /> {p.label}
                 </Button>
               ))}
@@ -264,7 +264,7 @@ export function RegexTester() {
               >
                 {result.parts.map((p, i) =>
                   p.hit ? (
-                    <mark key={i} className="rounded bg-[#308f68]/20 px-0.5 text-foreground">
+                    <mark key={i} className="rounded bg-lf-green/20 px-0.5 text-foreground">
                       {p.t}
                     </mark>
                   ) : (

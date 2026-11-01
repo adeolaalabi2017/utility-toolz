@@ -87,12 +87,12 @@ export function PasswordGenerator() {
 
   const strength =
     entropy < 40
-      ? { label: "Weak", tone: "bad" as const, color: "bg-[#cf4f43]" }
+      ? { label: "Weak", tone: "bad" as const, color: "bg-lf-coral" }
       : entropy < 65
-      ? { label: "Fair", tone: "warn" as const, color: "bg-[#e07a3c]" }
+      ? { label: "Fair", tone: "warn" as const, color: "bg-lf-orange" }
       : entropy < 90
-      ? { label: "Strong", tone: "good" as const, color: "bg-[#308f68]" }
-      : { label: "Cryptographic Grade", tone: "good" as const, color: "bg-[#1f5f45]" };
+      ? { label: "Strong", tone: "good" as const, color: "bg-lf-green" }
+      : { label: "Cryptographic Grade", tone: "good" as const, color: "bg-lf-green" };
 
   const copyPwd = (str: string) => {
     navigator.clipboard.writeText(str);
@@ -105,14 +105,14 @@ export function PasswordGenerator() {
         <div className="space-y-5">
           <div className="space-y-2">
             <div className="flex items-center justify-between">
-              <Label className="text-sm font-medium">Password Length: {length} characters</Label>
-              <Input
+              <Label htmlFor="password-generator-1" className="text-sm font-medium">Password Length: {length} characters</Label>
+              <Input id="password-generator-1"
                 type="number"
                 min={8}
                 max={64}
                 value={length}
                 onChange={(e) => setLength(Math.min(64, Math.max(8, Number(e.target.value) || 8)))}
-                className="w-16 text-center h-8 font-mono text-sm"
+                className="h-10 w-16 text-center font-mono text-sm sm:h-8"
               />
             </div>
             <Slider
@@ -205,7 +205,7 @@ export function PasswordGenerator() {
                   className="flex items-center justify-between rounded-md border border-border bg-card px-3 py-1.5 hover:border-primary/50 transition-colors"
                 >
                   <span className="truncate max-w-[280px] sm:max-w-md">{pwd}</span>
-                  <button
+                  <button type="button"
                     onClick={() => copyPwd(pwd)}
                     className="p-1 hover:text-primary text-muted-foreground"
                     title="Copy this password"

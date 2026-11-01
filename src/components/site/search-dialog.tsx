@@ -61,7 +61,12 @@ function SearchDialog() {
   };
 
   return (
-    <CommandDialog open={open} onOpenChange={setOpen}>
+    <CommandDialog
+      open={open}
+      onOpenChange={setOpen}
+      title="Search tools"
+      description="Type to filter tools, domains and professions, then press Enter to open one."
+    >
       <CommandInput placeholder="Search tools, domains, professions…" />
       <CommandList className="thin-scroll max-h-[420px]">
         <CommandEmpty>

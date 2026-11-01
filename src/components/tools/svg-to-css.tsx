@@ -72,18 +72,19 @@ export function SvgToCss() {
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Sparkles className="h-4 w-4 text-[#a4502c]" /> Paste SVG Code
+              <Sparkles className="h-4 w-4 text-deep-orange" /> Paste SVG Code
             </span>
             <Button
               variant="outline"
               size="sm"
               onClick={() => setSvgInput(SAMPLE_SVG)}
-              className="h-7 text-xs"
+              className="h-10 sm:h-7 text-xs"
             >
               Load Sample
             </Button>
           </div>
           <textarea
+            aria-label="SVG markup"
             value={svgInput}
             onChange={(e) => setSvgInput(e.target.value)}
             rows={10}
@@ -131,9 +132,9 @@ export function SvgToCss() {
               variant="outline"
               size="sm"
               onClick={() => copyVal(cssUrl, "css")}
-              className="h-7 text-xs gap-1"
+              className="h-10 sm:h-7 text-xs gap-1"
             >
-              {copiedType === "css" ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+              {copiedType === "css" ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
               <span>{copiedType === "css" ? "Copied" : "Copy CSS"}</span>
             </Button>
           </div>
@@ -153,9 +154,9 @@ export function SvgToCss() {
               variant="outline"
               size="sm"
               onClick={() => copyVal(base64Uri, "b64")}
-              className="h-7 text-xs gap-1"
+              className="h-10 sm:h-7 text-xs gap-1"
             >
-              {copiedType === "b64" ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+              {copiedType === "b64" ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
               <span>{copiedType === "b64" ? "Copied" : "Copy Data URI"}</span>
             </Button>
           </div>

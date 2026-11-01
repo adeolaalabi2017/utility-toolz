@@ -43,13 +43,13 @@ export function SprintCapacityPlanner() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Users className="h-4 w-4 text-[#a4502c]" /> Team & Sprint Availability
+            <Users className="h-4 w-4 text-deep-orange" /> Team & Sprint Availability
           </span>
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-foreground">Team Size (Engineers)</label>
-              <input
+              <label htmlFor="sprint-capacity-planner-1" className="text-xs font-medium text-foreground">Team Size (Engineers)</label>
+              <input id="sprint-capacity-planner-1"
                 type="number"
                 min="1"
                 max="50"
@@ -60,8 +60,8 @@ export function SprintCapacityPlanner() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Sprint Length (Working Days)</label>
-              <input
+              <label htmlFor="sprint-capacity-planner-2" className="text-xs font-medium text-foreground">Sprint Length (Working Days)</label>
+              <input id="sprint-capacity-planner-2"
                 type="number"
                 min="1"
                 max="30"
@@ -73,21 +73,21 @@ export function SprintCapacityPlanner() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Total Team PTO / Holidays (Days)</label>
-              <input
+              <label htmlFor="sprint-capacity-planner-3" className="text-xs font-medium text-foreground">Total Team PTO / Holidays (Days)</label>
+              <input id="sprint-capacity-planner-3"
                 type="number"
                 min="0"
                 max="50"
                 value={totalPtoDays}
                 onChange={(e) => setTotalPtoDays(Number(e.target.value) || 0)}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-[#cf4f43] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-deep-coral focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               <span className="text-[11px] text-muted-foreground mt-0.5 block">Cumulative vacation across team</span>
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Hours per Story Point</label>
-              <input
+              <label htmlFor="sprint-capacity-planner-4" className="text-xs font-medium text-foreground">Hours per Story Point</label>
+              <input id="sprint-capacity-planner-4"
                 type="number"
                 min="1"
                 max="24"
@@ -99,8 +99,8 @@ export function SprintCapacityPlanner() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Ceremony Overhead: {ceremonyOverheadPct}%</label>
-              <input
+              <label htmlFor="sprint-capacity-planner-5" className="text-xs font-medium text-foreground">Ceremony Overhead: {ceremonyOverheadPct}%</label>
+              <input id="sprint-capacity-planner-5"
                 type="range"
                 min="10"
                 max="40"
@@ -112,8 +112,8 @@ export function SprintCapacityPlanner() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Focus Factor: {focusFactorPct}%</label>
-              <input
+              <label htmlFor="sprint-capacity-planner-6" className="text-xs font-medium text-foreground">Focus Factor: {focusFactorPct}%</label>
+              <input id="sprint-capacity-planner-6"
                 type="range"
                 min="50"
                 max="95"
@@ -159,7 +159,7 @@ export function SprintCapacityPlanner() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Recommended Commitment</span>
-              <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                 {calc.safeCommitmentPoints}
                 <span className="text-sm font-normal text-muted-foreground"> Story Points</span>
               </p>
@@ -177,7 +177,7 @@ export function SprintCapacityPlanner() {
               </div>
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Net Dev Hours</span>
-                <span className="tnum font-display text-display-sm text-[#3f346f] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {Math.round(calc.productiveHours)} hrs
                 </span>
               </div>

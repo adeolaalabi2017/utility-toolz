@@ -57,7 +57,7 @@ export function CountdownTimer() {
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
         <div className="flex items-center justify-between">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Clock className="h-4 w-4 text-[#a4502c]" /> Target Event & Milestone Date
+            <Clock className="h-4 w-4 text-deep-orange" /> Target Event & Milestone Date
           </span>
 
           <div className="flex gap-2">
@@ -65,7 +65,7 @@ export function CountdownTimer() {
               variant="outline"
               size="sm"
               onClick={() => setPreset(1, "Tomorrow Morning")}
-              className="h-7 text-xs"
+              className="h-10 sm:h-7 text-xs"
             >
               Tomorrow
             </Button>
@@ -73,7 +73,7 @@ export function CountdownTimer() {
               variant="outline"
               size="sm"
               onClick={() => setPreset(7, "Next Week Sprint")}
-              className="h-7 text-xs"
+              className="h-10 sm:h-7 text-xs"
             >
               1 Week
             </Button>
@@ -81,7 +81,7 @@ export function CountdownTimer() {
               variant="outline"
               size="sm"
               onClick={() => setPreset(30, "Monthly Milestone")}
-              className="h-7 text-xs"
+              className="h-10 sm:h-7 text-xs"
             >
               30 Days
             </Button>
@@ -90,8 +90,8 @@ export function CountdownTimer() {
 
         <div className="grid gap-4 sm:grid-cols-2">
           <div>
-            <label className="text-xs font-medium text-foreground">Event Title</label>
-            <input
+            <label htmlFor="countdown-timer-1" className="text-xs font-medium text-foreground">Event Title</label>
+            <input id="countdown-timer-1"
               type="text"
               value={eventName}
               onChange={(e) => setEventName(e.target.value)}
@@ -100,8 +100,8 @@ export function CountdownTimer() {
           </div>
 
           <div>
-            <label className="text-xs font-medium text-foreground">Date & Time</label>
-            <input
+            <label htmlFor="countdown-timer-2" className="text-xs font-medium text-foreground">Date & Time</label>
+            <input id="countdown-timer-2"
               type="datetime-local"
               value={targetDateStr}
               onChange={(e) => setTargetDateStr(e.target.value)}
@@ -125,7 +125,7 @@ export function CountdownTimer() {
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 max-w-2xl mx-auto">
             <div className="rounded-xl bg-muted/50 p-4 shadow-lark-sm">
-              <span className="tnum font-display text-display-lg text-[#1f5f45] font-bold block">
+              <span className="tnum font-display text-display-lg text-deep-green font-bold block">
                 {time.days}
               </span>
               <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mt-1 block">
@@ -134,7 +134,7 @@ export function CountdownTimer() {
             </div>
 
             <div className="rounded-xl bg-muted/50 p-4 shadow-lark-sm">
-              <span className="tnum font-display text-display-lg text-[#1f5f45] font-bold block">
+              <span className="tnum font-display text-display-lg text-deep-green font-bold block">
                 {String(time.hours).padStart(2, "0")}
               </span>
               <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mt-1 block">
@@ -143,7 +143,7 @@ export function CountdownTimer() {
             </div>
 
             <div className="rounded-xl bg-muted/50 p-4 shadow-lark-sm">
-              <span className="tnum font-display text-display-lg text-[#1f5f45] font-bold block">
+              <span className="tnum font-display text-display-lg text-deep-green font-bold block">
                 {String(time.minutes).padStart(2, "0")}
               </span>
               <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mt-1 block">
@@ -152,7 +152,7 @@ export function CountdownTimer() {
             </div>
 
             <div className="rounded-xl bg-muted/50 p-4 shadow-lark-sm">
-              <span className="tnum font-display text-display-lg text-[#a4502c] font-bold block">
+              <span className="tnum font-display text-display-lg text-deep-orange font-bold block">
                 {String(time.seconds).padStart(2, "0")}
               </span>
               <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground mt-1 block">

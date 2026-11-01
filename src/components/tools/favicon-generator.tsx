@@ -73,8 +73,8 @@ export function FaviconGenerator() {
 
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <label className="text-xs font-medium text-foreground">Letter / Monogram</label>
-              <input
+              <label htmlFor="favicon-generator-1" className="text-xs font-medium text-foreground">Letter / Monogram</label>
+              <input id="favicon-generator-1"
                 type="text"
                 maxLength={2}
                 value={monogram}
@@ -87,8 +87,8 @@ export function FaviconGenerator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Corner Radius: {radius}%</label>
-              <input
+              <label htmlFor="favicon-generator-2" className="text-xs font-medium text-foreground">Corner Radius: {radius}%</label>
+              <input id="favicon-generator-2"
                 type="range"
                 min="0"
                 max="50"
@@ -99,32 +99,32 @@ export function FaviconGenerator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Background Color</label>
+              <label htmlFor="favicon-generator-3" className="text-xs font-medium text-foreground">Background Color</label>
               <div className="mt-1 flex items-center gap-2">
-                <input
+                <input id="favicon-generator-3"
                   type="color"
                   value={bgColor}
                   onChange={(e) => {
                     setBgColor(e.target.value);
                     setUploadedImage(null);
                   }}
-                  className="h-8 w-12 cursor-pointer rounded border border-input p-0.5"
+                  className="h-10 sm:h-8 w-12 cursor-pointer rounded border border-input p-0.5"
                 />
                 <span className="font-mono text-xs text-foreground">{bgColor}</span>
               </div>
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Text Color</label>
+              <label htmlFor="favicon-generator-4" className="text-xs font-medium text-foreground">Text Color</label>
               <div className="mt-1 flex items-center gap-2">
-                <input
+                <input id="favicon-generator-4"
                   type="color"
                   value={textColor}
                   onChange={(e) => {
                     setTextColor(e.target.value);
                     setUploadedImage(null);
                   }}
-                  className="h-8 w-12 cursor-pointer rounded border border-input p-0.5"
+                  className="h-10 sm:h-8 w-12 cursor-pointer rounded border border-input p-0.5"
                 />
                 <span className="font-mono text-xs text-foreground">{textColor}</span>
               </div>
@@ -133,8 +133,8 @@ export function FaviconGenerator() {
 
           {/* Or Upload Image */}
           <div className="border-t border-border/60 pt-3">
-            <label className="text-xs font-medium text-muted-foreground block mb-1.5">Or upload custom image / logo:</label>
-            <input
+            <label htmlFor="favicon-generator-5" className="text-xs font-medium text-muted-foreground block mb-1.5">Or upload custom image / logo:</label>
+            <input id="favicon-generator-5"
               type="file"
               accept="image/*"
               onChange={(e) => {
@@ -154,7 +154,7 @@ export function FaviconGenerator() {
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between">
           <div>
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5 pb-3">
-              <Monitor className="h-4 w-4 text-[#308f68]" /> Browser Tab Mockup
+              <Monitor className="h-4 w-4 text-deep-green" /> Browser Tab Mockup
             </span>
 
             {/* Simulated Chrome Browser Header */}
@@ -216,7 +216,7 @@ export function FaviconGenerator() {
                 variant="outline"
                 size="sm"
                 onClick={() => downloadSize(s.size, s.name)}
-                className="h-7 text-xs gap-1"
+                className="h-10 sm:h-7 text-xs gap-1"
               >
                 <Download className="h-3 w-3" />
                 <span>PNG</span>
@@ -238,9 +238,9 @@ export function FaviconGenerator() {
               setCopiedSnippet(true);
               setTimeout(() => setCopiedSnippet(false), 2000);
             }}
-            className="h-7 text-xs gap-1"
+            className="h-10 sm:h-7 text-xs gap-1"
           >
-            {copiedSnippet ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+            {copiedSnippet ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
             <span>{copiedSnippet ? "Copied" : "Copy Tags"}</span>
           </Button>
         </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { Cur } from "@/components/site/currency";
 import React, { useState, useMemo } from "react";
 import { fmtUSD, fmtNum } from "@/lib/format";
 import { Package, RefreshCw, Clock, AlertCircle } from "lucide-react";
@@ -30,13 +31,13 @@ export function InventoryTurnoverCalculator() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Package className="h-4 w-4 text-[#a4502c]" /> Annual Inventory Data
+            <Package className="h-4 w-4 text-deep-orange" /> Annual Inventory Data
           </span>
 
           <div className="grid grid-cols-2 gap-4">
             <div className="col-span-2">
-              <label className="text-xs font-medium text-foreground">Annual Cost of Goods Sold (COGS) ($)</label>
-              <input
+              <label htmlFor="inventory-turnover-calculator-1" className="text-xs font-medium text-foreground">Annual Cost of Goods Sold (COGS) (<Cur />)</label>
+              <input id="inventory-turnover-calculator-1"
                 type="number"
                 value={cogs}
                 onChange={(e) => setCogs(Number(e.target.value) || 0)}
@@ -46,8 +47,8 @@ export function InventoryTurnoverCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Beginning Inventory ($)</label>
-              <input
+              <label htmlFor="inventory-turnover-calculator-2" className="text-xs font-medium text-foreground">Beginning Inventory (<Cur />)</label>
+              <input id="inventory-turnover-calculator-2"
                 type="number"
                 value={startInventory}
                 onChange={(e) => setStartInventory(Number(e.target.value) || 0)}
@@ -57,8 +58,8 @@ export function InventoryTurnoverCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Ending Inventory ($)</label>
-              <input
+              <label htmlFor="inventory-turnover-calculator-3" className="text-xs font-medium text-foreground">Ending Inventory (<Cur />)</label>
+              <input id="inventory-turnover-calculator-3"
                 type="number"
                 value={endInventory}
                 onChange={(e) => setEndInventory(Number(e.target.value) || 0)}
@@ -68,8 +69,8 @@ export function InventoryTurnoverCalculator() {
             </div>
 
             <div className="col-span-2">
-              <label className="text-xs font-medium text-foreground">Estimated Annual Carrying Cost Rate (%): {carryingCostPct}%</label>
-              <input
+              <label htmlFor="inventory-turnover-calculator-4" className="text-xs font-medium text-foreground">Estimated Annual Carrying Cost Rate (%): {carryingCostPct}%</label>
+              <input id="inventory-turnover-calculator-4"
                 type="range"
                 min="10"
                 max="35"
@@ -91,7 +92,7 @@ export function InventoryTurnoverCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Inventory Turnover Ratio</span>
-              <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                 {calc.turnover.toFixed(2)}x
               </p>
               <span className="text-xs text-muted-foreground mt-1 block">
@@ -102,13 +103,13 @@ export function InventoryTurnoverCalculator() {
             <div className="grid grid-cols-2 gap-3 text-center">
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Days to Sell (DSI)</span>
-                <span className="tnum font-display text-display-sm text-[#3f346f] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {Math.round(calc.dsi)} days
                 </span>
               </div>
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Holding Cost / Year</span>
-                <span className="tnum font-display text-display-sm text-[#cf4f43] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-coral font-bold">
                   {fmtUSD(calc.annualHoldingCost, 0)}
                 </span>
               </div>

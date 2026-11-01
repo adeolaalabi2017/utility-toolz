@@ -52,19 +52,20 @@ export function RedirectGenerator() {
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <ArrowRightLeft className="h-4 w-4 text-[#a4502c]" /> URL Migration Pairs
+              <ArrowRightLeft className="h-4 w-4 text-deep-orange" /> URL Migration Pairs
             </span>
             <Button
               variant="outline"
               size="sm"
               onClick={() => setInputPairs(SAMPLE_PAIRS)}
-              className="h-7 text-xs"
+              className="h-10 sm:h-7 text-xs"
             >
               Load Sample
             </Button>
           </div>
 
           <textarea
+            aria-label="Redirect rules, one per line"
             value={inputPairs}
             onChange={(e) => setInputPairs(e.target.value)}
             rows={10}
@@ -76,15 +77,15 @@ export function RedirectGenerator() {
           </p>
 
           <div className="flex items-center gap-3 pt-1">
-            <label className="text-xs font-medium text-foreground">Redirect Type:</label>
-            <div className="flex gap-2">
-              <button
+            <p id="redirect-type-label" className="text-xs font-medium text-foreground">Redirect Type:</p>
+            <div role="group" aria-labelledby="redirect-type-label" className="flex gap-2">
+              <button aria-pressed={statusCode === 301} type="button"
                 onClick={() => setStatusCode(301)}
                 className={`rounded px-2.5 py-1 text-xs font-medium ${statusCode === 301 ? "bg-card border border-border font-bold shadow-xs text-foreground" : "text-muted-foreground"}`}
               >
                 301 (Permanent)
               </button>
-              <button
+              <button aria-pressed={statusCode === 302} type="button"
                 onClick={() => setStatusCode(302)}
                 className={`rounded px-2.5 py-1 text-xs font-medium ${statusCode === 302 ? "bg-card border border-border font-bold shadow-xs text-foreground" : "text-muted-foreground"}`}
               >
@@ -99,25 +100,25 @@ export function RedirectGenerator() {
           <div>
             <div className="flex items-center justify-between pb-3">
               <div className="flex rounded-md bg-muted/60 p-0.5 text-xs font-medium">
-                <button
+                <button aria-pressed={format === "nginx"} type="button"
                   onClick={() => setFormat("nginx")}
                   className={`rounded px-2.5 py-1 ${format === "nginx" ? "bg-card font-semibold shadow-xs" : "text-muted-foreground"}`}
                 >
                   Nginx
                 </button>
-                <button
+                <button aria-pressed={format === "htaccess"} type="button"
                   onClick={() => setFormat("htaccess")}
                   className={`rounded px-2.5 py-1 ${format === "htaccess" ? "bg-card font-semibold shadow-xs" : "text-muted-foreground"}`}
                 >
                   Apache
                 </button>
-                <button
+                <button aria-pressed={format === "redirects"} type="button"
                   onClick={() => setFormat("redirects")}
                   className={`rounded px-2.5 py-1 ${format === "redirects" ? "bg-card font-semibold shadow-xs" : "text-muted-foreground"}`}
                 >
                   Cloudflare / Netlify
                 </button>
-                <button
+                <button aria-pressed={format === "nextjs"} type="button"
                   onClick={() => setFormat("nextjs")}
                   className={`rounded px-2.5 py-1 ${format === "nextjs" ? "bg-card font-semibold shadow-xs" : "text-muted-foreground"}`}
                 >
@@ -133,9 +134,9 @@ export function RedirectGenerator() {
                   setCopied(true);
                   setTimeout(() => setCopied(false), 2000);
                 }}
-                className="h-7 text-xs gap-1"
+                className="h-10 sm:h-7 text-xs gap-1"
               >
-                {copied ? <Check className="h-3 w-3 text-[#1f5f45]" /> : <Copy className="h-3 w-3" />}
+                {copied ? <Check className="h-3 w-3 text-deep-green" /> : <Copy className="h-3 w-3" />}
                 <span>{copied ? "Copied" : "Copy Rules"}</span>
               </Button>
             </div>

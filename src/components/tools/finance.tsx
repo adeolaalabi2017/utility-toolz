@@ -1,5 +1,6 @@
 "use client";
 
+import { currencySymbol } from "@/lib/format";
 import * as React from "react";
 import {
   CalcLayout,
@@ -221,10 +222,10 @@ export function LoanMortgageCalculator() {
             filename="loan-amortization-schedule"
             columns={[
               { header: "Payment #", key: "month" },
-              { header: "Payment Amount ($)", key: "payment" },
-              { header: "Principal ($)", key: "principal" },
-              { header: "Interest ($)", key: "interest" },
-              { header: "Remaining Balance ($)", key: "balance" },
+              { header: `Payment Amount (${currencySymbol()})`, key: "payment" },
+              { header: `Principal (${currencySymbol()})`, key: "principal" },
+              { header: `Interest (${currencySymbol()})`, key: "interest" },
+              { header: `Remaining Balance (${currencySymbol()})`, key: "balance" },
             ]}
             rows={scheduleRows}
             className="pt-2 border-t border-border/60"
@@ -419,7 +420,7 @@ export function IncomeTaxCalculator() {
 /* ================================================================== */
 
 export function VATCalculator() {
-  const [params, setParams, resetParams] = useToolState({
+  const [params, setParams] = useToolState({
     amount: "1,000",
     rate: "20",
     mode: "add",
@@ -434,12 +435,12 @@ export function VATCalculator() {
 
   return (
     <CalcLayout
-      actions={<ToolShareBar onReset={resetParams} />}
+      actions={<ToolShareBar />}
       inputs={
         <div className="space-y-4">
           <div className="grid grid-cols-2 gap-2">
             {(["add", "remove"] as const).map((m) => (
-              <button
+              <button aria-pressed={mode === m} type="button"
                 key={m}
                 onClick={() => setParams({ mode: m })}
                 className={`rounded-lg border px-3 py-2.5 text-sm font-medium transition-colors ${
@@ -466,7 +467,7 @@ export function VATCalculator() {
           />
           <div className="flex flex-wrap gap-2">
             {[5, 7.5, 10, 20, 21, 25].map((p) => (
-              <button
+              <button type="button"
                 key={p}
                 onClick={() => setParams({ rate: String(p) })}
                 className="rounded-full border px-3 py-1 text-xs font-medium hover:bg-accent"
@@ -757,10 +758,10 @@ export function DebtRepaymentCalculator() {
                 Debt {i + 1}
               </div>
               <div className="grid grid-cols-2 gap-2">
-                <NumberField label="" value={d.balance} onChange={(v) => setDebt(i, "balance", v)} prefix="$" />
-                <NumberField label="" value={d.apr} onChange={(v) => setDebt(i, "apr", v)} suffix="%" />
+                <NumberField ariaLabel={`Debt ${i + 1} balance`} value={d.balance} onChange={(v) => setDebt(i, "balance", v)} prefix="$" />
+                <NumberField ariaLabel={`Debt ${i + 1} APR`} value={d.apr} onChange={(v) => setDebt(i, "apr", v)} suffix="%" />
               </div>
-              <NumberField label="" value={d.min} onChange={(v) => setDebt(i, "min", v)} prefix="$" />
+              <NumberField ariaLabel={`Debt ${i + 1} minimum payment`} value={d.min} onChange={(v) => setDebt(i, "min", v)} prefix="$" />
             </FieldGrid>
           ))}
           <FieldGrid>

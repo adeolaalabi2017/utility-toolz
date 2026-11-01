@@ -23,13 +23,13 @@ export function CtorCalculator() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Mail className="h-4 w-4 text-[#a4502c]" /> Email Campaign Volume
+            <Mail className="h-4 w-4 text-deep-orange" /> Email Campaign Volume
           </span>
 
           <div className="space-y-3">
             <div>
-              <label className="text-xs font-medium text-foreground">Total Emails Delivered</label>
-              <input
+              <label htmlFor="ctor-calculator-1" className="text-xs font-medium text-foreground">Total Emails Delivered</label>
+              <input id="ctor-calculator-1"
                 type="number"
                 value={delivered}
                 onChange={(e) => setDelivered(Number(e.target.value) || 0)}
@@ -39,23 +39,23 @@ export function CtorCalculator() {
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Unique Opens</label>
-              <input
+              <label htmlFor="ctor-calculator-2" className="text-xs font-medium text-foreground">Unique Opens</label>
+              <input id="ctor-calculator-2"
                 type="number"
                 value={uniqueOpens}
                 onChange={(e) => setUniqueOpens(Number(e.target.value) || 0)}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-[#6b5faf] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-lf-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               <span className="text-[11px] text-muted-foreground mt-0.5 block">Unique subscribers who opened the email</span>
             </div>
 
             <div>
-              <label className="text-xs font-medium text-foreground">Unique Clicks</label>
-              <input
+              <label htmlFor="ctor-calculator-3" className="text-xs font-medium text-foreground">Unique Clicks</label>
+              <input id="ctor-calculator-3"
                 type="number"
                 value={uniqueClicks}
                 onChange={(e) => setUniqueClicks(Number(e.target.value) || 0)}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-[#1f5f45] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-deep-green focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               <span className="text-[11px] text-muted-foreground mt-0.5 block">Unique subscribers who clicked a link</span>
             </div>
@@ -71,7 +71,7 @@ export function CtorCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Click-to-Open Rate (CTOR)</span>
-              <p className="tnum font-display text-display-lg text-[#1f5f45] mt-1 font-bold">
+              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
                 {fmtPct(calc.ctor, 2)}
               </p>
               <span className="text-xs text-muted-foreground mt-1 block">
@@ -82,7 +82,7 @@ export function CtorCalculator() {
             <div className="grid grid-cols-2 gap-3 text-center">
               <div className="rounded-lg border border-border bg-background p-3">
                 <span className="text-[11px] text-muted-foreground block">Open Rate</span>
-                <span className="tnum font-display text-display-sm text-[#3f346f] font-bold">
+                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {fmtPct(calc.openRate, 2)}
                 </span>
               </div>
