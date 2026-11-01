@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { TOOLS, toolBySlug } from "@/lib/registry";
+import { TOOL_CONTENT } from "@/lib/registry/tool-content";
 import { ToolPage } from "@/components/pages/tool-page";
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://utilitytoolz.com";
@@ -59,7 +60,8 @@ export default async function ToolRoutePage({
   const { domain, tool: slug } = await params;
   const t = toolBySlug(slug);
 
-  if (!t || t.domain !== domain) {
+  const content = t && TOOL_CONTENT[t.slug];
+  if (!t || !content || t.domain !== domain) {
     notFound();
   }
 
@@ -84,7 +86,7 @@ export default async function ToolRoutePage({
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
-    mainEntity: t.faqs.map((f) => ({
+    mainEntity: content.faqs.map((f) => ({
       "@type": "Question",
       name: f.q,
       acceptedAnswer: {
@@ -104,7 +106,7 @@ export default async function ToolRoutePage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
-      <ToolPage toolSlug={slug} />
+      <ToolPage toolSlug={slug} content={content} />
     </>
   );
 }

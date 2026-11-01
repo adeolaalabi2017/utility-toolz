@@ -17,8 +17,9 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Lightbulb } from "lucide-react";
-import type { Tool } from "@/lib/registry/types";
+import type { Tool, ToolContent } from "@/lib/registry/types";
 import { domainBySlug, relatedTools, toolBySlug } from "@/lib/registry";
+import { TOOL_COMPONENTS } from "@/lib/registry/tool-components";
 import { ToolCard } from "@/components/site/tool-card";
 import { AdSlot } from "@/components/site/ad-slot";
 
@@ -31,15 +32,18 @@ import { AdSlot } from "@/components/site/ad-slot";
 export function ToolPage({
   tool: toolProp,
   toolSlug,
+  content,
 }: {
   tool?: Tool;
   toolSlug?: string;
+  content: ToolContent;
 }) {
   const tool = toolProp || (toolSlug ? toolBySlug(toolSlug) : undefined);
   if (!tool) return null;
   const domain = domainBySlug(tool.domain);
   const Icon = domain?.icon;
   const related = relatedTools(tool, 6);
+  const ToolWidget = TOOL_COMPONENTS[tool.slug];
 
   return (
     <article>
@@ -86,7 +90,7 @@ export function ToolPage({
 
         {/* Working tool above the fold */}
         <div className="mt-8">
-          <tool.component />
+          {ToolWidget && <ToolWidget />}
         </div>
 
         {/* Section 7.1: Ad placement strictly between result and explanation */}
@@ -100,7 +104,7 @@ export function ToolPage({
               : `How ${tool.name} works`}
           </h2>
           <div className="mt-5 space-y-4">
-            {tool.howItWorks.map((p, i) => (
+            {content.howItWorks.map((p, i) => (
               <p key={i} className="leading-relaxed text-foreground/85">
                 {p}
               </p>
@@ -114,7 +118,7 @@ export function ToolPage({
             <p className="flex items-center gap-2 text-sm font-semibold text-[#a4502c] dark:text-[#fb923c]">
               <Lightbulb className="h-4 w-4" /> Worked example
             </p>
-            <p className="mt-3 leading-relaxed text-foreground/85">{tool.example}</p>
+            <p className="mt-3 leading-relaxed text-foreground/85">{content.example}</p>
             <p className="mt-3 text-sm text-muted-foreground">
               The calculator above ships preloaded with these exact numbers — change them to run
               your own scenario.
@@ -130,7 +134,7 @@ export function ToolPage({
                 Frequently asked questions
               </h2>
               <Accordion type="single" collapsible className="mt-5">
-                {tool.faqs.map((f, i) => (
+                {content.faqs.map((f, i) => (
                   <AccordionItem key={i} value={`faq-${i}`}>
                     <AccordionTrigger className="text-left font-medium">{f.q}</AccordionTrigger>
                     <AccordionContent className="leading-relaxed text-foreground/85">

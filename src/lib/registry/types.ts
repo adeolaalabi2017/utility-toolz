@@ -1,4 +1,3 @@
-import type { ComponentType } from "react";
 import type { LucideIcon } from "lucide-react";
 
 export type DomainSlug =
@@ -42,12 +41,15 @@ export interface Tool {
   description: string;
   tags: string[];
   popular?: boolean;
+}
+
+/** Tool-page copy, stored separately from Tool so it only ships with its own page. */
+export interface ToolContent {
   /** 2-4 short paragraphs explaining the method */
   howItWorks: string[];
   /** Narrated worked example (the tool itself ships preloaded with the same values) */
   example: string;
   faqs: Faq[];
-  component: ComponentType;
 }
 
 export interface PlannedTool {
