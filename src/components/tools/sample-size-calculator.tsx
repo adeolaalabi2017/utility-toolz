@@ -46,8 +46,8 @@ export function SampleSizeCalculator() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <BarChart3 className="h-4 w-4 text-deep-orange" /> Statistical Confidence Parameters
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <BarChart3 className="h-4 w-4 text-deep-orange" /> Statistical confidence parameters
           </span>
 
           <div className="grid grid-cols-2 gap-4">
@@ -106,8 +106,8 @@ export function SampleSizeCalculator() {
 
         {/* Results Banner (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Recommended Sample
+          <span className="text-sm font-semibold text-muted-foreground">
+            Recommended sample
           </span>
 
           <div className="my-4 space-y-4">
@@ -122,13 +122,13 @@ export function SampleSizeCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Confidence Level</span>
                 <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {confidence}%
                 </span>
               </div>
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Critical Value (Z)</span>
                 <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {calc.z.toFixed(3)}
@@ -146,15 +146,15 @@ export function SampleSizeCalculator() {
 
       {/* Margin of error trade-off comparison */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Sample Size vs. Precision Trade-Off Table
+        <h4 className="text-sm font-semibold text-muted-foreground">
+          Sample size vs. precision trade-off table
         </h4>
         <div className="grid gap-3 sm:grid-cols-5 text-xs text-center">
           {calc.comparisons.map((c) => (
             <div
               key={c.err}
-              className={`rounded-lg border p-3 ${
-                c.err === marginOfError ? "border-deep-green bg-muted/50 font-bold" : "border-border bg-background"
+              className={`rounded-lg p-3 ${
+                c.err === marginOfError ? "bg-lf-green/15 font-bold" : "bg-muted/50"
               }`}
             >
               <span className="text-muted-foreground block">±{c.err}% Error</span>

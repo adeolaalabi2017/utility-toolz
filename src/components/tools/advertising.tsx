@@ -629,7 +629,7 @@ export function MediaPlanningCalculator() {
             <SectionLabel>Channel mix</SectionLabel>
             <div className="mt-3 space-y-4">
               {channels.map((ch, i) => (
-                <div key={ch.name} className="rounded-lg border bg-card p-3">
+                <div key={ch.name} className="rounded-lg bg-muted/50 p-3">
                   <p className="mb-2.5 text-sm font-semibold">{ch.name}</p>
                   <FieldGrid cols={3}>
                     <NumberField label="Share" value={ch.share} onChange={(v) => setChannel(i, { share: v })} suffix="%" />

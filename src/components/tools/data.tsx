@@ -41,7 +41,7 @@ export function PercentageChangeCalculator() {
       results={
         <div className="space-y-4">
           <div className="rounded-lg bg-ink px-4 py-5 text-white">
-            <p className="text-xs font-medium uppercase tracking-wider text-white/60">
+            <p className="text-sm font-medium text-white/60">
               {diff >= 0 ? "Increase" : diff < 0 ? "Decrease" : "Change"}
             </p>
             <p className="tnum mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
@@ -514,7 +514,7 @@ export function AverageCalculator() {
       results={
         <div className="space-y-4">
           <div className="rounded-lg bg-ink px-4 py-5 text-white">
-            <p className="text-xs font-medium uppercase tracking-wider text-white/60">Average (mean)</p>
+            <p className="text-sm font-medium text-white/60">Average (mean)</p>
             <p className="tnum mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{fmtNum(mean, 2)}</p>
             <p className="mt-1.5 text-sm text-white/70">{nums.length} values summed to {fmtNum(sum, 2)}</p>
           </div>
@@ -583,7 +583,7 @@ export function StandardDeviationCalculator() {
       results={
         <div className="space-y-4">
           <div className="rounded-lg bg-ink px-4 py-5 text-white">
-            <p className="text-xs font-medium uppercase tracking-wider text-white/60">
+            <p className="text-sm font-medium text-white/60">
               Standard deviation
             </p>
             <p className="tnum mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{fmtNum(sd, 4)}</p>

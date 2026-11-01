@@ -49,7 +49,7 @@ export function CalcLayout({
               aria-label="Inputs"
               className="rounded-xl border bg-card p-4 shadow-lark-sm sm:p-5"
             >
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <p className="mb-4 text-sm font-semibold text-muted-foreground">
                 Inputs
               </p>
               {inputs}
@@ -60,13 +60,13 @@ export function CalcLayout({
               aria-label="Results"
               className="relative rounded-xl border bg-card p-4 shadow-lark-sm h-full sm:p-5"
             >
-              <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <p className="mb-4 text-sm font-semibold text-muted-foreground">
                 Results
               </p>
               {hasInvalid ? (
                 <div
                   role="status"
-                  className="rounded-lg border border-dashed border-lf-coral/40 bg-lf-coral/10 px-4 py-6 text-sm leading-relaxed text-deep-coral"
+                  className="rounded-lg bg-lf-coral/10 px-4 py-6 text-sm leading-relaxed text-deep-coral"
                 >
                   Results are paused until every highlighted field holds a valid number.
                 </div>
@@ -267,7 +267,7 @@ export function FieldGrid({ children, cols = 2 }: { children: React.ReactNode; c
 
 export function SectionLabel({ children }: { children: React.ReactNode }) {
   return (
-    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pt-1">
+    <p className="text-sm font-semibold text-muted-foreground pt-1">
       {children}
     </p>
   );
@@ -295,7 +295,7 @@ export function ResultHero({
       aria-live="polite"
       aria-atomic="true"
     >
-      <p className="text-xs font-medium uppercase tracking-wider text-[#fef5de]/75">{label}</p>
+      <p className="text-sm font-medium text-[#fef5de]/75">{label}</p>
       <p className="tnum mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{value}</p>
       {sub && <p className="mt-1.5 text-sm text-[#fef5de]/80">{sub}</p>}
     </div>
@@ -331,13 +331,13 @@ export function Verdict({
   children: React.ReactNode;
 }) {
   const styles = {
-    good: "bg-lf-green/10 text-deep-green border-lf-green/30",
-    warn: "bg-lf-orange/10 text-deep-orange border-lf-orange/30",
-    bad: "bg-lf-coral/10 text-deep-coral border-lf-coral/30",
-    neutral: "bg-muted text-foreground border-border",
+    good: "bg-lf-green/10 text-deep-green",
+    warn: "bg-lf-orange/10 text-deep-orange",
+    bad: "bg-lf-coral/10 text-deep-coral",
+    neutral: "bg-muted text-foreground",
   } as const;
   return (
-    <div className={cn("rounded-lg border px-3.5 py-3 text-sm leading-relaxed", styles[tone])}>
+    <div className={cn("rounded-lg px-3.5 py-3 text-sm leading-relaxed", styles[tone])}>
       {children}
     </div>
   );
@@ -577,7 +577,7 @@ export function OutputPanel({
         role="region"
         aria-label={ariaLabel ?? "Generated output"}
         className={cn(
-          "overflow-auto rounded-lg border bg-ink p-4 font-mono text-[12.5px] leading-relaxed text-white/90",
+          "overflow-auto rounded-lg bg-ink p-4 font-mono text-[12.5px] leading-relaxed text-white/90",
           maxHeight
         )}
       >

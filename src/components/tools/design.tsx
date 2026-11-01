@@ -572,7 +572,7 @@ export function ColourPaletteGenerator() {
             </div>
             {!valid && <p className="text-xs text-deep-coral">Using #308f68 until the hex is valid.</p>}
           </div>
-          <div className="flex items-center gap-3 rounded-lg border bg-card p-3">
+          <div className="flex items-center gap-3 rounded-lg bg-muted/50 p-3">
             <span className="h-12 w-12 rounded-md border" style={{ background: base }} aria-hidden />
             <div>
               <p className="font-mono text-sm font-semibold">{base}</p>
@@ -763,7 +763,7 @@ export function AspectRatioCalculator() {
       results={
         <div className="space-y-4">
           <div className="rounded-lg bg-ink px-4 py-5 text-white">
-            <p className="text-xs font-medium uppercase tracking-wider text-white/60">Aspect ratio</p>
+            <p className="text-sm font-medium text-white/60">Aspect ratio</p>
             <p className="tnum mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
               {rw}:{rh}
             </p>

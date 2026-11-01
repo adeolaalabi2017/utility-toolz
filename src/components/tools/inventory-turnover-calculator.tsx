@@ -30,8 +30,8 @@ export function InventoryTurnoverCalculator() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Package className="h-4 w-4 text-deep-orange" /> Annual Inventory Data
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Package className="h-4 w-4 text-deep-orange" /> Annual inventory data
           </span>
 
           <div className="grid grid-cols-2 gap-4">
@@ -85,8 +85,8 @@ export function InventoryTurnoverCalculator() {
 
         {/* Results Banner (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Inventory Velocity
+          <span className="text-sm font-semibold text-muted-foreground">
+            Inventory velocity
           </span>
 
           <div className="my-4 space-y-4">
@@ -101,13 +101,13 @@ export function InventoryTurnoverCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Days to Sell (DSI)</span>
                 <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {Math.round(calc.dsi)} days
                 </span>
               </div>
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Holding Cost / Year</span>
                 <span className="tnum font-display text-display-sm text-deep-coral font-bold">
                   {fmtUSD(calc.annualHoldingCost, 0)}

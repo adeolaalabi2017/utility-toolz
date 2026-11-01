@@ -106,7 +106,7 @@ export function PinnedToolsBar() {
     <section aria-labelledby="pinned-title" className="mb-6 rounded-xl border border-border bg-card p-4 shadow-lark-sm">
       <div className="mb-3 flex items-center gap-2">
         <Star className="h-4 w-4 fill-lf-orange text-lf-orange" aria-hidden />
-        <h2 id="pinned-title" className="font-sans text-xs font-semibold uppercase tracking-wider text-foreground/80">
+        <h2 id="pinned-title" className="font-sans text-sm font-semibold text-foreground/80">
           Starred tools ({validTools.length})
         </h2>
       </div>

@@ -102,7 +102,7 @@ export function PomodoroTimer() {
               hint="Short break: 5 min"
             />
           </FieldGrid>
-          <div className="rounded-lg border bg-card p-4 text-sm leading-relaxed text-muted-foreground">
+          <div className="rounded-lg bg-muted/50 p-4 text-sm leading-relaxed text-muted-foreground">
             <p className="font-medium text-foreground">The cycle</p>
             <p className="mt-1">
               One <strong>pomodoro</strong> = {focusMin} min of single-task focus + {breakMin} min break.
@@ -567,8 +567,8 @@ export function TimeZoneConverter() {
               {rows.map((r) => (
                 <div
                   key={r.id}
-                  className={`flex items-center justify-between gap-3 rounded-lg border px-3 py-2 ${
-                    r.isSource ? "border-primary/40 bg-secondary/50" : "bg-card"
+                  className={`flex items-center justify-between gap-3 rounded-lg px-3 py-2 ${
+                    r.isSource ? "bg-secondary/60 ring-1 ring-primary/40" : "bg-muted/50"
                   }`}
                 >
                   <div className="min-w-0">

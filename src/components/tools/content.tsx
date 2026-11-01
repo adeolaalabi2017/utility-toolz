@@ -49,7 +49,7 @@ export function WordCounter() {
     <div className="grid gap-5 lg:grid-cols-5">
       <div className="lg:col-span-3">
         <div className="rounded-xl border bg-muted/40 p-4 sm:p-5">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="mb-4 text-sm font-semibold text-muted-foreground">
             Input text
           </p>
           <TextAreaField
@@ -63,7 +63,7 @@ export function WordCounter() {
       </div>
       <div className="lg:col-span-2">
         <div className="rounded-xl border bg-card p-4 shadow-sm sm:p-5">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="mb-4 text-sm font-semibold text-muted-foreground">
             Live counts
           </p>
           <p className="tnum text-4xl font-bold tracking-tight">{s.words.toLocaleString()}</p>
@@ -81,7 +81,7 @@ export function WordCounter() {
           </div>
           {topWords.length > 0 && (
             <div className="mt-4">
-              <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+              <p className="mb-2 text-sm font-semibold text-muted-foreground">
                 Most used words
               </p>
               <MiniTable head={["Word", "Uses"]} rows={topWords.map(([w, c]) => [w, c])} />
@@ -114,7 +114,7 @@ export function CharacterCounter() {
     <div className="grid gap-5 lg:grid-cols-5">
       <div className="lg:col-span-3">
         <div className="rounded-xl border bg-muted/40 p-4 sm:p-5">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="mb-4 text-sm font-semibold text-muted-foreground">
             Input text
           </p>
           <TextAreaField ariaLabel="Text to analyse" value={text} onChange={setText} rows={10} placeholder="Paste your post, title or caption…" />
@@ -126,7 +126,7 @@ export function CharacterCounter() {
       </div>
       <div className="lg:col-span-2">
         <div className="rounded-xl border bg-card p-4 shadow-sm sm:p-5">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="mb-4 text-sm font-semibold text-muted-foreground">
             Platform limits
           </p>
           <div className="space-y-3.5">
@@ -283,7 +283,7 @@ export function TextCaseConverter() {
     <div className="grid gap-5 lg:grid-cols-5">
       <div className="lg:col-span-3">
         <div className="rounded-xl border bg-muted/40 p-4 sm:p-5">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="mb-4 text-sm font-semibold text-muted-foreground">
             Input text
           </p>
           <TextAreaField ariaLabel="Text to analyse" value={text} onChange={setText} rows={6} />
@@ -291,9 +291,9 @@ export function TextCaseConverter() {
       </div>
       <div className="lg:col-span-2 space-y-3">
         {cases.map((c) => (
-          <div key={c.label} className="rounded-lg border bg-card p-3">
+          <div key={c.label} className="rounded-lg bg-muted/50 p-3">
             <div className="flex items-center justify-between gap-2">
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">{c.label}</p>
+              <p className="text-sm font-semibold text-muted-foreground">{c.label}</p>
               <CopyButton text={c.value} size="xs" label="Copy" />
             </div>
             <p className="mt-1 break-words font-mono text-sm">{c.value || "—"}</p>
@@ -394,7 +394,7 @@ export function LoremIpsumGenerator() {
       results={
         <div className="space-y-3">
           <div className="flex items-center justify-between">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <p className="text-sm font-semibold text-muted-foreground">
               Placeholder text
             </p>
             <CopyButton text={output} />
@@ -402,7 +402,7 @@ export function LoremIpsumGenerator() {
           <div
             role="region"
             aria-label="Generated lorem ipsum"
-            className="max-h-80 overflow-auto rounded-lg border bg-card p-4 text-sm leading-relaxed whitespace-pre-wrap"
+            className="max-h-80 overflow-auto rounded-lg bg-muted/50 p-4 text-sm leading-relaxed whitespace-pre-wrap"
           >
             {output}
           </div>

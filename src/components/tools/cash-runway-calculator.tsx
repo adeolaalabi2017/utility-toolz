@@ -71,8 +71,8 @@ export function CashRunwayCalculator() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Landmark className="h-4 w-4 text-deep-orange" /> Cash & Burn Parameters
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Landmark className="h-4 w-4 text-deep-orange" /> Cash & burn parameters
           </span>
 
           <div className="grid grid-cols-2 gap-4">
@@ -136,8 +136,8 @@ export function CashRunwayCalculator() {
 
         {/* Results Banner (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Estimated Runway
+          <span className="text-sm font-semibold text-muted-foreground">
+            Estimated runway
           </span>
 
           <div className="my-4 space-y-4">
@@ -154,13 +154,13 @@ export function CashRunwayCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Net Monthly Burn</span>
                 <span className="tnum font-display text-display-sm text-deep-coral font-bold">
                   {fmtUSD(calc.initialNetBurn, 0)}
                 </span>
               </div>
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Static Runway</span>
                 <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {calc.staticRunwayMonths.toFixed(1)} mo
@@ -181,8 +181,8 @@ export function CashRunwayCalculator() {
       {/* Projection Table */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Projected Monthly Cash Trajectory
+          <h4 className="text-sm font-semibold text-muted-foreground">
+            Projected monthly cash trajectory
           </h4>
           <ExportToolbar
             filename="cash-runway-trajectory"

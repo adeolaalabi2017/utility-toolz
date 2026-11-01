@@ -260,7 +260,7 @@ export function RegexTester() {
               <div
                 role="region"
                 aria-label="Highlighted matches"
-                className="max-h-40 overflow-auto rounded-lg border bg-muted/40 p-3 font-mono text-[13px] leading-relaxed whitespace-pre-wrap break-words"
+                className="max-h-40 overflow-auto rounded-lg bg-muted/50 p-3 font-mono text-[13px] leading-relaxed whitespace-pre-wrap break-words"
               >
                 {result.parts.map((p, i) =>
                   p.hit ? (
@@ -274,12 +274,12 @@ export function RegexTester() {
               </div>
               {result.matches.length > 0 && (
                 <div>
-                  <p className="mb-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  <p className="mb-2 text-sm font-semibold text-muted-foreground">
                     Matches
                   </p>
                   <div className="max-h-56 space-y-1.5 overflow-auto">
                     {result.matches.map((m, i) => (
-                      <div key={i} className="rounded-lg border bg-card p-2.5 text-sm">
+                      <div key={i} className="rounded-lg bg-muted/50 p-2.5 text-sm">
                         <div className="flex items-baseline justify-between gap-3">
                           <span className="truncate font-mono text-[13px] font-semibold">{m.text}</span>
                           <span className="tnum shrink-0 text-xs text-muted-foreground">@ {m.index}</span>
@@ -558,14 +558,14 @@ export function UuidGenerator() {
             onChange={setCount}
             options={["1", "5", "10", "25", "50"].map((n) => ({ value: n, label: n }))}
           />
-          <div className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
+          <div className="flex items-center justify-between rounded-lg bg-muted/50 px-4 py-3">
             <div>
               <p className="text-sm font-medium">Uppercase</p>
               <p className="text-xs text-muted-foreground">A-F instead of a-f</p>
             </div>
             <Switch checked={uppercase} onCheckedChange={setUppercase} aria-label="Toggle uppercase" />
           </div>
-          <div className="flex items-center justify-between rounded-lg border bg-card px-4 py-3">
+          <div className="flex items-center justify-between rounded-lg bg-muted/50 px-4 py-3">
             <div>
               <p className="text-sm font-medium">Compact format</p>
               <p className="text-xs text-muted-foreground">Omit hyphens (32 hex characters)</p>

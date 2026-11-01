@@ -185,8 +185,8 @@ export function DiffChecker() {
           <div className="grid gap-3 sm:grid-cols-2">
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <Label htmlFor="diff-checker-1" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Original Text
+                <Label htmlFor="diff-checker-1" className="text-sm font-semibold text-muted-foreground">
+                  Original text
                 </Label>
                 <span className="text-[11px] text-muted-foreground">
                   {original.split("\n").length} lines
@@ -203,8 +203,8 @@ export function DiffChecker() {
 
             <div className="space-y-1.5">
               <div className="flex items-center justify-between">
-                <Label htmlFor="diff-checker-2" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Modified Text
+                <Label htmlFor="diff-checker-2" className="text-sm font-semibold text-muted-foreground">
+                  Modified text
                 </Label>
                 <span className="text-[11px] text-muted-foreground">
                   {modified.split("\n").length} lines
@@ -223,15 +223,15 @@ export function DiffChecker() {
           {/* Visual Diff Output */}
           <div className="space-y-2 pt-2">
             <div className="flex items-center justify-between">
-              <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Unified Diff View
+              <p className="text-sm font-semibold text-muted-foreground">
+                Unified diff view
               </p>
               <Button variant="outline" size="sm" onClick={copyDiff} className="h-10 sm:h-7 text-xs gap-1">
                 <Copy className="h-3 w-3" /> Copy Diff
               </Button>
             </div>
 
-            <div className="max-h-80 overflow-auto rounded-lg border border-border bg-muted/50 p-2 font-mono text-xs leading-5">
+            <div className="max-h-80 overflow-auto rounded-lg bg-muted/50 p-2 font-mono text-xs leading-5">
               {diff.length === 0 ? (
                 <div className="p-6 text-center">
                   <p className="font-medium text-foreground">No text to compare yet</p>
@@ -304,9 +304,9 @@ export function DiffChecker() {
                 }.`}
           </Verdict>
 
-          <div className="space-y-2 rounded-lg border border-border/70 p-3.5 bg-card/50">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Comparison Statistics
+          <div className="space-y-2 rounded-lg bg-muted/50 p-3.5">
+            <p className="text-sm font-semibold text-muted-foreground">
+              Comparison statistics
             </p>
             <div className="space-y-1.5 text-xs">
               <StatRow label="Lines added" value={`+${additions}`} />

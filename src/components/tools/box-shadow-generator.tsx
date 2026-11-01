@@ -88,7 +88,7 @@ export function BoxShadowGenerator() {
         <div className="space-y-5 lg:col-span-7">
           {/* Presets */}
           <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
+            <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
               <Sparkles className="h-3.5 w-3.5 text-deep-orange" /> Presets
             </span>
             <div className="mt-2.5 flex flex-wrap gap-2">
@@ -112,8 +112,8 @@ export function BoxShadowGenerator() {
             <div className="flex items-center justify-between border-b border-border/60 pb-3">
               <div className="flex items-center gap-2">
                 <Layers className="h-4 w-4 text-lf-purple" />
-                <span className="text-xs font-semibold uppercase tracking-wider text-foreground">
-                  Shadow Layers ({layers.length})
+                <span className="text-sm font-semibold text-foreground">
+                  Shadow layers ({layers.length})
                 </span>
               </div>
               <div className="flex gap-1.5">
@@ -242,8 +242,8 @@ export function BoxShadowGenerator() {
         <div className="space-y-4 lg:col-span-5">
           <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col h-full">
             <div className="flex items-center justify-between pb-3">
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Live Preview
+              <span className="text-sm font-semibold text-muted-foreground">
+                Live preview
               </span>
               <div className="flex rounded-md bg-muted/60 p-0.5 text-[11px] font-medium">
                 <button aria-pressed={previewBg === "cream"} type="button"
@@ -297,7 +297,7 @@ export function BoxShadowGenerator() {
       <div className="grid gap-4 sm:grid-cols-2">
         <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
           <div className="flex items-center justify-between pb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <span className="text-sm font-semibold text-muted-foreground">
               CSS `box-shadow`
             </span>
             <Button
@@ -317,8 +317,8 @@ export function BoxShadowGenerator() {
 
         <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
           <div className="flex items-center justify-between pb-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Tailwind Arbitrary Class
+            <span className="text-sm font-semibold text-muted-foreground">
+              Tailwind arbitrary class
             </span>
             <Button
               variant="outline"

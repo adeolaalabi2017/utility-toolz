@@ -67,8 +67,8 @@ export function FaviconGenerator() {
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Controls */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Icon Design & Generator
+          <span className="text-sm font-semibold text-muted-foreground">
+            Icon design & generator
           </span>
 
           <div className="grid grid-cols-2 gap-4">
@@ -153,8 +153,8 @@ export function FaviconGenerator() {
         {/* Browser Tab Simulator */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between">
           <div>
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5 pb-3">
-              <Monitor className="h-4 w-4 text-deep-green" /> Browser Tab Mockup
+            <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5 pb-3">
+              <Monitor className="h-4 w-4 text-deep-green" /> Browser tab mockup
             </span>
 
             {/* Simulated Chrome Browser Header */}
@@ -201,13 +201,13 @@ export function FaviconGenerator() {
 
       {/* Export Sizes Grid */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
-        <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Download Platform Favicons (PNG)
+        <span className="text-sm font-semibold text-muted-foreground">
+          Download platform favicons (PNG)
         </span>
 
         <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
           {SIZES.map((s) => (
-            <div key={s.name} className="flex items-center justify-between rounded-lg border border-border bg-muted/50 p-3 text-xs">
+            <div key={s.name} className="flex items-center justify-between rounded-lg bg-muted/50 p-3 text-xs">
               <div>
                 <span className="font-semibold text-foreground block">{s.label}</span>
                 <span className="text-[11px] text-muted-foreground">{s.desc}</span>

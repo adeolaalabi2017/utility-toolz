@@ -71,8 +71,8 @@ export function SigFigCalculator() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Input (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Binary className="h-4 w-4 text-deep-orange" /> Number & Precision
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Binary className="h-4 w-4 text-deep-orange" /> Number & precision
           </span>
 
           <div className="space-y-4">
@@ -109,8 +109,8 @@ export function SigFigCalculator() {
 
         {/* Results Banner (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Significant Figures Analysis
+          <span className="text-sm font-semibold text-muted-foreground">
+            Significant figures analysis
           </span>
 
           {stats ? (
@@ -126,7 +126,7 @@ export function SigFigCalculator() {
                 </span>
               </div>
 
-              <div className="rounded-lg border border-border bg-background p-3 text-center">
+              <div className="rounded-lg bg-muted/50 p-3 text-center">
                 <span className="text-[11px] text-muted-foreground block">
                   Rounded to {targetSigFigs} Sig Figs
                 </span>

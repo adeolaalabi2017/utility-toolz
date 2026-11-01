@@ -53,8 +53,8 @@ export function ClampCalculator() {
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Inputs */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Viewport & Size Thresholds (px)
+          <span className="text-sm font-semibold text-muted-foreground">
+            Viewport & size thresholds (px)
           </span>
 
           <div className="grid grid-cols-2 gap-4">
@@ -112,8 +112,8 @@ export function ClampCalculator() {
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3">
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Simulated Screen Width
+              <span className="text-sm font-semibold text-muted-foreground">
+                Simulated screen width
               </span>
               <span className="font-mono text-xs font-bold text-deep-green">
                 {testViewport}px width → {currentCalculatedSize.toFixed(1)}px font size
@@ -136,7 +136,7 @@ export function ClampCalculator() {
           </div>
 
           {/* Sample Typography Box */}
-          <div className="my-4 rounded-lg border border-border bg-muted/60 p-5 flex items-center justify-center min-h-[140px] overflow-hidden text-center">
+          <div className="my-4 rounded-lg bg-muted/60 p-5 flex items-center justify-center min-h-[140px] overflow-hidden text-center">
             <span
               style={{ fontSize: `${currentCalculatedSize}px`, lineHeight: 1.2 }}
               className="font-display font-semibold text-foreground transition-all duration-75"
@@ -156,8 +156,8 @@ export function ClampCalculator() {
         <div className="grid gap-4 sm:grid-cols-2">
           <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
             <div className="flex items-center justify-between pb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                CSS `clamp()` Formula
+              <span className="text-sm font-semibold text-muted-foreground">
+                CSS `clamp()` formula
               </span>
               <Button
                 variant="outline"
@@ -176,8 +176,8 @@ export function ClampCalculator() {
 
           <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
             <div className="flex items-center justify-between pb-2">
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Tailwind CSS Class
+              <span className="text-sm font-semibold text-muted-foreground">
+                Tailwind CSS class
               </span>
               <Button
                 variant="outline"

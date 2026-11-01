@@ -53,8 +53,8 @@ export function UtmBuilder() {
       {/* Top Generated URL Banner */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
         <div className="flex items-center justify-between">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Link2 className="h-4 w-4 text-deep-orange" /> Generated Campaign Tracking URL
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Link2 className="h-4 w-4 text-deep-orange" /> Generated campaign tracking URL
           </span>
           <Button
             onClick={copyUrl}
@@ -160,8 +160,8 @@ export function UtmBuilder() {
 
         {/* Quick Channel Presets (4 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3 lg:col-span-4">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Sparkles className="h-4 w-4 text-deep-orange" /> Channel Presets
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Sparkles className="h-4 w-4 text-deep-orange" /> Channel presets
           </span>
           <p className="text-xs text-muted-foreground">
             Apply standardized naming conventions to avoid analytics fragmentation.

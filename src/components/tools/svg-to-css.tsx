@@ -71,8 +71,8 @@ export function SvgToCss() {
         {/* Input */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Sparkles className="h-4 w-4 text-deep-orange" /> Paste SVG Code
+            <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+              <Sparkles className="h-4 w-4 text-deep-orange" /> Paste SVG code
             </span>
             <Button
               variant="outline"
@@ -99,13 +99,13 @@ export function SvgToCss() {
 
         {/* Live Preview */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pb-3">
-            Rendered Preview
+          <span className="text-sm font-semibold text-muted-foreground pb-3">
+            Rendered preview
           </span>
-          <div className="flex-1 rounded-lg border border-dashed border-border bg-muted/60 p-6 flex flex-col items-center justify-center min-h-[200px]">
+          <div className="flex-1 rounded-lg bg-muted/60 p-6 flex flex-col items-center justify-center min-h-[200px]">
             {cleanSvg.includes("<svg") ? (
               // Rendered as an <img> so scripts and event handlers in pasted SVG never run.
-              <div className="h-24 w-24 flex items-center justify-center p-2 rounded-lg bg-card border border-border shadow-lark-sm">
+              <div className="h-24 w-24 flex items-center justify-center p-2 rounded-lg bg-card">
                 <img src={previewUri} alt="SVG preview" className="max-h-full max-w-full" />
               </div>
             ) : (

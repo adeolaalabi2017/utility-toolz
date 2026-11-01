@@ -157,8 +157,8 @@ export function CronBuilder() {
       <div className="rounded-xl border border-border bg-card p-6 shadow-lark-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex-1">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Cron Expression (5 fields)
+            <span className="text-sm font-semibold text-muted-foreground">
+              Cron expression (5 fields)
             </span>
             <div className="mt-2 flex items-center gap-3">
               <input
@@ -226,8 +226,8 @@ export function CronBuilder() {
 
       {/* Next scheduled runs */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-          <Calendar className="h-4 w-4 text-deep-green" /> Next 5 Scheduled Executions
+        <h4 className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+          <Calendar className="h-4 w-4 text-deep-green" /> Next 5 scheduled executions
         </h4>
         <div className="mt-4 divide-y divide-border/60">
           {nextRuns.length > 0 ? (

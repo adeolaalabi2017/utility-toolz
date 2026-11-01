@@ -32,7 +32,7 @@ export function Footer() {
 
           {/* Domains */}
           <nav aria-label="Domains">
-            <p className="text-xs font-semibold uppercase tracking-wider text-foreground/75 dark:text-foreground/85">Domains</p>
+            <p className="text-sm font-semibold text-foreground/75 dark:text-foreground/85">Domains</p>
             <ul className="mt-3 space-y-2">
               {DOMAINS.map((d) => (
                 <li key={d.slug}>
@@ -45,7 +45,7 @@ export function Footer() {
                   >
                     {d.shortName}
                     {d.status === "planned" && (
-                      <span className="ml-2 text-[10px] uppercase tracking-wide text-foreground/50">
+                      <span className="ml-2 text-xs text-foreground/50">
                         Phase {d.phase}
                       </span>
                     )}
@@ -57,7 +57,7 @@ export function Footer() {
 
           {/* Professions */}
           <nav aria-label="Professions">
-            <p className="text-xs font-semibold uppercase tracking-wider text-foreground/75 dark:text-foreground/85">
+            <p className="text-sm font-semibold text-foreground/75 dark:text-foreground/85">
               For your profession
             </p>
             <ul className="mt-3 space-y-2">
@@ -76,7 +76,7 @@ export function Footer() {
 
           {/* About */}
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-foreground/75 dark:text-foreground/85">
+            <p className="text-sm font-semibold text-foreground/75 dark:text-foreground/85">
               The platform
             </p>
             <ul className="mt-3 space-y-2 text-sm text-foreground/80 dark:text-foreground/85">

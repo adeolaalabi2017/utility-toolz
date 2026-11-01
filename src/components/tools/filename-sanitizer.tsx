@@ -63,8 +63,8 @@ export function FilenameSanitizer() {
     <div className="space-y-6">
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
         <div className="flex items-center justify-between">
-          <span id="filename-sanitizer-heading-1" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <FileCheck className="h-4 w-4 text-deep-orange" /> Original String or Filename
+          <span id="filename-sanitizer-heading-1" className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <FileCheck className="h-4 w-4 text-deep-orange" /> Original string or filename
           </span>
           <Button
             variant="outline"

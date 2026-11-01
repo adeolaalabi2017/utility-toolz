@@ -47,8 +47,8 @@ export function FreelanceRateCalculator() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Briefcase className="h-4 w-4 text-deep-orange" /> Income, Tax & Working Capacity
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Briefcase className="h-4 w-4 text-deep-orange" /> Income, tax & working capacity
           </span>
 
           <div className="grid grid-cols-2 gap-4">
@@ -130,8 +130,8 @@ export function FreelanceRateCalculator() {
 
         {/* Primary Rate Results (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Target Billing Rates
+          <span className="text-sm font-semibold text-muted-foreground">
+            Target billing rates
           </span>
 
           <div className="my-4 space-y-4">
@@ -147,13 +147,13 @@ export function FreelanceRateCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Day Rate</span>
                 <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {fmtUSD(calc.dayRate, 0)}
                 </span>
               </div>
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Monthly Invoice Target</span>
                 <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {fmtUSD(calc.monthlyTarget, 0)}
@@ -171,8 +171,8 @@ export function FreelanceRateCalculator() {
 
       {/* Revenue Waterfall Breakdown */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pb-3">
-          Annual Revenue Allocation Breakdown
+        <h4 className="text-sm font-semibold text-muted-foreground pb-3">
+          Annual revenue allocation breakdown
         </h4>
         <div className="grid gap-3 sm:grid-cols-4 text-xs">
           <div className="rounded-lg bg-muted/50 p-3">

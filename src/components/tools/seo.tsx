@@ -67,11 +67,11 @@ export function MetaTitleGenerator() {
       }
       results={
         <div className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="text-sm font-semibold text-muted-foreground">
             Six title options
           </p>
           {titles.map((t) => (
-            <div key={t} className="rounded-lg border bg-card p-3">
+            <div key={t} className="rounded-lg bg-muted/50 p-3">
               <div className="flex items-start justify-between gap-3">
                 <p className="text-sm font-medium leading-snug">{t}</p>
                 <LengthPill value={t.length} min={30} max={60} />
@@ -137,11 +137,11 @@ export function MetaDescriptionGenerator() {
       }
       results={
         <div className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="text-sm font-semibold text-muted-foreground">
             Four description variants
           </p>
           {variants.map((v) => (
-            <div key={v} className="rounded-lg border bg-card p-3">
+            <div key={v} className="rounded-lg bg-muted/50 p-3">
               <p className="text-sm leading-relaxed">{v}</p>
               <div className="mt-2 flex items-center justify-between gap-2">
                 <LengthPill value={v.length} min={120} max={158} />
@@ -213,7 +213,7 @@ export function SerpSnippetPreview() {
       }
       results={
         <div className="space-y-4">
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="text-sm font-semibold text-muted-foreground">
             Desktop result preview
           </p>
           <div className="rounded-xl border bg-white p-4 shadow-sm">
@@ -309,7 +309,7 @@ export function KeywordDensityChecker() {
     <div className="grid gap-5 lg:grid-cols-5">
       <div className="lg:col-span-3">
         <div className="rounded-xl border bg-muted/40 p-4 sm:p-5">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="mb-4 text-sm font-semibold text-muted-foreground">
             Paste your content
           </p>
           <TextAreaField
@@ -333,11 +333,11 @@ export function KeywordDensityChecker() {
       </div>
       <div className="lg:col-span-2">
         <div className="rounded-xl border bg-card p-4 shadow-sm sm:p-5">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="mb-4 text-sm font-semibold text-muted-foreground">
             Density report
           </p>
           <p className="tnum text-2xl font-bold">{words.toLocaleString()} words</p>
-          <p className="mt-4 space-y-0 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="mt-4 space-y-0 text-sm font-semibold text-muted-foreground">
             Top phrases
           </p>
           {words === 0 ? (
@@ -634,11 +634,11 @@ export function UrlSlugGenerator() {
       }
       results={
         <div className="space-y-3">
-          <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="text-sm font-semibold text-muted-foreground">
             Slugs
           </p>
           {slugs.map((s, i) => (
-            <div key={i} className="rounded-lg border bg-card p-3">
+            <div key={i} className="rounded-lg bg-muted/50 p-3">
               <p className="break-all font-mono text-sm">{s || "—"}</p>
               <div className="mt-2 flex items-center gap-2">
                 <CopyButton text={s} size="xs" label="Copy slug" />
@@ -812,9 +812,9 @@ export function SchemaMarkupGenerator() {
           {type === "FAQPage" && (
             <div className="space-y-3">
               {faqs.map((f, i) => (
-                <div key={i} className="rounded-lg border bg-card p-3">
+                <div key={i} className="rounded-lg bg-muted/50 p-3">
                   <div className="mb-2 flex items-center justify-between">
-                    <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    <p className="text-sm font-semibold text-muted-foreground">
                       Question {i + 1}
                     </p>
                     {faqs.length > 1 && (

@@ -53,8 +53,8 @@ export function HreflangGenerator() {
     <div className="space-y-6">
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
         <div className="flex items-center justify-between border-b border-border/60 pb-3">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Globe className="h-4 w-4 text-deep-green" /> Regional URL Variants
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Globe className="h-4 w-4 text-deep-green" /> Regional URL variants
           </span>
           <Button onClick={addRow} variant="outline" size="sm" className="h-10 sm:h-7 text-xs gap-1">
             <Plus className="h-3.5 w-3.5" />
@@ -64,7 +64,7 @@ export function HreflangGenerator() {
 
         <div className="space-y-3">
           {rows.map((r, idx) => (
-            <div key={r.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-2 rounded-lg border border-border bg-background p-2.5 text-xs">
+            <div key={r.id} className="flex flex-col sm:flex-row items-start sm:items-center gap-2 rounded-lg bg-muted/50 p-2.5 text-xs">
               <div className="w-28 shrink-0">
                 <input
                   type="text"

@@ -29,8 +29,8 @@ export function SocialSharePreview() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (6 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-6">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Share2 className="h-4 w-4 text-deep-orange" /> Open Graph & Twitter Card Metadata
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Share2 className="h-4 w-4 text-deep-orange" /> Open Graph & Twitter card metadata
           </span>
 
           <div className="space-y-3">
@@ -85,8 +85,8 @@ export function SocialSharePreview() {
         {/* Live Card Preview (6 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-6">
           <div className="flex items-center justify-between pb-3">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Social Platform Mockup
+            <span className="text-sm font-semibold text-muted-foreground">
+              Social platform mockup
             </span>
             <div className="flex rounded-md bg-muted/60 p-0.5 text-xs font-medium">
               <button aria-pressed={platform === "twitter"} type="button"

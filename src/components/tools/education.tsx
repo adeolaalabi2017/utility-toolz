@@ -80,8 +80,8 @@ export function GpaCalculator() {
       inputs={
         <div className="space-y-3">
           <div className="hidden grid-cols-[1fr_110px_36px] gap-2 px-1 sm:grid">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Course grade</p>
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Credits</p>
+            <p className="text-sm font-semibold text-muted-foreground">Course grade</p>
+            <p className="text-sm font-semibold text-muted-foreground">Credits</p>
             <span />
           </div>
           {rows.map((r, idx) => (

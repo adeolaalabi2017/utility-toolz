@@ -35,7 +35,10 @@ Rules:
 
 - Family: Geist (body, `font-sans`) and Outfit (headings, `font-display`), both self-hosted through `next/font` with `display: swap`, falling back to the system sans stack. No further webfonts **should** be added.
 - Scale (design.md mapped onto Tailwind): `xs=11.5px`, `sm=12.5px`, `base=16px/lh24`, `lg=16.5px`, `xl=18px`; display serif sizes `display-sm=22px`, `display-md=28px`, `display-lg=34px`, `display-xl=clamp(36–50px)`.
-- Headings **must** use `font-display` (Outfit), weight 400–600, tracking tight; eyebrows **must** be 11.5px uppercase, `tracking-[0.14em]`, deep orange `#a4502c`.
+- Headings **must** use `font-display` (Outfit), weight 400–600, tracking tight.
+- No eyebrows: a heading **must not** have a small label stacked above it. Fold that context into the heading or the sentence under it.
+- Labels (section labels, panel titles, stat captions) **must** be sentence case at `text-sm` (or `text-xs` for captions), never `uppercase` with letter-spacing. `uppercase` is allowed only where the content itself is upper case: hex colours, language/region codes, file-format badges, and mock-ups of third-party UI.
+- Headlines are one colour: no single word picked out in an accent colour.
 
 ### 2.3 Radius, shadow, motion
 
@@ -55,6 +58,7 @@ Rules:
 - Resting: `bg-card`, 1px `--border`, `rounded-xl` (22px). Hover: `-translate-y-0.5`, `border-primary/40`, `shadow-lark`. Focus-visible: purple outline.
 - Domain/tool icon chips use the domain accent from `accents.ts` (`chip` solid for domain cards, `soft` wash for tool cards) — accents **must not** be reassigned ad hoc.
 - Long content: titles clamp to 2 lines (`line-clamp-2`); cards in a row stretch to equal height (`h-full` on grids).
+- No card inside a card. Inside a card, group with spacing, `StatRow`-style dividers, or a borderless tint (`bg-muted/50`, or an accent wash for `Verdict` notes); a nested element **must not** have its own border. Exceptions: previews of a real surface (SERP result, social card, invoice paper, shadow/contrast samples, colour swatches) and file drop zones.
 - Empty state: dashed border, muted icon, one sentence + one action.
 
 ### 3.3 Inputs (`NumberField`, `TextAreaField`, `SelectField`)

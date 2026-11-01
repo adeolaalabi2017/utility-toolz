@@ -180,7 +180,7 @@ export function Header() {
                 >
                   Home
                 </Link>
-                <p className="mt-4 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <p className="mt-4 px-3 text-sm font-semibold text-muted-foreground">
                   Domains
                 </p>
                 {liveDomains.map((d) => (
@@ -195,7 +195,7 @@ export function Header() {
                 ))}
                 {plannedDomains.length > 0 && (
                   <>
-                    <p className="mt-4 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                    <p className="mt-4 px-3 text-sm font-semibold text-muted-foreground">
                       Coming soon
                     </p>
                     {plannedDomains.map((d) => (
@@ -211,7 +211,7 @@ export function Header() {
                     ))}
                   </>
                 )}
-                <p className="mt-4 px-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                <p className="mt-4 px-3 text-sm font-semibold text-muted-foreground">
                   Professions
                 </p>
                 {PROFESSIONS.map((p) => (

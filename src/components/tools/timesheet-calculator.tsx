@@ -74,8 +74,8 @@ export function TimesheetCalculator() {
         {/* Daily Schedule (8 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-8">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/60 pb-3">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Calendar className="h-4 w-4 text-deep-orange" /> Weekly Working Hours
+            <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+              <Calendar className="h-4 w-4 text-deep-orange" /> Weekly working hours
             </span>
             <div className="flex items-center gap-2">
               <ExportToolbar
@@ -104,7 +104,7 @@ export function TimesheetCalculator() {
             {days.map((row, i) => {
               const h = calc.dailyHours[i];
               return (
-                <div key={row.day} className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-lg border border-border bg-background p-2.5 text-xs">
+                <div key={row.day} className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 rounded-lg bg-muted/50 p-2.5 text-xs">
                   <span className="w-24 font-semibold text-foreground">{row.day}</span>
                   <div className="flex items-center gap-2">
                     <label htmlFor={`timesheet-calculator-1-${i}`} className="text-[11px] text-muted-foreground">In:</label>
@@ -144,8 +144,8 @@ export function TimesheetCalculator() {
 
         {/* Results Banner (4 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-4">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Weekly Pay Summary
+          <span className="text-sm font-semibold text-muted-foreground">
+            Weekly pay summary
           </span>
 
           <div className="my-4 space-y-4">

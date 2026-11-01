@@ -79,8 +79,8 @@ export function TimestampConverter() {
               <Clock className="h-5 w-5" />
             </span>
             <div>
-              <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                Current Unix Timestamp
+              <span className="text-sm font-semibold text-muted-foreground">
+                Current Unix timestamp
               </span>
               <div className="flex items-baseline gap-2">
                 <span className="tnum font-display text-display-md text-foreground">
@@ -118,8 +118,8 @@ export function TimestampConverter() {
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Epoch -> Human Date */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            1. Convert Epoch to Human Date
+          <span className="text-sm font-semibold text-muted-foreground">
+            1. Convert epoch to human date
           </span>
           <div>
             <label htmlFor="timestamp-converter-1" className="text-xs font-medium text-foreground">Unix Timestamp (seconds or ms)</label>
@@ -173,8 +173,8 @@ export function TimestampConverter() {
 
         {/* Human Date -> Epoch */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            2. Convert Date & Time to Epoch
+          <span className="text-sm font-semibold text-muted-foreground">
+            2. Convert date & time to epoch
           </span>
           <div>
             <label htmlFor="timestamp-converter-2" className="text-xs font-medium text-foreground">Select Date and Time</label>

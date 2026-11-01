@@ -59,8 +59,8 @@ export function FinalExamCalculator() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <GraduationCap className="h-4 w-4 text-deep-orange" /> Grade & Exam Weighting (%)
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <GraduationCap className="h-4 w-4 text-deep-orange" /> Grade & exam weighting (%)
           </span>
 
           <div className="space-y-4">
@@ -113,8 +113,8 @@ export function FinalExamCalculator() {
 
         {/* Results Banner (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Target Final Exam Score
+          <span className="text-sm font-semibold text-muted-foreground">
+            Target final exam score
           </span>
 
           <div className="my-4 space-y-4">
@@ -128,7 +128,7 @@ export function FinalExamCalculator() {
               </span>
             </div>
 
-            <div className="rounded-lg border border-border bg-background p-3 text-center">
+            <div className="rounded-lg bg-muted/50 p-3 text-center">
               <span className="text-[11px] text-muted-foreground block">Current Course Points Secured</span>
               <span className="tnum font-display text-display-sm text-foreground font-bold">
                 {(currentGrade * (1 - examWeight / 100)).toFixed(1)}% of total grade
@@ -145,12 +145,12 @@ export function FinalExamCalculator() {
 
       {/* Target Letter Grade Grid */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Scores Needed for Alternative Final Grades
+        <h4 className="text-sm font-semibold text-muted-foreground">
+          Scores needed for alternative final grades
         </h4>
         <div className="grid gap-3 sm:grid-cols-4 text-xs text-center">
           {calc.targetsTable.map((t) => (
-            <div key={t.label} className="rounded-lg border border-border bg-background p-3">
+            <div key={t.label} className="rounded-lg bg-muted/50 p-3">
               <span className="text-muted-foreground block">{t.label}</span>
               <span className="text-base font-bold text-foreground mt-1 block">{t.needed}</span>
               <span className="text-[10px] text-muted-foreground mt-0.5 block">{t.status}</span>

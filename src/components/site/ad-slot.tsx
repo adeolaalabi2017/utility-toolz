@@ -46,7 +46,7 @@ export function AdSlot({ slot, className }: AdSlotProps) {
       data-ad-slot={slot}
       className={cn("ad-slot my-6 flex w-full flex-col items-center justify-center", size, className)}
     >
-      <span className="mb-1 text-[10px] font-semibold uppercase tracking-widest text-muted-foreground">
+      <span className="mb-1 text-xs font-semibold text-muted-foreground">
         Advertisement
       </span>
       {/* Mount the AdSense <ins> unit for this slot here when ads go live. */}

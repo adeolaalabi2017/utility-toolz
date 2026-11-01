@@ -125,9 +125,9 @@ export function PasswordGenerator() {
             />
           </div>
 
-          <div className="space-y-2.5 rounded-lg border border-border bg-muted/50 p-4 text-xs">
-            <p className="font-semibold uppercase tracking-wider text-muted-foreground">
-              Character Sets
+          <div className="space-y-2.5 rounded-lg bg-muted/50 p-4 text-xs">
+            <p className="font-semibold text-muted-foreground">
+              Character sets
             </p>
             <div className="grid grid-cols-2 gap-3">
               <label className="flex items-center gap-2 cursor-pointer font-medium">
@@ -195,8 +195,8 @@ export function PasswordGenerator() {
 
           {/* Alternatives / Batch */}
           <div className="space-y-2 pt-2">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Alternative Options
+            <p className="text-sm font-semibold text-muted-foreground">
+              Alternative options
             </p>
             <div className="space-y-1.5 font-mono text-xs">
               {batch.map((pwd, idx) => (
@@ -249,9 +249,9 @@ export function PasswordGenerator() {
             </div>
           </div>
 
-          <div className="space-y-2 rounded-lg border border-border/70 p-3.5 bg-card/50">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Cryptographic Breakdown
+          <div className="space-y-2 rounded-lg bg-muted/50 p-3.5">
+            <p className="text-sm font-semibold text-muted-foreground">
+              Cryptographic breakdown
             </p>
             <div className="space-y-1.5 text-xs">
               <StatRow label="Length" value={`${length} chars`} />

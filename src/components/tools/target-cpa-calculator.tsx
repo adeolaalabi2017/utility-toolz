@@ -42,8 +42,8 @@ export function TargetCpaCalculator() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Target className="h-4 w-4 text-deep-orange" /> Product Unit Economics (<Cur />)
+            <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+              <Target className="h-4 w-4 text-deep-orange" /> Product unit economics (<Cur />)
             </span>
             <ToolShareBar />
           </div>
@@ -99,8 +99,8 @@ export function TargetCpaCalculator() {
 
         {/* Results Banner (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Bidding Targets
+          <span className="text-sm font-semibold text-muted-foreground">
+            Bidding targets
           </span>
 
           <div className="my-4 space-y-4">
@@ -115,14 +115,14 @@ export function TargetCpaCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Break-Even CPA</span>
                 <span className="tnum font-display text-display-sm text-deep-coral font-bold">
                   {fmtUSD(calc.breakEvenCpa, 2)}
                 </span>
                 <span className="text-[10px] text-muted-foreground block mt-0.5">0% profit ceiling</span>
               </div>
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Break-Even ROAS</span>
                 <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {calc.breakEvenRoas.toFixed(2)}x

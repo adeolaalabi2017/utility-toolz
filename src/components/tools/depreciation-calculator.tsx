@@ -83,8 +83,8 @@ export function DepreciationCalculator() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Calculator className="h-4 w-4 text-deep-orange" /> Asset Cost & Depreciation Method
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Calculator className="h-4 w-4 text-deep-orange" /> Asset cost & depreciation method
           </span>
 
           <div className="grid grid-cols-2 gap-4">
@@ -140,8 +140,8 @@ export function DepreciationCalculator() {
 
         {/* Results Banner (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Depreciation Summary
+          <span className="text-sm font-semibold text-muted-foreground">
+            Depreciation summary
           </span>
 
           <div className="my-4 space-y-4">
@@ -156,13 +156,13 @@ export function DepreciationCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Total Write-Off</span>
                 <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {fmtUSD(calc.totalAccumulated, 0)}
                 </span>
               </div>
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Residual Book Value</span>
                 <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {fmtUSD(calc.endingBookValue, 0)}
@@ -182,8 +182,8 @@ export function DepreciationCalculator() {
 
       {/* Schedule Table */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-          <FileSpreadsheet className="h-4 w-4 text-lf-purple" /> Annual Depreciation Schedule
+        <h4 className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+          <FileSpreadsheet className="h-4 w-4 text-lf-purple" /> Annual depreciation schedule
         </h4>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">

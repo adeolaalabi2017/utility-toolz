@@ -12,10 +12,9 @@ export default function NotFound() {
   const popular = popularTools().slice(0, 6);
   return (
     <section className="mx-auto max-w-3xl px-4 py-16 text-center sm:px-6 sm:py-24">
-      <p className="text-xs font-semibold uppercase tracking-[0.14em] text-deep-orange">Error 404</p>
-      <h1 className="mt-3 font-display text-display-lg tracking-tight">We couldn&apos;t find that page</h1>
+      <h1 className="font-display text-display-lg tracking-tight">We couldn&apos;t find that page</h1>
       <p className="mx-auto mt-3 max-w-xl text-muted-foreground">
-        The link may be old or mistyped. Search for the tool you need, or pick a domain below.
+        The link may be old or mistyped (error 404). Search for the tool you need, or pick a domain below.
       </p>
       <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <NotFoundSearch />

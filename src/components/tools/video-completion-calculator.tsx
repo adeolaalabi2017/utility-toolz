@@ -39,8 +39,8 @@ export function VideoCompletionCalculator() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Video className="h-4 w-4 text-deep-orange" /> Campaign Spend & Quartile Metrics
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Video className="h-4 w-4 text-deep-orange" /> Campaign spend & quartile metrics
           </span>
 
           <div className="grid grid-cols-2 gap-4">
@@ -108,8 +108,8 @@ export function VideoCompletionCalculator() {
 
         {/* Results Banner (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Video Performance
+          <span className="text-sm font-semibold text-muted-foreground">
+            Video performance
           </span>
 
           <div className="my-4 space-y-4">
@@ -124,13 +124,13 @@ export function VideoCompletionCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Cost / Completed View (CPCV)</span>
                 <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {fmtUSD(calc.cpcv, 2)}
                 </span>
               </div>
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Cost / Start (CPV)</span>
                 <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {fmtUSD(calc.cpv, 3)}
@@ -150,8 +150,8 @@ export function VideoCompletionCalculator() {
 
       {/* Retention Drop-off Bars */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Audience Retention Waterfall
+        <h4 className="text-sm font-semibold text-muted-foreground">
+          Audience retention waterfall
         </h4>
 
         <div className="space-y-3 pt-2">

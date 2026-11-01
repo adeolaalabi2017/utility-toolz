@@ -163,7 +163,7 @@ export function JwtDecoder() {
           )}
 
           {expInfo && (
-            <div className="mt-4 rounded-lg border border-border bg-muted/50 p-4 text-xs space-y-2">
+            <div className="mt-4 rounded-lg bg-muted/50 p-4 text-xs space-y-2">
               <div className="flex items-center justify-between">
                 <span className="font-semibold text-foreground flex items-center gap-1.5">
                   <Clock className="h-3.5 w-3.5 text-muted-foreground" />
@@ -197,8 +197,8 @@ export function JwtDecoder() {
         {/* Header */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
           <div className="flex items-center justify-between pb-2 border-b border-border/60">
-            <span className="text-xs font-semibold uppercase tracking-wider text-deep-coral">
-              Header: Algorithm & Token Type
+            <span className="text-sm font-semibold text-deep-coral">
+              Header: algorithm & token type
             </span>
             {parsed.header && (
               <Button
@@ -224,8 +224,8 @@ export function JwtDecoder() {
         {/* Payload */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
           <div className="flex items-center justify-between pb-2 border-b border-border/60">
-            <span className="text-xs font-semibold uppercase tracking-wider text-deep-purple">
-              Payload: Claims & Data
+            <span className="text-sm font-semibold text-deep-purple">
+              Payload: claims & data
             </span>
             {parsed.payload && (
               <Button

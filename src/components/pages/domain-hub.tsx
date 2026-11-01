@@ -113,7 +113,7 @@ export function DomainHub({
                   {planned.map((p) => (
                     <Badge key={p.name} variant="outline" className="py-1 text-foreground/80">
                       {p.name}
-                      <span className="ml-1.5 text-[10px] font-semibold uppercase text-muted-foreground">
+                      <span className="ml-1.5 text-xs font-semibold text-muted-foreground">
                         Phase {p.phase}
                       </span>
                     </Badge>
@@ -138,7 +138,7 @@ export function DomainHub({
                 {planned.map((p) => (
                   <Badge key={p.name} variant="outline" className="py-1 text-foreground/80">
                     {p.name}
-                    <span className="ml-1.5 text-[10px] font-semibold uppercase text-muted-foreground">
+                    <span className="ml-1.5 text-xs font-semibold text-muted-foreground">
                       Phase {p.phase}
                     </span>
                   </Badge>

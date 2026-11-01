@@ -28,8 +28,8 @@ export function NpsCalculator() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Smile className="h-4 w-4 text-deep-orange" /> Survey Response Counts
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Smile className="h-4 w-4 text-deep-orange" /> Survey response counts
           </span>
 
           <div className="space-y-3">
@@ -85,7 +85,7 @@ export function NpsCalculator() {
 
         {/* Results Banner (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <span className="text-sm font-semibold text-muted-foreground">
             Net Promoter Score
           </span>
 
@@ -103,13 +103,13 @@ export function NpsCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Total Responses</span>
                 <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {fmtNum(calc.total, 0)}
                 </span>
               </div>
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Promoter Ratio</span>
                 <span className="tnum font-display text-display-sm text-deep-green font-bold">
                   {calc.pPct.toFixed(0)}%
@@ -127,8 +127,8 @@ export function NpsCalculator() {
 
       {/* Visual Composition Bar */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Respondent Audience Distribution
+        <h4 className="text-sm font-semibold text-muted-foreground">
+          Respondent audience distribution
         </h4>
         <div className="h-4 w-full overflow-hidden rounded-full flex bg-muted">
           <div style={{ width: `${calc.pPct}%` }} className="bg-lf-green" title="Promoters" />

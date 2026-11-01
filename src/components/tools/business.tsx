@@ -650,7 +650,7 @@ ${items
     <div className="grid gap-5 lg:grid-cols-5">
       <div className="lg:col-span-3">
         <div className="rounded-xl border bg-muted/40 p-4 sm:p-5">
-          <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+          <p className="mb-4 text-sm font-semibold text-muted-foreground">
             Invoice details
           </p>
           <div className="space-y-4">
@@ -751,7 +751,7 @@ ${items
       <div className="lg:col-span-2">
         <div className="space-y-4">
           <div className="rounded-xl border bg-card p-4 shadow-sm sm:p-5">
-            <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <p className="mb-4 text-sm font-semibold text-muted-foreground">
               Totals
             </p>
             <p className="tnum text-3xl font-bold tracking-tight">{fmtUSD(total, 2)}</p>
@@ -764,7 +764,7 @@ ${items
             </div>
           </div>
           <div className="rounded-xl border bg-card p-4 shadow-sm sm:p-5">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+            <p className="mb-3 text-sm font-semibold text-muted-foreground">
               Invoice preview
             </p>
             <div className="rounded-lg border bg-white p-4 text-[13px] leading-relaxed">

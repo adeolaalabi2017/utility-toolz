@@ -107,8 +107,8 @@ export function DataDeduplicator() {
       <div className="grid gap-6 lg:grid-cols-2">
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3 flex flex-col">
           <div className="flex items-center justify-between">
-            <span id="data-deduplicator-heading-1" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Input Lines ({result.originalCount})
+            <span id="data-deduplicator-heading-1" className="text-sm font-semibold text-muted-foreground">
+              Input lines ({result.originalCount})
             </span>
             <Button
               variant="ghost"
@@ -130,8 +130,8 @@ export function DataDeduplicator() {
 
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3 flex flex-col">
           <div className="flex items-center justify-between">
-            <span id="data-deduplicator-heading-2" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Deduplicated Unique Output ({result.uniqueCount})
+            <span id="data-deduplicator-heading-2" className="text-sm font-semibold text-muted-foreground">
+              Deduplicated unique output ({result.uniqueCount})
             </span>
             <span className="text-xs font-bold text-deep-green">
               Removed {result.duplicateCount} duplicates

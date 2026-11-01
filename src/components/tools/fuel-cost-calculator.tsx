@@ -43,8 +43,8 @@ export function FuelCostCalculator() {
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-              <Fuel className="h-4 w-4 text-deep-orange" /> Journey & Vehicle Economy
+            <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+              <Fuel className="h-4 w-4 text-deep-orange" /> Journey & vehicle economy
             </span>
             <div className="flex rounded-md bg-muted/60 p-0.5 text-xs font-medium">
               <button aria-pressed={unitSystem === "us"} type="button"
@@ -138,8 +138,8 @@ export function FuelCostCalculator() {
 
         {/* Results Banner (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Trip Fuel Cost
+          <span className="text-sm font-semibold text-muted-foreground">
+            Trip fuel cost
           </span>
 
           <div className="my-4 space-y-4">
@@ -154,13 +154,13 @@ export function FuelCostCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Fuel Required</span>
                 <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {calc.fuelNeeded.toFixed(1)} {unitSystem === "us" ? "gal" : "L"}
                 </span>
               </div>
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Cost / {unitSystem === "us" ? "Mile" : "Km"}</span>
                 <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {fmtUSD(calc.costPerDistance, 2)}

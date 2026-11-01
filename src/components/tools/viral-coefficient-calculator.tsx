@@ -50,8 +50,8 @@ export function ViralCoefficientCalculator() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Share2 className="h-4 w-4 text-deep-orange" /> Referral & Loop Parameters
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Share2 className="h-4 w-4 text-deep-orange" /> Referral & loop parameters
           </span>
 
           <div className="grid grid-cols-2 gap-4">
@@ -108,8 +108,8 @@ export function ViralCoefficientCalculator() {
 
         {/* Results Banner (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Viral K-Factor
+          <span className="text-sm font-semibold text-muted-foreground">
+            Viral K-factor
           </span>
 
           <div className="my-4 space-y-4">
@@ -126,13 +126,13 @@ export function ViralCoefficientCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Viral Multiplier</span>
                 <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {calc.isExponential ? "∞" : `${calc.multiplier.toFixed(2)}x`}
                 </span>
               </div>
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Expanded Cohort</span>
                 <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {calc.isExponential ? "Unlimited" : fmtNum(calc.totalPotentialUsers, 0)}
@@ -152,8 +152,8 @@ export function ViralCoefficientCalculator() {
 
       {/* Cycle Progression */}
       <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
-        <h4 className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          5-Cycle Growth Projection
+        <h4 className="text-sm font-semibold text-muted-foreground">
+          5-Cycle growth projection
         </h4>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">

@@ -131,8 +131,8 @@ export function ContrastChecker() {
 
           {/* Quick Presets */}
           <div className="space-y-2 pt-2">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Design System & Tested Presets
+            <p className="text-sm font-semibold text-muted-foreground">
+              Design system & tested presets
             </p>
             <div className="flex flex-wrap gap-2">
               {PRESETS.map((p) => (
@@ -156,8 +156,8 @@ export function ContrastChecker() {
 
           {/* Live Preview Box */}
           <div className="space-y-2 pt-2">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              Rendered Preview
+            <p className="text-sm font-semibold text-muted-foreground">
+              Rendered preview
             </p>
             <div
               className="rounded-xl p-5 border transition-colors shadow-inner"
@@ -200,9 +200,9 @@ export function ContrastChecker() {
               : "Fails WCAG AA requirements. Low contrast will cause eyestrain or readability issues."}
           </Verdict>
 
-          <div className="space-y-2.5 rounded-lg border border-border/70 p-3.5 bg-card/50">
-            <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-              WCAG 2.2 Compliance Breakdown
+          <div className="space-y-2.5 rounded-lg bg-muted/50 p-3.5">
+            <p className="text-sm font-semibold text-muted-foreground">
+              WCAG 2.2 compliance breakdown
             </p>
             <div className="space-y-2 text-xs">
               <div className="flex items-center justify-between py-1 border-b border-border/40">

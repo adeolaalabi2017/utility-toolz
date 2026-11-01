@@ -137,8 +137,8 @@ export function MarkdownConverter() {
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Input */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col">
-          <span id="markdown-converter-heading-1" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pb-2">
-            {direction === "md2html" ? "Input Markdown" : "Input Raw HTML"}
+          <span id="markdown-converter-heading-1" className="text-sm font-semibold text-muted-foreground pb-2">
+            {direction === "md2html" ? "Input Markdown" : "Input raw HTML"}
           </span>
           <textarea aria-labelledby="markdown-converter-heading-1"
             value={input}
@@ -151,7 +151,7 @@ export function MarkdownConverter() {
 
         {/* Output */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col">
-          <span id="markdown-converter-heading-2" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground pb-2">
+          <span id="markdown-converter-heading-2" className="text-sm font-semibold text-muted-foreground pb-2">
             {direction === "md2html" ? "Generated HTML" : "Generated Markdown"}
           </span>
           <textarea aria-labelledby="markdown-converter-heading-2"

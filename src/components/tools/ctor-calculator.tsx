@@ -22,8 +22,8 @@ export function CtorCalculator() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <Mail className="h-4 w-4 text-deep-orange" /> Email Campaign Volume
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <Mail className="h-4 w-4 text-deep-orange" /> Email campaign volume
           </span>
 
           <div className="space-y-3">
@@ -64,8 +64,8 @@ export function CtorCalculator() {
 
         {/* Results Banner (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Email Quality Metrics
+          <span className="text-sm font-semibold text-muted-foreground">
+            Email quality metrics
           </span>
 
           <div className="my-4 space-y-4">
@@ -80,13 +80,13 @@ export function CtorCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Open Rate</span>
                 <span className="tnum font-display text-display-sm text-deep-purple font-bold">
                   {fmtPct(calc.openRate, 2)}
                 </span>
               </div>
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Overall CTR</span>
                 <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {fmtPct(calc.ctr, 2)}

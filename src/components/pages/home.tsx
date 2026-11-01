@@ -145,7 +145,7 @@ function HeroWorkbench() {
   return (
     <div className="rounded-2xl border border-border/80 bg-card p-5 shadow-lark sm:p-7">
       <div className="flex flex-col gap-3 border-b border-border/60 pb-3.5 sm:flex-row sm:items-center sm:justify-between">
-        <span id="quick-calc-title" className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <span id="quick-calc-title" className="text-sm font-semibold text-muted-foreground">
           Quick calculator
         </span>
         <div

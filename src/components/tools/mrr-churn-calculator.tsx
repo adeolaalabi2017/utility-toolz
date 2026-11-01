@@ -42,8 +42,8 @@ export function MrrChurnCalculator() {
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground flex items-center gap-1.5">
-            <TrendingUp className="h-4 w-4 text-deep-green" /> Monthly SaaS Revenue Components (<Cur />)
+          <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
+            <TrendingUp className="h-4 w-4 text-deep-green" /> Monthly SaaS revenue components (<Cur />)
           </span>
 
           <div className="grid grid-cols-2 gap-4">
@@ -105,8 +105,8 @@ export function MrrChurnCalculator() {
 
         {/* Primary Metrics (5 cols) */}
         <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
-          <span className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-            Ending Recurring Revenue
+          <span className="text-sm font-semibold text-muted-foreground">
+            Ending recurring revenue
           </span>
 
           <div className="my-4 space-y-4">
@@ -123,13 +123,13 @@ export function MrrChurnCalculator() {
             </div>
 
             <div className="grid grid-cols-2 gap-3 text-center">
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Annual Run Rate (ARR)</span>
                 <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {fmtUSD(calc.arr, 0)}
                 </span>
               </div>
-              <div className="rounded-lg border border-border bg-background p-3">
+              <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Net Retention (NRR)</span>
                 <span className={`tnum font-display text-display-sm font-bold ${calc.nrr >= 100 ? "text-deep-green" : "text-deep-coral"}`}>
                   {fmtPct(calc.nrr, 1)}
