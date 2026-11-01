@@ -44,6 +44,14 @@ export function SvgToCss() {
     }
   }, [cleanSvg]);
 
+  // An SVG loaded as an image needs its namespace, which inline-HTML snippets often omit.
+  const previewUri = useMemo(() => {
+    const svg = /<svg[^>]*\sxmlns=/i.test(cleanSvg)
+      ? cleanSvg
+      : cleanSvg.replace(/<svg/i, '<svg xmlns="http://www.w3.org/2000/svg"');
+    return `data:image/svg+xml,${encodeURIComponent(svg)}`;
+  }, [cleanSvg]);
+
   const stats = useMemo(() => {
     const origLen = new Blob([svgInput]).size;
     const optLen = new Blob([cleanSvg]).size;
@@ -95,10 +103,10 @@ export function SvgToCss() {
           </span>
           <div className="flex-1 rounded-lg border border-dashed border-border bg-muted/60 p-6 flex flex-col items-center justify-center min-h-[200px]">
             {cleanSvg.includes("<svg") ? (
-              <div
-                className="h-24 w-24 flex items-center justify-center p-2 rounded-lg bg-card border border-border shadow-lark-sm"
-                dangerouslySetInnerHTML={{ __html: cleanSvg }}
-              />
+              // Rendered as an <img> so scripts and event handlers in pasted SVG never run.
+              <div className="h-24 w-24 flex items-center justify-center p-2 rounded-lg bg-card border border-border shadow-lark-sm">
+                <img src={previewUri} alt="SVG preview" className="max-h-full max-w-full" />
+              </div>
             ) : (
               <div className="text-center text-xs text-muted-foreground">
                 <ImageIcon className="h-8 w-8 mx-auto mb-2 opacity-40" />
