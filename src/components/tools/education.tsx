@@ -524,7 +524,11 @@ export function CitationFormatter() {
           </FieldGrid>
           <FieldGrid>
             {sourceType !== "book" && (
-              <NumberField label="Pages" value={pages} onChange={setPages} placeholder="44-61" />
+              // A page range ("44-61") isn't a number, so it gets a plain text field.
+              <div className="space-y-1.5">
+                <Label htmlFor="education-6" className="text-sm font-medium">Pages</Label>
+                <Input id="education-6" value={pages} onChange={(e) => setPages(e.target.value)} placeholder="44-61" className="tnum" />
+              </div>
             )}
             <NumberField label="Year" value={year} onChange={setYear} placeholder="2025" />
           </FieldGrid>
