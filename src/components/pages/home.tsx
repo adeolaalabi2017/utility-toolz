@@ -206,7 +206,7 @@ function HeroWorkbench() {
               </>,
               profit < 0 ? "text-deep-coral" : "text-deep-green"
             )}
-            {footer("Runs in your browser", "/finance/profit-margin-calculator", "Open profit margin tool")}
+            {footer("Runs in your browser", "/business/profit-margin-calculator", "Open profit margin tool")}
           </>
         )}
 
@@ -253,7 +253,7 @@ function HeroWorkbench() {
               </>,
               "text-deep-orange"
             )}
-            {footer("Instant markdown calculation", "/finance/discount-calculator", "Open discount calculator")}
+            {footer("Instant markdown calculation", "/business/discount-calculator", "Open discount calculator")}
           </>
         )}
       </div>

@@ -42,12 +42,13 @@ export function ToolPage({
   content: ToolContent;
 }) {
   const tool = toolProp || (toolSlug ? toolBySlug(toolSlug) : undefined);
+  // Hooks run before the early return so their order never changes between renders.
+  const [resetKey, setResetKey] = React.useState(0);
   if (!tool) return null;
   const domain = domainBySlug(tool.domain);
   const Icon = domain?.icon;
   const related = relatedTools(tool, 6);
   const ToolWidget = TOOL_COMPONENTS[tool.slug];
-  const [resetKey, setResetKey] = React.useState(0);
 
   // Every tool gets the same "start over": clear any inputs saved in the URL
   // and remount the tool so it returns to its worked-example defaults.
