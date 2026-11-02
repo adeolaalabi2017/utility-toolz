@@ -4,8 +4,10 @@ import * as React from "react";
 import { Pause, Play, RotateCcw, SkipForward } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { CalcLayout, FieldGrid, NumberField, ResultHero, SelectField, ShareBar, StatRow, Verdict } from "./ui";
+import { CalcLayout, FieldGrid, NumberField, ResultHero, SelectField, ShareBar, StatRow, TextField, Verdict } from "./ui";
 import { fmtMoney, fmtNum, num } from "@/lib/format";
+import { useToolState } from "@/hooks/use-tool-state";
+import { ToolShareBar } from "@/components/site/tool-share-bar";
 import {
   addMonthsSafe,
   addWorkingDays,
@@ -596,6 +598,83 @@ export function TimeZoneConverter() {
               {zoneLabel(fromZone)} is on {dst} on this date ({tzAbbrev(instant, fromZone)},{" "}
               {fmtOffset(offNow)}). Days marked in amber have shifted to the previous or next calendar day.
             </Verdict>
+          </div>
+        )
+      }
+    />
+  );
+}
+
+/* ================================================================== */
+/* Hours between times calculator                                      */
+/* ================================================================== */
+
+function parseClock(v: string): number | null {
+  const m = /^(\d{1,2}):(\d{2})$/.exec(v);
+  if (!m) return null;
+  const h = Number(m[1]);
+  const min = Number(m[2]);
+  return h > 23 || min > 59 ? null : h * 60 + min;
+}
+
+export function HoursBetweenTimesCalculator() {
+  const [params, setParams] = useToolState({ start: "09:00", end: "17:30", breakMin: "30" });
+  const { start, end, breakMin } = params;
+
+  const startMin = parseClock(start);
+  const endMin = parseClock(end);
+  const brk = Math.max(0, num(breakMin));
+
+  let problem = "";
+  let span = 0;
+  let overnight = false;
+  if (startMin === null || endMin === null) {
+    problem = "Enter both times as 24-hour HH:MM.";
+  } else if (startMin === endMin) {
+    problem = "The start and end times are the same, so there is no span to measure.";
+  } else {
+    overnight = endMin < startMin;
+    span = endMin - startMin + (overnight ? 1440 : 0);
+    if (brk > span) problem = "The break is longer than the time between start and end.";
+  }
+  const worked = span - brk;
+  const hours = worked / 60;
+  const h = Math.floor(worked / 60);
+  const m = Math.round(worked % 60);
+
+  return (
+    <CalcLayout
+      actions={<ToolShareBar />}
+      inputs={
+        <div className="space-y-4">
+          <FieldGrid>
+            <TextField label="Start time" type="time" value={start} onChange={(v) => setParams({ start: v })} />
+            <TextField label="End time" type="time" value={end} onChange={(v) => setParams({ end: v })} />
+          </FieldGrid>
+          <NumberField
+            label="Unpaid break"
+            value={breakMin}
+            onChange={(v) => setParams({ breakMin: v })}
+            suffix="min"
+            min={0}
+            hint="Minutes taken out of the span"
+          />
+        </div>
+      }
+      results={
+        problem ? (
+          <Verdict tone="bad">{problem}</Verdict>
+        ) : (
+          <div className="space-y-4">
+            <ResultHero label="Time worked" value={`${h}h ${String(m).padStart(2, "0")}m`} sub={`${fmtNum(hours, 2)} hours`} />
+            <div>
+              <StatRow label="Time between start and end" value={`${Math.floor(span / 60)}h ${String(span % 60).padStart(2, "0")}m`} />
+              <StatRow label="Break taken" value={`${brk} min`} />
+              <StatRow label="Decimal hours" value={fmtNum(hours, 2)} emphasis />
+            </div>
+            {overnight && (
+              <Verdict tone="neutral">The end time falls on the next day, so the span crosses midnight.</Verdict>
+            )}
           </div>
         )
       }

@@ -2510,4 +2510,396 @@ export const TOOL_CONTENT: Record<string, ToolContent> = {
       { q: "Does the countdown work across time zones?", a: "Yes, dates are interpreted in your local browser timezone or UTC depending on input format." }
     ],
   },
+  "hourly-salary-converter": {
+    howItWorks: [
+      "Weekly pay is your hourly rate multiplied by the hours you work each week.",
+      "Annual pay is weekly pay multiplied by the number of paid weeks in the year. Use 52 if you are paid every week, or fewer if you take unpaid leave.",
+      "Monthly pay divides the annual figure by twelve, and daily pay assumes a five-day week. Overtime and tax are not included.",
+    ],
+    example:
+      "At $25 an hour for 40 hours a week and 52 paid weeks, the sample numbers give $1,000 a week, about $200 a day and $52,000 a year, or roughly $4,333 a month before tax.",
+    faqs: [
+      {
+        q: "Is 2,080 hours the right yearly figure?",
+        a: "That is 40 hours times 52 weeks, the usual full-time figure with no unpaid time off. Subtract any unpaid leave or sick weeks you take.",
+      },
+      {
+        q: "Does this include overtime?",
+        a: "No. Add overtime separately: if you earn time-and-a-half, the extra hours are worth 1.5 times your hourly rate.",
+      },
+      {
+        q: "Why is my salary figure before tax?",
+        a: "Hourly and salary figures are gross pay. Use the paycheck calculator to estimate what you take home.",
+      },
+    ],
+  },
+  "paycheck-calculator": {
+    howItWorks: [
+      "Gross pay per paycheck is your annual salary divided by the number of pay periods: 52 for weekly, 26 for every two weeks, 24 for twice a month and 12 for monthly.",
+      "Income tax is that gross amount multiplied by your combined effective rate. Social Security and Medicare (FICA) are taken at 7.65% of gross, the employee share.",
+      "Retirement contributions are a percentage of gross. Take-home pay is gross minus all three deductions.",
+    ],
+    example:
+      "A $65,000 salary paid every two weeks is $2,500 gross per paycheck. With a 22% effective tax rate, 7.65% FICA and a 5% 401(k), take-home is $1,633.75 per paycheck, or about $42,478 across the year.",
+    faqs: [
+      {
+        q: "What tax rate should I enter?",
+        a: "Use your effective rate: total federal and state income tax divided by your gross income. It is lower than your top bracket because each bracket applies only to the income inside it.",
+      },
+      {
+        q: "Why does my real paycheck differ?",
+        a: "Pre-tax benefits such as health insurance, HSA contributions and commuter benefits reduce the taxable amount. Some states also tax differently, and the Social Security wage cap can lower FICA for high earners.",
+      },
+      {
+        q: "Is the 401(k) taken before tax?",
+        a: "Traditional 401(k) contributions also lower your taxable income, so the tax line here is a little high for them. Roth contributions do not reduce income tax, so the tax line is accurate for them.",
+      },
+      {
+        q: "Can I use this for hourly pay?",
+        a: "Yes. Convert your hourly rate to an annual salary with the hourly to salary converter first, then enter that figure.",
+      },
+    ],
+  },
+  "home-affordability-calculator": {
+    howItWorks: [
+      "Lenders usually cap the housing payment at 28% of gross monthly income (the front-end ratio) and total debt payments, housing included, at 36% (the back-end ratio). The calculator uses whichever limit is tighter.",
+      "Property tax and insurance come out of the housing budget first. What is left is the principal and interest payment.",
+      "That payment is converted into a loan amount using the standard mortgage formula for your rate and term. Adding your down payment gives the maximum price.",
+    ],
+    example:
+      "A $95,000 income with $450 of monthly debts, a $60,000 deposit, a 6.5% rate over 30 years and $450 a month of property tax and insurance gives a housing budget of about $2,217 a month and a maximum price of about $339,500.",
+    faqs: [
+      {
+        q: "What are the 28% and 36% rules?",
+        a: "They are common lender guidelines. The 28% rule limits housing costs to 28% of gross monthly income. The 36% rule limits all debt payments, including the new mortgage, to 36%.",
+      },
+      {
+        q: "Does this include mortgage insurance?",
+        a: "Not directly. If your deposit is under 20%, add private mortgage insurance to the property tax and insurance figure to see the full housing cost.",
+      },
+      {
+        q: "Is this a mortgage approval?",
+        a: "No. It is a planning estimate. Lenders check your credit, savings and full paperwork before approving any loan.",
+      },
+      {
+        q: "Should I aim for the maximum?",
+        a: "Many people keep the payment well below the limit so that savings and everyday spending stay comfortable. The maximum is a ceiling, not a target.",
+      },
+    ],
+  },
+  "retirement-savings-calculator": {
+    howItWorks: [
+      "Years to retirement are your retirement age minus your current age. The calculator converts that into months and a monthly return rate.",
+      "Current savings grow by compounding every month. Each monthly contribution also grows from the month it is paid until retirement.",
+      "The sustainable monthly income is the projected pot times your withdrawal rate, divided by twelve. The 4% rule of thumb is a common starting point, not a guarantee.",
+    ],
+    example:
+      "Saving $800 a month from age 35 with $80,000 already invested, at a 7% return, gives roughly $1.63 million by 65. Drawing 4% of that pot would pay about $5,400 a month before tax.",
+    faqs: [
+      {
+        q: "Is the return rate after inflation?",
+        a: "No. The default is a nominal return, so the projection is in future dollars. Lower your return or think in today's money to allow for inflation.",
+      },
+      {
+        q: "Are fees included?",
+        a: "No. Fund fees and advice costs reduce returns. Subtract them from the expected return to get a more realistic projection.",
+      },
+      {
+        q: "Why use a 4% withdrawal rate?",
+        a: "It is a widely cited rule of thumb for drawing down a portfolio over about 30 years. Your own time horizon and market conditions may call for a different rate.",
+      },
+      {
+        q: "Does this include Social Security or a workplace pension?",
+        a: "No. Those add to your retirement income, so the projection here shows only the savings you build.",
+      },
+    ],
+  },
+  "electricity-cost-calculator": {
+    howItWorks: [
+      "Energy use in kilowatt-hours (kWh) is power in watts times hours used, divided by 1,000. A 100 W device running for one hour uses 0.1 kWh.",
+      "Cost is energy multiplied by your electricity price per kWh. Find that price on your bill, where it may be split into supply and delivery charges.",
+      "The calculator shows cost per hour, per day, per month and per year, so you can compare appliances on the same basis.",
+    ],
+    example:
+      "A 100 W TV used for 8 hours a day for 30 days uses 24 kWh. At $0.16 per kWh that is $3.84 a month, about $46 a year.",
+    faqs: [
+      {
+        q: "Where do I find the wattage?",
+        a: "Look for the power rating on the label or the back of the device, or in the manual. Use the rated power, not the plug socket's maximum.",
+      },
+      {
+        q: "Why is my bill different?",
+        a: "Your bill also includes standing charges, taxes and fees. The calculator covers only the energy an appliance uses at your unit price.",
+      },
+      {
+        q: "Do heaters and fridges use power all the time?",
+        a: "Heaters use their rated power only while they run, so the hours matter. Fridges cycle on and off, so a rated figure overstates their average draw; use a plug-in energy monitor for an exact figure.",
+      },
+      {
+        q: "How do I cut the cost?",
+        a: "Find the device with the highest monthly cost first. Reducing hours or switching to a lower-wattage model usually saves more than any small device.",
+      },
+    ],
+  },
+  "random-number-generator": {
+    howItWorks: [
+      "Each number is drawn between your minimum and maximum, both included, using the browser's secure random source (crypto.getRandomValues) rather than a predictable pseudo-random generator.",
+      "With no repeats turned on, a drawn number is set aside and cannot appear again in the same batch. The range must hold at least as many values as you ask for.",
+      "Nothing is stored or sent anywhere. Each press of Generate draws a fresh set in your browser.",
+    ],
+    example:
+      "With the range 1 to 100 and five numbers with no repeats, every number from 1 to 100 has the same chance of coming up first, and the other four are drawn from the numbers that remain.",
+    faqs: [
+      {
+        q: "Are these numbers truly random?",
+        a: "They come from the operating system's cryptographic random source, which is suitable for games, raffles and sampling. They are not a certified random source for legal or regulated draws.",
+      },
+      {
+        q: "Can I include negative numbers?",
+        a: "Yes. Enter a negative minimum, such as -10, to draw from a range that includes negative values.",
+      },
+      {
+        q: "Why can't I generate that many unique numbers?",
+        a: "Unique numbers need a range at least as large as the count. For example, you cannot draw 20 unique numbers from a range of 1 to 10.",
+      },
+      {
+        q: "Can I roll a dice with this?",
+        a: "Yes. Set the range from 1 to 6 for a standard six-sided die, or 1 to 20 for a twenty-sided one.",
+      },
+    ],
+  },
+  "fraction-calculator": {
+    howItWorks: [
+      "Addition and subtraction first bring both fractions to a common denominator by multiplying across. Multiplication multiplies the tops and bottoms. Division multiplies by the reciprocal of the second fraction.",
+      "The result is divided by the greatest common divisor of its numerator and denominator, so the answer is always in lowest terms.",
+      "The mixed number splits off whole units, and the decimal is the numerator divided by the denominator.",
+    ],
+    example:
+      "3/4 plus 2/5 becomes 15/20 plus 8/20, which is 23/20. That simplifies no further, so the answer is 23/20, or 1 3/20 as a mixed number, or 1.15 as a decimal.",
+    faqs: [
+      {
+        q: "Why does the answer sometimes look different from my workings?",
+        a: "Both can be right. Fractions with different denominators have many equal forms, and the calculator always reduces to lowest terms.",
+      },
+      {
+        q: "Can I enter a negative fraction?",
+        a: "Yes. Put the minus sign on the numerator, such as -3 over 4. A negative denominator is flipped to the top automatically.",
+      },
+      {
+        q: "What happens if I divide by zero?",
+        a: "The calculator stops and tells you. A fraction with a zero denominator is undefined, and so is dividing by a fraction whose numerator is zero.",
+      },
+    ],
+  },
+  "hours-between-times-calculator": {
+    howItWorks: [
+      "Each time is converted to minutes after midnight. The span is the end minus the start.",
+      "If the end time is earlier than the start, the shift is taken to cross midnight, so 24 hours are added before subtracting.",
+      "The unpaid break is subtracted from the span, and the result is shown as hours and minutes and as decimal hours for payroll.",
+    ],
+    example:
+      "A 09:00 start and 17:30 finish spans 8 hours 30 minutes. Taking a 30-minute unpaid break leaves 8 hours, or 8.00 decimal hours.",
+    faqs: [
+      {
+        q: "How do I enter a shift that finishes after midnight?",
+        a: "Enter the real times, such as 22:00 to 06:00. The calculator detects the crossing and counts the extra day.",
+      },
+      {
+        q: "Why are decimal hours useful?",
+        a: "Payroll and billing often use decimal hours. Eight hours and 15 minutes is 8.25, so multiplying by an hourly rate is simpler.",
+      },
+      {
+        q: "Does it handle a 24-hour shift?",
+        a: "Identical start and end times are rejected because the span is ambiguous. Enter the actual finish time for longer shifts.",
+      },
+    ],
+  },
+  "number-base-converter": {
+    howItWorks: [
+      "Each base uses a set of digits: binary uses 0 and 1, octal uses 0 to 7, decimal uses 0 to 9, and hexadecimal adds A to F for ten to fifteen.",
+      "The input is read digit by digit into an exact integer, then written out in each of the four bases.",
+      "Hexadecimal is shown in capitals, a common convention for colours and memory addresses.",
+    ],
+    example:
+      "The decimal number 255 is 11111111 in binary, 377 in octal and FF in hexadecimal. Those are the same value written four different ways.",
+    faqs: [
+      {
+        q: "Can I use very large numbers?",
+        a: "Yes. The conversion uses exact integer arithmetic, so long values keep every digit.",
+      },
+      {
+        q: "Can I enter negative numbers?",
+        a: "Yes. Start the number with a minus sign and the result keeps it.",
+      },
+      {
+        q: "Why does hexadecimal use letters?",
+        a: "Each hex digit holds four bits, so it packs binary into fewer characters. The letters A to F stand for ten to fifteen.",
+      },
+    ],
+  },
+  "password-strength-checker": {
+    howItWorks: [
+      "The estimate multiplies the password length by the log of the character pool it draws from. Lowercase, uppercase, digits and symbols add up to a pool of up to 95 characters.",
+      "A password containing a common word, such as password or qwerty, or a repeated character, is capped at a low estimate, because attackers try those first.",
+      "The score then maps to a band: under 28 bits is very weak, under 60 is fair, and 80 or more is very strong.",
+    ],
+    example:
+      "A 12-character password using all four character types has a pool of 95, which gives about 79 bits and a Strong rating. The same length containing the word password is capped at about 20 bits and rated Very weak.",
+    faqs: [
+      {
+        q: "Is my password sent anywhere?",
+        a: "No. The check runs entirely in your browser, and the value is not stored or logged.",
+      },
+      {
+        q: "Does a high score mean my password is safe?",
+        a: "It means the password is hard to guess by brute force. It does not detect every pattern, and a password reused on another site is still at risk.",
+      },
+      {
+        q: "Should I use symbols?",
+        a: "Length matters more than symbols. A long passphrase of random words is strong and easy to remember.",
+      },
+      {
+        q: "What should I do if my password is weak?",
+        a: "Use a password manager to generate and store a unique password for each site. The password generator on this site can create one.",
+      },
+    ],
+  },
+  "roman-numeral-converter": {
+    howItWorks: [
+      "To write a number as a Roman numeral, take the largest symbol values that fit, repeating and subtracting until nothing is left. Values such as 4, 9, 40 and 90 use subtractive pairs like IV and XC.",
+      "To read a numeral, add each symbol's value, except when a smaller symbol sits before a larger one, which subtracts.",
+      "The converter checks the result by converting it back, so invalid forms such as IIII are rejected.",
+    ],
+    example:
+      "The year 2026 becomes MMXXVI: two thousands, two tens and a six made of V and I.",
+    faqs: [
+      {
+        q: "Why is the range limited to 3,999?",
+        a: "The standard form uses M as the largest symbol and cannot write four M's in a row, so 3,999 is the usual upper limit.",
+      },
+      {
+        q: "Why is zero not supported?",
+        a: "The Roman system has no symbol for zero.",
+      },
+      {
+        q: "Can I type lowercase letters?",
+        a: "Yes. Numerals are converted to capitals, so xiv and XIV give the same result.",
+      },
+    ],
+  },
+  "bmi-calculator": {
+    howItWorks: [
+      "BMI is weight in kilograms divided by height in metres squared. Imperial figures are converted first: pounds divided by 2.2 and inches multiplied by 2.54.",
+      "Adult categories are: under 18.5 underweight, 18.5 to 24.9 healthy, 25 to 29.9 overweight and 30 or above obesity. These cut-offs come from the World Health Organization.",
+      "The healthy weight range works backwards from the same cut-offs: 18.5 and 24.9 multiplied by your height in metres squared.",
+    ],
+    example:
+      "70 kg at 175 cm gives a BMI of 22.9, which is in the healthy band. For that height, the healthy range runs from 56.7 kg to 76.3 kg.",
+    faqs: [
+      {
+        q: "Is BMI an accurate measure of health?",
+        a: "It is a quick population screening tool. It does not tell muscle from fat, and it says little about where fat sits. Waist measurement and other checks give a fuller picture.",
+      },
+      {
+        q: "Why does BMI not suit athletes?",
+        a: "Muscle weighs more than fat, so a muscular person can score as overweight while being lean. A body fat measure is a better guide for them.",
+      },
+      {
+        q: "Should I see a doctor about my BMI?",
+        a: "A clinician can weigh the result with your history, blood pressure, blood sugar and family health. Raise it with them if you are worried.",
+      },
+    ],
+  },
+  "calorie-calculator": {
+    howItWorks: [
+      "Resting energy (BMR) comes from the Mifflin-St Jeor equation: 10 times weight in kg, plus 6.25 times height in cm, minus 5 times age, plus 5 for men or minus 161 for women.",
+      "Maintenance calories multiply BMR by an activity factor from 1.2 for little exercise up to 1.9 for very hard training or a physical job.",
+      "Losing about 0.5 kg a week means eating roughly 500 calories below maintenance, because a kilogram of fat holds roughly 7,700 calories. Gaining is set more gently, at 250 calories above.",
+    ],
+    example:
+      "A 30-year-old man weighing 75 kg, 175 cm tall and training 3 to 5 days a week has a resting energy of about 1,699 kcal and maintenance near 2,633 kcal. Losing 0.5 kg a week means about 2,133 kcal a day.",
+    faqs: [
+      {
+        q: "Why are my results different from a fitness tracker?",
+        a: "Trackers estimate activity separately and can overcount. Choose the activity level honestly and track your weight for a few weeks to check the estimate.",
+      },
+      {
+        q: "How quickly should I lose weight?",
+        a: "About 0.5 to 1 kg a week is a common, sustainable pace. Faster losses usually cost muscle and are harder to keep off.",
+      },
+      {
+        q: "Is there a minimum safe intake?",
+        a: "The calculator warns when a target falls below about 1,200 kcal for women or 1,500 kcal for men. Intakes that low should be supervised by a clinician.",
+      },
+    ],
+  },
+  "pregnancy-due-date-calculator": {
+    howItWorks: [
+      "Pregnancy is counted from the first day of your last menstrual period. Adding 280 days (40 weeks) gives an estimated due date, using Naegele's rule for a 28-day cycle.",
+      "If your cycles are longer or shorter, the due date moves by the difference from 28 days, since ovulation and conception shift with the cycle.",
+      "Conception is estimated at about two weeks after the first day of the last period, and week 20 falls 140 days after it.",
+    ],
+    example:
+      "A last period starting 1 March 2026 with a 28-day cycle gives a due date of 6 December 2026. Conception is estimated around 15 March, and week 20 falls around 19 July.",
+    faqs: [
+      {
+        q: "How accurate is a due date?",
+        a: "Only about 4 in 100 babies are born on their due date. Most arrive in the weeks either side, so treat it as an estimate.",
+      },
+      {
+        q: "Is an early scan more accurate?",
+        a: "Yes. An ultrasound in the first trimester measures the baby and often gives a more reliable date than a period calculation.",
+      },
+      {
+        q: "What if I do not remember my last period?",
+        a: "Your midwife or doctor can estimate the date from an early scan. Use the result of the scan rather than this calculator.",
+      },
+    ],
+  },
+  "body-fat-calculator": {
+    howItWorks: [
+      "The US Navy method uses height, neck and waist for men, and adds hip for women. It works from logarithms of the measurements, so small changes in tape position shift the result.",
+      "Men measure the waist at the navel. Women measure the narrowest part of the waist and the widest part of the hips. Neck is measured just below the larynx.",
+      "The result is compared with bands for essential fat, athletic, fitness, average and above average. Those bands follow common fitness guidelines for each sex.",
+    ],
+    example:
+      "A 178 cm man with a 38 cm neck and an 88 cm waist has an estimated body fat of about 25.3%, which falls in the above average band.",
+    faqs: [
+      {
+        q: "How accurate is the tape method?",
+        a: "It usually lands within about 3 to 4 percentage points of a DEXA scan, and more if the tape is placed inconsistently. Measure the same way each time to track change.",
+      },
+      {
+        q: "When should I measure?",
+        a: "In the morning before eating, at the same point each time. Water retention after salty or large meals can add centimetres to the waist.",
+      },
+      {
+        q: "Is a low body fat always good?",
+        a: "Not necessarily. Very low levels can affect hormones and health. Essential fat is needed for normal body function.",
+      },
+    ],
+  },
+  "target-heart-rate-calculator": {
+    howItWorks: [
+      "Maximum heart rate is estimated as 220 minus your age. It is a rough average, and individuals can differ by 10 or more beats in either direction.",
+      "Each training zone is a percentage of that maximum. Zone 2 is 60 to 70 percent and suits long, easy sessions. Zone 4 is 80 to 90 percent and suits hard intervals.",
+      "Zones are a guide. Breathing, how talking feels and perceived effort tell you as much as the numbers do.",
+    ],
+    example:
+      "A 35-year-old has an estimated maximum of 185 bpm. Zone 2, for easy aerobic work, runs from 111 to 130 bpm.",
+    faqs: [
+      {
+        q: "Is 220 minus age accurate?",
+        a: "It is a widely used average, but it is imprecise. A field test or a lab test gives a better maximum if you train hard.",
+      },
+      {
+        q: "Do medicines affect my heart rate?",
+        a: "Yes. Beta blockers and some other medicines lower heart rate, so zones based on age may not suit you. Ask your prescriber before intense training.",
+      },
+      {
+        q: "Which zone should I train in?",
+        a: "Most people benefit from mostly easy sessions in Zone 2 with some harder work in Zone 4. Build up gradually.",
+      },
+    ],
+  },
 };

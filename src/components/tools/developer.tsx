@@ -6,7 +6,9 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
-import { CalcLayout, CopyButton, OutputPanel, SelectField, StatRow, TextAreaField, Verdict } from "./ui";
+import { CalcLayout, CopyButton, FieldGrid, OutputPanel, ResultHero, SelectField, StatRow, TextAreaField, TextField, Verdict } from "./ui";
+import { useToolState } from "@/hooks/use-tool-state";
+import { ToolShareBar } from "@/components/site/tool-share-bar";
 import { cn } from "@/lib/utils";
 
 /* ================================================================== */
@@ -695,6 +697,181 @@ export function HashGenerator() {
                 A tiny change in the input avalanche-shuffles every output bit. Hashes verify data —
                 they do not hide it; for passwords use a slow KDF like Argon2 or bcrypt, not raw SHA.
               </Verdict>
+            )}
+          </div>
+        )
+      }
+    />
+  );
+}
+
+/* ================================================================== */
+/* Number base converter                                               */
+/* ================================================================== */
+
+const BASE_OPTIONS = [
+  { value: "2", label: "Binary (base 2)" },
+  { value: "8", label: "Octal (base 8)" },
+  { value: "10", label: "Decimal (base 10)" },
+  { value: "16", label: "Hexadecimal (base 16)" },
+];
+
+/** Parses digits in the given base with BigInt, so large values stay exact. Returns null if invalid. */
+function parseInBase(text: string, base: number): bigint | null {
+  const clean = text.trim().replace(/[\s_]/g, "");
+  const negative = clean.startsWith("-");
+  const digits = negative ? clean.slice(1) : clean;
+  if (!digits) return null;
+  let value = BigInt(0);
+  const b = BigInt(base);
+  for (const ch of digits.toLowerCase()) {
+    const digit = parseInt(ch, 36);
+    if (Number.isNaN(digit) || digit >= base) return null;
+    value = value * b + BigInt(digit);
+  }
+  return negative ? -value : value;
+}
+
+export function NumberBaseConverter() {
+  const [params, setParams] = useToolState({ value: "255", base: "10" });
+  const { value, base } = params;
+  const parsed = parseInBase(value, Number(base));
+
+  const outputs = parsed === null ? [] : [
+    { label: "Binary", value: parsed.toString(2) },
+    { label: "Octal", value: parsed.toString(8) },
+    { label: "Decimal", value: parsed.toString(10) },
+    { label: "Hexadecimal", value: parsed.toString(16).toUpperCase() },
+  ];
+
+  return (
+    <CalcLayout
+      actions={<ToolShareBar />}
+      inputs={
+        <div className="space-y-4">
+          <FieldGrid>
+            <TextField
+              label="Number"
+              value={value}
+              onChange={(v) => setParams({ value: v })}
+              mono
+              placeholder="e.g. 255 or ff"
+              hint="Negative numbers are allowed with a leading minus"
+            />
+            <SelectField label="Number is in" value={base} onChange={(v) => setParams({ base: v })} options={BASE_OPTIONS} />
+          </FieldGrid>
+        </div>
+      }
+      results={
+        parsed === null ? (
+          <Verdict tone="bad">That is not a valid base {base} number. Check the digits and the base.</Verdict>
+        ) : (
+          <div className="space-y-4">
+            <div>
+              {outputs.map((o) => (
+                <div key={o.label} className="flex items-center justify-between gap-3 border-b border-border/70 py-2 last:border-0">
+                  <span className="text-sm text-muted-foreground">{o.label}</span>
+                  <span className="flex min-w-0 items-center gap-2">
+                    <span className="truncate font-mono text-sm font-semibold text-foreground">{o.value}</span>
+                    <CopyButton text={o.value} label="Copy" size="xs" />
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      }
+    />
+  );
+}
+
+/* ================================================================== */
+/* Password strength checker                                           */
+/* ================================================================== */
+
+const COMMON_WORDS = [
+  "password", "qwerty", "123456", "letmein", "admin", "welcome",
+  "iloveyou", "monkey", "dragon", "login", "football", "master",
+];
+
+function passwordBits(pw: string): { bits: number; pool: number; types: string[] } {
+  const types: string[] = [];
+  if (/[a-z]/.test(pw)) types.push("lowercase");
+  if (/[A-Z]/.test(pw)) types.push("uppercase");
+  if (/\d/.test(pw)) types.push("digits");
+  if (/[^a-zA-Z\d]/.test(pw)) types.push("symbols");
+  const pool = (types.includes("lowercase") ? 26 : 0) + (types.includes("uppercase") ? 26 : 0)
+    + (types.includes("digits") ? 10 : 0) + (types.includes("symbols") ? 33 : 0);
+  let bits = pw.length && pool ? pw.length * Math.log2(pool) : 0;
+  // A common word or a plain repeat means the length is not doing its job.
+  const lower = pw.toLowerCase();
+  if (COMMON_WORDS.some((w) => lower.includes(w))) bits = Math.min(bits, 20);
+  if (/^(.)\1+$/.test(pw)) bits = Math.min(bits, 8);
+  return { bits, pool, types };
+}
+
+function strengthBand(bits: number): { label: string; tone: "good" | "warn" | "bad" | "neutral" } {
+  if (bits < 28) return { label: "Very weak", tone: "bad" };
+  if (bits < 36) return { label: "Weak", tone: "bad" };
+  if (bits < 60) return { label: "Fair", tone: "warn" };
+  if (bits < 80) return { label: "Strong", tone: "good" };
+  return { label: "Very strong", tone: "good" };
+}
+
+export function PasswordStrengthChecker() {
+  const [password, setPassword] = React.useState("");
+  const [show, setShow] = React.useState(false);
+  const { bits, types } = passwordBits(password);
+  const band = strengthBand(bits);
+  const common = COMMON_WORDS.find((w) => password.toLowerCase().includes(w));
+
+  return (
+    <CalcLayout
+      inputs={
+        <div className="space-y-4">
+          <div className="space-y-1.5">
+            <Label htmlFor="password-strength-input" className="text-sm font-medium">
+              Password to check
+            </Label>
+            <Input
+              id="password-strength-input"
+              type={show ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="off"
+              spellCheck={false}
+              className="font-mono"
+              aria-describedby="password-strength-note"
+            />
+            <p id="password-strength-note" className="text-xs text-muted-foreground">
+              Checked in your browser only. Nothing you type is sent or stored.
+            </p>
+          </div>
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={show}
+              onChange={(e) => setShow(e.target.checked)}
+              className="h-4 w-4 accent-primary"
+            />
+            Show password
+          </label>
+        </div>
+      }
+      results={
+        password === "" ? (
+          <Verdict tone="neutral">Type a password to see its estimated strength.</Verdict>
+        ) : (
+          <div className="space-y-4">
+            <ResultHero label="Strength" value={band.label} sub={`About ${Math.round(bits)} bits of entropy`} />
+            <div>
+              <StatRow label="Length" value={`${password.length} characters`} />
+              <StatRow label="Character types" value={types.length ? types.join(", ") : "none"} />
+              <StatRow label="Estimated bits" value={String(Math.round(bits))} emphasis />
+            </div>
+            {common && <Verdict tone="bad">It contains the common word “{common}”, which attackers try first.</Verdict>}
+            {password.length < 12 && !common && (
+              <Verdict tone="warn">Use at least 12 characters. Length matters more than symbols.</Verdict>
             )}
           </div>
         )

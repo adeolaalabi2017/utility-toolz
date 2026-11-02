@@ -1,12 +1,10 @@
 import type { Tool } from "./types";
 
 /**
- * The complete catalogue: all 78 tools across twelve domains, matching
- * Appendix A of the build plan (Finance 8 · Marketing 8 · Advertising 8 ·
- * Business 8 · SEO 8 · Content 6 · Design 6 · Data 6 · Developer 6 ·
- * Productivity 6 · Education 4 · Everyday 4). Every entry carries the
- * full tool-page template content so each URL is a complete, unique page —
- * never a bare widget.
+ * The live catalogue, grouped by domain. Every entry carries the full
+ * tool-page template content so each URL is a complete, unique page —
+ * never a bare widget. Counts shown on the site come from this array,
+ * so do not type them into copy.
  */
 export const TOOLS: Tool[] = [
   /* ---------------------------- FINANCE ---------------------------- */
@@ -1221,5 +1219,152 @@ export const TOOLS: Tool[] = [
     tagline: "Track days, hours, and minutes remaining until your milestone events.",
     description: "Real-time client-side countdown timer for product launches, deadlines, holidays, and milestones with live second ticks.",
     tags: ["countdown", "timer", "event", "milestone", "days-until", "everyday"],
+  },
+  /* ---------------------------- FIRST BATCH ---------------------------- */
+  {
+    slug: "hourly-salary-converter",
+    name: "Hourly to Salary Converter",
+    domain: "finance",
+    category: "Income & Pay",
+    tagline: "Turn an hourly rate into weekly, monthly and annual pay in one step.",
+    description: "Convert an hourly wage into weekly, monthly and annual salary using your hours per week and paid weeks per year.",
+    tags: ["hourly to salary", "hourly wage", "annual salary", "pay calculator", "income"],
+  },
+  {
+    slug: "paycheck-calculator",
+    name: "Paycheck Calculator",
+    domain: "finance",
+    category: "Income & Pay",
+    tagline: "Estimate your take-home pay per paycheck after tax, FICA and retirement.",
+    description: "Work out what lands in your bank on each payday from your gross salary, pay frequency, tax rate and 401(k) contribution.",
+    tags: ["paycheck", "take-home pay", "net pay", "salary", "paycheck calculator"],
+  },
+  {
+    slug: "home-affordability-calculator",
+    name: "Home Affordability Calculator",
+    domain: "finance",
+    category: "Home Buying",
+    tagline: "Work out the most house you can afford from your income, debts and deposit.",
+    description: "Apply the 28% and 36% lender rules to your income and monthly debts to estimate the maximum home price you can afford.",
+    tags: ["home affordability", "how much house", "mortgage", "home price", "debt to income"],
+  },
+  {
+    slug: "retirement-savings-calculator",
+    name: "Retirement Savings Calculator",
+    domain: "finance",
+    category: "Retirement",
+    tagline: "See how far your savings could grow by retirement and what they might pay each month.",
+    description: "Project your retirement pot from current savings and monthly contributions, then estimate the monthly income it could support.",
+    tags: ["retirement", "retirement savings", "401k", "pension", "nest egg"],
+  },
+  {
+    slug: "electricity-cost-calculator",
+    name: "Electricity Cost Calculator",
+    domain: "everyday",
+    category: "Energy & Bills",
+    tagline: "Find out what any appliance costs to run per hour, per month and per year.",
+    description: "Enter an appliance's wattage, daily hours and your electricity price to see its running cost and monthly kWh use.",
+    tags: ["electricity cost", "energy cost", "kwh", "appliance", "power bill"],
+  },
+  {
+    slug: "random-number-generator",
+    name: "Random Number Generator",
+    domain: "everyday",
+    category: "Chance & Games",
+    tagline: "Draw random whole numbers in any range, with or without repeats.",
+    description: "Generate one or many random whole numbers between any minimum and maximum, optionally with no repeats, using your browser's secure random source.",
+    tags: ["random number", "random number generator", "dice", "lottery", "raffle"],
+  },
+  /* ------------------------- SECOND WAVE ------------------------- */
+  {
+    slug: "fraction-calculator",
+    name: "Fraction Calculator",
+    domain: "education",
+    category: "Maths",
+    tagline: "Add, subtract, multiply or divide fractions and get the simplified answer.",
+    description: "Enter two fractions and an operation to get the simplified fraction, its mixed-number form and its decimal value.",
+    tags: ["fraction calculator", "fractions", "simplify fraction", "mixed number", "math homework"],
+  },
+  {
+    slug: "hours-between-times-calculator",
+    name: "Hours Between Times Calculator",
+    domain: "productivity",
+    category: "Time Tracking",
+    tagline: "Work out hours worked between two times, minus your unpaid break.",
+    description: "Enter a start time, an end time and an unpaid break to get the hours worked, handling shifts that cross midnight.",
+    tags: ["hours between times", "time worked", "timesheet", "shift hours", "time calculator"],
+  },
+  {
+    slug: "number-base-converter",
+    name: "Number Base Converter",
+    domain: "developer",
+    category: "Number Systems",
+    tagline: "Convert numbers between binary, octal, decimal and hexadecimal.",
+    description: "Convert a number between binary, octal, decimal and hexadecimal, with exact results for very large values.",
+    tags: ["binary converter", "hex to decimal", "base converter", "octal", "number systems"],
+  },
+  {
+    slug: "password-strength-checker",
+    name: "Password Strength Checker",
+    domain: "developer",
+    category: "Security",
+    tagline: "Estimate how strong a password is, checked privately in your browser.",
+    description: "Check a password's estimated strength from its length and character types, and flag common words. Nothing you type leaves your browser.",
+    tags: ["password strength", "password checker", "entropy", "password security", "strong password"],
+  },
+  {
+    slug: "roman-numeral-converter",
+    name: "Roman Numeral Converter",
+    domain: "everyday",
+    category: "Conversions",
+    tagline: "Convert numbers to Roman numerals and back, from 1 to 3,999.",
+    description: "Turn any whole number from 1 to 3,999 into a Roman numeral, or convert a Roman numeral back into a number.",
+    tags: ["roman numerals", "roman numeral converter", "convert to roman", "MMXXVI", "numerals"],
+  },
+  /* ----------------------------- HEALTH ----------------------------- */
+  {
+    slug: "bmi-calculator",
+    name: "BMI Calculator",
+    domain: "health",
+    category: "Body metrics",
+    tagline: "Check your body mass index and the healthy weight range for your height.",
+    description: "Calculate your body mass index in metric or imperial units, see the healthy weight range for your height and read the adult category.",
+    tags: ["bmi", "bmi calculator", "body mass index", "healthy weight", "weight"],
+  },
+  {
+    slug: "calorie-calculator",
+    name: "Daily Calorie Calculator",
+    domain: "health",
+    category: "Nutrition",
+    tagline: "Estimate maintenance calories and the intake for losing or gaining weight.",
+    description: "Estimate your daily calorie needs from age, sex, height, weight and activity, with targets for losing or gaining about half a kilogram a week.",
+    tags: ["calorie calculator", "tdee", "maintenance calories", "weight loss", "bmr"],
+  },
+  {
+    slug: "pregnancy-due-date-calculator",
+    name: "Pregnancy Due Date Calculator",
+    domain: "health",
+    category: "Pregnancy",
+    tagline: "Estimate your due date from the first day of your last period.",
+    description: "Estimate your due date, likely conception date and mid-pregnancy date from the first day of your last period and your cycle length.",
+    tags: ["due date", "pregnancy due date", "pregnancy calculator", "conception date", "naegele"],
+  },
+  {
+    slug: "body-fat-calculator",
+    name: "Body Fat Percentage Calculator",
+    domain: "health",
+    category: "Body composition",
+    tagline: "Estimate body fat from a few tape measurements using the US Navy method.",
+    description: "Estimate your body fat percentage from height, neck, waist and hip measurements, with the category it falls into.",
+    tags: ["body fat", "body fat percentage", "navy method", "body composition", "tape measure"],
+  },
+  {
+    slug: "target-heart-rate-calculator",
+    name: "Target Heart Rate Calculator",
+    domain: "health",
+    category: "Fitness",
+    tagline: "Find your heart-rate training zones from your age.",
+    description: "Estimate your maximum heart rate from your age and see the beats per minute for each of five training zones.",
+    tags: ["target heart rate", "heart rate zones", "max heart rate", "training zones", "cardio"],
   },
 ];

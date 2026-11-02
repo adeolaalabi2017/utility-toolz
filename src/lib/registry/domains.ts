@@ -11,13 +11,13 @@ import {
   Timer,
   GraduationCap,
   Sparkles,
+  HeartPulse,
 } from "lucide-react";
 import type { Domain, DomainSlug, PlannedTool } from "./types";
 
 /**
- * The twelve professional domains (build plan §2.1).
- * All twelve are live — the full 78-tool catalogue from Appendix A of the
- * build plan shipped through Phase 4 of the roadmap.
+ * The live domains (build plan §2.1), plus Health & Body added later.
+ * Every domain listed here is live; the planned roadmap is kept in PLANNED_TOOLS.
  */
 export const DOMAINS: Domain[] = [
   {
@@ -140,6 +140,16 @@ export const DOMAINS: Domain[] = [
     status: "live",
     phase: 4,
   },
+  {
+    slug: "health",
+    name: "Health & Body",
+    shortName: "Health",
+    description:
+      "Body metrics, calorie needs, pregnancy dates and heart-rate zones, with the limits of each estimate stated.",
+    icon: HeartPulse,
+    status: "live",
+    phase: 5,
+  },
 ];
 
 export const domainBySlug = (slug: string): Domain | undefined =>
@@ -148,8 +158,8 @@ export const domainBySlug = (slug: string): Domain | undefined =>
 export const LIVE_DOMAINS = DOMAINS.filter((d) => d.status === "live");
 
 /**
- * The build-plan roadmap from Appendix A is fully shipped: Phases 1-4
- * delivered all 78 tools. The list is kept (empty) so hub "next up" and
+ * The build-plan roadmap from Appendix A is fully shipped. The list is
+ * kept (empty) so hub "next up" and
  * profession "coming for you" sections keep compiling — future batches of
  * the catalogue would be appended here before their tools go live.
  */

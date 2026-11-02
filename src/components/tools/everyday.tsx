@@ -12,8 +12,13 @@ import {
   SelectField,
   StatRow,
   Verdict,
+  CopyButton,
+  TextField,
 } from "./ui";
-import { fmtNum, num } from "@/lib/format";
+import { fmtNum, fmtUSD, num } from "@/lib/format";
+import { useToolState } from "@/hooks/use-tool-state";
+import { ToolShareBar } from "@/components/site/tool-share-bar";
+import { Button } from "@/components/ui/button";
 import {
   addMonthsSafe,
   countWeekendDays,
@@ -423,6 +428,299 @@ export function TemperatureConverter() {
                     ? "At or below water's freezing point."
                     : "Comfortable range for most life on Earth."}
             </Verdict>
+          </div>
+        )
+      }
+    />
+  );
+}
+
+/* ================================================================== */
+/* Electricity cost calculator                                         */
+/* ================================================================== */
+
+const APPLIANCES = [
+  { label: "LED bulb", watts: 10 },
+  { label: "Laptop", watts: 60 },
+  { label: "TV", watts: 100 },
+  { label: "Fridge", watts: 150 },
+  { label: "Window AC", watts: 1000 },
+  { label: "Space heater", watts: 1500 },
+];
+
+export function ElectricityCostCalculator() {
+  const [params, setParams] = useToolState({ watts: "100", hours: "8", days: "30", rate: "0.16" });
+  const { watts, hours, days, rate } = params;
+
+  const kwhPerMonth = (num(watts) * num(hours) * num(days)) / 1000;
+  const perHour = (num(watts) / 1000) * num(rate);
+  const perDay = perHour * num(hours);
+  const perMonth = kwhPerMonth * num(rate);
+
+  return (
+    <CalcLayout
+      actions={<ToolShareBar />}
+      inputs={
+        <div className="space-y-4">
+          <div>
+            <p className="mb-2 text-sm font-medium text-muted-foreground">Start from an appliance</p>
+            <div className="flex flex-wrap gap-2">
+              {APPLIANCES.map((a) => (
+                <button
+                  type="button"
+                  key={a.label}
+                  aria-pressed={num(watts) === a.watts}
+                  onClick={() => setParams({ watts: String(a.watts) })}
+                  className="rounded-full border px-3 py-1 text-xs font-medium hover:bg-accent aria-pressed:border-primary aria-pressed:bg-primary aria-pressed:text-primary-foreground"
+                >
+                  {a.label}
+                </button>
+              ))}
+            </div>
+          </div>
+          <FieldGrid>
+            <NumberField
+              label="Power draw"
+              value={watts}
+              onChange={(v) => setParams({ watts: v })}
+              suffix="W"
+              min={0}
+              hint="Check the label on the device"
+            />
+            <NumberField
+              label="Hours used per day"
+              value={hours}
+              onChange={(v) => setParams({ hours: v })}
+              suffix="h"
+              min={0}
+              step={0.5}
+            />
+            <NumberField
+              label="Days used per month"
+              value={days}
+              onChange={(v) => setParams({ days: v })}
+              min={0}
+            />
+            <NumberField
+              label="Electricity price"
+              value={rate}
+              onChange={(v) => setParams({ rate: v })}
+              prefix="$"
+              suffix="/kWh"
+              min={0}
+              step={0.01}
+              hint="Find it on your energy bill"
+            />
+          </FieldGrid>
+        </div>
+      }
+      results={
+        <div className="space-y-4">
+          <ResultHero
+            label="Monthly cost"
+            value={fmtUSD(perMonth, 2)}
+            sub={`${fmtNum(kwhPerMonth, 1)} kWh a month`}
+          />
+          <div>
+            <StatRow label="Cost per hour" value={fmtUSD(perHour, 3)} />
+            <StatRow label="Cost per day" value={fmtUSD(perDay, 2)} />
+            <StatRow label="Cost per year" value={fmtUSD(perMonth * 12, 2)} emphasis />
+          </div>
+        </div>
+      }
+    />
+  );
+}
+
+/* ================================================================== */
+/* Random number generator                                             */
+/* ================================================================== */
+
+function randomInt(min: number, max: number): number {
+  const buf = new Uint32Array(1);
+  crypto.getRandomValues(buf);
+  return min + (buf[0] % (max - min + 1));
+}
+
+export function RandomNumberGenerator() {
+  const [params, setParams] = useToolState({ min: "1", max: "100", count: "1", unique: false as boolean });
+  const [drawn, setDrawn] = React.useState<number[]>([]);
+  const { min, max, count, unique } = params;
+
+  const lo = Math.floor(num(min));
+  const hi = Math.floor(num(max));
+  const n = Math.floor(num(count));
+  const rangeSize = hi - lo + 1;
+  const problem =
+    hi < lo
+      ? "The maximum must be at least the minimum."
+      : n < 1 || n > 1000
+        ? "Choose between 1 and 1,000 numbers."
+        : unique && n > rangeSize
+          ? `Unique numbers need a range of at least ${n} values.`
+          : "";
+
+  const generate = () => {
+    if (problem) return;
+    const out: number[] = [];
+    const seen = new Set<number>();
+    while (out.length < n) {
+      const v = randomInt(lo, hi);
+      if (unique) {
+        if (seen.has(v)) continue;
+        seen.add(v);
+      }
+      out.push(v);
+    }
+    setDrawn(out);
+  };
+
+  return (
+    <CalcLayout
+      actions={<ToolShareBar />}
+      inputs={
+        <div className="space-y-4">
+          <FieldGrid>
+            <NumberField
+              label="Minimum"
+              value={min}
+              onChange={(v) => setParams({ min: v })}
+            />
+            <NumberField
+              label="Maximum"
+              value={max}
+              onChange={(v) => setParams({ max: v })}
+            />
+            <NumberField
+              label="How many numbers"
+              value={count}
+              onChange={(v) => setParams({ count: v })}
+              min={1}
+            />
+          </FieldGrid>
+          <label className="flex items-center gap-2 text-sm">
+            <input
+              type="checkbox"
+              checked={unique}
+              onChange={(e) => setParams({ unique: e.target.checked })}
+              className="h-4 w-4 accent-primary"
+            />
+            No repeats
+          </label>
+          {problem && <Verdict tone="bad">{problem}</Verdict>}
+          <Button type="button" onClick={generate} disabled={Boolean(problem)} className="w-full sm:w-auto">
+            Generate numbers
+          </Button>
+        </div>
+      }
+      results={
+        <div className="space-y-4" role="status" aria-live="polite">
+          {drawn.length === 0 ? (
+            <Verdict tone="neutral">Press Generate to draw numbers between {lo} and {hi}.</Verdict>
+          ) : drawn.length === 1 ? (
+            <ResultHero label="Your number" value={String(drawn[0])} sub={`Between ${lo} and ${hi}`} />
+          ) : (
+            <div className="space-y-3">
+              <ul className="flex flex-wrap gap-2">
+                {drawn.map((v, i) => (
+                  <li key={`${v}-${i}`} className="tnum rounded-full bg-muted px-3 py-1 text-sm font-medium">
+                    {v}
+                  </li>
+                ))}
+              </ul>
+              <CopyButton text={drawn.join(", ")} label="Copy numbers" />
+            </div>
+          )}
+        </div>
+      }
+    />
+  );
+}
+
+/* ================================================================== */
+/* Roman numeral converter                                             */
+/* ================================================================== */
+
+const ROMAN_TABLE: [number, string][] = [
+  [1000, "M"], [900, "CM"], [500, "D"], [400, "CD"], [100, "C"], [90, "XC"],
+  [50, "L"], [40, "XL"], [10, "X"], [9, "IX"], [5, "V"], [4, "IV"], [1, "I"],
+];
+
+function toRoman(n: number): string {
+  let rest = n;
+  let out = "";
+  for (const [value, symbol] of ROMAN_TABLE) {
+    while (rest >= value) {
+      out += symbol;
+      rest -= value;
+    }
+  }
+  return out;
+}
+
+/** Returns the number for a canonical Roman numeral, or null. Round-trips so malformed input such as IIII is rejected. */
+function fromRoman(text: string): number | null {
+  const s = text.toUpperCase();
+  if (!/^[MDCLXVI]+$/.test(s)) return null;
+  const values: Record<string, number> = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+  let total = 0;
+  for (let i = 0; i < s.length; i++) {
+    const cur = values[s[i]];
+    const next = values[s[i + 1]] ?? 0;
+    total += cur < next ? -cur : cur;
+  }
+  return total >= 1 && total <= 3999 && toRoman(total) === s ? total : null;
+}
+
+export function RomanNumeralConverter() {
+  const [params, setParams] = useToolState({ text: "2026" });
+  const { text } = params;
+  const trimmed = text.trim();
+
+  let result: string | null = null;
+  let mode: "toRoman" | "fromRoman" | null = null;
+  if (/^\d+$/.test(trimmed)) {
+    const n = Number(trimmed);
+    if (n >= 1 && n <= 3999) {
+      result = toRoman(n);
+      mode = "toRoman";
+    }
+  } else if (trimmed !== "") {
+    const n = fromRoman(trimmed);
+    if (n !== null) {
+      result = String(n);
+      mode = "fromRoman";
+    }
+  }
+
+  return (
+    <CalcLayout
+      actions={<ToolShareBar />}
+      inputs={
+        <div className="space-y-4">
+          <TextField
+            label="Number or Roman numeral"
+            value={text}
+            onChange={(v) => setParams({ text: v })}
+            mono
+            placeholder="e.g. 2026 or MMXXVI"
+            hint="Whole numbers from 1 to 3,999. Roman numerals are converted back automatically."
+          />
+        </div>
+      }
+      results={
+        result === null ? (
+          <Verdict tone="bad">
+            Enter a whole number from 1 to 3,999, or a valid Roman numeral such as XIV.
+          </Verdict>
+        ) : (
+          <div className="space-y-4">
+            <ResultHero
+              label={mode === "toRoman" ? "Roman numeral" : "Number"}
+              value={result}
+              sub={mode === "toRoman" ? `${trimmed} in Roman numerals` : `${trimmed.toUpperCase()} as a number`}
+              copyText={result}
+            />
           </div>
         )
       }

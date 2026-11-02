@@ -19,6 +19,8 @@ import {
   Verdict,
 } from "./ui";
 import { fmtNum, num } from "@/lib/format";
+import { useToolState } from "@/hooks/use-tool-state";
+import { ToolShareBar } from "@/components/site/tool-share-bar";
 
 /* ================================================================== */
 /* 71. GPA calculator                                                  */
@@ -565,6 +567,105 @@ export function CitationFormatter() {
             so italicise the container in your document.
           </Verdict>
         </div>
+      }
+    />
+  );
+}
+
+/* ================================================================== */
+/* Fraction calculator                                                 */
+/* ================================================================== */
+
+function fractionGcd(a: number, b: number): number {
+  let x = Math.abs(a);
+  let y = Math.abs(b);
+  while (y) [x, y] = [y, x % y];
+  return x || 1;
+}
+
+const FRACTION_OPS = [
+  { value: "add", label: "Add (+)" },
+  { value: "subtract", label: "Subtract (−)" },
+  { value: "multiply", label: "Multiply (×)" },
+  { value: "divide", label: "Divide (÷)" },
+];
+
+export function FractionCalculator() {
+  const [params, setParams] = useToolState({ n1: "3", d1: "4", op: "add", n2: "2", d2: "5" });
+  const { n1, d1, op, n2, d2 } = params;
+
+  const a = Math.floor(num(n1));
+  const b = Math.floor(num(d1));
+  const c = Math.floor(num(n2));
+  const d = Math.floor(num(d2));
+  const problem =
+    b === 0 || d === 0
+      ? "A denominator cannot be zero."
+      : op === "divide" && c === 0
+        ? "You cannot divide by zero."
+        : "";
+
+  let rn = 0;
+  let rd = 1;
+  if (!problem) {
+    if (op === "add") {
+      rn = a * d + c * b;
+      rd = b * d;
+    } else if (op === "subtract") {
+      rn = a * d - c * b;
+      rd = b * d;
+    } else if (op === "multiply") {
+      rn = a * c;
+      rd = b * d;
+    } else {
+      rn = a * d;
+      rd = b * c;
+    }
+    if (rd < 0) {
+      rn = -rn;
+      rd = -rd;
+    }
+    const g = fractionGcd(rn, rd);
+    rn /= g;
+    rd /= g;
+  }
+
+  const whole = Math.trunc(rn / rd);
+  const remainder = Math.abs(rn) % rd;
+  const simple = rd === 1 ? `${rn}` : `${rn}/${rd}`;
+  const mixed = remainder === 0 ? `${whole}` : whole === 0 ? simple : `${whole} ${remainder}/${rd}`;
+  const decimal = rn / rd;
+
+  return (
+    <CalcLayout
+      actions={<ToolShareBar />}
+      inputs={
+        <div className="space-y-4">
+          <FieldGrid cols={3}>
+            <NumberField label="Numerator" value={n1} onChange={(v) => setParams({ n1: v })} ariaLabel="First numerator" />
+            <NumberField label="Denominator" value={d1} onChange={(v) => setParams({ d1: v })} ariaLabel="First denominator" />
+            <SelectField label="Operation" value={op} onChange={(v) => setParams({ op: v })} options={FRACTION_OPS} />
+            <NumberField label="Numerator" value={n2} onChange={(v) => setParams({ n2: v })} ariaLabel="Second numerator" />
+            <NumberField label="Denominator" value={d2} onChange={(v) => setParams({ d2: v })} ariaLabel="Second denominator" />
+          </FieldGrid>
+        </div>
+      }
+      results={
+        problem ? (
+          <Verdict tone="bad">{problem}</Verdict>
+        ) : (
+          <div className="space-y-4">
+            <ResultHero
+              label="Simplified result"
+              value={simple}
+              sub={`Mixed number ${mixed}`}
+            />
+            <div>
+              <StatRow label="Decimal" value={fmtNum(decimal, 4)} emphasis />
+              <StatRow label="Mixed number" value={mixed} />
+            </div>
+          </div>
+        )
       }
     />
   );

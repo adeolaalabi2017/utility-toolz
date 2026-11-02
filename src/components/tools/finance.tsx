@@ -802,3 +802,355 @@ export function DebtRepaymentCalculator() {
     />
   );
 }
+
+/* ================================================================== */
+/* Hourly to salary converter                                          */
+/* ================================================================== */
+
+export function HourlySalaryConverter() {
+  const [params, setParams] = useToolState({ rate: "25", hours: "40", weeks: "52" });
+  const { rate, hours, weeks } = params;
+
+  const hourly = num(rate);
+  const weekly = hourly * num(hours);
+  const annual = weekly * num(weeks);
+
+  return (
+    <CalcLayout
+      actions={<ToolShareBar />}
+      inputs={
+        <div className="space-y-4">
+          <NumberField
+            label="Hourly rate"
+            value={rate}
+            onChange={(v) => setParams({ rate: v })}
+            prefix="$"
+            min={0}
+          />
+          <FieldGrid>
+            <NumberField
+              label="Hours per week"
+              value={hours}
+              onChange={(v) => setParams({ hours: v })}
+              suffix="h"
+              min={0}
+            />
+            <NumberField
+              label="Paid weeks per year"
+              value={weeks}
+              onChange={(v) => setParams({ weeks: v })}
+              min={0}
+              hint="52 for no unpaid leave"
+            />
+          </FieldGrid>
+        </div>
+      }
+      results={
+        <div className="space-y-4">
+          <ResultHero
+            label="Annual salary"
+            value={fmtUSD(annual)}
+            sub={`${fmtUSD(hourly, 2)} an hour, ${num(hours)} hours a week`}
+          />
+          <div>
+            <StatRow label="Weekly pay" value={fmtUSD(weekly, 2)} />
+            <StatRow label="Daily pay (5-day week)" value={fmtUSD(weekly / 5, 2)} />
+            <StatRow label="Monthly pay" value={fmtUSD(annual / 12, 2)} emphasis />
+          </div>
+        </div>
+      }
+    />
+  );
+}
+
+/* ================================================================== */
+/* Paycheck (take-home pay) calculator                                 */
+/* ================================================================== */
+
+export function PaycheckCalculator() {
+  const [params, setParams] = useToolState({
+    salary: "65,000",
+    frequency: "26",
+    taxRate: "22",
+    retirement: "5",
+  });
+  const { salary, frequency, taxRate, retirement } = params;
+
+  const perYear = num(frequency) || 26;
+  const gross = num(salary) / perYear;
+  const income = gross * (num(taxRate) / 100);
+  const fica = gross * 0.0765;
+  const retire = gross * (num(retirement) / 100);
+  const net = gross - income - fica - retire;
+
+  return (
+    <CalcLayout
+      actions={<ToolShareBar />}
+      inputs={
+        <div className="space-y-4">
+          <NumberField
+            label="Annual gross salary"
+            value={salary}
+            onChange={(v) => setParams({ salary: v })}
+            prefix="$"
+            min={0}
+          />
+          <FieldGrid>
+            <SelectField
+              label="Pay frequency"
+              value={frequency}
+              onChange={(v) => setParams({ frequency: v })}
+              options={[
+                { value: "52", label: "Weekly" },
+                { value: "26", label: "Every two weeks" },
+                { value: "24", label: "Twice a month" },
+                { value: "12", label: "Monthly" },
+              ]}
+            />
+            <NumberField
+              label="Income tax rate (federal + state)"
+              value={taxRate}
+              onChange={(v) => setParams({ taxRate: v })}
+              suffix="%"
+              min={0}
+              hint="Effective rate, not the top bracket"
+            />
+          </FieldGrid>
+          <NumberField
+            label="401(k) or pension contribution"
+            value={retirement}
+            onChange={(v) => setParams({ retirement: v })}
+            suffix="%"
+            min={0}
+          />
+        </div>
+      }
+      results={
+        <div className="space-y-4">
+          <ResultHero
+            label="Take-home per paycheck"
+            value={fmtUSD(net, 2)}
+            sub={`${fmtUSD(net * perYear)} a year after deductions`}
+          />
+          <div>
+            <StatRow label="Gross per paycheck" value={fmtUSD(gross, 2)} />
+            <StatRow label="Income tax" value={`−${fmtUSD(income, 2)}`} />
+            <StatRow label="Social Security and Medicare (7.65%)" value={`−${fmtUSD(fica, 2)}`} />
+            <StatRow label="Retirement contribution" value={`−${fmtUSD(retire, 2)}`} />
+            <StatRow label="Take-home per paycheck" value={fmtUSD(net, 2)} emphasis />
+          </div>
+          <Verdict tone="neutral">
+            This is an estimate. It applies one flat tax rate and ignores pre-tax benefits, health premiums and the Social Security wage cap. Your payslip is the exact figure.
+          </Verdict>
+        </div>
+      }
+    />
+  );
+}
+
+/* ================================================================== */
+/* Home affordability calculator                                       */
+/* ================================================================== */
+
+export function HomeAffordabilityCalculator() {
+  const [params, setParams] = useToolState({
+    income: "95,000",
+    debts: "450",
+    down: "60,000",
+    rate: "6.5",
+    years: "30",
+    taxIns: "450",
+  });
+  const { income, debts, down, rate, years, taxIns } = params;
+
+  const monthlyIncome = num(income) / 12;
+  const frontCap = monthlyIncome * 0.28;
+  const backCap = monthlyIncome * 0.36 - num(debts);
+  const housingBudget = Math.max(0, Math.min(frontCap, backCap));
+  const principalInterest = Math.max(0, housingBudget - num(taxIns));
+
+  const r = num(rate) / 100 / 12;
+  const n = num(years) * 12;
+  const loan =
+    n <= 0
+      ? 0
+      : r === 0
+        ? principalInterest * n
+        : (principalInterest * (1 - Math.pow(1 + r, -n))) / r;
+  const price = loan + num(down);
+
+  return (
+    <CalcLayout
+      actions={<ToolShareBar />}
+      inputs={
+        <div className="space-y-4">
+          <FieldGrid>
+            <NumberField
+              label="Annual gross income"
+              value={income}
+              onChange={(v) => setParams({ income: v })}
+              prefix="$"
+              min={0}
+            />
+            <NumberField
+              label="Monthly debt payments"
+              value={debts}
+              onChange={(v) => setParams({ debts: v })}
+              prefix="$"
+              min={0}
+              hint="Car loans, cards, student loans"
+            />
+            <NumberField
+              label="Down payment"
+              value={down}
+              onChange={(v) => setParams({ down: v })}
+              prefix="$"
+              min={0}
+            />
+            <NumberField
+              label="Interest rate"
+              value={rate}
+              onChange={(v) => setParams({ rate: v })}
+              suffix="%"
+              min={0}
+            />
+            <NumberField
+              label="Loan term"
+              value={years}
+              onChange={(v) => setParams({ years: v })}
+              suffix="years"
+              min={1}
+            />
+            <NumberField
+              label="Property tax and insurance"
+              value={taxIns}
+              onChange={(v) => setParams({ taxIns: v })}
+              prefix="$"
+              suffix="/mo"
+              min={0}
+            />
+          </FieldGrid>
+        </div>
+      }
+      results={
+        <div className="space-y-4">
+          <ResultHero
+            label="Estimated maximum home price"
+            value={fmtUSD(price)}
+            sub={`Loan of ${fmtUSD(loan)} plus ${fmtUSD(num(down))} down`}
+          />
+          <div>
+            <StatRow label="Monthly housing budget" value={fmtUSD(housingBudget)} />
+            <StatRow label="Principal and interest" value={fmtUSD(principalInterest)} />
+            <StatRow label="Property tax and insurance" value={fmtUSD(num(taxIns))} />
+            <StatRow label="Housing share of income (28% limit)" value={fmtPct(monthlyIncome ? (housingBudget / monthlyIncome) * 100 : 0, 1)} emphasis />
+          </div>
+          <Verdict tone={backCap < frontCap ? "warn" : "neutral"}>
+            {backCap < frontCap
+              ? "Your existing debts, not your income, set this budget. Paying down a loan raises the price you can afford."
+              : "Income sets this budget. Lenders apply the 28% housing and 36% total debt limits used here."}
+          </Verdict>
+        </div>
+      }
+    />
+  );
+}
+
+/* ================================================================== */
+/* Retirement savings calculator                                       */
+/* ================================================================== */
+
+export function RetirementSavingsCalculator() {
+  const [params, setParams] = useToolState({
+    age: "35",
+    retireAge: "65",
+    balance: "80,000",
+    monthly: "800",
+    returnRate: "7",
+    withdrawal: "4",
+  });
+  const { age, retireAge, balance, monthly, returnRate, withdrawal } = params;
+
+  const years = Math.max(0, num(retireAge) - num(age));
+  const months = years * 12;
+  const r = num(returnRate) / 100 / 12;
+  const growth = Math.pow(1 + r, months);
+  const contributed = num(balance) + num(monthly) * months;
+  const future =
+    r === 0
+      ? num(balance) + num(monthly) * months
+      : num(balance) * growth + (num(monthly) * (growth - 1)) / r;
+  const interest = future - contributed;
+  const monthlyIncome = (future * (num(withdrawal) / 100)) / 12;
+
+  return (
+    <CalcLayout
+      actions={<ToolShareBar />}
+      inputs={
+        <div className="space-y-4">
+          <FieldGrid>
+            <NumberField
+              label="Current age"
+              value={age}
+              onChange={(v) => setParams({ age: v })}
+              min={0}
+            />
+            <NumberField
+              label="Retirement age"
+              value={retireAge}
+              onChange={(v) => setParams({ retireAge: v })}
+              min={0}
+            />
+            <NumberField
+              label="Current savings"
+              value={balance}
+              onChange={(v) => setParams({ balance: v })}
+              prefix="$"
+              min={0}
+            />
+            <NumberField
+              label="Monthly contribution"
+              value={monthly}
+              onChange={(v) => setParams({ monthly: v })}
+              prefix="$"
+              min={0}
+            />
+            <NumberField
+              label="Expected annual return"
+              value={returnRate}
+              onChange={(v) => setParams({ returnRate: v })}
+              suffix="%"
+              min={0}
+              hint="Nominal, before fees and inflation"
+            />
+            <NumberField
+              label="Annual withdrawal rate"
+              value={withdrawal}
+              onChange={(v) => setParams({ withdrawal: v })}
+              suffix="%"
+              min={0}
+              hint="4% is the common rule of thumb"
+            />
+          </FieldGrid>
+        </div>
+      }
+      results={
+        <div className="space-y-4">
+          <ResultHero
+            label={`Projected savings at ${num(retireAge)}`}
+            value={fmtUSD(future)}
+            sub={`${years} years of growth`}
+          />
+          <div>
+            <StatRow label="Total you contribute" value={fmtUSD(contributed)} />
+            <StatRow label="Growth from returns" value={fmtUSD(interest)} />
+            <StatRow label="Sustainable income per month" value={fmtUSD(monthlyIncome)} emphasis />
+          </div>
+          <Verdict tone="neutral">
+            Figures are in nominal terms, so they do not adjust for inflation. Results are projections, not guarantees.
+          </Verdict>
+        </div>
+      }
+    />
+  );
+}

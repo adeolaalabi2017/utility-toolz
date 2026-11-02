@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 
 const SAMPLE_MD = `# Launch Strategy 2026
 
-We are releasing the **Utility Toolz** platform across **12 domains**.
+We are releasing the **Utility Toolz** platform across **13 domains**.
 
 ## Key Objectives
 - Complete client-side calculation

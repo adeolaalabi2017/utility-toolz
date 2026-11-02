@@ -617,3 +617,49 @@ export function LengthPill({ value, min, max }: { value: number; min: number; ma
     </span>
   );
 }
+
+/** Single-line text input with a programmatic label, for values that are not numbers. */
+export function TextField({
+  label,
+  value,
+  onChange,
+  type = "text",
+  placeholder,
+  hint,
+  mono,
+  autoComplete = "off",
+}: {
+  label: string;
+  value: string;
+  onChange: (v: string) => void;
+  type?: "text" | "password" | "time" | "date";
+  placeholder?: string;
+  hint?: string;
+  mono?: boolean;
+  autoComplete?: string;
+}) {
+  const id = React.useId();
+  return (
+    <div className="space-y-1.5">
+      <Label htmlFor={id} className="text-sm font-medium">
+        {label}
+      </Label>
+      <Input
+        id={id}
+        type={type}
+        value={value}
+        placeholder={placeholder}
+        autoComplete={autoComplete}
+        spellCheck={false}
+        onChange={(e) => onChange(e.target.value)}
+        aria-describedby={hint ? `${id}-hint` : undefined}
+        className={cn("tnum", mono && "font-mono")}
+      />
+      {hint && (
+        <p id={`${id}-hint`} className="text-xs text-muted-foreground">
+          {hint}
+        </p>
+      )}
+    </div>
+  );
+}
