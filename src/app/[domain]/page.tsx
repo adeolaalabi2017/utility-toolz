@@ -33,6 +33,7 @@ export async function generateMetadata({
       title: `${d.name} Tools & Calculators — Utility Toolz`,
       description: d.description,
       type: "website",
+      images: ["/opengraph-image"],
       url: `/${d.slug}`,
     },
     twitter: {

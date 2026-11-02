@@ -20,7 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   ];
 
-  // 12 Professional Domains
+  // Every live domain
   const domainRoutes: MetadataRoute.Sitemap = DOMAINS.map((d) => ({
     url: `${baseUrl}/${d.slug}`,
     lastModified: new Date(),
@@ -28,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.8,
   }));
 
-  // 6 Profession Hubs
+  // Profession hubs
   const professionRoutes: MetadataRoute.Sitemap = PROFESSIONS.map((p) => ({
     url: `${baseUrl}/professions/${p.slug}`,
     lastModified: new Date(),
@@ -36,7 +36,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }));
 
-  // All 119 Individual Tool Pages
+  // Every tool page
   const toolRoutes: MetadataRoute.Sitemap = TOOLS.map((t) => ({
     url: `${baseUrl}/${t.domain}/${t.slug}`,
     lastModified: new Date(),

@@ -37,6 +37,7 @@ export async function generateMetadata({
       title: `${title} — Utility Toolz`,
       description,
       type: "website",
+      images: ["/opengraph-image"],
       url: canonicalUrl,
     },
     twitter: {

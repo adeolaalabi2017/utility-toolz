@@ -1,24 +1,42 @@
-"use client";
+import type { Metadata } from "next";
+import { DOMAINS, TOOLS } from "@/lib/registry";
+import { HomeEntry } from "./home-entry";
 
-import * as React from "react";
-import { useRouter } from "next/navigation";
-import { HomePage } from "@/components/pages/home";
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://utilitytoolz.com";
+
+export const metadata: Metadata = {
+  alternates: { canonical: "/" },
+};
+
+// Site-wide entities for search engines. The home page is the only place they appear.
+const siteSchema = [
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: "Utility Toolz",
+    url: siteUrl,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: "Utility Toolz",
+    url: siteUrl,
+    logo: `${siteUrl}/icon-512.png`,
+    description: `Free professional calculators and utilities, ${TOOLS.length} tools across ${DOMAINS.length} domains.`,
+  },
+];
 
 export default function RootPage() {
-  const router = useRouter();
-
-  // Backward compatibility: seamlessly redirect legacy hash routes (e.g. /#/finance/vat-calculator -> /finance/vat-calculator)
-  React.useEffect(() => {
-    if (typeof window !== "undefined" && window.location.hash.startsWith("#/")) {
-      const cleanPath = window.location.hash.replace(/^#\/?/, "/");
-      // Only follow plain slug paths, so a crafted hash like "#//evil.com" can't
-      // turn this into an open redirect to another origin.
-      const [path, query] = cleanPath.split("?", 2);
-      if (path !== "/" && /^(\/[a-z0-9-]+)+\/?$/i.test(path)) {
-        router.replace(query ? `${path}?${query}` : path);
-      }
-    }
-  }, [router]);
-
-  return <HomePage />;
+  return (
+    <>
+      {siteSchema.map((entity) => (
+        <script
+          key={entity["@type"]}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(entity) }}
+        />
+      ))}
+      <HomeEntry />
+    </>
+  );
 }

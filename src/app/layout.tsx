@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     template: "%s | Utility Toolz",
   },
   description:
-    `A domain-first platform of professional calculators and utilities for marketers, accountants, business owners, media buyers, developers, designers, project managers and students. ${TOOL_COUNT} free tools across ${DOMAIN_COUNT} domains.`,
+    `Free professional calculators and utilities for finance, marketing, business, developers and students. ${TOOL_COUNT} tools across ${DOMAIN_COUNT} domains.`,
   keywords: [
     "calculators",
     "marketing tools",
@@ -80,9 +80,6 @@ export const metadata: Metadata = {
     siteName: "Utility Toolz",
     type: "website",
     url: siteUrl,
-  },
-  alternates: {
-    canonical: "/",
   },
 };
 
