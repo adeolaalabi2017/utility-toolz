@@ -1626,4 +1626,77 @@ export const TOOLS: Tool[] = [
       "Open or paste an image to decode its QR code, with links, Wi-Fi details and contact cards laid out clearly, all without uploading the image.",
     tags: ["qr code reader", "scan qr code", "decode qr", "qr scanner", "qr code"],
   },
+  /* ------------------------- CONSTRUCTION ------------------------- */
+  {
+    slug: "paint-calculator",
+    name: "Paint Calculator",
+    domain: "construction",
+    category: "Painting & Decorating",
+    tagline: "How much paint a room needs, and which tins to buy.",
+    description:
+      "Enter a room's size, doors, windows and coats to get the litres or gallons of paint needed and the cheapest mix of tin sizes.",
+    tags: ["paint calculator", "how much paint", "paint coverage", "decorating", "diy"],
+    popular: true,
+  },
+  {
+    slug: "wallpaper-calculator",
+    name: "Wallpaper Calculator",
+    domain: "construction",
+    category: "Painting & Decorating",
+    tagline: "Rolls of wallpaper for a room, pattern repeat included.",
+    description:
+      "Work out how many rolls of wallpaper a room needs from its size, the roll size and the pattern repeat, with the drops per roll shown.",
+    tags: ["wallpaper calculator", "how many rolls", "pattern repeat", "decorating", "diy"],
+  },
+  {
+    slug: "tile-calculator",
+    name: "Tile Calculator",
+    domain: "construction",
+    category: "Floors & Walls",
+    tagline: "Tiles and boxes for a floor or wall, with grout and waste allowed for.",
+    description:
+      "Calculate how many tiles and boxes you need from the area, tile size, grout joint and a waste allowance for cuts and breakage.",
+    tags: ["tile calculator", "how many tiles", "floor tiles", "bathroom tiles", "diy"],
+  },
+  {
+    slug: "flooring-calculator",
+    name: "Flooring Calculator",
+    domain: "construction",
+    category: "Floors & Walls",
+    tagline: "Packs of laminate, vinyl or wood flooring for a room.",
+    description:
+      "Work out the packs of flooring a room needs from its size, the pack coverage and the laying pattern, plus the skirting length.",
+    tags: ["flooring calculator", "laminate calculator", "how much flooring", "vinyl plank", "diy"],
+  },
+  {
+    slug: "concrete-calculator",
+    name: "Concrete Calculator",
+    domain: "construction",
+    category: "Building",
+    tagline: "Cubic metres or yards of concrete, and bags of premix, for a slab or posts.",
+    description:
+      "Calculate the concrete for a slab, path, footing or round post holes, in m³ or yd³, with the number of premix bags by bag size.",
+    tags: ["concrete calculator", "concrete bags", "slab calculator", "cubic yards", "diy"],
+    popular: true,
+  },
+  {
+    slug: "roofing-calculator",
+    name: "Roofing Calculator",
+    domain: "construction",
+    category: "Building",
+    tagline: "Roof area from its footprint and pitch, in squares and shingle bundles.",
+    description:
+      "Turn a roof's footprint and pitch into its real surface area, roofing squares and bundles of shingles, with waste for gable or hip roofs.",
+    tags: ["roofing calculator", "roof pitch", "shingle bundles", "roofing squares", "roof area"],
+  },
+  {
+    slug: "gravel-mulch-calculator",
+    name: "Gravel & Mulch Calculator",
+    domain: "construction",
+    category: "Landscaping",
+    tagline: "Volume, weight and bags of gravel, soil, sand or mulch for an area.",
+    description:
+      "Calculate how much gravel, crushed stone, sand, topsoil or bark mulch covers an area at a given depth, by volume, weight and bags.",
+    tags: ["gravel calculator", "mulch calculator", "topsoil calculator", "landscaping", "diy"],
+  },
 ];

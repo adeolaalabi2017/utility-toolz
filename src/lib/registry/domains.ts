@@ -14,11 +14,12 @@ import {
   HeartPulse,
   Sigma,
   FileArchive,
+  Hammer,
 } from "lucide-react";
 import type { Domain, DomainSlug, PlannedTool } from "./types";
 
 /**
- * The live domains (build plan §2.1), plus Health & Body, Math and Files added later.
+ * The live domains (build plan §2.1), plus Health & Body, Math, Files and Construction added later.
  * Every domain listed here is live; the planned roadmap is kept in PLANNED_TOOLS.
  */
 export const DOMAINS: Domain[] = [
@@ -169,6 +170,16 @@ export const DOMAINS: Domain[] = [
     description:
       "Merge, split and convert PDFs, convert spreadsheets, and pack or unpack ZIP and TAR archives, all in your browser with nothing uploaded.",
     icon: FileArchive,
+    status: "live",
+    phase: 5,
+  },
+  {
+    slug: "construction",
+    name: "Construction & DIY",
+    shortName: "Construction",
+    description:
+      "Paint, tiles, flooring, concrete, roofing and landscaping — how much to buy for the job, in metric or imperial.",
+    icon: Hammer,
     status: "live",
     phase: 5,
   },

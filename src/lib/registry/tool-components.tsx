@@ -169,4 +169,11 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   "excel-to-pdf": dynamic(() => import("@/components/tools/spreadsheets").then((m) => m.ExcelToPdf)),
   "qr-code-generator": dynamic(() => import("@/components/tools/qr").then((m) => m.QrCodeGenerator)),
   "qr-code-reader": dynamic(() => import("@/components/tools/qr").then((m) => m.QrCodeReader)),
+  "paint-calculator": dynamic(() => import("@/components/tools/construction").then((m) => m.PaintCalculator)),
+  "wallpaper-calculator": dynamic(() => import("@/components/tools/construction").then((m) => m.WallpaperCalculator)),
+  "tile-calculator": dynamic(() => import("@/components/tools/construction").then((m) => m.TileCalculator)),
+  "flooring-calculator": dynamic(() => import("@/components/tools/construction").then((m) => m.FlooringCalculator)),
+  "concrete-calculator": dynamic(() => import("@/components/tools/construction").then((m) => m.ConcreteCalculator)),
+  "roofing-calculator": dynamic(() => import("@/components/tools/construction").then((m) => m.RoofingCalculator)),
+  "gravel-mulch-calculator": dynamic(() => import("@/components/tools/construction").then((m) => m.GravelMulchCalculator)),
 };

@@ -1,4 +1,4 @@
-import { Megaphone, Landmark, Briefcase, Code2, Palette, GraduationCap, ClipboardList } from "lucide-react";
+import { Megaphone, Landmark, Briefcase, Code2, Palette, GraduationCap, ClipboardList, HardHat } from "lucide-react";
 import type { Profession } from "./types";
 
 /**
@@ -176,6 +176,29 @@ export const PROFESSIONS: Profession[] = [
       "scientific-calculator",
       "fraction-calculator",
       "quadratic-equation-solver",
+    ],
+    comingNames: [],
+  },
+  {
+    slug: "contractor",
+    name: "Contractors & DIYers",
+    icon: HardHat,
+    blurb:
+      "Paint, tiles, flooring, concrete and roofing. Estimate materials before the trip to the supplier, in metric or imperial.",
+    liveSlugs: [
+      "paint-calculator",
+      "tile-calculator",
+      "flooring-calculator",
+      "concrete-calculator",
+      "roofing-calculator",
+      "wallpaper-calculator",
+      "gravel-mulch-calculator",
+      "area-calculator",
+      "volume-calculator",
+      "pythagorean-theorem-calculator",
+      "unit-converter",
+      "project-cost-calculator",
+      "invoice-generator",
     ],
     comingNames: [],
   },

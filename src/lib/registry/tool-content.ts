@@ -3489,4 +3489,165 @@ export const TOOL_CONTENT: Record<string, ToolContent> = {
       },
     ],
   },
+  "paint-calculator": {
+    howItWorks: [
+      "The wall area is the room's perimeter times the wall height, less a typical door (1.9 m², about 20 ft²) and window (1.5 m², about 16 ft²) for each one you enter. The ceiling's length × width is added if you include it.",
+      "Paint needed is the area times the number of coats, divided by the coverage printed on the tin. Most interior emulsions cover 10–12 m² per litre, or 350–400 ft² per US gallon.",
+      "The tin suggestion picks the mix of 5, 2.5 and 1 litre tins (or gallons and quarts) likely to cost least, since bigger tins are cheaper per litre.",
+    ],
+    example:
+      "A 4 × 3.5 m bedroom with 2.4 m walls, one door and one window has 32.6 m² of wall. Two coats at 10 m² per litre need 6.5 litres, so buy one 5 L and one 2.5 L tin.",
+    faqs: [
+      {
+        q: "Do I need two coats?",
+        a: "Usually. One coat can do when refreshing the same colour; a big change from dark to light can need three, or a primer first.",
+      },
+      {
+        q: "Why is my real usage higher?",
+        a: "Fresh plaster, bare wood and textured walls absorb more. Thin the first coat as a mist coat on new plaster and allow 10–20% extra.",
+      },
+      {
+        q: "Should I subtract windows?",
+        a: "Yes for big ones. The calculator takes off a standard size per window; for a whole glazed wall, reduce the room length instead.",
+      },
+    ],
+  },
+  "tile-calculator": {
+    howItWorks: [
+      "Each tile covers its own size plus one grout joint in each direction, so a 30 × 60 cm tile with a 3 mm joint takes up 30.3 × 60.3 cm of floor or wall.",
+      "The area is divided by that, then the waste allowance is added for cut pieces and breakages: about 10% for a standard room, more for diagonal layouts and patterns.",
+      "If you give the tiles per box, the count is rounded up to whole boxes.",
+    ],
+    example:
+      "A 3 × 2.5 m bathroom floor is 7.5 m². With 30 × 60 cm tiles, 3 mm joints and 10% waste, that's 46 tiles, or 6 boxes of 8.",
+    faqs: [
+      {
+        q: "How much spare should I keep?",
+        a: "A few tiles from the same batch. If one cracks later, a new batch may differ slightly in colour or size.",
+      },
+      {
+        q: "What waste allowance should I use?",
+        a: "5% for a plain rectangular room with large tiles laid straight, 10% as a default, 15% for diagonal layouts or many corners, 20% for herringbone.",
+      },
+      {
+        q: "Does it work for walls?",
+        a: "Yes. Enter the wall's width and height as the area, and subtract windows by working out each tiled section separately.",
+      },
+    ],
+  },
+  "flooring-calculator": {
+    howItWorks: [
+      "The floor area is length times width. Waste is added for the laying pattern: about 7% for straight boards, 15% for diagonal and 20% for herringbone, since angled cuts leave more offcuts.",
+      "That area is divided by the coverage printed on each pack and rounded up to whole packs.",
+      "The skirting or baseboard length is the room's perimeter, before taking off doorways.",
+    ],
+    example:
+      "A 5 × 4 m living room is 20 m². Laid straight with 7% waste that's 21.4 m², so with packs covering 2.2 m² you need 10 packs. The skirting runs 18 m before doorways.",
+    faqs: [
+      {
+        q: "Does this work for laminate, vinyl and engineered wood?",
+        a: "Yes. They're all sold by the pack with the coverage printed on it.",
+      },
+      {
+        q: "How do I handle an L-shaped room?",
+        a: "Split it into two rectangles, calculate each, and add the packs together.",
+      },
+      {
+        q: "Should I buy an extra pack?",
+        a: "One spare pack is worth having for repairs, since the same product can be discontinued within a few years.",
+      },
+    ],
+  },
+  "concrete-calculator": {
+    howItWorks: [
+      "A slab, path or footing is length × width × thickness. Round post holes are π × radius² × depth for each hole.",
+      "An allowance is added for spillage, formwork that bows and uneven ground: 10% is standard.",
+      "Bags are counted from their weight, since mixed concrete weighs about 2,100 kg per m³. That gives about 0.012 m³ per 25 kg bag, and 0.6 ft³ per 80 lb bag, matching the yields printed on the bags.",
+    ],
+    example:
+      "A 3 × 3 m shed base 10 cm thick is 0.9 m³, or 0.99 m³ with 10% extra. In 25 kg bags of premix that's 84 bags, which is when a mixer or ready-mix delivery starts to make sense.",
+    faqs: [
+      {
+        q: "How thick should a slab be?",
+        a: "Around 10 cm (4 in) for sheds, paths and patios, and 15 cm (6 in) or more with reinforcement for driveways and garages.",
+      },
+      {
+        q: "Bags or ready-mix?",
+        a: "Bags are handy up to about 1 m³ (1.3 yd³). Beyond that, a ready-mix truck is usually cheaper and gives a more even pour.",
+      },
+      {
+        q: "How much concrete does a fence post need?",
+        a: "Choose round posts, enter the hole size and depth, and the number of posts. Subtract a little for the post itself if it's large.",
+      },
+    ],
+  },
+  "roofing-calculator": {
+    howItWorks: [
+      "The footprint is the roof seen from above, eaves included. A sloped roof has more surface than that: the footprint is multiplied by √(1 + (rise ÷ 12)²) for its pitch.",
+      "Roofing is sold by the square, which covers 100 ft². Waste is added for cuts: about 10% for a simple gable roof and 15% for hips and valleys.",
+      "Standard asphalt shingles come three bundles to the square, so bundles are squares × 3, rounded up.",
+    ],
+    example:
+      "A 12 × 9 m footprint at a 6 in 12 pitch (26.6°) has 120.7 m² of roof surface. With 10% waste for a gable roof that's 14.3 squares, or 43 bundles of shingles.",
+    faqs: [
+      {
+        q: "How do I find the pitch?",
+        a: "Hold a level horizontally against a rafter, measure 12 inches along it, then measure straight up to the roof. That height is the rise in 12.",
+      },
+      {
+        q: "Does this include ridge caps and starter strip?",
+        a: "No. Buy those by length: the ridge and hips for caps, and the eaves and rakes for starter strip.",
+      },
+      {
+        q: "What about metal or tile roofs?",
+        a: "The roof surface area is the same; divide it by the coverage of the sheet or tile you're using instead of using the bundle count.",
+      },
+    ],
+  },
+  "wallpaper-calculator": {
+    howItWorks: [
+      "Each drop is a strip of paper the height of the wall plus one pattern repeat, so the pattern can be lined up with the strip next to it.",
+      "A roll gives as many whole drops as fit its length; offcuts too short for a full drop go above doors and windows. The room needs one drop per roll-width of wall.",
+      "Rolls are the drops needed divided by drops per roll, rounded up. Only skip the width of doors and full-height windows: ordinary windows are papered over and trimmed.",
+    ],
+    example:
+      "A 4 × 3.5 m room with 2.4 m walls and one 0.9 m door has 14.1 m of wall. That's 27 drops of 0.53 m paper; a 10.05 m roll gives 4 drops, so you need 7 rolls. With a 53 cm pattern repeat, each roll gives only 3 drops and you need 9.",
+    faqs: [
+      {
+        q: "Where do I find the pattern repeat?",
+        a: "On the roll's label, usually as a number in centimetres or inches. Plain and random-match papers have no repeat.",
+      },
+      {
+        q: "Why are batch numbers important?",
+        a: "Rolls from different print runs can differ slightly in shade, which shows on the wall. Buy all rolls with the same batch number, plus a spare.",
+      },
+      {
+        q: "Does it include the ceiling?",
+        a: "No. Treat the ceiling as a separate wall whose width is the room's width and height is its length.",
+      },
+    ],
+  },
+  "gravel-mulch-calculator": {
+    howItWorks: [
+      "The volume is the area times the depth. Weight is that volume times the material's typical loose density: about 1.6 tonnes per m³ for gravel, 1.3 for topsoil and 0.35 for bark mulch.",
+      "Bags sold by weight are counted from the weight; bags sold by volume, and bulk loads, from the volume.",
+      "Densities are averages for dry, loose material. Wet loads are heavier, so allow for it when checking a trailer's limit.",
+    ],
+    example:
+      "A 5 × 4 m gravel area 5 cm deep needs 1 m³ of gravel, which weighs about 1.6 tonnes: 64 bags of 25 kg, or one or two bulk bags.",
+    faqs: [
+      {
+        q: "How deep should gravel be?",
+        a: "About 5 cm (2 in) for paths and topping up a drive, and 10–15 cm (4–6 in) of compacted sub-base under a new driveway.",
+      },
+      {
+        q: "How deep should mulch be?",
+        a: "About 7.5 cm (3 in) to keep weeds down and hold moisture. Keep it clear of plant stems and tree trunks.",
+      },
+      {
+        q: "Is a bulk bag a full tonne?",
+        a: "Not always. Many hold about 0.75 m³, which is around 1.2 tonnes of gravel but far less of mulch. Check the supplier's stated volume.",
+      },
+    ],
+  },
 };

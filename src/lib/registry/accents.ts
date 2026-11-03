@@ -80,6 +80,7 @@ export const DOMAIN_ACCENTS: Record<string, DomainAccent> = {
   health: A.green,
   math: A.purple,
   files: A.coral,
+  construction: A.orange,
 };
 
 export function domainAccent(slug: string): DomainAccent {
