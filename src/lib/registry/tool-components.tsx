@@ -167,4 +167,6 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   "csv-to-excel": dynamic(() => import("@/components/tools/spreadsheets").then((m) => m.CsvToExcel)),
   "excel-to-json": dynamic(() => import("@/components/tools/spreadsheets").then((m) => m.ExcelToJson)),
   "excel-to-pdf": dynamic(() => import("@/components/tools/spreadsheets").then((m) => m.ExcelToPdf)),
+  "qr-code-generator": dynamic(() => import("@/components/tools/qr").then((m) => m.QrCodeGenerator)),
+  "qr-code-reader": dynamic(() => import("@/components/tools/qr").then((m) => m.QrCodeReader)),
 };

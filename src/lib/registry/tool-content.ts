@@ -3439,4 +3439,54 @@ export const TOOL_CONTENT: Record<string, ToolContent> = {
       },
     ],
   },
+  "qr-code-generator": {
+    howItWorks: [
+      "Your details are written in the standard text format phone cameras recognise: a web address, WIFI:… for networks, a vCard for contacts, or mailto:, tel: and SMSTO: links. That text is then encoded as a QR code.",
+      "Error correction adds redundancy so a code still scans when part of it is dirty, scratched or covered. Higher levels make the grid denser, so use Medium for screens and High for print, stickers or a logo in the middle.",
+      "The quiet zone is the blank border scanners need to find the code. Keep the standard 4 modules unless the code will sit on a plain light background anyway.",
+    ],
+    example:
+      "The generator opens with https://utilitytoolz.com at Medium error correction, which makes a 25 × 25 grid. Download it as a 1024-pixel PNG for screens, or as SVG to print it at any size without blur.",
+    faqs: [
+      {
+        q: "Do these QR codes expire?",
+        a: "No. The content is stored in the code itself, not behind a redirect service, so it works for as long as the link or details inside it do.",
+      },
+      {
+        q: "Is my Wi-Fi password sent anywhere?",
+        a: "No. The code is drawn in your browser, and the details aren't saved in the page address either, so a shared link never contains your password.",
+      },
+      {
+        q: "Can I change the colours?",
+        a: "Yes, as long as the code stays clearly darker than the background. Light codes on dark backgrounds and low-contrast pairs fail in many camera apps, and the tool warns you about both.",
+      },
+      {
+        q: "How small can I print it?",
+        a: "About 2 × 2 cm for a short link scanned from close up. Codes holding more data, or scanned from further away, need to be larger.",
+      },
+    ],
+  },
+  "qr-code-reader": {
+    howItWorks: [
+      "The image is decoded in your browser: it is scanned for the three square finder patterns that mark a QR code, then the grid between them is read and its error correction applied.",
+      "Large photos are first checked at a reduced size for speed, then at full resolution if nothing was found. Light-on-dark codes are tried too.",
+      "The text is then recognised: links show the site they lead to, Wi-Fi codes show the network and password, and contact cards are laid out field by field.",
+    ],
+    example:
+      "A screenshot of a café's Wi-Fi poster reads as Network name CafeGuest, Security WPA/WPA2/WPA3 and its password, with a button to copy the password straight into your laptop's Wi-Fi settings.",
+    faqs: [
+      {
+        q: "Why isn't my QR code found?",
+        a: "It's usually blur, glare or a code cut off at the edge. Take a closer, sharper photo with the whole code and some space around it.",
+      },
+      {
+        q: "Is it safe to open the link?",
+        a: "Check the site name first. Fake QR stickers placed over real ones on parking meters and posters are a common scam, so the reader shows where the link goes before you open it.",
+      },
+      {
+        q: "Can it scan with my camera?",
+        a: "Not yet. Take a photo or screenshot and open it here, or paste a screenshot with Ctrl+V or ⌘V.",
+      },
+    ],
+  },
 };

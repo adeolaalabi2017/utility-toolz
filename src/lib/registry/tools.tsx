@@ -1604,4 +1604,26 @@ export const TOOLS: Tool[] = [
       "Turn a sheet into a PDF table that fits the page width, with the header row repeated on every page and page numbers in the footer.",
     tags: ["excel to pdf", "xlsx to pdf", "spreadsheet to pdf", "convert excel", "pdf"],
   },
+  /* ---------------------------- QR CODES -------------------------- */
+  {
+    slug: "qr-code-generator",
+    name: "QR Code Generator",
+    domain: "everyday",
+    category: "QR Codes",
+    tagline: "Make QR codes for links, Wi-Fi, contacts, email and texts.",
+    description:
+      "Create a QR code for a website, Wi-Fi login, contact card, email, phone call or text message, choose its colours and download it as PNG or SVG. Codes never expire.",
+    tags: ["qr code generator", "qr code", "wifi qr code", "vcard qr", "create qr code"],
+    popular: true,
+  },
+  {
+    slug: "qr-code-reader",
+    name: "QR Code Reader",
+    domain: "everyday",
+    category: "QR Codes",
+    tagline: "Read a QR code from a photo or screenshot, and see where it leads first.",
+    description:
+      "Open or paste an image to decode its QR code, with links, Wi-Fi details and contact cards laid out clearly, all without uploading the image.",
+    tags: ["qr code reader", "scan qr code", "decode qr", "qr scanner", "qr code"],
+  },
 ];
