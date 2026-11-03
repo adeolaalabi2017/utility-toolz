@@ -13,7 +13,10 @@ export type DomainSlug =
   | "productivity"
   | "education"
   | "everyday"
-  | "health";
+  | "health"
+  | "math"
+  | "files"
+  | "construction";
 
 export interface Domain {
   slug: DomainSlug;

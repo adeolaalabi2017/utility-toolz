@@ -2902,4 +2902,752 @@ export const TOOL_CONTENT: Record<string, ToolContent> = {
       },
     ],
   },
+  "basic-calculator": {
+    howItWorks: [
+      "Type a sum straight into the expression field or tap the keypad. The answer updates as you type, and multiplication and division are worked out before addition and subtraction.",
+      "Percent follows the phone-calculator rule: 200 + 15% adds 15% of 200, giving 230. On its own, or after × or ÷, a percent is simply divided by 100.",
+      "Press = or Enter to keep an answer. It moves into the history, where you can tap it to use it again. Results are shown to 12 significant figures, which hides floating-point noise such as 0.1 + 0.2 = 0.30000000000000004.",
+    ],
+    example:
+      "The calculator opens on 1250 + 15%. The percent is taken of 1,250, which is 187.5, and added on, so the answer is 1,437.5. That is a price with 15% VAT or a bill with a 15% tip in one step.",
+    faqs: [
+      {
+        q: "Can I use my keyboard?",
+        a: "Yes. Click into the expression and type digits, + − * / % and brackets. Enter gives the answer, Esc clears and Backspace deletes.",
+      },
+      {
+        q: "Why does 100 − 10% give 90 and not 99.9?",
+        a: "After + or −, a percent is taken of the number before it. So 100 − 10% means 100 minus 10% of 100. To subtract one tenth of a unit, type 100 − 0.1.",
+      },
+      {
+        q: "What happens after I press equals?",
+        a: "The answer stays in the display. Typing an operator carries on from it, and typing a digit starts a new sum.",
+      },
+      {
+        q: "Is my history saved?",
+        a: "Only while the page is open. Nothing is sent anywhere, and closing or reloading the page clears it.",
+      },
+    ],
+  },
+  "scientific-calculator": {
+    howItWorks: [
+      "Write the whole expression the way you would on paper, such as 2sin(30) + √16. Brackets, powers (^), roots, logs, factorials (!), π, e and mod are all understood, and a number next to a bracket or function multiplies it.",
+      "Trig functions use degrees or radians, set by the Angles menu. Results at exact angles are snapped so sin(30°) gives 0.5 and sin(180°) gives 0, not a tiny rounding error.",
+      "Powers group right to left, so 2^3^2 is 2^9 = 512, and −2^2 is −4 because the power applies before the minus sign. log is base 10 and ln is the natural log. Write 1.5E3 for 1.5 × 10³ and use Ans for the last answer.",
+    ],
+    example:
+      "The calculator opens on 2sin(30) + √16 in degrees. sin(30°) is 0.5, so 2sin(30) is 1. The square root of 16 is 4, and 1 + 4 gives 5.",
+    faqs: [
+      {
+        q: "Why do I get a different answer for sin(30) than my phone?",
+        a: "Your phone is probably in radians, where 30 means 30 radians. Switch the Angles menu, or your phone, so both use the same unit.",
+      },
+      {
+        q: "What does the error message mean?",
+        a: "It says what stopped the sum: a bracket that doesn't match, dividing by zero, the log of a negative number or a factorial of a fraction. Fix that part and press = again.",
+      },
+      {
+        q: "How large can numbers get?",
+        a: "Up to about 1.8 × 10³⁰⁸, the largest standard double-precision number. Factorials work up to 170!, the largest that fits.",
+      },
+      {
+        q: "Does it use eval or send my sums anywhere?",
+        a: "No. Expressions are read by a small parser in your browser that only understands numbers, operators and the listed functions, so nothing else can run.",
+      },
+    ],
+  },
+  "ratio-calculator": {
+    howItWorks: [
+      "A proportion says two ratios are equal: A : B = C : D. Cross-multiplying gives A × D = B × C, so the missing value is D = B × C ÷ A.",
+      "To simplify a ratio, both sides are divided by their greatest common divisor. Decimals are first scaled up to whole numbers, so 1.5 : 2.25 becomes 150 : 225 and then 2 : 3.",
+      "The share lines show each side as a percentage of the total, which is how ratios are often quoted for mixtures and splits.",
+    ],
+    example:
+      "A recipe uses flour and water in the ratio 3 : 5, and you have 12 cups of flour. The missing value is 5 × 12 ÷ 3 = 20, so you need 20 cups of water. The scale factor is 4×.",
+    faqs: [
+      {
+        q: "Does the order of the numbers matter?",
+        a: "Yes. 3 : 5 is not the same as 5 : 3. Keep each kind of thing in the same position on both sides: flour first, water second.",
+      },
+      {
+        q: "How do I simplify a screen size like 1920 × 1080?",
+        a: "Choose Simplify a ratio and enter 1920 and 1080. The answer is 16 : 9.",
+      },
+      {
+        q: "Can I use this for map scales?",
+        a: "Yes. For a 1 : 25,000 map, enter 1 and 25000 as A and B, then the distance on the map as C. The result is the real distance in the same unit.",
+      },
+    ],
+  },
+  "rounding-calculator": {
+    howItWorks: [
+      "Rounding to decimal places looks at the first digit you are dropping. Under the usual half-up rule, 5 or more rounds up and 4 or less rounds down. Negative numbers round away from zero, so −2.5 becomes −3.",
+      "Banker's rounding (half to even) sends an exact half to the nearest even digit, so 2.5 becomes 2 and 3.5 becomes 4. Over many values the ups and downs cancel out, which is why it is used in accounting and statistics.",
+      "Ceiling, floor and truncate ignore the size of the remainder. Rounding to a multiple divides by the step, rounds to a whole number, then multiplies back, so 7.33 to the nearest 0.05 is 7.35.",
+    ],
+    example:
+      "1,234.5678 rounded half up to two decimal places is 1,234.57, because the next digit is 7. The table shows that every rule gives 1,234.57 except always down and truncate, which give 1,234.56.",
+    faqs: [
+      {
+        q: "Why does 1.005 round to 1.01 here but 1.00 in some spreadsheets?",
+        a: "1.005 can't be stored exactly in binary, so a plain computer rounding sees 1.00499999…. This calculator rounds the number as you typed it.",
+      },
+      {
+        q: "How do I round to the nearest 10 or 100?",
+        a: "Choose Nearest ten or Nearest hundred under Precision, or switch to Nearest multiple and enter any step you like.",
+      },
+      {
+        q: "What is the difference between truncate and always down?",
+        a: "They only differ for negative numbers. Truncate moves towards zero (−2.7 to −2), while always down moves towards minus infinity (−2.7 to −3).",
+      },
+    ],
+  },
+  "quadratic-equation-solver": {
+    howItWorks: [
+      "A quadratic equation has the form ax² + bx + c = 0. Its roots come from the quadratic formula, x = (−b ± √(b² − 4ac)) ÷ 2a.",
+      "The discriminant, b² − 4ac, decides the kind of answer. Positive gives two real roots, zero gives one repeated root, and negative gives two complex roots written as p ± qi.",
+      "The vertex is the turning point of the parabola, at x = −b ÷ 2a. With real roots r₁ and r₂, the equation factors as a(x − r₁)(x − r₂). The roots are computed in a way that stays accurate even when b is very large compared with a and c.",
+    ],
+    example:
+      "For 2x² − 4x − 6 = 0, the discriminant is (−4)² − 4 × 2 × (−6) = 64. Its square root is 8, so x = (4 ± 8) ÷ 4, which gives x = −1 or x = 3. The vertex is at (1, −8), and the factored form is 2(x + 1)(x − 3).",
+    faqs: [
+      {
+        q: "What if my equation isn't equal to zero?",
+        a: "Move every term to one side first. For example, x² = 5x − 6 becomes x² − 5x + 6 = 0, so a = 1, b = −5 and c = 6.",
+      },
+      {
+        q: "What does i mean in the answer?",
+        a: "i is the square root of −1. A complex answer means the parabola never crosses the x-axis, so there is no real x that solves the equation.",
+      },
+      {
+        q: "What happens if a is 0?",
+        a: "Then there is no x² term and the equation is linear. The solver gives its single root, x = −c ÷ b.",
+      },
+    ],
+  },
+  "gcd-lcm-calculator": {
+    howItWorks: [
+      "Each number is split into prime factors. The greatest common divisor multiplies the primes that every number shares, each at its lowest power. The least common multiple multiplies every prime that appears, each at its highest power.",
+      "In practice the GCD is found with Euclid's algorithm, which repeatedly replaces the larger number with the remainder of dividing it by the smaller. The LCM of each pair is a × b ÷ GCD, carried across the list.",
+      "The LCM is computed with exact big integers, so it stays correct even when it grows far beyond the numbers you entered.",
+    ],
+    example:
+      "For 12, 18 and 30, the factorisations are 2² × 3, 2 × 3² and 2 × 3 × 5. The shared primes at their lowest powers give 2 × 3 = 6, the GCD. Every prime at its highest power gives 2² × 3² × 5 = 180, the LCM.",
+    faqs: [
+      {
+        q: "Is GCD the same as HCF or GCF?",
+        a: "Yes. Greatest common divisor, highest common factor and greatest common factor are three names for the same number.",
+      },
+      {
+        q: "When do I need the LCM?",
+        a: "To add fractions, the LCM of the denominators is the lowest common denominator. It also tells you when repeating events line up, such as buses every 12 and 18 minutes meeting every 36.",
+      },
+      {
+        q: "What does coprime mean?",
+        a: "Two numbers are coprime when their GCD is 1, so they share no prime factor. 8 and 15 are coprime even though neither is prime.",
+      },
+    ],
+  },
+  "prime-factorization-calculator": {
+    howItWorks: [
+      "Small prime factors are removed by trial division. Whatever remains is tested with the Miller–Rabin test, which is exact for every number this tool accepts, and split with Pollard's rho method if it is not prime. Even 16-digit numbers answer instantly.",
+      "Every whole number above 1 has exactly one prime factorisation. A number is prime when that factorisation is just the number itself.",
+      "The divisor count multiplies one more than each exponent, so 2³ × 3² × 5 has 4 × 3 × 2 = 24 divisors. The nearest primes on either side are found by testing each neighbour in turn.",
+    ],
+    example:
+      "360 is 2³ × 3² × 5, so it is not prime. It has 24 divisors, which add up to 1,170. The nearest primes are 359 below and 367 above.",
+    faqs: [
+      {
+        q: "Is 1 a prime number?",
+        a: "No. A prime needs exactly two different divisors, and 1 has only one. Leaving it out is also what makes every factorisation unique.",
+      },
+      {
+        q: "How big a number can I check?",
+        a: "Any whole number up to 9,007,199,254,740,991, the largest integer a browser can hold exactly.",
+      },
+      {
+        q: "Why is 2 the only even prime?",
+        a: "Every other even number can be divided by 2, which gives it a third divisor.",
+      },
+    ],
+  },
+  "permutation-combination-calculator": {
+    howItWorks: [
+      "Combinations count groups where order doesn't matter: C(n, r) = n! ÷ (r! (n − r)!). Permutations count arrangements where order matters: P(n, r) = n! ÷ (n − r)!.",
+      "With repetition allowed, arrangements number nʳ, since every pick has n choices. Groups with repetition are counted with the stars-and-bars formula, C(n + r − 1, r).",
+      "Every result is calculated with exact big integers, so the answer stays exact even when it runs to thousands of digits. The chance line assumes every outcome is equally likely.",
+    ],
+    example:
+      "A poker hand is 5 cards from a 52-card deck, with order ignored and no repeats. That gives C(52, 5) = 2,598,960 hands, so any particular hand has a 1 in 2,598,960 chance. If order mattered, there would be 311,875,200 arrangements.",
+    faqs: [
+      {
+        q: "How do I know whether order matters?",
+        a: "Ask whether swapping two picks gives a different result. A race podium (first, second, third) is a permutation. A committee of three is a combination.",
+      },
+      {
+        q: "How many 4-digit PINs are there?",
+        a: "Set n to 10 and r to 4, with order mattering and repetition allowed. That gives 10⁴ = 10,000 PINs.",
+      },
+      {
+        q: "What are my lottery odds?",
+        a: "For a 6-from-49 draw, enter n = 49 and r = 6 with order ignored. There are 13,983,816 possible tickets, so one ticket has a 1 in 13,983,816 chance.",
+      },
+    ],
+  },
+  "pythagorean-theorem-calculator": {
+    howItWorks: [
+      "In a right-angled triangle, the squares of the two shorter sides (the legs a and b) add up to the square of the longest side (the hypotenuse c): a² + b² = c².",
+      "To find the hypotenuse, take the square root of a² + b². To find a leg, take the square root of c² minus the other leg squared. The hypotenuse must always be the longest side.",
+      "The angles come from the inverse tangent of the legs. The area is half of a × b, because the two legs are the base and the height.",
+    ],
+    example:
+      "With legs of 3 and 4, the hypotenuse is √(9 + 16) = √25 = 5. Angle A is 36.87° and angle B is 53.13°. The area is 6 and the perimeter is 12.",
+    faqs: [
+      {
+        q: "Does this work for any triangle?",
+        a: "No, only for triangles with a 90° angle. For other triangles, use the three-sides option in the area calculator, or the law of cosines.",
+      },
+      {
+        q: "How do I check a corner is square?",
+        a: "Measure 3 units along one side and 4 along the other. If the diagonal between the marks is exactly 5, the corner is 90°. Builders call this the 3-4-5 rule.",
+      },
+      {
+        q: "What is a Pythagorean triple?",
+        a: "Three whole numbers that fit a² + b² = c², such as 3-4-5, 5-12-13 and 8-15-17. Any multiple of a triple, like 6-8-10, is a triple too.",
+      },
+    ],
+  },
+  "area-calculator": {
+    howItWorks: [
+      "Each shape uses its standard formula: length × width for a rectangle, ½ × base × height for a triangle, πr² for a circle, ½ × (a + b) × height for a trapezoid and π × a × b for an ellipse.",
+      "For a triangle where you only know the three sides, Heron's formula works out the area from the half-perimeter s: √(s(s − a)(s − b)(s − c)).",
+      "Area is reported in square units and perimeter in plain units. The ellipse perimeter uses Ramanujan's approximation, because there is no exact simple formula.",
+    ],
+    example:
+      "A rectangular room 8 m long and 5 m wide has an area of 8 × 5 = 40 m² and a perimeter of 2 × (8 + 5) = 26 m. That is 0.004 hectares.",
+    faqs: [
+      {
+        q: "What is the height of a triangle?",
+        a: "The perpendicular distance from the base to the opposite corner, measured at a right angle to the base. It is not the length of a sloping side.",
+      },
+      {
+        q: "How do I find the area of an L-shaped room?",
+        a: "Split it into two rectangles, work out each area, and add them together.",
+      },
+      {
+        q: "How do I convert square feet to square metres?",
+        a: "Multiply square feet by 0.0929. Each unit is squared, so a length conversion factor has to be squared too.",
+      },
+    ],
+  },
+  "volume-calculator": {
+    howItWorks: [
+      "Prisms and cylinders have a volume equal to the base area times the height. Cones and pyramids hold exactly one third of the matching prism or cylinder. A sphere holds ⁴⁄₃πr³.",
+      "Surface area adds up every face: for a cylinder, two circles plus the curved side (2πr(r + h)). For a cone, the curved side uses the slant height √(r² + h²).",
+      "Capacity in litres is shown when you choose a unit: 1,000 cm³ is one litre and one cubic metre is 1,000 litres.",
+    ],
+    example:
+      "A cylinder 5 cm in radius and 25 cm tall holds π × 5² × 25 ≈ 1,963.5 cm³, which is about 1.96 litres or 0.52 US gallons. Its surface area is 2π × 5 × 30 ≈ 942.5 cm².",
+    faqs: [
+      {
+        q: "I have the diameter. What do I enter?",
+        a: "Enter half of it as the radius. A pipe 10 cm across has a radius of 5 cm.",
+      },
+      {
+        q: "How much concrete or soil do I need?",
+        a: "Use the box shape with all measurements in metres. The answer in cubic metres is how suppliers usually sell it, so add 5–10% for waste.",
+      },
+      {
+        q: "Why is a cone exactly a third of a cylinder?",
+        a: "A cone narrows evenly to a point, and adding up its circular slices gives exactly one third of the cylinder with the same base and height. Pyramids follow the same rule.",
+      },
+    ],
+  },
+  "merge-pdf": {
+    howItWorks: [
+      "Each PDF is opened in your browser and its pages are copied, in the order listed, into a new document. Text stays selectable and images keep their original quality, because pages are copied rather than re-printed.",
+      "Use the arrows to change the order. A file that can't be read, such as a password-protected PDF, is marked in the list and skipped.",
+      "Nothing leaves your device: the merged file is built in the page and handed straight to your downloads.",
+    ],
+    example:
+      "Add a 2-page cover letter, a 3-page CV and a 1-page reference, in that order. The merged PDF has 6 pages: the letter first, then the CV, then the reference.",
+    faqs: [
+      {
+        q: "Are my PDFs uploaded anywhere?",
+        a: "No. They are read and merged by code running in your browser tab, so they never reach a server.",
+      },
+      {
+        q: "Why is a file marked as password-protected?",
+        a: "Encrypted PDFs can't be copied without the password. Open it in your PDF reader, save a copy without the password, and add that copy.",
+      },
+      {
+        q: "Do bookmarks and form fields survive?",
+        a: "Page content, links and images do. The bookmark outline of each file and interactive form fields are not carried into the merged file.",
+      },
+    ],
+  },
+  "split-pdf": {
+    howItWorks: [
+      "Extract mode copies the pages you list into one new PDF. Ranges such as 1-3, single pages such as 5, and open ranges such as 8- (page 8 to the end) can be mixed, and pages come out in the order you type them.",
+      "Every-page mode makes one PDF per page. Every-N mode makes a PDF for each block of N pages, with a shorter last file if the pages don't divide evenly.",
+      "When there is more than one file, they are downloaded together in a single ZIP, named after the pages each one holds.",
+    ],
+    example:
+      "A 10-page report split with 1-3, 5 gives one 4-page PDF holding pages 1, 2, 3 and 5. Split every 4 pages instead, and you get three files: pages 1-4, 5-8 and 9-10.",
+    faqs: [
+      {
+        q: "Can I reverse or repeat pages?",
+        a: "Yes. 3-1 puts pages 3, 2 and 1 in that order, and 2, 2 includes page 2 twice.",
+      },
+      {
+        q: "Does splitting reduce quality?",
+        a: "No. Pages are copied as they are, so text, vector graphics and images are unchanged.",
+      },
+      {
+        q: "How do I remove a single page?",
+        a: "List every page except that one, such as 1-4, 6- to drop page 5. The PDF page organizer lets you do the same by clicking.",
+      },
+    ],
+  },
+  "pdf-page-organizer": {
+    howItWorks: [
+      "Each page is drawn as a small thumbnail so you can see what you are moving. The arrows move a page earlier or later, the rotate buttons turn it a quarter at a time, and the bin removes it.",
+      "Saving copies the pages you kept, in the new order, into a fresh PDF, adding your rotation to any rotation the page already had.",
+      "Start over discards your changes and reloads the pages from the original file.",
+    ],
+    example:
+      "A scanned 4-page contract has page 3 upside down and a blank page 4. Rotate page 3 twice, remove page 4 and save: the new PDF has 3 pages, all the right way up.",
+    faqs: [
+      {
+        q: "Does rotating change the content?",
+        a: "No. Rotation is stored as a page setting, so the text and images are untouched and can be rotated back later.",
+      },
+      {
+        q: "Is there a page limit?",
+        a: "The organizer draws a thumbnail for every page, so it handles up to 300 pages. Split longer documents first.",
+      },
+      {
+        q: "Can I combine pages from different PDFs?",
+        a: "Merge them with the Merge PDF tool first, then reorder the merged file here.",
+      },
+    ],
+  },
+  "jpg-to-pdf": {
+    howItWorks: [
+      "Each image becomes one page. With A4 or Letter pages, the image is scaled down to fit inside the margin and centred, never stretched or cropped. With image-sized pages, the page takes the size of the image at 96 pixels per inch.",
+      "Orientation can follow each image, so a wide photo gets a landscape page and a tall one a portrait page, or be fixed for every page.",
+      "Rotation saved by your phone's camera is applied first, so photos come out the right way up.",
+    ],
+    example:
+      "Three phone photos of a receipt, taken upright, become a 3-page A4 PDF with a quarter-inch margin, one receipt photo per page, in the order you listed them.",
+    faqs: [
+      {
+        q: "Which image types work?",
+        a: "JPG, PNG, WebP, GIF and BMP. HEIC photos from iPhones open only in browsers that support HEIC, so convert them to JPG first if they are refused.",
+      },
+      {
+        q: "Will the PDF be large?",
+        a: "Roughly the size of the images added together. Shrink them first with the image compressor if you need a smaller file for email.",
+      },
+      {
+        q: "Are my photos uploaded?",
+        a: "No. The PDF is assembled in your browser and downloaded directly.",
+      },
+    ],
+  },
+  "pdf-to-jpg": {
+    howItWorks: [
+      "Each page is drawn onto a canvas at the resolution you choose and saved as an image. 72 DPI matches a screen, 150 DPI is sharp enough for most uses and 300 DPI suits printing.",
+      "PNG keeps text crisp and suits documents. JPG makes much smaller files and suits pages that are mostly photos.",
+      "Leave Pages empty to convert every page, or enter a range such as 1-3, 5. Up to 100 pages can be converted at a time.",
+    ],
+    example:
+      "A US Letter page is 8.5 × 11 inches, so at 150 DPI it becomes an image 1,275 × 1,650 pixels. Converting pages 1-3 gives three images, downloaded together as a ZIP.",
+    faqs: [
+      {
+        q: "Why does my image look blurry?",
+        a: "The resolution is too low for how large you are showing it. Choose 300 DPI for print or zooming in.",
+      },
+      {
+        q: "Can I get the text out instead?",
+        a: "Not with this tool, which makes pictures of the pages. Copy text from the PDF in your reader instead.",
+      },
+      {
+        q: "Is the PDF uploaded?",
+        a: "No. Pages are rendered in your browser and the images go straight to your downloads.",
+      },
+    ],
+  },
+  "zip-file-creator": {
+    howItWorks: [
+      "Pick files, or a whole folder to keep its structure, and choose ZIP, TAR.GZ or plain TAR. The archive is built in your browser and downloaded directly.",
+      "ZIP compresses each file on its own and opens natively on Windows and macOS. TAR.GZ bundles the files and compresses them together, which usually comes out smaller and is the norm on Linux and servers.",
+      "Two files with the same name get (2), (3) and so on added, so nothing is overwritten.",
+    ],
+    example:
+      "A folder of 40 text and spreadsheet files totalling 12 MB might pack into a ZIP of about 3 MB, a 75% saving. A folder of JPG photos barely shrinks, because the photos are already compressed.",
+    faqs: [
+      {
+        q: "Can I password-protect the ZIP?",
+        a: "Not here. Browsers can't create encrypted ZIPs safely, so use your operating system's archive tool or 7-Zip for that.",
+      },
+      {
+        q: "How large can the archive be?",
+        a: "Up to 500 MB of files at a time. Everything happens in memory, and larger jobs can crash a browser tab, especially on a phone.",
+      },
+      {
+        q: "Which compression level should I use?",
+        a: "Normal is the best balance. Maximum saves a little more on text at the cost of time, and None is fastest for files that are already compressed.",
+      },
+    ],
+  },
+  "archive-extractor": {
+    howItWorks: [
+      "The archive's type is read from the file's own bytes rather than its name, so a renamed file still opens. ZIP, TAR, TAR.GZ, TGZ and single-file GZ are supported.",
+      "Every file inside is listed with its path and size. Save the ones you need individually, or download the whole contents of a TAR as a ZIP.",
+      "Folders that hold no files are skipped, and so are links and device entries in TAR archives.",
+    ],
+    example:
+      "A project-1.4.tar.gz downloaded from GitHub opens to show its 120 source files. Save just README.md, or download everything as project-1.4.zip to open on Windows.",
+    faqs: [
+      {
+        q: "Can it open RAR or 7z files?",
+        a: "Not yet. RAR and 7z use formats browsers can't decode without a large add-on, so open those with 7-Zip or The Unarchiver.",
+      },
+      {
+        q: "Why won't my ZIP open?",
+        a: "It is either damaged, password-protected, or uses a compression method other than the standard one. The message says which.",
+      },
+      {
+        q: "Is the archive uploaded?",
+        a: "No. It is opened entirely inside your browser tab.",
+      },
+    ],
+  },
+  "tar-to-zip-converter": {
+    howItWorks: [
+      "The archive is unpacked in your browser and every file is repacked in the format you choose: ZIP, TAR.GZ or plain TAR.",
+      "File names, folder paths and modified dates carry over. Unix permissions, symbolic links and empty folders are not kept.",
+      "When you open a ZIP, the target switches to TAR.GZ, and any other archive defaults to ZIP, since those are the usual reasons to convert.",
+    ],
+    example:
+      "A backup.tar.gz from a Linux server holding 300 files becomes backup.zip, which opens with a double-click on Windows. Going the other way, a ZIP becomes a .tar.gz ready to extract with tar -xzf.",
+    faqs: [
+      {
+        q: "What is the difference between TAR and TAR.GZ?",
+        a: "TAR bundles files into one without compressing them. TAR.GZ is a TAR that has been gzip-compressed, so it is smaller.",
+      },
+      {
+        q: "Will scripts still be executable after converting?",
+        a: "No, permissions are not carried over. Run chmod +x on scripts after extracting the converted archive.",
+      },
+      {
+        q: "How big an archive can I convert?",
+        a: "Up to 500 MB, since the original and the converted copy both sit in your browser's memory.",
+      },
+    ],
+  },
+  "excel-to-csv": {
+    howItWorks: [
+      "The workbook is opened in your browser and the chosen sheet is written out row by row. Each value is saved as Excel displays it, so 01/03/2026 stays a date in that format and $1,250.00 keeps its currency sign. Formulas are replaced by their results.",
+      "Fields that contain the separator, quotes or line breaks are wrapped in quotes, following the CSV standard. The file starts with a byte-order mark by default, which tells Excel to read accented letters and symbols correctly.",
+      "Choose Every sheet to get one CSV per sheet, downloaded together as a ZIP.",
+    ],
+    example:
+      "A workbook with a Sales sheet of 1,200 rows and a Returns sheet of 85 rows gives sales.csv when you pick Sales, or a ZIP holding Sales.csv and Returns.csv when you pick Every sheet.",
+    faqs: [
+      {
+        q: "Why do accented letters look wrong when I open the CSV?",
+        a: "The program is reading it with the wrong encoding. Keep the UTF-8 for Excel option, which adds the marker Excel needs.",
+      },
+      {
+        q: "Which separator should I use?",
+        a: "Comma for most English-language software. Where decimals are written with a comma, as in much of Europe, Excel expects semicolons.",
+      },
+      {
+        q: "Can it open old .xls files?",
+        a: "Yes. .xlsx, .xlsm, .xls and OpenDocument .ods files all open. Password-protected workbooks need an unprotected copy first.",
+      },
+    ],
+  },
+  "csv-to-excel": {
+    howItWorks: [
+      "Each CSV is read with the separator detected from its first lines: comma, semicolon, tab or pipe. Quoted fields, including ones with line breaks inside, are handled the standard way.",
+      "Plain numbers are stored as numbers so you can sum and sort them. Codes with leading zeros and numbers longer than 15 digits stay as text, because Excel would otherwise drop the zeros or round the digits. You can also keep every value as text.",
+      "Every file becomes its own sheet named after the file, and column widths are set to fit the content.",
+    ],
+    example:
+      "orders.csv, with a ZIP code column holding 02134, becomes orders.xlsx with one sheet named orders. Totals such as 18.50 are real numbers, while 02134 stays exactly as written.",
+    faqs: [
+      {
+        q: "Will text starting with = become a formula?",
+        a: "No. Every value is stored as plain text or a number, so a cell like =SUM(A1:A9) appears as written and nothing runs when the workbook opens.",
+      },
+      {
+        q: "Can I combine several CSVs into one workbook?",
+        a: "Yes. Add them all and each becomes a sheet, in the order listed.",
+      },
+      {
+        q: "Are dates converted?",
+        a: "Dates stay as the text in the CSV, so nothing is misread between day-first and month-first formats. Excel can convert them with Text to Columns.",
+      },
+    ],
+  },
+  "excel-to-json": {
+    howItWorks: [
+      "In Objects mode the first row supplies the keys and every following row becomes one object. Repeated header names get _1, _2 added, so no value is lost.",
+      "Typed values keep numbers as numbers, TRUE and FALSE as booleans and dates as ISO 8601 text. Text as shown gives every value exactly as Excel displays it, formatting included.",
+      "Empty cells become null, so every object has the same keys. Arrays mode returns each row as a plain list instead.",
+    ],
+    example:
+      "A sheet with headers name, price and in_stock and a row Tea, 2.5, TRUE becomes [{\"name\": \"Tea\", \"price\": 2.5, \"in_stock\": true}].",
+    faqs: [
+      {
+        q: "Why is my date one day off?",
+        a: "Dates are written in UTC. A date with no time is midnight, which can fall on the previous day in time zones west of UTC. Choose Text as shown to keep the date exactly as displayed.",
+      },
+      {
+        q: "Can I convert a CSV to JSON here?",
+        a: "Yes, CSV files open too. The JSON to CSV converter in Data goes the other way.",
+      },
+      {
+        q: "Is the spreadsheet uploaded?",
+        a: "No. It is read and converted inside your browser tab.",
+      },
+    ],
+  },
+  "excel-to-pdf": {
+    howItWorks: [
+      "The sheet is laid out as a table across the full page width: each column gets space in proportion to its longest value, so a wide table shrinks to fit and a narrow one spreads out. Text that still doesn't fit is cut short with an ellipsis.",
+      "Rows flow onto as many pages as needed. With a header row, it is shaded and repeated at the top of every page, and each page is numbered in the footer.",
+      "Values print as Excel displays them, and numbers line up on the right. The built-in PDF font covers Western European alphabets, so other scripts print as question marks and the tool tells you how many.",
+    ],
+    example:
+      "A price list with 6 columns and 300 rows, printed landscape on A4 at 9 point, fits on 10 pages with the header on each one.",
+    faqs: [
+      {
+        q: "Does it keep my cell colours and borders?",
+        a: "No. The PDF is a clean table of the values. For an exact copy of the formatting, use Excel's own Save as PDF.",
+      },
+      {
+        q: "How do I fit more columns on a page?",
+        a: "Switch to landscape and lower the text size. Very wide sheets are easier to read split into narrower sheets first.",
+      },
+      {
+        q: "Can I print Chinese, Arabic or Cyrillic text?",
+        a: "Not yet. The built-in font only covers Latin script, so those characters print as question marks.",
+      },
+    ],
+  },
+  "qr-code-generator": {
+    howItWorks: [
+      "Your details are written in the standard text format phone cameras recognise: a web address, WIFI:… for networks, a vCard for contacts, or mailto:, tel: and SMSTO: links. That text is then encoded as a QR code.",
+      "Error correction adds redundancy so a code still scans when part of it is dirty, scratched or covered. Higher levels make the grid denser, so use Medium for screens and High for print, stickers or a logo in the middle.",
+      "The quiet zone is the blank border scanners need to find the code. Keep the standard 4 modules unless the code will sit on a plain light background anyway.",
+    ],
+    example:
+      "The generator opens with https://utilitytoolz.com at Medium error correction, which makes a 25 × 25 grid. Download it as a 1024-pixel PNG for screens, or as SVG to print it at any size without blur.",
+    faqs: [
+      {
+        q: "Do these QR codes expire?",
+        a: "No. The content is stored in the code itself, not behind a redirect service, so it works for as long as the link or details inside it do.",
+      },
+      {
+        q: "Is my Wi-Fi password sent anywhere?",
+        a: "No. The code is drawn in your browser, and the details aren't saved in the page address either, so a shared link never contains your password.",
+      },
+      {
+        q: "Can I change the colours?",
+        a: "Yes, as long as the code stays clearly darker than the background. Light codes on dark backgrounds and low-contrast pairs fail in many camera apps, and the tool warns you about both.",
+      },
+      {
+        q: "How small can I print it?",
+        a: "About 2 × 2 cm for a short link scanned from close up. Codes holding more data, or scanned from further away, need to be larger.",
+      },
+    ],
+  },
+  "qr-code-reader": {
+    howItWorks: [
+      "The image is decoded in your browser: it is scanned for the three square finder patterns that mark a QR code, then the grid between them is read and its error correction applied.",
+      "Large photos are first checked at a reduced size for speed, then at full resolution if nothing was found. Light-on-dark codes are tried too.",
+      "The text is then recognised: links show the site they lead to, Wi-Fi codes show the network and password, and contact cards are laid out field by field.",
+    ],
+    example:
+      "A screenshot of a café's Wi-Fi poster reads as Network name CafeGuest, Security WPA/WPA2/WPA3 and its password, with a button to copy the password straight into your laptop's Wi-Fi settings.",
+    faqs: [
+      {
+        q: "Why isn't my QR code found?",
+        a: "It's usually blur, glare or a code cut off at the edge. Take a closer, sharper photo with the whole code and some space around it.",
+      },
+      {
+        q: "Is it safe to open the link?",
+        a: "Check the site name first. Fake QR stickers placed over real ones on parking meters and posters are a common scam, so the reader shows where the link goes before you open it.",
+      },
+      {
+        q: "Can it scan with my camera?",
+        a: "Not yet. Take a photo or screenshot and open it here, or paste a screenshot with Ctrl+V or ⌘V.",
+      },
+    ],
+  },
+  "paint-calculator": {
+    howItWorks: [
+      "The wall area is the room's perimeter times the wall height, less a typical door (1.9 m², about 20 ft²) and window (1.5 m², about 16 ft²) for each one you enter. The ceiling's length × width is added if you include it.",
+      "Paint needed is the area times the number of coats, divided by the coverage printed on the tin. Most interior emulsions cover 10–12 m² per litre, or 350–400 ft² per US gallon.",
+      "The tin suggestion picks the mix of 5, 2.5 and 1 litre tins (or gallons and quarts) likely to cost least, since bigger tins are cheaper per litre.",
+    ],
+    example:
+      "A 4 × 3.5 m bedroom with 2.4 m walls, one door and one window has 32.6 m² of wall. Two coats at 10 m² per litre need 6.5 litres, so buy one 5 L and one 2.5 L tin.",
+    faqs: [
+      {
+        q: "Do I need two coats?",
+        a: "Usually. One coat can do when refreshing the same colour; a big change from dark to light can need three, or a primer first.",
+      },
+      {
+        q: "Why is my real usage higher?",
+        a: "Fresh plaster, bare wood and textured walls absorb more. Thin the first coat as a mist coat on new plaster and allow 10–20% extra.",
+      },
+      {
+        q: "Should I subtract windows?",
+        a: "Yes for big ones. The calculator takes off a standard size per window; for a whole glazed wall, reduce the room length instead.",
+      },
+    ],
+  },
+  "tile-calculator": {
+    howItWorks: [
+      "Each tile covers its own size plus one grout joint in each direction, so a 30 × 60 cm tile with a 3 mm joint takes up 30.3 × 60.3 cm of floor or wall.",
+      "The area is divided by that, then the waste allowance is added for cut pieces and breakages: about 10% for a standard room, more for diagonal layouts and patterns.",
+      "If you give the tiles per box, the count is rounded up to whole boxes.",
+    ],
+    example:
+      "A 3 × 2.5 m bathroom floor is 7.5 m². With 30 × 60 cm tiles, 3 mm joints and 10% waste, that's 46 tiles, or 6 boxes of 8.",
+    faqs: [
+      {
+        q: "How much spare should I keep?",
+        a: "A few tiles from the same batch. If one cracks later, a new batch may differ slightly in colour or size.",
+      },
+      {
+        q: "What waste allowance should I use?",
+        a: "5% for a plain rectangular room with large tiles laid straight, 10% as a default, 15% for diagonal layouts or many corners, 20% for herringbone.",
+      },
+      {
+        q: "Does it work for walls?",
+        a: "Yes. Enter the wall's width and height as the area, and subtract windows by working out each tiled section separately.",
+      },
+    ],
+  },
+  "flooring-calculator": {
+    howItWorks: [
+      "The floor area is length times width. Waste is added for the laying pattern: about 7% for straight boards, 15% for diagonal and 20% for herringbone, since angled cuts leave more offcuts.",
+      "That area is divided by the coverage printed on each pack and rounded up to whole packs.",
+      "The skirting or baseboard length is the room's perimeter, before taking off doorways.",
+    ],
+    example:
+      "A 5 × 4 m living room is 20 m². Laid straight with 7% waste that's 21.4 m², so with packs covering 2.2 m² you need 10 packs. The skirting runs 18 m before doorways.",
+    faqs: [
+      {
+        q: "Does this work for laminate, vinyl and engineered wood?",
+        a: "Yes. They're all sold by the pack with the coverage printed on it.",
+      },
+      {
+        q: "How do I handle an L-shaped room?",
+        a: "Split it into two rectangles, calculate each, and add the packs together.",
+      },
+      {
+        q: "Should I buy an extra pack?",
+        a: "One spare pack is worth having for repairs, since the same product can be discontinued within a few years.",
+      },
+    ],
+  },
+  "concrete-calculator": {
+    howItWorks: [
+      "A slab, path or footing is length × width × thickness. Round post holes are π × radius² × depth for each hole.",
+      "An allowance is added for spillage, formwork that bows and uneven ground: 10% is standard.",
+      "Bags are counted from their weight, since mixed concrete weighs about 2,100 kg per m³. That gives about 0.012 m³ per 25 kg bag, and 0.6 ft³ per 80 lb bag, matching the yields printed on the bags.",
+    ],
+    example:
+      "A 3 × 3 m shed base 10 cm thick is 0.9 m³, or 0.99 m³ with 10% extra. In 25 kg bags of premix that's 84 bags, which is when a mixer or ready-mix delivery starts to make sense.",
+    faqs: [
+      {
+        q: "How thick should a slab be?",
+        a: "Around 10 cm (4 in) for sheds, paths and patios, and 15 cm (6 in) or more with reinforcement for driveways and garages.",
+      },
+      {
+        q: "Bags or ready-mix?",
+        a: "Bags are handy up to about 1 m³ (1.3 yd³). Beyond that, a ready-mix truck is usually cheaper and gives a more even pour.",
+      },
+      {
+        q: "How much concrete does a fence post need?",
+        a: "Choose round posts, enter the hole size and depth, and the number of posts. Subtract a little for the post itself if it's large.",
+      },
+    ],
+  },
+  "roofing-calculator": {
+    howItWorks: [
+      "The footprint is the roof seen from above, eaves included. A sloped roof has more surface than that: the footprint is multiplied by √(1 + (rise ÷ 12)²) for its pitch.",
+      "Roofing is sold by the square, which covers 100 ft². Waste is added for cuts: about 10% for a simple gable roof and 15% for hips and valleys.",
+      "Standard asphalt shingles come three bundles to the square, so bundles are squares × 3, rounded up.",
+    ],
+    example:
+      "A 12 × 9 m footprint at a 6 in 12 pitch (26.6°) has 120.7 m² of roof surface. With 10% waste for a gable roof that's 14.3 squares, or 43 bundles of shingles.",
+    faqs: [
+      {
+        q: "How do I find the pitch?",
+        a: "Hold a level horizontally against a rafter, measure 12 inches along it, then measure straight up to the roof. That height is the rise in 12.",
+      },
+      {
+        q: "Does this include ridge caps and starter strip?",
+        a: "No. Buy those by length: the ridge and hips for caps, and the eaves and rakes for starter strip.",
+      },
+      {
+        q: "What about metal or tile roofs?",
+        a: "The roof surface area is the same; divide it by the coverage of the sheet or tile you're using instead of using the bundle count.",
+      },
+    ],
+  },
+  "wallpaper-calculator": {
+    howItWorks: [
+      "Each drop is a strip of paper the height of the wall plus one pattern repeat, so the pattern can be lined up with the strip next to it.",
+      "A roll gives as many whole drops as fit its length; offcuts too short for a full drop go above doors and windows. The room needs one drop per roll-width of wall.",
+      "Rolls are the drops needed divided by drops per roll, rounded up. Only skip the width of doors and full-height windows: ordinary windows are papered over and trimmed.",
+    ],
+    example:
+      "A 4 × 3.5 m room with 2.4 m walls and one 0.9 m door has 14.1 m of wall. That's 27 drops of 0.53 m paper; a 10.05 m roll gives 4 drops, so you need 7 rolls. With a 53 cm pattern repeat, each roll gives only 3 drops and you need 9.",
+    faqs: [
+      {
+        q: "Where do I find the pattern repeat?",
+        a: "On the roll's label, usually as a number in centimetres or inches. Plain and random-match papers have no repeat.",
+      },
+      {
+        q: "Why are batch numbers important?",
+        a: "Rolls from different print runs can differ slightly in shade, which shows on the wall. Buy all rolls with the same batch number, plus a spare.",
+      },
+      {
+        q: "Does it include the ceiling?",
+        a: "No. Treat the ceiling as a separate wall whose width is the room's width and height is its length.",
+      },
+    ],
+  },
+  "gravel-mulch-calculator": {
+    howItWorks: [
+      "The volume is the area times the depth. Weight is that volume times the material's typical loose density: about 1.6 tonnes per m³ for gravel, 1.3 for topsoil and 0.35 for bark mulch.",
+      "Bags sold by weight are counted from the weight; bags sold by volume, and bulk loads, from the volume.",
+      "Densities are averages for dry, loose material. Wet loads are heavier, so allow for it when checking a trailer's limit.",
+    ],
+    example:
+      "A 5 × 4 m gravel area 5 cm deep needs 1 m³ of gravel, which weighs about 1.6 tonnes: 64 bags of 25 kg, or one or two bulk bags.",
+    faqs: [
+      {
+        q: "How deep should gravel be?",
+        a: "About 5 cm (2 in) for paths and topping up a drive, and 10–15 cm (4–6 in) of compacted sub-base under a new driveway.",
+      },
+      {
+        q: "How deep should mulch be?",
+        a: "About 7.5 cm (3 in) to keep weeds down and hold moisture. Keep it clear of plant stems and tree trunks.",
+      },
+      {
+        q: "Is a bulk bag a full tonne?",
+        a: "Not always. Many hold about 0.75 m³, which is around 1.2 tonnes of gravel but far less of mulch. Check the supplier's stated volume.",
+      },
+    ],
+  },
 };

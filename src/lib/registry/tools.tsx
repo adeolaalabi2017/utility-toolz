@@ -798,17 +798,6 @@ export const TOOLS: Tool[] = [
     popular: true,
   },
   {
-    slug: "percentage-calculator",
-    name: "Percentage Calculator",
-    domain: "education",
-    category: "Math Basics",
-    tagline: "Three percentage questions, answered instantly.",
-    description:
-      "Compute X% of Y, what percent X is of Y, or the percentage change between two numbers — with the inverse changes most people get wrong.",
-    tags: ["percentage", "math", "calculator", "discount", "education"],
-    popular: true,
-  },
-  {
     slug: "citation-formatter",
     name: "Citation Formatter",
     domain: "education",
@@ -1185,15 +1174,6 @@ export const TOOLS: Tool[] = [
     tags: ["grades", "final-exam", "gpa", "college", "school", "education"],
   },
   {
-    slug: "sig-fig-calculator",
-    name: "Significant Figures Calculator",
-    domain: "education",
-    category: "Math & Science",
-    tagline: "Count significant figures and format numbers into scientific and rounded notation.",
-    description: "Analyze significant digits, trailing zeros, and round values to specified precision according to standard scientific rounding rules.",
-    tags: ["sig-fig", "precision", "scientific-notation", "chemistry", "physics", "education"],
-  },
-  {
     slug: "tip-splitter",
     name: "Tip & Bill Splitter",
     domain: "everyday",
@@ -1277,15 +1257,6 @@ export const TOOLS: Tool[] = [
   },
   /* ------------------------- SECOND WAVE ------------------------- */
   {
-    slug: "fraction-calculator",
-    name: "Fraction Calculator",
-    domain: "education",
-    category: "Maths",
-    tagline: "Add, subtract, multiply or divide fractions and get the simplified answer.",
-    description: "Enter two fractions and an operation to get the simplified fraction, its mixed-number form and its decimal value.",
-    tags: ["fraction calculator", "fractions", "simplify fraction", "mixed number", "math homework"],
-  },
-  {
     slug: "hours-between-times-calculator",
     name: "Hours Between Times Calculator",
     domain: "productivity",
@@ -1366,5 +1337,366 @@ export const TOOLS: Tool[] = [
     tagline: "Find your heart-rate training zones from your age.",
     description: "Estimate your maximum heart rate from your age and see the beats per minute for each of five training zones.",
     tags: ["target heart rate", "heart rate zones", "max heart rate", "training zones", "cardio"],
+  },
+  /* ----------------------------- MATH ----------------------------- */
+  {
+    slug: "basic-calculator",
+    name: "Calculator",
+    domain: "math",
+    category: "Calculators",
+    tagline: "A plain calculator that you can type into, with a running history.",
+    description:
+      "Add, subtract, multiply, divide and work out percentages with the keypad or your keyboard. Every answer is kept in a history you can reuse.",
+    tags: ["calculator", "online calculator", "basic calculator", "simple calculator", "math"],
+    popular: true,
+  },
+  {
+    slug: "scientific-calculator",
+    name: "Scientific Calculator",
+    domain: "math",
+    category: "Calculators",
+    tagline: "Trig, logs, powers, roots and factorials, in degrees or radians.",
+    description:
+      "Type a full expression such as 2sin(30) + √16 and get the answer as you type. Supports brackets, powers, logs, factorials, π, e and the last answer.",
+    tags: ["scientific calculator", "trigonometry", "logarithm", "exponent", "square root", "math"],
+    popular: true,
+  },
+  {
+    slug: "percentage-calculator",
+    name: "Percentage Calculator",
+    domain: "math",
+    category: "Arithmetic",
+    tagline: "Three percentage questions, answered instantly.",
+    description:
+      "Compute X% of Y, what percent X is of Y, or the percentage change between two numbers — with the inverse changes most people get wrong.",
+    tags: ["percentage", "math", "calculator", "discount", "education"],
+    popular: true,
+  },
+  {
+    slug: "sig-fig-calculator",
+    name: "Significant Figures Calculator",
+    domain: "math",
+    category: "Rounding & Precision",
+    tagline: "Count significant figures and format numbers into scientific and rounded notation.",
+    description: "Analyze significant digits, trailing zeros, and round values to specified precision according to standard scientific rounding rules.",
+    tags: ["sig-fig", "precision", "scientific-notation", "chemistry", "physics", "education"],
+  },
+  {
+    slug: "fraction-calculator",
+    name: "Fraction Calculator",
+    domain: "math",
+    category: "Arithmetic",
+    tagline: "Add, subtract, multiply or divide fractions and get the simplified answer.",
+    description: "Enter two fractions and an operation to get the simplified fraction, its mixed-number form and its decimal value.",
+    tags: ["fraction calculator", "fractions", "simplify fraction", "mixed number", "math homework"],
+  },
+  {
+    slug: "ratio-calculator",
+    name: "Ratio Calculator",
+    domain: "math",
+    category: "Arithmetic",
+    tagline: "Solve a proportion for the missing value, or simplify a ratio.",
+    description:
+      "Find the missing number in A : B = C : D, scale a recipe or drawing, or reduce any ratio such as 1920 : 1080 to its simplest form.",
+    tags: ["ratio calculator", "proportion", "simplify ratio", "scale", "math"],
+  },
+  {
+    slug: "rounding-calculator",
+    name: "Rounding Calculator",
+    domain: "math",
+    category: "Rounding & Precision",
+    tagline: "Round to decimal places or the nearest 5, 10 or 0.05, with five rounding rules.",
+    description:
+      "Round any number to a set number of decimal places or to the nearest multiple, using half up, half to even (banker's), up, down or truncation.",
+    tags: ["rounding calculator", "round number", "decimal places", "nearest ten", "bankers rounding", "math"],
+  },
+  {
+    slug: "quadratic-equation-solver",
+    name: "Quadratic Equation Solver",
+    domain: "math",
+    category: "Algebra",
+    tagline: "Solve ax² + bx + c = 0, with real or complex roots shown step by step.",
+    description:
+      "Enter a, b and c to get both roots, the discriminant, the vertex and the factored form, with each step of the quadratic formula written out.",
+    tags: ["quadratic equation", "quadratic formula", "solve for x", "discriminant", "algebra", "math"],
+  },
+  {
+    slug: "gcd-lcm-calculator",
+    name: "GCD & LCM Calculator",
+    domain: "math",
+    category: "Number Theory",
+    tagline: "Greatest common divisor and least common multiple of any list of numbers.",
+    description:
+      "Find the GCD (HCF) and LCM of two or more whole numbers, with the prime factorisation of each so you can see where the answer comes from.",
+    tags: ["gcd", "lcm", "hcf", "greatest common factor", "least common multiple", "math"],
+  },
+  {
+    slug: "prime-factorization-calculator",
+    name: "Prime Factorization Calculator",
+    domain: "math",
+    category: "Number Theory",
+    tagline: "Check whether a number is prime and break it into prime factors.",
+    description:
+      "Enter any whole number up to 9 quadrillion to see whether it is prime, its prime factorisation, its divisors and the nearest primes either side.",
+    tags: ["prime factorization", "prime checker", "is it prime", "factors", "divisors", "math"],
+  },
+  {
+    slug: "permutation-combination-calculator",
+    name: "Permutation & Combination Calculator",
+    domain: "math",
+    category: "Counting & Probability",
+    tagline: "nPr and nCr, with or without repetition, as exact numbers.",
+    description:
+      "Count the ways to choose or arrange r items from n, where order does or doesn't matter and items can or can't repeat. Results are exact, however large.",
+    tags: ["permutation", "combination", "ncr", "npr", "probability", "math"],
+  },
+  {
+    slug: "pythagorean-theorem-calculator",
+    name: "Pythagorean Theorem Calculator",
+    domain: "math",
+    category: "Geometry",
+    tagline: "Find the missing side of a right triangle from the other two.",
+    description:
+      "Enter any two sides of a right-angled triangle to get the third, plus both angles, the area and the perimeter.",
+    tags: ["pythagorean theorem", "hypotenuse", "right triangle", "a² + b² = c²", "geometry", "math"],
+  },
+  {
+    slug: "area-calculator",
+    name: "Area Calculator",
+    domain: "math",
+    category: "Geometry",
+    tagline: "Area and perimeter of rectangles, triangles, circles and more.",
+    description:
+      "Pick a shape, enter its measurements and get the area and perimeter, for rectangles, squares, triangles, circles, trapezoids, parallelograms and ellipses.",
+    tags: ["area calculator", "perimeter", "circle area", "triangle area", "geometry", "math"],
+  },
+  {
+    slug: "volume-calculator",
+    name: "Volume Calculator",
+    domain: "math",
+    category: "Geometry",
+    tagline: "Volume and surface area of cubes, cylinders, spheres, cones and pyramids.",
+    description:
+      "Pick a solid, enter its measurements and get the volume, surface area and capacity in litres when you measure in centimetres or metres.",
+    tags: ["volume calculator", "surface area", "cylinder volume", "sphere volume", "geometry", "math"],
+  },
+  /* ---------------------------- FILES ----------------------------- */
+  {
+    slug: "merge-pdf",
+    name: "Merge PDF",
+    domain: "files",
+    category: "Combine & Split PDF",
+    tagline: "Combine several PDFs into one file, in the order you choose.",
+    description:
+      "Add PDF files, put them in order and merge them into a single PDF. Everything happens in your browser, so the files are never uploaded.",
+    tags: ["merge pdf", "combine pdf", "join pdf", "pdf", "documents"],
+    popular: true,
+  },
+  {
+    slug: "split-pdf",
+    name: "Split PDF",
+    domain: "files",
+    category: "Combine & Split PDF",
+    tagline: "Pull pages out of a PDF, or break it into smaller files.",
+    description:
+      "Extract a page range such as 1-3, 5 into a new PDF, or split every page or every few pages into separate files, downloaded as one ZIP.",
+    tags: ["split pdf", "extract pdf pages", "separate pdf", "pdf", "documents"],
+  },
+  {
+    slug: "pdf-page-organizer",
+    name: "PDF Page Organizer",
+    domain: "files",
+    category: "Edit PDF",
+    tagline: "Reorder, rotate and delete PDF pages, with a thumbnail of each.",
+    description:
+      "See every page as a thumbnail, move pages earlier or later, rotate them and remove the ones you don't need, then save a new PDF.",
+    tags: ["rotate pdf", "reorder pdf pages", "delete pdf pages", "organize pdf", "pdf"],
+  },
+  {
+    slug: "jpg-to-pdf",
+    name: "JPG to PDF Converter",
+    domain: "files",
+    category: "Convert PDF",
+    tagline: "Turn JPG, PNG or WebP images into one PDF, a page per image.",
+    description:
+      "Add photos or scans, put them in order, choose A4, Letter or image-sized pages and download a single PDF. Phone photos keep the right way up.",
+    tags: ["jpg to pdf", "image to pdf", "png to pdf", "photo to pdf", "pdf"],
+    popular: true,
+  },
+  {
+    slug: "pdf-to-jpg",
+    name: "PDF to JPG Converter",
+    domain: "files",
+    category: "Convert PDF",
+    tagline: "Save PDF pages as JPG or PNG images at screen or print resolution.",
+    description:
+      "Render every page, or just the ones you pick, as JPG or PNG at 72, 150 or 300 DPI. Download images one by one or all together as a ZIP.",
+    tags: ["pdf to jpg", "pdf to png", "pdf to image", "convert pdf", "pdf"],
+  },
+  {
+    slug: "zip-file-creator",
+    name: "Zip File Creator",
+    domain: "files",
+    category: "Archives",
+    tagline: "Pack files or a whole folder into a ZIP or TAR.GZ archive.",
+    description:
+      "Add files or a folder and download them as one .zip, .tar.gz or .tar archive, with the folder structure and modified dates kept.",
+    tags: ["zip files", "create zip", "compress files", "tar.gz", "archive"],
+  },
+  {
+    slug: "archive-extractor",
+    name: "Unzip & Extract Archive",
+    domain: "files",
+    category: "Archives",
+    tagline: "Open ZIP, TAR, TAR.GZ and GZ files and save what's inside.",
+    description:
+      "See every file inside an archive with its size and save just the ones you need, or download the contents of a TAR as a ZIP.",
+    tags: ["unzip", "extract zip", "open tar.gz", "untar", "archive"],
+  },
+  {
+    slug: "tar-to-zip-converter",
+    name: "TAR to ZIP Converter",
+    domain: "files",
+    category: "Archives",
+    tagline: "Convert between TAR, TAR.GZ and ZIP archives in either direction.",
+    description:
+      "Turn a .tar or .tar.gz into a .zip for Windows, or a .zip into a .tar.gz for Linux and servers. File names, folders and dates carry over.",
+    tags: ["tar to zip", "tar.gz to zip", "zip to tar", "convert archive", "archive"],
+  },
+  {
+    slug: "excel-to-csv",
+    name: "Excel to CSV Converter",
+    domain: "files",
+    category: "Spreadsheets",
+    tagline: "Save a sheet from an .xlsx, .xls or .ods file as CSV.",
+    description:
+      "Convert one sheet or every sheet of a workbook to CSV, with your choice of separator and encoding that opens correctly in Excel.",
+    tags: ["excel to csv", "xlsx to csv", "xls to csv", "convert excel", "spreadsheet"],
+    popular: true,
+  },
+  {
+    slug: "csv-to-excel",
+    name: "CSV to Excel Converter",
+    domain: "files",
+    category: "Spreadsheets",
+    tagline: "Turn CSV files into an .xlsx workbook, one sheet per file.",
+    description:
+      "Convert CSV files to Excel with the separator detected for you, numbers stored as numbers, and leading zeros in codes kept intact.",
+    tags: ["csv to excel", "csv to xlsx", "convert csv", "combine csv", "spreadsheet"],
+  },
+  {
+    slug: "excel-to-json",
+    name: "Excel to JSON Converter",
+    domain: "files",
+    category: "Spreadsheets",
+    tagline: "Turn a spreadsheet sheet into JSON objects or arrays.",
+    description:
+      "Convert an .xlsx, .xls, .ods or CSV sheet to JSON, using the first row as keys and keeping numbers, booleans and dates typed.",
+    tags: ["excel to json", "xlsx to json", "spreadsheet to json", "convert excel", "json"],
+  },
+  {
+    slug: "excel-to-pdf",
+    name: "Excel to PDF Converter",
+    domain: "files",
+    category: "Spreadsheets",
+    tagline: "Print a spreadsheet sheet as a clean, paginated PDF table.",
+    description:
+      "Turn a sheet into a PDF table that fits the page width, with the header row repeated on every page and page numbers in the footer.",
+    tags: ["excel to pdf", "xlsx to pdf", "spreadsheet to pdf", "convert excel", "pdf"],
+  },
+  /* ---------------------------- QR CODES -------------------------- */
+  {
+    slug: "qr-code-generator",
+    name: "QR Code Generator",
+    domain: "everyday",
+    category: "QR Codes",
+    tagline: "Make QR codes for links, Wi-Fi, contacts, email and texts.",
+    description:
+      "Create a QR code for a website, Wi-Fi login, contact card, email, phone call or text message, choose its colours and download it as PNG or SVG. Codes never expire.",
+    tags: ["qr code generator", "qr code", "wifi qr code", "vcard qr", "create qr code"],
+    popular: true,
+  },
+  {
+    slug: "qr-code-reader",
+    name: "QR Code Reader",
+    domain: "everyday",
+    category: "QR Codes",
+    tagline: "Read a QR code from a photo or screenshot, and see where it leads first.",
+    description:
+      "Open or paste an image to decode its QR code, with links, Wi-Fi details and contact cards laid out clearly, all without uploading the image.",
+    tags: ["qr code reader", "scan qr code", "decode qr", "qr scanner", "qr code"],
+  },
+  /* ------------------------- CONSTRUCTION ------------------------- */
+  {
+    slug: "paint-calculator",
+    name: "Paint Calculator",
+    domain: "construction",
+    category: "Painting & Decorating",
+    tagline: "How much paint a room needs, and which tins to buy.",
+    description:
+      "Enter a room's size, doors, windows and coats to get the litres or gallons of paint needed and the cheapest mix of tin sizes.",
+    tags: ["paint calculator", "how much paint", "paint coverage", "decorating", "diy"],
+    popular: true,
+  },
+  {
+    slug: "wallpaper-calculator",
+    name: "Wallpaper Calculator",
+    domain: "construction",
+    category: "Painting & Decorating",
+    tagline: "Rolls of wallpaper for a room, pattern repeat included.",
+    description:
+      "Work out how many rolls of wallpaper a room needs from its size, the roll size and the pattern repeat, with the drops per roll shown.",
+    tags: ["wallpaper calculator", "how many rolls", "pattern repeat", "decorating", "diy"],
+  },
+  {
+    slug: "tile-calculator",
+    name: "Tile Calculator",
+    domain: "construction",
+    category: "Floors & Walls",
+    tagline: "Tiles and boxes for a floor or wall, with grout and waste allowed for.",
+    description:
+      "Calculate how many tiles and boxes you need from the area, tile size, grout joint and a waste allowance for cuts and breakage.",
+    tags: ["tile calculator", "how many tiles", "floor tiles", "bathroom tiles", "diy"],
+  },
+  {
+    slug: "flooring-calculator",
+    name: "Flooring Calculator",
+    domain: "construction",
+    category: "Floors & Walls",
+    tagline: "Packs of laminate, vinyl or wood flooring for a room.",
+    description:
+      "Work out the packs of flooring a room needs from its size, the pack coverage and the laying pattern, plus the skirting length.",
+    tags: ["flooring calculator", "laminate calculator", "how much flooring", "vinyl plank", "diy"],
+  },
+  {
+    slug: "concrete-calculator",
+    name: "Concrete Calculator",
+    domain: "construction",
+    category: "Building",
+    tagline: "Cubic metres or yards of concrete, and bags of premix, for a slab or posts.",
+    description:
+      "Calculate the concrete for a slab, path, footing or round post holes, in m³ or yd³, with the number of premix bags by bag size.",
+    tags: ["concrete calculator", "concrete bags", "slab calculator", "cubic yards", "diy"],
+    popular: true,
+  },
+  {
+    slug: "roofing-calculator",
+    name: "Roofing Calculator",
+    domain: "construction",
+    category: "Building",
+    tagline: "Roof area from its footprint and pitch, in squares and shingle bundles.",
+    description:
+      "Turn a roof's footprint and pitch into its real surface area, roofing squares and bundles of shingles, with waste for gable or hip roofs.",
+    tags: ["roofing calculator", "roof pitch", "shingle bundles", "roofing squares", "roof area"],
+  },
+  {
+    slug: "gravel-mulch-calculator",
+    name: "Gravel & Mulch Calculator",
+    domain: "construction",
+    category: "Landscaping",
+    tagline: "Volume, weight and bags of gravel, soil, sand or mulch for an area.",
+    description:
+      "Calculate how much gravel, crushed stone, sand, topsoil or bark mulch covers an area at a given depth, by volume, weight and bags.",
+    tags: ["gravel calculator", "mulch calculator", "topsoil calculator", "landscaping", "diy"],
   },
 ];
