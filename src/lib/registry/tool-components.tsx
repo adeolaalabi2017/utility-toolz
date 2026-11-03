@@ -155,4 +155,12 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   "pythagorean-theorem-calculator": dynamic(() => import("@/components/tools/geometry").then((m) => m.PythagoreanTheoremCalculator)),
   "area-calculator": dynamic(() => import("@/components/tools/geometry").then((m) => m.AreaCalculator)),
   "volume-calculator": dynamic(() => import("@/components/tools/geometry").then((m) => m.VolumeCalculator)),
+  "merge-pdf": dynamic(() => import("@/components/tools/pdf").then((m) => m.PdfMerger)),
+  "split-pdf": dynamic(() => import("@/components/tools/pdf").then((m) => m.PdfSplitter)),
+  "pdf-page-organizer": dynamic(() => import("@/components/tools/pdf").then((m) => m.PdfPageOrganizer)),
+  "jpg-to-pdf": dynamic(() => import("@/components/tools/pdf").then((m) => m.ImagesToPdf)),
+  "pdf-to-jpg": dynamic(() => import("@/components/tools/pdf").then((m) => m.PdfToImages)),
+  "zip-file-creator": dynamic(() => import("@/components/tools/archives").then((m) => m.ZipFileCreator)),
+  "archive-extractor": dynamic(() => import("@/components/tools/archives").then((m) => m.ArchiveExtractor)),
+  "tar-to-zip-converter": dynamic(() => import("@/components/tools/archives").then((m) => m.ArchiveConverter)),
 };

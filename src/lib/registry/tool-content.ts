@@ -3163,4 +3163,188 @@ export const TOOL_CONTENT: Record<string, ToolContent> = {
       },
     ],
   },
+  "merge-pdf": {
+    howItWorks: [
+      "Each PDF is opened in your browser and its pages are copied, in the order listed, into a new document. Text stays selectable and images keep their original quality, because pages are copied rather than re-printed.",
+      "Use the arrows to change the order. A file that can't be read, such as a password-protected PDF, is marked in the list and skipped.",
+      "Nothing leaves your device: the merged file is built in the page and handed straight to your downloads.",
+    ],
+    example:
+      "Add a 2-page cover letter, a 3-page CV and a 1-page reference, in that order. The merged PDF has 6 pages: the letter first, then the CV, then the reference.",
+    faqs: [
+      {
+        q: "Are my PDFs uploaded anywhere?",
+        a: "No. They are read and merged by code running in your browser tab, so they never reach a server.",
+      },
+      {
+        q: "Why is a file marked as password-protected?",
+        a: "Encrypted PDFs can't be copied without the password. Open it in your PDF reader, save a copy without the password, and add that copy.",
+      },
+      {
+        q: "Do bookmarks and form fields survive?",
+        a: "Page content, links and images do. The bookmark outline of each file and interactive form fields are not carried into the merged file.",
+      },
+    ],
+  },
+  "split-pdf": {
+    howItWorks: [
+      "Extract mode copies the pages you list into one new PDF. Ranges such as 1-3, single pages such as 5, and open ranges such as 8- (page 8 to the end) can be mixed, and pages come out in the order you type them.",
+      "Every-page mode makes one PDF per page. Every-N mode makes a PDF for each block of N pages, with a shorter last file if the pages don't divide evenly.",
+      "When there is more than one file, they are downloaded together in a single ZIP, named after the pages each one holds.",
+    ],
+    example:
+      "A 10-page report split with 1-3, 5 gives one 4-page PDF holding pages 1, 2, 3 and 5. Split every 4 pages instead, and you get three files: pages 1-4, 5-8 and 9-10.",
+    faqs: [
+      {
+        q: "Can I reverse or repeat pages?",
+        a: "Yes. 3-1 puts pages 3, 2 and 1 in that order, and 2, 2 includes page 2 twice.",
+      },
+      {
+        q: "Does splitting reduce quality?",
+        a: "No. Pages are copied as they are, so text, vector graphics and images are unchanged.",
+      },
+      {
+        q: "How do I remove a single page?",
+        a: "List every page except that one, such as 1-4, 6- to drop page 5. The PDF page organizer lets you do the same by clicking.",
+      },
+    ],
+  },
+  "pdf-page-organizer": {
+    howItWorks: [
+      "Each page is drawn as a small thumbnail so you can see what you are moving. The arrows move a page earlier or later, the rotate buttons turn it a quarter at a time, and the bin removes it.",
+      "Saving copies the pages you kept, in the new order, into a fresh PDF, adding your rotation to any rotation the page already had.",
+      "Start over discards your changes and reloads the pages from the original file.",
+    ],
+    example:
+      "A scanned 4-page contract has page 3 upside down and a blank page 4. Rotate page 3 twice, remove page 4 and save: the new PDF has 3 pages, all the right way up.",
+    faqs: [
+      {
+        q: "Does rotating change the content?",
+        a: "No. Rotation is stored as a page setting, so the text and images are untouched and can be rotated back later.",
+      },
+      {
+        q: "Is there a page limit?",
+        a: "The organizer draws a thumbnail for every page, so it handles up to 300 pages. Split longer documents first.",
+      },
+      {
+        q: "Can I combine pages from different PDFs?",
+        a: "Merge them with the Merge PDF tool first, then reorder the merged file here.",
+      },
+    ],
+  },
+  "jpg-to-pdf": {
+    howItWorks: [
+      "Each image becomes one page. With A4 or Letter pages, the image is scaled down to fit inside the margin and centred, never stretched or cropped. With image-sized pages, the page takes the size of the image at 96 pixels per inch.",
+      "Orientation can follow each image, so a wide photo gets a landscape page and a tall one a portrait page, or be fixed for every page.",
+      "Rotation saved by your phone's camera is applied first, so photos come out the right way up.",
+    ],
+    example:
+      "Three phone photos of a receipt, taken upright, become a 3-page A4 PDF with a quarter-inch margin, one receipt photo per page, in the order you listed them.",
+    faqs: [
+      {
+        q: "Which image types work?",
+        a: "JPG, PNG, WebP, GIF and BMP. HEIC photos from iPhones open only in browsers that support HEIC, so convert them to JPG first if they are refused.",
+      },
+      {
+        q: "Will the PDF be large?",
+        a: "Roughly the size of the images added together. Shrink them first with the image compressor if you need a smaller file for email.",
+      },
+      {
+        q: "Are my photos uploaded?",
+        a: "No. The PDF is assembled in your browser and downloaded directly.",
+      },
+    ],
+  },
+  "pdf-to-jpg": {
+    howItWorks: [
+      "Each page is drawn onto a canvas at the resolution you choose and saved as an image. 72 DPI matches a screen, 150 DPI is sharp enough for most uses and 300 DPI suits printing.",
+      "PNG keeps text crisp and suits documents. JPG makes much smaller files and suits pages that are mostly photos.",
+      "Leave Pages empty to convert every page, or enter a range such as 1-3, 5. Up to 100 pages can be converted at a time.",
+    ],
+    example:
+      "A US Letter page is 8.5 × 11 inches, so at 150 DPI it becomes an image 1,275 × 1,650 pixels. Converting pages 1-3 gives three images, downloaded together as a ZIP.",
+    faqs: [
+      {
+        q: "Why does my image look blurry?",
+        a: "The resolution is too low for how large you are showing it. Choose 300 DPI for print or zooming in.",
+      },
+      {
+        q: "Can I get the text out instead?",
+        a: "Not with this tool, which makes pictures of the pages. Copy text from the PDF in your reader instead.",
+      },
+      {
+        q: "Is the PDF uploaded?",
+        a: "No. Pages are rendered in your browser and the images go straight to your downloads.",
+      },
+    ],
+  },
+  "zip-file-creator": {
+    howItWorks: [
+      "Pick files, or a whole folder to keep its structure, and choose ZIP, TAR.GZ or plain TAR. The archive is built in your browser and downloaded directly.",
+      "ZIP compresses each file on its own and opens natively on Windows and macOS. TAR.GZ bundles the files and compresses them together, which usually comes out smaller and is the norm on Linux and servers.",
+      "Two files with the same name get (2), (3) and so on added, so nothing is overwritten.",
+    ],
+    example:
+      "A folder of 40 text and spreadsheet files totalling 12 MB might pack into a ZIP of about 3 MB, a 75% saving. A folder of JPG photos barely shrinks, because the photos are already compressed.",
+    faqs: [
+      {
+        q: "Can I password-protect the ZIP?",
+        a: "Not here. Browsers can't create encrypted ZIPs safely, so use your operating system's archive tool or 7-Zip for that.",
+      },
+      {
+        q: "How large can the archive be?",
+        a: "Up to 500 MB of files at a time. Everything happens in memory, and larger jobs can crash a browser tab, especially on a phone.",
+      },
+      {
+        q: "Which compression level should I use?",
+        a: "Normal is the best balance. Maximum saves a little more on text at the cost of time, and None is fastest for files that are already compressed.",
+      },
+    ],
+  },
+  "archive-extractor": {
+    howItWorks: [
+      "The archive's type is read from the file's own bytes rather than its name, so a renamed file still opens. ZIP, TAR, TAR.GZ, TGZ and single-file GZ are supported.",
+      "Every file inside is listed with its path and size. Save the ones you need individually, or download the whole contents of a TAR as a ZIP.",
+      "Folders that hold no files are skipped, and so are links and device entries in TAR archives.",
+    ],
+    example:
+      "A project-1.4.tar.gz downloaded from GitHub opens to show its 120 source files. Save just README.md, or download everything as project-1.4.zip to open on Windows.",
+    faqs: [
+      {
+        q: "Can it open RAR or 7z files?",
+        a: "Not yet. RAR and 7z use formats browsers can't decode without a large add-on, so open those with 7-Zip or The Unarchiver.",
+      },
+      {
+        q: "Why won't my ZIP open?",
+        a: "It is either damaged, password-protected, or uses a compression method other than the standard one. The message says which.",
+      },
+      {
+        q: "Is the archive uploaded?",
+        a: "No. It is opened entirely inside your browser tab.",
+      },
+    ],
+  },
+  "tar-to-zip-converter": {
+    howItWorks: [
+      "The archive is unpacked in your browser and every file is repacked in the format you choose: ZIP, TAR.GZ or plain TAR.",
+      "File names, folder paths and modified dates carry over. Unix permissions, symbolic links and empty folders are not kept.",
+      "When you open a ZIP, the target switches to TAR.GZ, and any other archive defaults to ZIP, since those are the usual reasons to convert.",
+    ],
+    example:
+      "A backup.tar.gz from a Linux server holding 300 files becomes backup.zip, which opens with a double-click on Windows. Going the other way, a ZIP becomes a .tar.gz ready to extract with tar -xzf.",
+    faqs: [
+      {
+        q: "What is the difference between TAR and TAR.GZ?",
+        a: "TAR bundles files into one without compressing them. TAR.GZ is a TAR that has been gzip-compressed, so it is smaller.",
+      },
+      {
+        q: "Will scripts still be executable after converting?",
+        a: "No, permissions are not carried over. Run chmod +x on scripts after extracting the converted archive.",
+      },
+      {
+        q: "How big an archive can I convert?",
+        a: "Up to 500 MB, since the original and the converted copy both sit in your browser's memory.",
+      },
+    ],
+  },
 };

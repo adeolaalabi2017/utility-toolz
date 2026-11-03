@@ -1480,4 +1480,87 @@ export const TOOLS: Tool[] = [
       "Pick a solid, enter its measurements and get the volume, surface area and capacity in litres when you measure in centimetres or metres.",
     tags: ["volume calculator", "surface area", "cylinder volume", "sphere volume", "geometry", "math"],
   },
+  /* ---------------------------- FILES ----------------------------- */
+  {
+    slug: "merge-pdf",
+    name: "Merge PDF",
+    domain: "files",
+    category: "Combine & Split PDF",
+    tagline: "Combine several PDFs into one file, in the order you choose.",
+    description:
+      "Add PDF files, put them in order and merge them into a single PDF. Everything happens in your browser, so the files are never uploaded.",
+    tags: ["merge pdf", "combine pdf", "join pdf", "pdf", "documents"],
+    popular: true,
+  },
+  {
+    slug: "split-pdf",
+    name: "Split PDF",
+    domain: "files",
+    category: "Combine & Split PDF",
+    tagline: "Pull pages out of a PDF, or break it into smaller files.",
+    description:
+      "Extract a page range such as 1-3, 5 into a new PDF, or split every page or every few pages into separate files, downloaded as one ZIP.",
+    tags: ["split pdf", "extract pdf pages", "separate pdf", "pdf", "documents"],
+  },
+  {
+    slug: "pdf-page-organizer",
+    name: "PDF Page Organizer",
+    domain: "files",
+    category: "Edit PDF",
+    tagline: "Reorder, rotate and delete PDF pages, with a thumbnail of each.",
+    description:
+      "See every page as a thumbnail, move pages earlier or later, rotate them and remove the ones you don't need, then save a new PDF.",
+    tags: ["rotate pdf", "reorder pdf pages", "delete pdf pages", "organize pdf", "pdf"],
+  },
+  {
+    slug: "jpg-to-pdf",
+    name: "JPG to PDF Converter",
+    domain: "files",
+    category: "Convert PDF",
+    tagline: "Turn JPG, PNG or WebP images into one PDF, a page per image.",
+    description:
+      "Add photos or scans, put them in order, choose A4, Letter or image-sized pages and download a single PDF. Phone photos keep the right way up.",
+    tags: ["jpg to pdf", "image to pdf", "png to pdf", "photo to pdf", "pdf"],
+    popular: true,
+  },
+  {
+    slug: "pdf-to-jpg",
+    name: "PDF to JPG Converter",
+    domain: "files",
+    category: "Convert PDF",
+    tagline: "Save PDF pages as JPG or PNG images at screen or print resolution.",
+    description:
+      "Render every page, or just the ones you pick, as JPG or PNG at 72, 150 or 300 DPI. Download images one by one or all together as a ZIP.",
+    tags: ["pdf to jpg", "pdf to png", "pdf to image", "convert pdf", "pdf"],
+  },
+  {
+    slug: "zip-file-creator",
+    name: "Zip File Creator",
+    domain: "files",
+    category: "Archives",
+    tagline: "Pack files or a whole folder into a ZIP or TAR.GZ archive.",
+    description:
+      "Add files or a folder and download them as one .zip, .tar.gz or .tar archive, with the folder structure and modified dates kept.",
+    tags: ["zip files", "create zip", "compress files", "tar.gz", "archive"],
+  },
+  {
+    slug: "archive-extractor",
+    name: "Unzip & Extract Archive",
+    domain: "files",
+    category: "Archives",
+    tagline: "Open ZIP, TAR, TAR.GZ and GZ files and save what's inside.",
+    description:
+      "See every file inside an archive with its size and save just the ones you need, or download the contents of a TAR as a ZIP.",
+    tags: ["unzip", "extract zip", "open tar.gz", "untar", "archive"],
+  },
+  {
+    slug: "tar-to-zip-converter",
+    name: "TAR to ZIP Converter",
+    domain: "files",
+    category: "Archives",
+    tagline: "Convert between TAR, TAR.GZ and ZIP archives in either direction.",
+    description:
+      "Turn a .tar or .tar.gz into a .zip for Windows, or a .zip into a .tar.gz for Linux and servers. File names, folders and dates carry over.",
+    tags: ["tar to zip", "tar.gz to zip", "zip to tar", "convert archive", "archive"],
+  },
 ];

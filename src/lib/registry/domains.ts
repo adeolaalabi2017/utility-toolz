@@ -13,11 +13,12 @@ import {
   Sparkles,
   HeartPulse,
   Sigma,
+  FileArchive,
 } from "lucide-react";
 import type { Domain, DomainSlug, PlannedTool } from "./types";
 
 /**
- * The live domains (build plan §2.1), plus Health & Body and Math added later.
+ * The live domains (build plan §2.1), plus Health & Body, Math and Files added later.
  * Every domain listed here is live; the planned roadmap is kept in PLANNED_TOOLS.
  */
 export const DOMAINS: Domain[] = [
@@ -158,6 +159,16 @@ export const DOMAINS: Domain[] = [
     description:
       "Calculators, fractions, ratios, equations, primes and shapes — the arithmetic, algebra and geometry behind homework and everyday sums.",
     icon: Sigma,
+    status: "live",
+    phase: 5,
+  },
+  {
+    slug: "files",
+    name: "Files & Documents",
+    shortName: "Files",
+    description:
+      "Merge, split and convert PDFs, and pack or unpack ZIP and TAR archives, all inside your browser with nothing uploaded.",
+    icon: FileArchive,
     status: "live",
     phase: 5,
   },
