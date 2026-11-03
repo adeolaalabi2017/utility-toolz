@@ -1,6 +1,41 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useCallback, useRef } from "react";
+
+// Parse share-link query params over the defaults; null when the URL carries none
+function readUrlState<T extends Record<string, string | number | boolean>>(defaults: T): T | null {
+  try {
+    const params = new URLSearchParams(window.location.search);
+    const initial: Record<string, string | number | boolean> = { ...defaults };
+    let hasCustom = false;
+
+    Object.keys(defaults).forEach((key) => {
+      if (params.has(key)) {
+        const raw = params.get(key);
+        if (raw !== null) {
+          const defaultVal = defaults[key];
+          if (typeof defaultVal === "number") {
+            const numVal = Number(raw);
+            if (!isNaN(numVal)) {
+              initial[key] = numVal;
+              hasCustom = true;
+            }
+          } else if (typeof defaultVal === "boolean") {
+            initial[key] = raw === "true" || raw === "1";
+            hasCustom = true;
+          } else {
+            initial[key] = raw;
+            hasCustom = true;
+          }
+        }
+      }
+    });
+
+    return hasCustom ? (initial as T) : null;
+  } catch {
+    return null;
+  }
+}
 
 export function useToolState<T extends Record<string, string | number | boolean>>(
   defaults: T
@@ -10,44 +45,19 @@ export function useToolState<T extends Record<string, string | number | boolean>
   resetState: () => void,
   getShareUrl: () => string
 ] {
-  // Lazy state initialization from window.location.search without triggering cascading renders in an effect
-  const [state, setStateInternal] = useState<T>(() => {
-    if (typeof window === "undefined") return defaults;
-    try {
-      const params = new URLSearchParams(window.location.search);
-      const initial: Record<string, string | number | boolean> = { ...defaults };
-      let hasCustom = false;
-
-      Object.keys(defaults).forEach((key) => {
-        if (params.has(key)) {
-          const raw = params.get(key);
-          if (raw !== null) {
-            const defaultVal = defaults[key];
-            if (typeof defaultVal === "number") {
-              const numVal = Number(raw);
-              if (!isNaN(numVal)) {
-                initial[key] = numVal;
-                hasCustom = true;
-              }
-            } else if (typeof defaultVal === "boolean") {
-              initial[key] = raw === "true" || raw === "1";
-              hasCustom = true;
-            } else {
-              initial[key] = raw;
-              hasCustom = true;
-            }
-          }
-        }
-      });
-
-      return hasCustom ? (initial as T) : defaults;
-    } catch {
-      return defaults;
-    }
-  });
+  // Start from defaults so the first client render matches the prerendered HTML
+  const [state, setStateInternal] = useState<T>(defaults);
 
   const isMountedRef = useRef(false);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+
+  // Apply share-link params after hydration but before paint, so defaults never flash
+  useLayoutEffect(() => {
+    const fromUrl = readUrlState(defaults);
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- URL is only readable after hydration
+    if (fromUrl) setStateInternal(fromUrl);
+    // Defaults are usually inline literals; read the URL once on mount
+  }, []);
 
   useEffect(() => {
     isMountedRef.current = true;
