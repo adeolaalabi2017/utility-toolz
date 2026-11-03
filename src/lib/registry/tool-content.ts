@@ -3347,4 +3347,96 @@ export const TOOL_CONTENT: Record<string, ToolContent> = {
       },
     ],
   },
+  "excel-to-csv": {
+    howItWorks: [
+      "The workbook is opened in your browser and the chosen sheet is written out row by row. Each value is saved as Excel displays it, so 01/03/2026 stays a date in that format and $1,250.00 keeps its currency sign. Formulas are replaced by their results.",
+      "Fields that contain the separator, quotes or line breaks are wrapped in quotes, following the CSV standard. The file starts with a byte-order mark by default, which tells Excel to read accented letters and symbols correctly.",
+      "Choose Every sheet to get one CSV per sheet, downloaded together as a ZIP.",
+    ],
+    example:
+      "A workbook with a Sales sheet of 1,200 rows and a Returns sheet of 85 rows gives sales.csv when you pick Sales, or a ZIP holding Sales.csv and Returns.csv when you pick Every sheet.",
+    faqs: [
+      {
+        q: "Why do accented letters look wrong when I open the CSV?",
+        a: "The program is reading it with the wrong encoding. Keep the UTF-8 for Excel option, which adds the marker Excel needs.",
+      },
+      {
+        q: "Which separator should I use?",
+        a: "Comma for most English-language software. Where decimals are written with a comma, as in much of Europe, Excel expects semicolons.",
+      },
+      {
+        q: "Can it open old .xls files?",
+        a: "Yes. .xlsx, .xlsm, .xls and OpenDocument .ods files all open. Password-protected workbooks need an unprotected copy first.",
+      },
+    ],
+  },
+  "csv-to-excel": {
+    howItWorks: [
+      "Each CSV is read with the separator detected from its first lines: comma, semicolon, tab or pipe. Quoted fields, including ones with line breaks inside, are handled the standard way.",
+      "Plain numbers are stored as numbers so you can sum and sort them. Codes with leading zeros and numbers longer than 15 digits stay as text, because Excel would otherwise drop the zeros or round the digits. You can also keep every value as text.",
+      "Every file becomes its own sheet named after the file, and column widths are set to fit the content.",
+    ],
+    example:
+      "orders.csv, with a ZIP code column holding 02134, becomes orders.xlsx with one sheet named orders. Totals such as 18.50 are real numbers, while 02134 stays exactly as written.",
+    faqs: [
+      {
+        q: "Will text starting with = become a formula?",
+        a: "No. Every value is stored as plain text or a number, so a cell like =SUM(A1:A9) appears as written and nothing runs when the workbook opens.",
+      },
+      {
+        q: "Can I combine several CSVs into one workbook?",
+        a: "Yes. Add them all and each becomes a sheet, in the order listed.",
+      },
+      {
+        q: "Are dates converted?",
+        a: "Dates stay as the text in the CSV, so nothing is misread between day-first and month-first formats. Excel can convert them with Text to Columns.",
+      },
+    ],
+  },
+  "excel-to-json": {
+    howItWorks: [
+      "In Objects mode the first row supplies the keys and every following row becomes one object. Repeated header names get _1, _2 added, so no value is lost.",
+      "Typed values keep numbers as numbers, TRUE and FALSE as booleans and dates as ISO 8601 text. Text as shown gives every value exactly as Excel displays it, formatting included.",
+      "Empty cells become null, so every object has the same keys. Arrays mode returns each row as a plain list instead.",
+    ],
+    example:
+      "A sheet with headers name, price and in_stock and a row Tea, 2.5, TRUE becomes [{\"name\": \"Tea\", \"price\": 2.5, \"in_stock\": true}].",
+    faqs: [
+      {
+        q: "Why is my date one day off?",
+        a: "Dates are written in UTC. A date with no time is midnight, which can fall on the previous day in time zones west of UTC. Choose Text as shown to keep the date exactly as displayed.",
+      },
+      {
+        q: "Can I convert a CSV to JSON here?",
+        a: "Yes, CSV files open too. The JSON to CSV converter in Data goes the other way.",
+      },
+      {
+        q: "Is the spreadsheet uploaded?",
+        a: "No. It is read and converted inside your browser tab.",
+      },
+    ],
+  },
+  "excel-to-pdf": {
+    howItWorks: [
+      "The sheet is laid out as a table across the full page width: each column gets space in proportion to its longest value, so a wide table shrinks to fit and a narrow one spreads out. Text that still doesn't fit is cut short with an ellipsis.",
+      "Rows flow onto as many pages as needed. With a header row, it is shaded and repeated at the top of every page, and each page is numbered in the footer.",
+      "Values print as Excel displays them, and numbers line up on the right. The built-in PDF font covers Western European alphabets, so other scripts print as question marks and the tool tells you how many.",
+    ],
+    example:
+      "A price list with 6 columns and 300 rows, printed landscape on A4 at 9 point, fits on 10 pages with the header on each one.",
+    faqs: [
+      {
+        q: "Does it keep my cell colours and borders?",
+        a: "No. The PDF is a clean table of the values. For an exact copy of the formatting, use Excel's own Save as PDF.",
+      },
+      {
+        q: "How do I fit more columns on a page?",
+        a: "Switch to landscape and lower the text size. Very wide sheets are easier to read split into narrower sheets first.",
+      },
+      {
+        q: "Can I print Chinese, Arabic or Cyrillic text?",
+        a: "Not yet. The built-in font only covers Latin script, so those characters print as question marks.",
+      },
+    ],
+  },
 };

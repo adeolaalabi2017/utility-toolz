@@ -1563,4 +1563,45 @@ export const TOOLS: Tool[] = [
       "Turn a .tar or .tar.gz into a .zip for Windows, or a .zip into a .tar.gz for Linux and servers. File names, folders and dates carry over.",
     tags: ["tar to zip", "tar.gz to zip", "zip to tar", "convert archive", "archive"],
   },
+  {
+    slug: "excel-to-csv",
+    name: "Excel to CSV Converter",
+    domain: "files",
+    category: "Spreadsheets",
+    tagline: "Save a sheet from an .xlsx, .xls or .ods file as CSV.",
+    description:
+      "Convert one sheet or every sheet of a workbook to CSV, with your choice of separator and encoding that opens correctly in Excel.",
+    tags: ["excel to csv", "xlsx to csv", "xls to csv", "convert excel", "spreadsheet"],
+    popular: true,
+  },
+  {
+    slug: "csv-to-excel",
+    name: "CSV to Excel Converter",
+    domain: "files",
+    category: "Spreadsheets",
+    tagline: "Turn CSV files into an .xlsx workbook, one sheet per file.",
+    description:
+      "Convert CSV files to Excel with the separator detected for you, numbers stored as numbers, and leading zeros in codes kept intact.",
+    tags: ["csv to excel", "csv to xlsx", "convert csv", "combine csv", "spreadsheet"],
+  },
+  {
+    slug: "excel-to-json",
+    name: "Excel to JSON Converter",
+    domain: "files",
+    category: "Spreadsheets",
+    tagline: "Turn a spreadsheet sheet into JSON objects or arrays.",
+    description:
+      "Convert an .xlsx, .xls, .ods or CSV sheet to JSON, using the first row as keys and keeping numbers, booleans and dates typed.",
+    tags: ["excel to json", "xlsx to json", "spreadsheet to json", "convert excel", "json"],
+  },
+  {
+    slug: "excel-to-pdf",
+    name: "Excel to PDF Converter",
+    domain: "files",
+    category: "Spreadsheets",
+    tagline: "Print a spreadsheet sheet as a clean, paginated PDF table.",
+    description:
+      "Turn a sheet into a PDF table that fits the page width, with the header row repeated on every page and page numbers in the footer.",
+    tags: ["excel to pdf", "xlsx to pdf", "spreadsheet to pdf", "convert excel", "pdf"],
+  },
 ];

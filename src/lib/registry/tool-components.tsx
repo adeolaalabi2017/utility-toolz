@@ -163,4 +163,8 @@ export const TOOL_COMPONENTS: Record<string, ComponentType> = {
   "zip-file-creator": dynamic(() => import("@/components/tools/archives").then((m) => m.ZipFileCreator)),
   "archive-extractor": dynamic(() => import("@/components/tools/archives").then((m) => m.ArchiveExtractor)),
   "tar-to-zip-converter": dynamic(() => import("@/components/tools/archives").then((m) => m.ArchiveConverter)),
+  "excel-to-csv": dynamic(() => import("@/components/tools/spreadsheets").then((m) => m.ExcelToCsv)),
+  "csv-to-excel": dynamic(() => import("@/components/tools/spreadsheets").then((m) => m.CsvToExcel)),
+  "excel-to-json": dynamic(() => import("@/components/tools/spreadsheets").then((m) => m.ExcelToJson)),
+  "excel-to-pdf": dynamic(() => import("@/components/tools/spreadsheets").then((m) => m.ExcelToPdf)),
 };
