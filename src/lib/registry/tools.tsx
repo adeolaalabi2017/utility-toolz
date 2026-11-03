@@ -798,17 +798,6 @@ export const TOOLS: Tool[] = [
     popular: true,
   },
   {
-    slug: "percentage-calculator",
-    name: "Percentage Calculator",
-    domain: "education",
-    category: "Math Basics",
-    tagline: "Three percentage questions, answered instantly.",
-    description:
-      "Compute X% of Y, what percent X is of Y, or the percentage change between two numbers — with the inverse changes most people get wrong.",
-    tags: ["percentage", "math", "calculator", "discount", "education"],
-    popular: true,
-  },
-  {
     slug: "citation-formatter",
     name: "Citation Formatter",
     domain: "education",
@@ -1185,15 +1174,6 @@ export const TOOLS: Tool[] = [
     tags: ["grades", "final-exam", "gpa", "college", "school", "education"],
   },
   {
-    slug: "sig-fig-calculator",
-    name: "Significant Figures Calculator",
-    domain: "education",
-    category: "Math & Science",
-    tagline: "Count significant figures and format numbers into scientific and rounded notation.",
-    description: "Analyze significant digits, trailing zeros, and round values to specified precision according to standard scientific rounding rules.",
-    tags: ["sig-fig", "precision", "scientific-notation", "chemistry", "physics", "education"],
-  },
-  {
     slug: "tip-splitter",
     name: "Tip & Bill Splitter",
     domain: "everyday",
@@ -1277,15 +1257,6 @@ export const TOOLS: Tool[] = [
   },
   /* ------------------------- SECOND WAVE ------------------------- */
   {
-    slug: "fraction-calculator",
-    name: "Fraction Calculator",
-    domain: "education",
-    category: "Maths",
-    tagline: "Add, subtract, multiply or divide fractions and get the simplified answer.",
-    description: "Enter two fractions and an operation to get the simplified fraction, its mixed-number form and its decimal value.",
-    tags: ["fraction calculator", "fractions", "simplify fraction", "mixed number", "math homework"],
-  },
-  {
     slug: "hours-between-times-calculator",
     name: "Hours Between Times Calculator",
     domain: "productivity",
@@ -1366,5 +1337,147 @@ export const TOOLS: Tool[] = [
     tagline: "Find your heart-rate training zones from your age.",
     description: "Estimate your maximum heart rate from your age and see the beats per minute for each of five training zones.",
     tags: ["target heart rate", "heart rate zones", "max heart rate", "training zones", "cardio"],
+  },
+  /* ----------------------------- MATH ----------------------------- */
+  {
+    slug: "basic-calculator",
+    name: "Calculator",
+    domain: "math",
+    category: "Calculators",
+    tagline: "A plain calculator that you can type into, with a running history.",
+    description:
+      "Add, subtract, multiply, divide and work out percentages with the keypad or your keyboard. Every answer is kept in a history you can reuse.",
+    tags: ["calculator", "online calculator", "basic calculator", "simple calculator", "math"],
+    popular: true,
+  },
+  {
+    slug: "scientific-calculator",
+    name: "Scientific Calculator",
+    domain: "math",
+    category: "Calculators",
+    tagline: "Trig, logs, powers, roots and factorials, in degrees or radians.",
+    description:
+      "Type a full expression such as 2sin(30) + √16 and get the answer as you type. Supports brackets, powers, logs, factorials, π, e and the last answer.",
+    tags: ["scientific calculator", "trigonometry", "logarithm", "exponent", "square root", "math"],
+    popular: true,
+  },
+  {
+    slug: "percentage-calculator",
+    name: "Percentage Calculator",
+    domain: "math",
+    category: "Arithmetic",
+    tagline: "Three percentage questions, answered instantly.",
+    description:
+      "Compute X% of Y, what percent X is of Y, or the percentage change between two numbers — with the inverse changes most people get wrong.",
+    tags: ["percentage", "math", "calculator", "discount", "education"],
+    popular: true,
+  },
+  {
+    slug: "sig-fig-calculator",
+    name: "Significant Figures Calculator",
+    domain: "math",
+    category: "Rounding & Precision",
+    tagline: "Count significant figures and format numbers into scientific and rounded notation.",
+    description: "Analyze significant digits, trailing zeros, and round values to specified precision according to standard scientific rounding rules.",
+    tags: ["sig-fig", "precision", "scientific-notation", "chemistry", "physics", "education"],
+  },
+  {
+    slug: "fraction-calculator",
+    name: "Fraction Calculator",
+    domain: "math",
+    category: "Arithmetic",
+    tagline: "Add, subtract, multiply or divide fractions and get the simplified answer.",
+    description: "Enter two fractions and an operation to get the simplified fraction, its mixed-number form and its decimal value.",
+    tags: ["fraction calculator", "fractions", "simplify fraction", "mixed number", "math homework"],
+  },
+  {
+    slug: "ratio-calculator",
+    name: "Ratio Calculator",
+    domain: "math",
+    category: "Arithmetic",
+    tagline: "Solve a proportion for the missing value, or simplify a ratio.",
+    description:
+      "Find the missing number in A : B = C : D, scale a recipe or drawing, or reduce any ratio such as 1920 : 1080 to its simplest form.",
+    tags: ["ratio calculator", "proportion", "simplify ratio", "scale", "math"],
+  },
+  {
+    slug: "rounding-calculator",
+    name: "Rounding Calculator",
+    domain: "math",
+    category: "Rounding & Precision",
+    tagline: "Round to decimal places or the nearest 5, 10 or 0.05, with five rounding rules.",
+    description:
+      "Round any number to a set number of decimal places or to the nearest multiple, using half up, half to even (banker's), up, down or truncation.",
+    tags: ["rounding calculator", "round number", "decimal places", "nearest ten", "bankers rounding", "math"],
+  },
+  {
+    slug: "quadratic-equation-solver",
+    name: "Quadratic Equation Solver",
+    domain: "math",
+    category: "Algebra",
+    tagline: "Solve ax² + bx + c = 0, with real or complex roots shown step by step.",
+    description:
+      "Enter a, b and c to get both roots, the discriminant, the vertex and the factored form, with each step of the quadratic formula written out.",
+    tags: ["quadratic equation", "quadratic formula", "solve for x", "discriminant", "algebra", "math"],
+  },
+  {
+    slug: "gcd-lcm-calculator",
+    name: "GCD & LCM Calculator",
+    domain: "math",
+    category: "Number Theory",
+    tagline: "Greatest common divisor and least common multiple of any list of numbers.",
+    description:
+      "Find the GCD (HCF) and LCM of two or more whole numbers, with the prime factorisation of each so you can see where the answer comes from.",
+    tags: ["gcd", "lcm", "hcf", "greatest common factor", "least common multiple", "math"],
+  },
+  {
+    slug: "prime-factorization-calculator",
+    name: "Prime Factorization Calculator",
+    domain: "math",
+    category: "Number Theory",
+    tagline: "Check whether a number is prime and break it into prime factors.",
+    description:
+      "Enter any whole number up to 9 quadrillion to see whether it is prime, its prime factorisation, its divisors and the nearest primes either side.",
+    tags: ["prime factorization", "prime checker", "is it prime", "factors", "divisors", "math"],
+  },
+  {
+    slug: "permutation-combination-calculator",
+    name: "Permutation & Combination Calculator",
+    domain: "math",
+    category: "Counting & Probability",
+    tagline: "nPr and nCr, with or without repetition, as exact numbers.",
+    description:
+      "Count the ways to choose or arrange r items from n, where order does or doesn't matter and items can or can't repeat. Results are exact, however large.",
+    tags: ["permutation", "combination", "ncr", "npr", "probability", "math"],
+  },
+  {
+    slug: "pythagorean-theorem-calculator",
+    name: "Pythagorean Theorem Calculator",
+    domain: "math",
+    category: "Geometry",
+    tagline: "Find the missing side of a right triangle from the other two.",
+    description:
+      "Enter any two sides of a right-angled triangle to get the third, plus both angles, the area and the perimeter.",
+    tags: ["pythagorean theorem", "hypotenuse", "right triangle", "a² + b² = c²", "geometry", "math"],
+  },
+  {
+    slug: "area-calculator",
+    name: "Area Calculator",
+    domain: "math",
+    category: "Geometry",
+    tagline: "Area and perimeter of rectangles, triangles, circles and more.",
+    description:
+      "Pick a shape, enter its measurements and get the area and perimeter, for rectangles, squares, triangles, circles, trapezoids, parallelograms and ellipses.",
+    tags: ["area calculator", "perimeter", "circle area", "triangle area", "geometry", "math"],
+  },
+  {
+    slug: "volume-calculator",
+    name: "Volume Calculator",
+    domain: "math",
+    category: "Geometry",
+    tagline: "Volume and surface area of cubes, cylinders, spheres, cones and pyramids.",
+    description:
+      "Pick a solid, enter its measurements and get the volume, surface area and capacity in litres when you measure in centimetres or metres.",
+    tags: ["volume calculator", "surface area", "cylinder volume", "sphere volume", "geometry", "math"],
   },
 ];

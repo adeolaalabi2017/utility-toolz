@@ -45,6 +45,14 @@ const nextConfig: NextConfig = {
     ignoreBuildErrors: true,
   },
   reactStrictMode: false,
+  async redirects() {
+    // These tools lived under Education before the Math domain existed.
+    return ["percentage-calculator", "fraction-calculator", "sig-fig-calculator"].map((slug) => ({
+      source: `/education/${slug}`,
+      destination: `/math/${slug}`,
+      permanent: true,
+    }));
+  },
   async headers() {
     return [
       { source: "/:path*", headers: securityHeaders },

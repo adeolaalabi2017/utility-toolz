@@ -12,11 +12,12 @@ import {
   GraduationCap,
   Sparkles,
   HeartPulse,
+  Sigma,
 } from "lucide-react";
 import type { Domain, DomainSlug, PlannedTool } from "./types";
 
 /**
- * The live domains (build plan §2.1), plus Health & Body added later.
+ * The live domains (build plan §2.1), plus Health & Body and Math added later.
  * Every domain listed here is live; the planned roadmap is kept in PLANNED_TOOLS.
  */
 export const DOMAINS: Domain[] = [
@@ -125,7 +126,7 @@ export const DOMAINS: Domain[] = [
     name: "Education & Research",
     shortName: "Education",
     description:
-      "Grades, GPA, percentages and citations — study tools for students, teachers and researchers.",
+      "Grades, GPA, exam targets and citations — study tools for students, teachers and researchers.",
     icon: GraduationCap,
     status: "live",
     phase: 4,
@@ -147,6 +148,16 @@ export const DOMAINS: Domain[] = [
     description:
       "Body metrics, calorie needs, pregnancy dates and heart-rate zones, with the limits of each estimate stated.",
     icon: HeartPulse,
+    status: "live",
+    phase: 5,
+  },
+  {
+    slug: "math",
+    name: "Math",
+    shortName: "Math",
+    description:
+      "Calculators, fractions, ratios, equations, primes and shapes — the arithmetic, algebra and geometry behind homework and everyday sums.",
+    icon: Sigma,
     status: "live",
     phase: 5,
   },

@@ -2902,4 +2902,265 @@ export const TOOL_CONTENT: Record<string, ToolContent> = {
       },
     ],
   },
+  "basic-calculator": {
+    howItWorks: [
+      "Type a sum straight into the expression field or tap the keypad. The answer updates as you type, and multiplication and division are worked out before addition and subtraction.",
+      "Percent follows the phone-calculator rule: 200 + 15% adds 15% of 200, giving 230. On its own, or after × or ÷, a percent is simply divided by 100.",
+      "Press = or Enter to keep an answer. It moves into the history, where you can tap it to use it again. Results are shown to 12 significant figures, which hides floating-point noise such as 0.1 + 0.2 = 0.30000000000000004.",
+    ],
+    example:
+      "The calculator opens on 1250 + 15%. The percent is taken of 1,250, which is 187.5, and added on, so the answer is 1,437.5. That is a price with 15% VAT or a bill with a 15% tip in one step.",
+    faqs: [
+      {
+        q: "Can I use my keyboard?",
+        a: "Yes. Click into the expression and type digits, + − * / % and brackets. Enter gives the answer, Esc clears and Backspace deletes.",
+      },
+      {
+        q: "Why does 100 − 10% give 90 and not 99.9?",
+        a: "After + or −, a percent is taken of the number before it. So 100 − 10% means 100 minus 10% of 100. To subtract one tenth of a unit, type 100 − 0.1.",
+      },
+      {
+        q: "What happens after I press equals?",
+        a: "The answer stays in the display. Typing an operator carries on from it, and typing a digit starts a new sum.",
+      },
+      {
+        q: "Is my history saved?",
+        a: "Only while the page is open. Nothing is sent anywhere, and closing or reloading the page clears it.",
+      },
+    ],
+  },
+  "scientific-calculator": {
+    howItWorks: [
+      "Write the whole expression the way you would on paper, such as 2sin(30) + √16. Brackets, powers (^), roots, logs, factorials (!), π, e and mod are all understood, and a number next to a bracket or function multiplies it.",
+      "Trig functions use degrees or radians, set by the Angles menu. Results at exact angles are snapped so sin(30°) gives 0.5 and sin(180°) gives 0, not a tiny rounding error.",
+      "Powers group right to left, so 2^3^2 is 2^9 = 512, and −2^2 is −4 because the power applies before the minus sign. log is base 10 and ln is the natural log. Write 1.5E3 for 1.5 × 10³ and use Ans for the last answer.",
+    ],
+    example:
+      "The calculator opens on 2sin(30) + √16 in degrees. sin(30°) is 0.5, so 2sin(30) is 1. The square root of 16 is 4, and 1 + 4 gives 5.",
+    faqs: [
+      {
+        q: "Why do I get a different answer for sin(30) than my phone?",
+        a: "Your phone is probably in radians, where 30 means 30 radians. Switch the Angles menu, or your phone, so both use the same unit.",
+      },
+      {
+        q: "What does the error message mean?",
+        a: "It says what stopped the sum: a bracket that doesn't match, dividing by zero, the log of a negative number or a factorial of a fraction. Fix that part and press = again.",
+      },
+      {
+        q: "How large can numbers get?",
+        a: "Up to about 1.8 × 10³⁰⁸, the largest standard double-precision number. Factorials work up to 170!, the largest that fits.",
+      },
+      {
+        q: "Does it use eval or send my sums anywhere?",
+        a: "No. Expressions are read by a small parser in your browser that only understands numbers, operators and the listed functions, so nothing else can run.",
+      },
+    ],
+  },
+  "ratio-calculator": {
+    howItWorks: [
+      "A proportion says two ratios are equal: A : B = C : D. Cross-multiplying gives A × D = B × C, so the missing value is D = B × C ÷ A.",
+      "To simplify a ratio, both sides are divided by their greatest common divisor. Decimals are first scaled up to whole numbers, so 1.5 : 2.25 becomes 150 : 225 and then 2 : 3.",
+      "The share lines show each side as a percentage of the total, which is how ratios are often quoted for mixtures and splits.",
+    ],
+    example:
+      "A recipe uses flour and water in the ratio 3 : 5, and you have 12 cups of flour. The missing value is 5 × 12 ÷ 3 = 20, so you need 20 cups of water. The scale factor is 4×.",
+    faqs: [
+      {
+        q: "Does the order of the numbers matter?",
+        a: "Yes. 3 : 5 is not the same as 5 : 3. Keep each kind of thing in the same position on both sides: flour first, water second.",
+      },
+      {
+        q: "How do I simplify a screen size like 1920 × 1080?",
+        a: "Choose Simplify a ratio and enter 1920 and 1080. The answer is 16 : 9.",
+      },
+      {
+        q: "Can I use this for map scales?",
+        a: "Yes. For a 1 : 25,000 map, enter 1 and 25000 as A and B, then the distance on the map as C. The result is the real distance in the same unit.",
+      },
+    ],
+  },
+  "rounding-calculator": {
+    howItWorks: [
+      "Rounding to decimal places looks at the first digit you are dropping. Under the usual half-up rule, 5 or more rounds up and 4 or less rounds down. Negative numbers round away from zero, so −2.5 becomes −3.",
+      "Banker's rounding (half to even) sends an exact half to the nearest even digit, so 2.5 becomes 2 and 3.5 becomes 4. Over many values the ups and downs cancel out, which is why it is used in accounting and statistics.",
+      "Ceiling, floor and truncate ignore the size of the remainder. Rounding to a multiple divides by the step, rounds to a whole number, then multiplies back, so 7.33 to the nearest 0.05 is 7.35.",
+    ],
+    example:
+      "1,234.5678 rounded half up to two decimal places is 1,234.57, because the next digit is 7. The table shows that every rule gives 1,234.57 except always down and truncate, which give 1,234.56.",
+    faqs: [
+      {
+        q: "Why does 1.005 round to 1.01 here but 1.00 in some spreadsheets?",
+        a: "1.005 can't be stored exactly in binary, so a plain computer rounding sees 1.00499999…. This calculator rounds the number as you typed it.",
+      },
+      {
+        q: "How do I round to the nearest 10 or 100?",
+        a: "Choose Nearest ten or Nearest hundred under Precision, or switch to Nearest multiple and enter any step you like.",
+      },
+      {
+        q: "What is the difference between truncate and always down?",
+        a: "They only differ for negative numbers. Truncate moves towards zero (−2.7 to −2), while always down moves towards minus infinity (−2.7 to −3).",
+      },
+    ],
+  },
+  "quadratic-equation-solver": {
+    howItWorks: [
+      "A quadratic equation has the form ax² + bx + c = 0. Its roots come from the quadratic formula, x = (−b ± √(b² − 4ac)) ÷ 2a.",
+      "The discriminant, b² − 4ac, decides the kind of answer. Positive gives two real roots, zero gives one repeated root, and negative gives two complex roots written as p ± qi.",
+      "The vertex is the turning point of the parabola, at x = −b ÷ 2a. With real roots r₁ and r₂, the equation factors as a(x − r₁)(x − r₂). The roots are computed in a way that stays accurate even when b is very large compared with a and c.",
+    ],
+    example:
+      "For 2x² − 4x − 6 = 0, the discriminant is (−4)² − 4 × 2 × (−6) = 64. Its square root is 8, so x = (4 ± 8) ÷ 4, which gives x = −1 or x = 3. The vertex is at (1, −8), and the factored form is 2(x + 1)(x − 3).",
+    faqs: [
+      {
+        q: "What if my equation isn't equal to zero?",
+        a: "Move every term to one side first. For example, x² = 5x − 6 becomes x² − 5x + 6 = 0, so a = 1, b = −5 and c = 6.",
+      },
+      {
+        q: "What does i mean in the answer?",
+        a: "i is the square root of −1. A complex answer means the parabola never crosses the x-axis, so there is no real x that solves the equation.",
+      },
+      {
+        q: "What happens if a is 0?",
+        a: "Then there is no x² term and the equation is linear. The solver gives its single root, x = −c ÷ b.",
+      },
+    ],
+  },
+  "gcd-lcm-calculator": {
+    howItWorks: [
+      "Each number is split into prime factors. The greatest common divisor multiplies the primes that every number shares, each at its lowest power. The least common multiple multiplies every prime that appears, each at its highest power.",
+      "In practice the GCD is found with Euclid's algorithm, which repeatedly replaces the larger number with the remainder of dividing it by the smaller. The LCM of each pair is a × b ÷ GCD, carried across the list.",
+      "The LCM is computed with exact big integers, so it stays correct even when it grows far beyond the numbers you entered.",
+    ],
+    example:
+      "For 12, 18 and 30, the factorisations are 2² × 3, 2 × 3² and 2 × 3 × 5. The shared primes at their lowest powers give 2 × 3 = 6, the GCD. Every prime at its highest power gives 2² × 3² × 5 = 180, the LCM.",
+    faqs: [
+      {
+        q: "Is GCD the same as HCF or GCF?",
+        a: "Yes. Greatest common divisor, highest common factor and greatest common factor are three names for the same number.",
+      },
+      {
+        q: "When do I need the LCM?",
+        a: "To add fractions, the LCM of the denominators is the lowest common denominator. It also tells you when repeating events line up, such as buses every 12 and 18 minutes meeting every 36.",
+      },
+      {
+        q: "What does coprime mean?",
+        a: "Two numbers are coprime when their GCD is 1, so they share no prime factor. 8 and 15 are coprime even though neither is prime.",
+      },
+    ],
+  },
+  "prime-factorization-calculator": {
+    howItWorks: [
+      "Small prime factors are removed by trial division. Whatever remains is tested with the Miller–Rabin test, which is exact for every number this tool accepts, and split with Pollard's rho method if it is not prime. Even 16-digit numbers answer instantly.",
+      "Every whole number above 1 has exactly one prime factorisation. A number is prime when that factorisation is just the number itself.",
+      "The divisor count multiplies one more than each exponent, so 2³ × 3² × 5 has 4 × 3 × 2 = 24 divisors. The nearest primes on either side are found by testing each neighbour in turn.",
+    ],
+    example:
+      "360 is 2³ × 3² × 5, so it is not prime. It has 24 divisors, which add up to 1,170. The nearest primes are 359 below and 367 above.",
+    faqs: [
+      {
+        q: "Is 1 a prime number?",
+        a: "No. A prime needs exactly two different divisors, and 1 has only one. Leaving it out is also what makes every factorisation unique.",
+      },
+      {
+        q: "How big a number can I check?",
+        a: "Any whole number up to 9,007,199,254,740,991, the largest integer a browser can hold exactly.",
+      },
+      {
+        q: "Why is 2 the only even prime?",
+        a: "Every other even number can be divided by 2, which gives it a third divisor.",
+      },
+    ],
+  },
+  "permutation-combination-calculator": {
+    howItWorks: [
+      "Combinations count groups where order doesn't matter: C(n, r) = n! ÷ (r! (n − r)!). Permutations count arrangements where order matters: P(n, r) = n! ÷ (n − r)!.",
+      "With repetition allowed, arrangements number nʳ, since every pick has n choices. Groups with repetition are counted with the stars-and-bars formula, C(n + r − 1, r).",
+      "Every result is calculated with exact big integers, so the answer stays exact even when it runs to thousands of digits. The chance line assumes every outcome is equally likely.",
+    ],
+    example:
+      "A poker hand is 5 cards from a 52-card deck, with order ignored and no repeats. That gives C(52, 5) = 2,598,960 hands, so any particular hand has a 1 in 2,598,960 chance. If order mattered, there would be 311,875,200 arrangements.",
+    faqs: [
+      {
+        q: "How do I know whether order matters?",
+        a: "Ask whether swapping two picks gives a different result. A race podium (first, second, third) is a permutation. A committee of three is a combination.",
+      },
+      {
+        q: "How many 4-digit PINs are there?",
+        a: "Set n to 10 and r to 4, with order mattering and repetition allowed. That gives 10⁴ = 10,000 PINs.",
+      },
+      {
+        q: "What are my lottery odds?",
+        a: "For a 6-from-49 draw, enter n = 49 and r = 6 with order ignored. There are 13,983,816 possible tickets, so one ticket has a 1 in 13,983,816 chance.",
+      },
+    ],
+  },
+  "pythagorean-theorem-calculator": {
+    howItWorks: [
+      "In a right-angled triangle, the squares of the two shorter sides (the legs a and b) add up to the square of the longest side (the hypotenuse c): a² + b² = c².",
+      "To find the hypotenuse, take the square root of a² + b². To find a leg, take the square root of c² minus the other leg squared. The hypotenuse must always be the longest side.",
+      "The angles come from the inverse tangent of the legs. The area is half of a × b, because the two legs are the base and the height.",
+    ],
+    example:
+      "With legs of 3 and 4, the hypotenuse is √(9 + 16) = √25 = 5. Angle A is 36.87° and angle B is 53.13°. The area is 6 and the perimeter is 12.",
+    faqs: [
+      {
+        q: "Does this work for any triangle?",
+        a: "No, only for triangles with a 90° angle. For other triangles, use the three-sides option in the area calculator, or the law of cosines.",
+      },
+      {
+        q: "How do I check a corner is square?",
+        a: "Measure 3 units along one side and 4 along the other. If the diagonal between the marks is exactly 5, the corner is 90°. Builders call this the 3-4-5 rule.",
+      },
+      {
+        q: "What is a Pythagorean triple?",
+        a: "Three whole numbers that fit a² + b² = c², such as 3-4-5, 5-12-13 and 8-15-17. Any multiple of a triple, like 6-8-10, is a triple too.",
+      },
+    ],
+  },
+  "area-calculator": {
+    howItWorks: [
+      "Each shape uses its standard formula: length × width for a rectangle, ½ × base × height for a triangle, πr² for a circle, ½ × (a + b) × height for a trapezoid and π × a × b for an ellipse.",
+      "For a triangle where you only know the three sides, Heron's formula works out the area from the half-perimeter s: √(s(s − a)(s − b)(s − c)).",
+      "Area is reported in square units and perimeter in plain units. The ellipse perimeter uses Ramanujan's approximation, because there is no exact simple formula.",
+    ],
+    example:
+      "A rectangular room 8 m long and 5 m wide has an area of 8 × 5 = 40 m² and a perimeter of 2 × (8 + 5) = 26 m. That is 0.004 hectares.",
+    faqs: [
+      {
+        q: "What is the height of a triangle?",
+        a: "The perpendicular distance from the base to the opposite corner, measured at a right angle to the base. It is not the length of a sloping side.",
+      },
+      {
+        q: "How do I find the area of an L-shaped room?",
+        a: "Split it into two rectangles, work out each area, and add them together.",
+      },
+      {
+        q: "How do I convert square feet to square metres?",
+        a: "Multiply square feet by 0.0929. Each unit is squared, so a length conversion factor has to be squared too.",
+      },
+    ],
+  },
+  "volume-calculator": {
+    howItWorks: [
+      "Prisms and cylinders have a volume equal to the base area times the height. Cones and pyramids hold exactly one third of the matching prism or cylinder. A sphere holds ⁴⁄₃πr³.",
+      "Surface area adds up every face: for a cylinder, two circles plus the curved side (2πr(r + h)). For a cone, the curved side uses the slant height √(r² + h²).",
+      "Capacity in litres is shown when you choose a unit: 1,000 cm³ is one litre and one cubic metre is 1,000 litres.",
+    ],
+    example:
+      "A cylinder 5 cm in radius and 25 cm tall holds π × 5² × 25 ≈ 1,963.5 cm³, which is about 1.96 litres or 0.52 US gallons. Its surface area is 2π × 5 × 30 ≈ 942.5 cm².",
+    faqs: [
+      {
+        q: "I have the diameter. What do I enter?",
+        a: "Enter half of it as the radius. A pipe 10 cm across has a radius of 5 cm.",
+      },
+      {
+        q: "How much concrete or soil do I need?",
+        a: "Use the box shape with all measurements in metres. The answer in cubic metres is how suppliers usually sell it, so add 5–10% for waste.",
+      },
+      {
+        q: "Why is a cone exactly a third of a cylinder?",
+        a: "A cone narrows evenly to a point, and adding up its circular slices gives exactly one third of the cylinder with the same base and height. Pyramids follow the same rule.",
+      },
+    ],
+  },
 };
