@@ -163,7 +163,7 @@ export function PdfMerger() {
   };
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FileDropZone multiple accept="application/pdf,.pdf" onFiles={add} title="Add PDF files" />
@@ -283,7 +283,7 @@ export function PdfSplitter() {
   };
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FileDropZone accept="application/pdf,.pdf" onFiles={(f) => { setMade(""); open(f); }} title={file ? `${file.name} · ${pagesLabel(pageCount)}` : "Open a PDF"} />
@@ -425,7 +425,7 @@ export function PdfPageOrganizer() {
   const iconBtn = "h-8 w-8 sm:h-8 sm:w-8";
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FileDropZone accept="application/pdf,.pdf" onFiles={open} title={file ? file.name : "Open a PDF"} />
@@ -589,7 +589,7 @@ export function ImagesToPdf() {
   };
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FileDropZone multiple accept="image/jpeg,image/png,image/webp,image/gif,image/bmp" onFiles={(fs) => { setMade(null); setItems((p) => [...p, ...fs.map((file) => ({ key: nextFileKey(), name: file.name, size: file.size, file }))]); }} title="Add JPG, PNG or WebP images" />
@@ -720,7 +720,7 @@ export function PdfToImages() {
   const totalSize = images.reduce((n, i) => n + i.blob.size, 0);
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FileDropZone accept="application/pdf,.pdf" onFiles={(f) => { clear(); open(f); }} title={file ? `${file.name} · ${pagesLabel(pageCount)}` : "Open a PDF"} />

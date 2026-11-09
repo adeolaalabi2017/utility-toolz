@@ -62,7 +62,7 @@ export function WordCounter() {
         </div>
       </div>
       <div className="lg:col-span-2">
-        <div className="rounded-xl border bg-card p-4 shadow-sm sm:p-5">
+        <div className="rounded-xl bg-card p-4 shadow-sm sm:p-5">
           <p className="mb-4 text-sm font-semibold text-muted-foreground">
             Live counts
           </p>
@@ -125,7 +125,7 @@ export function CharacterCounter() {
         </div>
       </div>
       <div className="lg:col-span-2">
-        <div className="rounded-xl border bg-card p-4 shadow-sm sm:p-5">
+        <div className="rounded-xl bg-card p-4 shadow-sm sm:p-5">
           <p className="mb-4 text-sm font-semibold text-muted-foreground">
             Platform limits
           </p>
@@ -180,7 +180,7 @@ export function ReadingTimeCalculator() {
   };
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <TextAreaField
@@ -361,7 +361,7 @@ export function LoremIpsumGenerator() {
   }, [unit, n, classicStart, seed]);
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FieldGrid>
@@ -382,7 +382,7 @@ export function LoremIpsumGenerator() {
               type="checkbox"
               checked={classicStart}
               onChange={(e) => setClassicStart(e.target.checked)}
-              className="h-4 w-4 accent-[#308f68]"
+              className="h-4 w-4 accent-[var(--foreground)]"
             />
             Start with the classic &ldquo;Lorem ipsum dolor sit amet…&rdquo;
           </label>
@@ -472,7 +472,7 @@ export function HeadlineAnalyser() {
   const score = Math.round((passed / checks.length) * 100);
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-3">
           <div className="space-y-1.5">

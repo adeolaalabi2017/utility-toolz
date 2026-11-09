@@ -1,5 +1,6 @@
 "use client";
 
+import { ResultValue } from "./result-value";
 import React, { useState, useMemo } from "react";
 import { fmtPct, fmtNum } from "@/lib/format";
 import { Mail, MousePointerClick, Eye, CheckCircle2 } from "lucide-react";
@@ -21,7 +22,7 @@ export function CtorCalculator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
             <Mail className="h-4 w-4 text-deep-orange" /> Email campaign volume
           </span>
@@ -44,7 +45,7 @@ export function CtorCalculator() {
                 type="number"
                 value={uniqueOpens}
                 onChange={(e) => setUniqueOpens(Number(e.target.value) || 0)}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-lf-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               <span className="text-[11px] text-muted-foreground mt-0.5 block">Unique subscribers who opened the email</span>
             </div>
@@ -63,7 +64,7 @@ export function CtorCalculator() {
         </div>
 
         {/* Results Banner (5 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
           <span className="text-sm font-semibold text-muted-foreground">
             Email quality metrics
           </span>
@@ -71,9 +72,9 @@ export function CtorCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Click-to-Open Rate (CTOR)</span>
-              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
+              <ResultValue compact live className="mt-1">
                 {fmtPct(calc.ctor, 2)}
-              </p>
+              </ResultValue>
               <span className="text-xs text-muted-foreground mt-1 block">
                 Measures content relevance & CTA effectiveness
               </span>
@@ -82,7 +83,7 @@ export function CtorCalculator() {
             <div className="grid grid-cols-2 gap-3 text-center">
               <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Open Rate</span>
-                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
+                <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {fmtPct(calc.openRate, 2)}
                 </span>
               </div>

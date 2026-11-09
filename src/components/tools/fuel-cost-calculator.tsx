@@ -1,5 +1,6 @@
 "use client";
 
+import { ResultValue } from "./result-value";
 import React, { useState, useMemo } from "react";
 import { fmtUSD, fmtNum } from "@/lib/format";
 import { Fuel, Car, Users, ArrowRightLeft } from "lucide-react";
@@ -41,7 +42,7 @@ export function FuelCostCalculator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
               <Fuel className="h-4 w-4 text-deep-orange" /> Journey & vehicle economy
@@ -137,7 +138,7 @@ export function FuelCostCalculator() {
         </div>
 
         {/* Results Banner (5 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
           <span className="text-sm font-semibold text-muted-foreground">
             Trip fuel cost
           </span>
@@ -145,9 +146,9 @@ export function FuelCostCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Estimated Total Fuel Cost</span>
-              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
+              <ResultValue compact live className="mt-1">
                 {fmtUSD(calc.totalCost, 2)}
-              </p>
+              </ResultValue>
               <span className="text-xs text-muted-foreground mt-1 block">
                 {fmtUSD(calc.perPersonCost, 2)} per passenger
               </span>
@@ -162,7 +163,7 @@ export function FuelCostCalculator() {
               </div>
               <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Cost / {unitSystem === "us" ? "Mile" : "Km"}</span>
-                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
+                <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {fmtUSD(calc.costPerDistance, 2)}
                 </span>
               </div>

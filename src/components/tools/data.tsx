@@ -31,7 +31,7 @@ export function PercentageChangeCalculator() {
   const multiplier = a !== 0 ? b / a : Infinity;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <FieldGrid>
           <NumberField label="From (original value)" value={from} onChange={setFrom} />
@@ -40,14 +40,14 @@ export function PercentageChangeCalculator() {
       }
       results={
         <div className="space-y-4">
-          <div className="rounded-lg bg-ink px-4 py-5 text-white">
-            <p className="text-sm font-medium text-white/60">
+          <div className="rounded-lg bg-highlight px-4 py-5 text-on-highlight">
+            <p className="text-sm font-medium text-on-highlight">
               {diff >= 0 ? "Increase" : diff < 0 ? "Decrease" : "Change"}
             </p>
             <p className="tnum mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
               {isFinite(change) ? `${change >= 0 ? "+" : ""}${change.toFixed(2)}%` : "—"}
             </p>
-            <p className="mt-1.5 text-sm text-white/70">
+            <p className="mt-1.5 text-sm text-on-highlight">
               {fmtNum(a)} → {fmtNum(b)} · {diff >= 0 ? "+" : "−"}
               {fmtNum(Math.abs(diff))} absolute
             </p>
@@ -222,7 +222,7 @@ export function DataFormatConverter() {
   }
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <TextAreaField
@@ -346,7 +346,7 @@ export function CsvViewer() {
           </div>
         </FieldGrid>
       </div>
-      <div className="rounded-xl border bg-card p-4 shadow-sm sm:p-5">
+      <div className="rounded-xl bg-card p-4 shadow-sm sm:p-5">
         <div className="mb-3 flex flex-wrap gap-4 text-sm">
           <span>
             <span className="tnum font-bold">{rows.length}</span> rows
@@ -419,7 +419,7 @@ export function JsonToCsvConverter() {
   }
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <TextAreaField
@@ -500,7 +500,7 @@ export function AverageCalculator() {
   const modes = maxFreq > 1 ? [...freq.entries()].filter(([, c]) => c === maxFreq).map(([v]) => v) : [];
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <TextAreaField
           label="Numbers (separated by spaces, commas or new lines)"
@@ -513,10 +513,10 @@ export function AverageCalculator() {
       }
       results={
         <div className="space-y-4">
-          <div className="rounded-lg bg-ink px-4 py-5 text-white">
-            <p className="text-sm font-medium text-white/60">Average (mean)</p>
+          <div className="rounded-lg bg-highlight px-4 py-5 text-on-highlight">
+            <p className="text-sm font-medium text-on-highlight">Average (mean)</p>
             <p className="tnum mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{fmtNum(mean, 2)}</p>
-            <p className="mt-1.5 text-sm text-white/70">{nums.length} values summed to {fmtNum(sum, 2)}</p>
+            <p className="mt-1.5 text-sm text-on-highlight">{nums.length} values summed to {fmtNum(sum, 2)}</p>
           </div>
           <div>
             <StatRow label="Median (middle value)" value={nums.length ? fmtNum(median, 2) : "—"} emphasis />
@@ -559,7 +559,7 @@ export function StandardDeviationCalculator() {
   const cv = mean !== 0 ? (sd / mean) * 100 : 0;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <TextAreaField
@@ -582,12 +582,12 @@ export function StandardDeviationCalculator() {
       }
       results={
         <div className="space-y-4">
-          <div className="rounded-lg bg-ink px-4 py-5 text-white">
-            <p className="text-sm font-medium text-white/60">
+          <div className="rounded-lg bg-highlight px-4 py-5 text-on-highlight">
+            <p className="text-sm font-medium text-on-highlight">
               Standard deviation
             </p>
             <p className="tnum mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{fmtNum(sd, 4)}</p>
-            <p className="mt-1.5 text-sm text-white/70">
+            <p className="mt-1.5 text-sm text-on-highlight">
               mean {fmtNum(mean, 3)} across {n} values
             </p>
           </div>

@@ -1,5 +1,6 @@
 "use client";
 
+import { ResultValue } from "./result-value";
 import { Cur } from "@/components/site/currency";
 
 import React, { useState, useMemo } from "react";
@@ -41,7 +42,7 @@ export function MrrChurnCalculator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
             <TrendingUp className="h-4 w-4 text-deep-green" /> Monthly SaaS revenue components (<Cur />)
           </span>
@@ -104,7 +105,7 @@ export function MrrChurnCalculator() {
         </div>
 
         {/* Primary Metrics (5 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
           <span className="text-sm font-semibold text-muted-foreground">
             Ending recurring revenue
           </span>
@@ -112,9 +113,9 @@ export function MrrChurnCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Ending Monthly Recurring Revenue (MRR)</span>
-              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
+              <ResultValue compact live className="mt-1">
                 {fmtUSD(calc.endMrr, 0)}
-              </p>
+              </ResultValue>
               <span className="text-xs text-muted-foreground mt-1 block">
                 Net Change: <strong className={calc.netNewMrr >= 0 ? "text-deep-green" : "text-deep-coral"}>
                   {calc.netNewMrr >= 0 ? `+${fmtUSD(calc.netNewMrr, 0)}` : fmtUSD(calc.netNewMrr, 0)}
@@ -149,13 +150,13 @@ export function MrrChurnCalculator() {
 
       {/* Retention & Churn Health Grid */}
       <div className="grid gap-4 sm:grid-cols-3 text-xs">
-        <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+        <div className="rounded-xl bg-card p-4 shadow-lark-sm">
           <span className="text-muted-foreground block">Gross MRR Churn Rate</span>
           <span className="text-lg font-bold text-foreground mt-1 block">{fmtPct(calc.grossChurnRate, 2)}</span>
           <span className="text-[11px] text-muted-foreground mt-1 block">Monthly revenue cancelled</span>
         </div>
 
-        <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+        <div className="rounded-xl bg-card p-4 shadow-lark-sm">
           <span className="text-muted-foreground block">Net MRR Churn Rate</span>
           <span className={`text-lg font-bold mt-1 block ${calc.netChurnRate <= 0 ? "text-deep-green" : "text-deep-coral"}`}>
             {calc.netChurnRate <= 0 ? `-${fmtPct(Math.abs(calc.netChurnRate), 2)}` : fmtPct(calc.netChurnRate, 2)}
@@ -163,7 +164,7 @@ export function MrrChurnCalculator() {
           <span className="text-[11px] text-muted-foreground mt-1 block">Negative churn indicates net expansion</span>
         </div>
 
-        <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+        <div className="rounded-xl bg-card p-4 shadow-lark-sm">
           <span className="text-muted-foreground block">Net Revenue Retention (NRR)</span>
           <span className={`text-lg font-bold mt-1 block ${calc.nrr >= 100 ? "text-deep-green" : "text-deep-orange"}`}>
             {fmtPct(calc.nrr, 1)}

@@ -172,7 +172,7 @@ export function ExcelToCsv() {
   };
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FileDropZone accept={SHEET_ACCEPT} onFiles={open} title={file ? file.name : "Open an Excel or ODS spreadsheet"} />
@@ -311,7 +311,7 @@ export function CsvToExcel() {
   const delimLabel = (d: string) => DELIMITERS.find((x) => x.value === d)?.label.split(" ")[0].toLowerCase() ?? d;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FileDropZone multiple accept=".csv,.tsv,.txt,text/csv,text/tab-separated-values" onFiles={add} title="Add CSV files" hint="Each file becomes its own sheet. Nothing is uploaded." />
@@ -416,7 +416,7 @@ export function ExcelToJson() {
   const shown = json.length > MAX_SHOWN_JSON ? `${json.slice(0, MAX_SHOWN_JSON)}\n…` : json;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FileDropZone accept={SHEET_ACCEPT} onFiles={(f) => { setJson(""); open(f); }} title={file ? file.name : "Open an Excel, ODS or CSV file"} />
@@ -582,7 +582,7 @@ export function ExcelToPdf() {
   };
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FileDropZone accept={SHEET_ACCEPT} onFiles={(f) => { setMade(null); open(f); }} title={file ? file.name : "Open an Excel, ODS or CSV file"} />

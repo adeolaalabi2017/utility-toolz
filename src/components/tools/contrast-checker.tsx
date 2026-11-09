@@ -142,7 +142,7 @@ export function ContrastChecker() {
                     setFg(p.fg);
                     setBg(p.bg);
                   }}
-                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-foreground/80 hover:border-lf-purple transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-full border border-border bg-card px-3 py-1 text-xs font-medium text-foreground/80 hover:border-input transition-colors"
                 >
                   <span
                     className="h-2.5 w-2.5 rounded-full border border-black/10"

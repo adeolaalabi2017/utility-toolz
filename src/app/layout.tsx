@@ -29,8 +29,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://utilitytoolz.com";
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#1f4a3f" },
-    { media: "(prefers-color-scheme: dark)", color: "#0d1520" },
+    { media: "(prefers-color-scheme: light)", color: "#f3f3ef" },
+    { media: "(prefers-color-scheme: dark)", color: "#131412" },
   ],
   width: "device-width",
   initialScale: 1,

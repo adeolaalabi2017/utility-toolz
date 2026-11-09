@@ -44,7 +44,7 @@ export function JsonFormatter() {
   };
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <TextAreaField
@@ -70,7 +70,7 @@ export function JsonFormatter() {
                 Invalid JSON
               </span>
             ) : (
-              <span className="rounded-full bg-secondary px-3 py-1 text-xs font-medium text-secondary-foreground">
+              <span className="rounded-md bg-highlight px-3 py-1 text-lg font-medium text-on-highlight">
                 Valid JSON ✓
               </span>
             )}
@@ -190,7 +190,7 @@ export function RegexTester() {
   };
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <div className="space-y-1.5">
@@ -354,7 +354,7 @@ export function Base64EncoderDecoder() {
   const decoded = mode === "decode" ? decodeBase64(input) : null;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <SelectField
@@ -459,7 +459,7 @@ export function UrlEncoderDecoder() {
   }, [mode, scope, input]);
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <SelectField
@@ -551,7 +551,7 @@ export function UuidGenerator() {
   const allText = ids.join("\n");
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <SelectField
@@ -589,7 +589,7 @@ export function UuidGenerator() {
         <div className="space-y-4">
           <div className="max-h-80 space-y-1.5 overflow-auto">
             {ids.map((id, i) => (
-              <div key={i} className="flex items-center justify-between gap-2 rounded-lg border bg-card px-3 py-2">
+              <div key={i} className="flex items-center justify-between gap-2 rounded-lg bg-card px-3 py-2">
                 <code className="truncate font-mono text-[13px]">{id}</code>
                 <CopyButton text={id} label="Copy" size="xs" />
               </div>
@@ -657,7 +657,7 @@ export function HashGenerator() {
   }, [text, algo]);
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <SelectField label="Algorithm" value={algo} onChange={setAlgo} options={HASH_ALGOS} />
@@ -745,7 +745,7 @@ export function NumberBaseConverter() {
   ];
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       actions={<ToolShareBar />}
       inputs={
         <div className="space-y-4">
@@ -826,7 +826,7 @@ export function PasswordStrengthChecker() {
   const common = COMMON_WORDS.find((w) => password.toLowerCase().includes(w));
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <div className="space-y-1.5">

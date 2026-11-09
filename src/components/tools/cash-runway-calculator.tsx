@@ -70,7 +70,7 @@ export function CashRunwayCalculator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
             <Landmark className="h-4 w-4 text-deep-orange" /> Cash & burn parameters
           </span>
@@ -135,7 +135,7 @@ export function CashRunwayCalculator() {
         </div>
 
         {/* Results Banner (5 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
           <span className="text-sm font-semibold text-muted-foreground">
             Estimated runway
           </span>
@@ -143,7 +143,7 @@ export function CashRunwayCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Cash Depletion Horizon</span>
-              <p className={`tnum font-display text-display-lg mt-1 font-bold ${
+              <p className={`tnum font-display text-display-md mt-1 font-bold ${
                 calc.dynamicRunwayMonths >= 18 ? "text-deep-green" : calc.dynamicRunwayMonths >= 6 ? "text-deep-orange" : "text-deep-coral"
               }`}>
                 {calc.dynamicRunwayMonths >= 60 ? "60+ Months" : `${calc.dynamicRunwayMonths.toFixed(1)} Months`}
@@ -179,7 +179,7 @@ export function CashRunwayCalculator() {
       </div>
 
       {/* Projection Table */}
-      <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
+      <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-3">
         <div className="flex flex-wrap items-center justify-between gap-2">
           <h4 className="text-sm font-semibold text-muted-foreground">
             Projected monthly cash trajectory

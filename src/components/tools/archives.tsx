@@ -97,7 +97,7 @@ export function ZipFileCreator() {
   };
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FieldGrid>
@@ -206,7 +206,7 @@ export function ArchiveExtractor() {
     downloadBlob(e.name.split("/").pop() || "file", bytesToBlob(e.data, "application/octet-stream"));
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FileDropZone accept={ARCHIVE_ACCEPT} onFiles={open} title={opened ? opened.file.name : "Open a ZIP, TAR, TAR.GZ or GZ file"} />
@@ -306,7 +306,7 @@ export function ArchiveConverter() {
     : [];
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FileDropZone accept={ARCHIVE_ACCEPT} onFiles={onFiles} title={opened ? opened.file.name : "Open a ZIP, TAR, TAR.GZ or GZ file"} />

@@ -42,7 +42,7 @@ export function MetaTitleGenerator() {
   const titles = TITLE_PATTERNS.map((fn) => fn(kw, br, year));
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <FieldGrid>
           <div className="space-y-1.5">
@@ -114,7 +114,7 @@ export function MetaDescriptionGenerator() {
   ];
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <div className="space-y-1.5">
@@ -187,7 +187,7 @@ export function SerpSnippetPreview() {
   );
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <div className="space-y-1.5">
@@ -218,7 +218,7 @@ export function SerpSnippetPreview() {
           </p>
           <div className="rounded-xl border bg-white p-4 shadow-sm">
             <div className="flex items-center gap-2">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-white">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary text-[10px] font-bold text-primary-foreground">
                 {domain.charAt(0).toUpperCase() || "A"}
               </span>
               <div className="min-w-0">
@@ -325,14 +325,14 @@ export function KeywordDensityChecker() {
               type="checkbox"
               checked={dropStop}
               onChange={(e) => setDropStop(e.target.checked)}
-              className="h-4 w-4 accent-[#308f68]"
+              className="h-4 w-4 accent-[var(--foreground)]"
             />
             Exclude phrases containing stop words (the, and, of…)
           </label>
         </div>
       </div>
       <div className="lg:col-span-2">
-        <div className="rounded-xl border bg-card p-4 shadow-sm sm:p-5">
+        <div className="rounded-xl bg-card p-4 shadow-sm sm:p-5">
           <p className="mb-4 text-sm font-semibold text-muted-foreground">
             Density report
           </p>
@@ -399,7 +399,7 @@ export function RobotsTxtGenerator() {
   if (sitemap.trim()) out += `\nSitemap: ${sitemap.trim()}\n`;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <SelectField
@@ -496,7 +496,7 @@ export function XmlSitemapGenerator() {
     `\n</urlset>`;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <TextAreaField
@@ -594,7 +594,7 @@ export function UrlSlugGenerator() {
     });
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <TextAreaField
@@ -626,7 +626,7 @@ export function UrlSlugGenerator() {
               type="checkbox"
               checked={stripStop}
               onChange={(e) => setStripStop(e.target.checked)}
-              className="h-4 w-4 accent-[#308f68]"
+              className="h-4 w-4 accent-[var(--foreground)]"
             />
             Remove stop words (the, of, in…) — shorter, more keyword-dense slugs
           </label>
@@ -743,7 +743,7 @@ export function SchemaMarkupGenerator() {
   const snippet = `<script type="application/ld+json">\n${json}\n</script>`;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <SelectField

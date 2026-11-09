@@ -16,11 +16,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Lightbulb, RotateCcw } from "lucide-react";
+import { RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookmarkButton } from "@/components/site/bookmarks";
 import { useCurrency } from "@/components/site/currency";
+import { ToolToolbarContext } from "@/components/site/tool-toolbar";
 import type { Tool, ToolContent } from "@/lib/registry/types";
 import { domainBySlug, relatedTools, toolBySlug } from "@/lib/registry";
 import { TOOL_COMPONENTS } from "@/lib/registry/tool-components";
@@ -28,9 +28,9 @@ import { ToolCard } from "@/components/site/tool-card";
 import { AdSlot } from "@/components/site/ad-slot";
 
 /**
- * The standard tool page template (build plan §3.3):
- * breadcrumb → H1 + value prop → working tool above the fold → AdSlot (§7.1)
- * → how it works → worked example → FAQ + beside-FAQ AdSlot → related tools → tags.
+ * The tool shell every tool shares: breadcrumb, title and one toolbar, then
+ * the working tool, then explanation. Ads sit below the tool and beside the
+ * FAQ, never between its input and output.
  * Every tool URL is a complete, unique page — never a bare widget.
  */
 export function ToolPage({
@@ -45,11 +45,11 @@ export function ToolPage({
   const tool = toolProp || (toolSlug ? toolBySlug(toolSlug) : undefined);
   // Hooks run before the early return so their order never changes between renders.
   const [resetKey, setResetKey] = React.useState(0);
+  const [toolbar, setToolbar] = React.useState<HTMLDivElement | null>(null);
   // Re-renders the tool with the new symbol when the display currency changes.
   useCurrency();
   if (!tool) return null;
   const domain = domainBySlug(tool.domain);
-  const Icon = domain?.icon;
   const related = relatedTools(tool, 6);
   const ToolWidget = TOOL_COMPONENTS[tool.slug];
 
@@ -63,155 +63,121 @@ export function ToolPage({
   };
 
   return (
-    <article>
-      {/* Breadcrumb */}
-      <div className="border-b bg-muted/30">
-        <div className="mx-auto max-w-6xl px-4 py-3 sm:px-6">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href="/">Home</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbLink asChild>
-                  <Link href={`/${tool.domain}`}>{domain?.name}</Link>
-                </BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator />
-              <BreadcrumbItem>
-                <BreadcrumbPage>{tool.name}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-      </div>
+    <article className="mx-auto max-w-7xl px-4 pb-14 pt-3 sm:px-6">
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link href="/">Home</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbLink asChild>
+              <Link href={`/${tool.domain}`}>{domain?.name}</Link>
+            </BreadcrumbLink>
+          </BreadcrumbItem>
+          <BreadcrumbSeparator />
+          <BreadcrumbItem>
+            <BreadcrumbPage>{tool.name}</BreadcrumbPage>
+          </BreadcrumbItem>
+        </BreadcrumbList>
+      </Breadcrumb>
 
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
-        {/* H1 + value proposition */}
-        <div className="flex items-start gap-4">
-          {Icon && (
-            <span className="mt-1 hidden h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-ink text-[#7fbb92] sm:flex">
-              <Icon className="h-6 w-6" aria-hidden />
-            </span>
-          )}
-          <div className="min-w-0 flex-1">
-            <h1 className="font-display text-display-lg tracking-tight">{tool.name}</h1>
-            <p className="mt-2 max-w-2xl text-lg leading-relaxed text-muted-foreground">
-              {tool.tagline}
-            </p>
-          </div>
-          <div className="no-print flex shrink-0 items-center gap-1">
-            <BookmarkButton slug={tool.slug} name={tool.name} />
-            <Button
-              type="button"
-              variant="ghost"
-              size="sm"
-              onClick={resetTool}
-              className="gap-1.5 text-muted-foreground hover:text-foreground"
-            >
-              <RotateCcw className="h-3.5 w-3.5" aria-hidden />
-              <span>Reset</span>
-            </Button>
-          </div>
+      <header className="mt-4">
+        <h1 className="text-display-lg">{tool.name}</h1>
+        <p className="mt-2 text-lg text-muted-foreground">{tool.tagline}</p>
+        {/* One row that scrolls, never wraps: tools add actions after hydration, and they must not move the tool. */}
+        <div
+          role="group"
+          aria-label="Tool actions"
+          className="no-print -m-1 mt-2 flex items-center gap-2 overflow-x-auto p-1 [scrollbar-width:none]"
+        >
+          <BookmarkButton
+            slug={tool.slug}
+            name={tool.name}
+            className="shrink-0 rounded-md border-[1.5px] border-input sm:h-10 sm:w-10"
+          />
+          <Button type="button" variant="outline" size="sm" onClick={resetTool} className="shrink-0 gap-1.5">
+            <RotateCcw className="h-3.5 w-3.5" aria-hidden />
+            Reset
+          </Button>
+          <div ref={setToolbar} className="contents [&>*]:shrink-0" />
         </div>
+      </header>
 
-        {/* Working tool above the fold */}
-        <div className="mt-8">
+      <div className="mt-5">
+        <ToolToolbarContext.Provider value={toolbar}>
           {ToolWidget && <ToolWidget key={resetKey} />}
-        </div>
-
-        {/* Section 7.1: Ad placement strictly between result and explanation */}
-        <AdSlot slot="below-tool" className="mt-8" />
-
-        {/* How it works */}
-        <section className="mt-12 max-w-3xl" aria-labelledby="how">
-          <h2 id="how" className="font-display text-display-md tracking-tight">
-            {tool.name.includes("Calculator")
-              ? `How the ${tool.name.replace(" Calculator", "").replace(" & ", " and ")} calculation works`
-              : `How ${tool.name} works`}
-          </h2>
-          <div className="mt-5 space-y-4">
-            {content.howItWorks.map((p, i) => (
-              <p key={i} className="leading-relaxed text-foreground/85">
-                {p}
-              </p>
-            ))}
-          </div>
-        </section>
-
-        {/* Worked example */}
-        <section className="mt-10 max-w-3xl" aria-labelledby="example">
-          <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm sm:p-6">
-            <p className="flex items-center gap-2 text-sm font-semibold text-deep-orange">
-              <Lightbulb className="h-4 w-4" /> Worked example
-            </p>
-            <p className="mt-3 leading-relaxed text-foreground/85">{content.example}</p>
-            <p className="mt-3 text-sm text-muted-foreground">
-              The tool above opens with these numbers — change them to run your own scenario, or
-              press Reset to come back to this example.
-            </p>
-          </div>
-        </section>
-
-        {/* FAQ with Beside-FAQ Ad Slot (§7.1) */}
-        <section className="mt-12" aria-labelledby="faq">
-          <div className="grid gap-8 lg:grid-cols-3">
-            <div className="lg:col-span-2">
-              <h2 id="faq" className="font-display text-display-md tracking-tight">
-                Frequently asked questions
-              </h2>
-              <Accordion type="single" collapsible className="mt-5">
-                {content.faqs.map((f, i) => (
-                  <AccordionItem key={i} value={`faq-${i}`}>
-                    <AccordionTrigger className="text-left font-medium">{f.q}</AccordionTrigger>
-                    <AccordionContent className="leading-relaxed text-foreground/85">
-                      {f.a}
-                    </AccordionContent>
-                  </AccordionItem>
-                ))}
-              </Accordion>
-            </div>
-            <div className="flex flex-col justify-start">
-              <AdSlot slot="beside-faq" className="my-0 h-full" />
-            </div>
-          </div>
-        </section>
-
-        {/* Tags */}
-        <section className="mt-10" aria-label="Tags">
-          <div className="flex flex-wrap items-center gap-2">
-            {tool.tags.map((t) => (
-              <Badge key={t} variant="outline" className="text-muted-foreground">
-                {t}
-              </Badge>
-            ))}
-          </div>
-          <Link
-            href={`/${tool.domain}`}
-            className="mt-6 inline-flex min-h-11 items-center gap-1.5 text-sm font-semibold text-deep-orange hover:underline"
-          >
-            <ArrowLeft className="h-4 w-4" /> Back to {domain?.name}
-          </Link>
-        </section>
-
-        {/* Related tools */}
-        <section className="mt-12 border-t pt-10" aria-labelledby="related">
-          <h2 id="related" className="font-display text-display-md tracking-tight">
-            Related tools
-          </h2>
-          <p className="mt-2 text-muted-foreground">
-            Sibling tools in {domain?.shortName.toLowerCase()} and the metrics that travel with them.
-          </p>
-          <div className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {related.map((t) => (
-              <ToolCard key={t.slug} tool={t} compact />
-            ))}
-          </div>
-        </section>
+        </ToolToolbarContext.Provider>
       </div>
+
+      <AdSlot slot="below-tool" className="mb-0 mt-2" />
+
+      <section className="mt-14" aria-labelledby="how">
+        <h2 id="how" className="text-display-md">
+          {tool.name.includes("Calculator")
+            ? `How the ${tool.name.replace(" Calculator", "").replace(" & ", " and ")} calculation works`
+            : `How ${tool.name} works`}
+        </h2>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {content.howItWorks.map((p, i) => (
+            <p key={i} className="rounded-xl bg-card p-5 leading-relaxed">
+              {p}
+            </p>
+          ))}
+        </div>
+        <div className="mt-2 rounded-xl bg-muted p-5">
+          <h3 className="font-sans font-semibold tracking-normal">Worked example</h3>
+          <p className="mt-1 max-w-4xl text-lg leading-snug">{content.example}</p>
+          <p className="mt-2 text-sm text-muted-foreground">
+            The tool above opens with these numbers. Change them to run your own scenario, or press Reset to
+            come back to this example.
+          </p>
+        </div>
+      </section>
+
+      <section className="mt-14" aria-labelledby="faq">
+        <div className="grid gap-6 lg:grid-cols-3">
+          <div className="lg:col-span-2">
+            <h2 id="faq" className="text-display-md">
+              Frequently asked questions
+            </h2>
+            <Accordion type="single" collapsible className="mt-4 flex flex-col gap-2">
+              {content.faqs.map((f, i) => (
+                <AccordionItem
+                  key={i}
+                  value={`faq-${i}`}
+                  className="rounded-md border-[1.5px] border-input px-4 last:border-b-[1.5px]"
+                >
+                  <AccordionTrigger className="text-left text-lg font-medium">{f.q}</AccordionTrigger>
+                  <AccordionContent className="text-base leading-relaxed text-muted-foreground">
+                    {f.a}
+                  </AccordionContent>
+                </AccordionItem>
+              ))}
+            </Accordion>
+          </div>
+          <AdSlot slot="beside-faq" className="my-0 h-full" />
+        </div>
+      </section>
+
+      <section className="mt-14" aria-labelledby="related">
+        <h2 id="related" className="text-display-md">
+          Related tools
+        </h2>
+        <div className="mt-4 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+          {related.map((t) => (
+            <ToolCard key={t.slug} tool={t} compact />
+          ))}
+        </div>
+      </section>
+
+      <ul aria-label="Tags" className="mt-10 flex flex-wrap gap-x-4 gap-y-1 text-sm text-muted-foreground">
+        {tool.tags.map((t) => (
+          <li key={t}>{t}</li>
+        ))}
+      </ul>
     </article>
   );
 }

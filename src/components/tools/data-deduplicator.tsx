@@ -68,7 +68,7 @@ export function DataDeduplicator() {
   return (
     <div className="space-y-6">
       {/* Options Toolbar */}
-      <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm flex flex-wrap items-center justify-between gap-4">
+      <div className="rounded-xl bg-card p-4 shadow-lark-sm flex flex-wrap items-center justify-between gap-4">
         <div className="flex flex-wrap items-center gap-4 text-xs">
           <label className="flex items-center gap-1.5 cursor-pointer font-medium text-foreground">
             <input
@@ -105,7 +105,7 @@ export function DataDeduplicator() {
 
       {/* Inputs & Outputs */}
       <div className="grid gap-6 lg:grid-cols-2">
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3 flex flex-col">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-3 flex flex-col">
           <div className="flex items-center justify-between">
             <span id="data-deduplicator-heading-1" className="text-sm font-semibold text-muted-foreground">
               Input lines ({result.originalCount})
@@ -128,7 +128,7 @@ export function DataDeduplicator() {
           />
         </div>
 
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3 flex flex-col">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-3 flex flex-col">
           <div className="flex items-center justify-between">
             <span id="data-deduplicator-heading-2" className="text-sm font-semibold text-muted-foreground">
               Deduplicated unique output ({result.uniqueCount})

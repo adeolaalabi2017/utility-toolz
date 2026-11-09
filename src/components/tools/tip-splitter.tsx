@@ -1,5 +1,6 @@
 "use client";
 
+import { ResultValue } from "./result-value";
 import { Cur } from "@/components/site/currency";
 import React, { useState, useMemo } from "react";
 import { fmtUSD } from "@/lib/format";
@@ -36,7 +37,7 @@ export function TipSplitter() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
             <Receipt className="h-4 w-4 text-deep-orange" /> Bill & gratuity
           </span>
@@ -118,7 +119,7 @@ export function TipSplitter() {
         </div>
 
         {/* Results Banner (5 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
           <span className="text-sm font-semibold text-muted-foreground">
             Per-Person share
           </span>
@@ -126,9 +127,9 @@ export function TipSplitter() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Each Person Pays</span>
-              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
+              <ResultValue compact live className="mt-1">
                 {fmtUSD(calc.perPersonTotal, 2)}
-              </p>
+              </ResultValue>
               <span className="text-xs text-muted-foreground mt-1 block">
                 Includes {fmtUSD(calc.perPersonTip, 2)} tip each
               </span>
@@ -143,7 +144,7 @@ export function TipSplitter() {
               </div>
               <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Total Bill + Tip</span>
-                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
+                <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {fmtUSD(calc.total, 2)}
                 </span>
               </div>

@@ -146,7 +146,7 @@ export function QrCodeGenerator() {
     set((prev) => ({ ...prev, [key]: v }));
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <SelectField label="What should it open?" value={kind} onChange={setKind} options={KINDS} />
@@ -366,7 +366,7 @@ export function QrCodeReader() {
   const password = result?.info.kind === "wifi" ? result.info.fields.find(([k]) => k === "Password")?.[1] : undefined;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FileDropZone accept="image/*" onFiles={read} title={name || "Open a photo or screenshot of a QR code"} hint="You can also paste a screenshot with Ctrl+V or ⌘V. Nothing is uploaded." />

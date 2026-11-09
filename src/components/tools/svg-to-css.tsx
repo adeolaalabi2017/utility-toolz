@@ -69,7 +69,7 @@ export function SvgToCss() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Input */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-3">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
               <Sparkles className="h-4 w-4 text-deep-orange" /> Paste SVG code
@@ -98,7 +98,7 @@ export function SvgToCss() {
         </div>
 
         {/* Live Preview */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col">
           <span className="text-sm font-semibold text-muted-foreground pb-3">
             Rendered preview
           </span>
@@ -122,7 +122,7 @@ export function SvgToCss() {
       {/* Generated Outputs */}
       <div className="space-y-4">
         {/* CSS background-image */}
-        <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+        <div className="rounded-xl bg-card p-4 shadow-lark-sm">
           <div className="flex items-center justify-between pb-2">
             <div>
               <span className="text-xs font-semibold text-foreground">CSS `background-image` (URL Encoded)</span>
@@ -144,7 +144,7 @@ export function SvgToCss() {
         </div>
 
         {/* Base64 Data URI */}
-        <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+        <div className="rounded-xl bg-card p-4 shadow-lark-sm">
           <div className="flex items-center justify-between pb-2">
             <div>
               <span className="text-xs font-semibold text-foreground">Base64 Data URI</span>

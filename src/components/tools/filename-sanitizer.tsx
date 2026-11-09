@@ -61,7 +61,7 @@ export function FilenameSanitizer() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
+      <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4">
         <div className="flex items-center justify-between">
           <span id="filename-sanitizer-heading-1" className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
             <FileCheck className="h-4 w-4 text-deep-orange" /> Original string or filename
@@ -96,7 +96,7 @@ export function FilenameSanitizer() {
           { label: "camelCase (JavaScript Variables)", val: outputs.camel, id: "camel" },
           { label: "PascalCase (React Components)", val: outputs.pascal, id: "pascal" },
         ].map((item) => (
-          <div key={item.id} className="rounded-xl border border-border bg-card p-4 shadow-lark-sm flex flex-col justify-between">
+          <div key={item.id} className="rounded-xl bg-card p-4 shadow-lark-sm flex flex-col justify-between">
             <div className="flex items-center justify-between pb-2">
               <span className="text-xs font-semibold text-muted-foreground">{item.label}</span>
               <Button

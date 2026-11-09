@@ -116,7 +116,7 @@ export function JwtDecoder() {
     <div className="grid gap-6 lg:grid-cols-2">
       {/* Input section */}
       <div className="space-y-4">
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm">
           <div className="flex items-center justify-between pb-3">
             <h3 className="text-sm font-semibold text-foreground flex items-center gap-2">
               <KeyRound className="h-4 w-4 text-deep-orange" />
@@ -146,7 +146,7 @@ export function JwtDecoder() {
               Header
             </span>
             <span>·</span>
-            <span className="rounded bg-lf-purple/15 px-2 py-0.5 font-mono text-deep-purple font-semibold">
+            <span className="rounded bg-muted px-2 py-0.5 font-mono text-foreground font-semibold">
               Payload
             </span>
             <span>·</span>
@@ -195,7 +195,7 @@ export function JwtDecoder() {
       {/* Decoded inspection section */}
       <div className="space-y-4">
         {/* Header */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm">
           <div className="flex items-center justify-between pb-2 border-b border-border/60">
             <span className="text-sm font-semibold text-deep-coral">
               Header: algorithm & token type
@@ -222,9 +222,9 @@ export function JwtDecoder() {
         </div>
 
         {/* Payload */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm">
           <div className="flex items-center justify-between pb-2 border-b border-border/60">
-            <span className="text-sm font-semibold text-deep-purple">
+            <span className="text-sm font-semibold text-foreground">
               Payload: claims & data
             </span>
             {parsed.payload && (

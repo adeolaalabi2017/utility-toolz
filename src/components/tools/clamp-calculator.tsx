@@ -52,7 +52,7 @@ export function ClampCalculator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Inputs */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4">
           <span className="text-sm font-semibold text-muted-foreground">
             Viewport & size thresholds (px)
           </span>
@@ -109,7 +109,7 @@ export function ClampCalculator() {
         </div>
 
         {/* Live Interactive Fluid Preview */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3">
               <span className="text-sm font-semibold text-muted-foreground">
@@ -154,7 +154,7 @@ export function ClampCalculator() {
       {/* Generated Code Snippets */}
       {formula && (
         <div className="grid gap-4 sm:grid-cols-2">
-          <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+          <div className="rounded-xl bg-card p-4 shadow-lark-sm">
             <div className="flex items-center justify-between pb-2">
               <span className="text-sm font-semibold text-muted-foreground">
                 CSS `clamp()` formula
@@ -174,7 +174,7 @@ export function ClampCalculator() {
             </pre>
           </div>
 
-          <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+          <div className="rounded-xl bg-card p-4 shadow-lark-sm">
             <div className="flex items-center justify-between pb-2">
               <span className="text-sm font-semibold text-muted-foreground">
                 Tailwind CSS class

@@ -10,9 +10,8 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "@/components/ui/sheet";
-import { ArrowRight, ChevronDown, LayoutGrid, Menu, Search } from "lucide-react";
+import { ArrowRight, ChevronDown, Menu, Search } from "lucide-react";
 import { DOMAINS, PROFESSIONS, TOOLS, toolsByDomain } from "@/lib/registry";
-import { domainAccent } from "@/lib/registry/accents";
 import { useSearch } from "./search-dialog";
 import { ThemeToggle } from "./theme-toggle";
 import { CurrencySelect } from "./currency";
@@ -22,39 +21,18 @@ export function Header() {
   const { setOpen } = useSearch();
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const liveDomains = DOMAINS.filter((d) => d.status === "live");
-  const inlineDomains = liveDomains.slice(0, 4);
   const plannedDomains = DOMAINS.filter((d) => d.status === "planned");
 
   return (
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur supports-[backdrop-filter]:bg-background/75">
-      <div className="mx-auto flex h-16 max-w-6xl items-center gap-2 px-4 sm:px-6">
+      <div className="mx-auto flex h-16 max-w-7xl items-center gap-2 px-4 sm:px-6">
         {/* Brand */}
         <Link href="/" className="mr-2 flex min-h-11 items-center gap-2" aria-label="Utility Toolz home">
-          <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink">
-            <LayoutGrid className="h-4.5 w-4.5 text-[#7fbb92]" aria-hidden />
-          </span>
-          <span className="font-display text-xl font-semibold tracking-tight">
-            Utility<span className="text-deep-rust">Toolz</span>
-          </span>
+          <span className="font-display text-2xl font-medium tracking-tight">Utility Toolz</span>
         </Link>
 
         {/* Desktop nav */}
         <nav className="hidden items-center gap-1 md:flex" aria-label="Main">
-          <Link
-            href="/"
-            className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-          >
-            Home
-          </Link>
-          {inlineDomains.map((d) => (
-            <Link
-              key={d.slug}
-              href={`/${d.slug}`}
-              className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
-            >
-              {d.shortName}
-            </Link>
-          ))}
 
           {/* Redesigned Workspaces Mega-Flyout Panel */}
           <DropdownMenu>
@@ -64,7 +42,7 @@ export function Header() {
                 size="sm"
                 className="gap-1.5 text-sm font-medium text-foreground/80 hover:text-foreground hover:bg-accent rounded-md px-3 py-2"
               >
-                <span>All domains</span>
+                <span>Domains</span>
                 <span className="rounded-full bg-muted px-1.5 py-0.5 text-[10px] font-semibold text-muted-foreground">
                   {DOMAINS.length}
                 </span>
@@ -91,7 +69,6 @@ export function Header() {
                 {DOMAINS.map((d) => {
                   const Icon = d.icon;
                   const count = toolsByDomain(d.slug).length;
-                  const acc = domainAccent(d.slug);
                   return (
                     <DropdownMenuItem key={d.slug} asChild className="p-0 focus:bg-transparent">
                       <Link
@@ -101,7 +78,7 @@ export function Header() {
                         <span
                           className={cn(
                             "mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-transform duration-300 group-hover:scale-110",
-                            acc.soft
+                            "bg-muted text-foreground"
                           )}
                         >
                           <Icon className="h-4 w-4" />
@@ -136,6 +113,12 @@ export function Header() {
               </div>
             </DropdownMenuContent>
           </DropdownMenu>
+          <Link
+            href="/#professions"
+            className="rounded-md px-3 py-2 text-sm font-medium text-foreground/80 transition-colors hover:bg-accent hover:text-foreground"
+          >
+            Professions
+          </Link>
         </nav>
 
         <div className="ml-auto flex items-center gap-2">
@@ -143,12 +126,12 @@ export function Header() {
           <button
             onClick={() => setOpen(true)}
             type="button"
-            className="flex h-11 min-w-11 items-center justify-center gap-2 rounded-md border border-input bg-card px-3 text-sm text-muted-foreground transition-colors hover:bg-accent sm:h-9 sm:min-w-0"
+            className="flex h-11 min-w-11 items-center justify-center gap-2 rounded-md border-[1.5px] border-input bg-transparent px-3 text-sm text-foreground transition-colors hover:bg-accent sm:h-9 sm:min-w-0"
             aria-label="Search tools"
             aria-keyshortcuts="Meta+K Control+K /"
           >
             <Search className="h-4 w-4" aria-hidden />
-            <span className="hidden sm:inline">Search tools…</span>
+            <span className="hidden sm:inline">Search {TOOLS.length} tools</span>
             <kbd className="hidden rounded-sm border border-border bg-card px-1.5 py-0.5 text-[10px] font-medium text-muted-foreground sm:inline">
               ⌘K
             </kbd>

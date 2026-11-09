@@ -65,7 +65,7 @@ export function ProfitMarginCalculator() {
   const markup = c > 0 ? (profit / c) * 100 : 0;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <FieldGrid>
           <NumberField label="Revenue (sales)" value={revenue} onChange={setRevenue} prefix="$" />
@@ -124,7 +124,7 @@ export function MarkupCalculator() {
   const marginOfMarkup = m > 0 ? (m / (1 + m)) * 100 : 0;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <ModeToggle
@@ -204,7 +204,7 @@ export function BreakEvenCalculator() {
   const safety = isFinite(beUnits) && units > 0 ? ((units - beUnits) / units) * 100 : NaN;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <FieldGrid>
           <NumberField label="Fixed costs / month" value={fixed} onChange={setFixed} prefix="$" hint="Rent, salaries, software — costs that don't move with volume" />
@@ -268,7 +268,7 @@ export function PricingCalculator() {
   }));
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <ModeToggle
@@ -359,7 +359,7 @@ export function DiscountCalculator() {
   const volumeNeeded = profitAfter > 0 ? profitBefore / profitAfter : Infinity;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <FieldGrid>
           <NumberField label="List price" value={list} onChange={setList} prefix="$" />
@@ -420,7 +420,7 @@ export function SalesCommissionCalculator() {
   }));
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <ModeToggle
@@ -517,7 +517,7 @@ export function ShippingCostCalculator() {
   }));
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FieldGrid cols={3}>
@@ -750,7 +750,7 @@ ${items
       </div>
       <div className="lg:col-span-2">
         <div className="space-y-4">
-          <div className="rounded-xl border bg-card p-4 shadow-sm sm:p-5">
+          <div className="rounded-xl bg-card p-4 shadow-sm sm:p-5">
             <p className="mb-4 text-sm font-semibold text-muted-foreground">
               Totals
             </p>
@@ -763,7 +763,7 @@ ${items
               <StatRow label="Line items" value={String(items.length)} />
             </div>
           </div>
-          <div className="rounded-xl border bg-card p-4 shadow-sm sm:p-5">
+          <div className="rounded-xl bg-card p-4 shadow-sm sm:p-5">
             <p className="mb-3 text-sm font-semibold text-muted-foreground">
               Invoice preview
             </p>
@@ -773,7 +773,7 @@ ${items
                   <p className="text-sm font-bold">{sellerName || "Your business"}</p>
                   <p className="text-xs text-muted-foreground">{sellerEmail}</p>
                 </div>
-                <div className="rounded-full bg-primary px-2.5 py-1 text-[10px] font-semibold text-white">
+                <div className="rounded-full bg-primary px-2.5 py-1 text-[10px] font-semibold text-primary-foreground">
                   {invoiceNo}
                 </div>
               </div>

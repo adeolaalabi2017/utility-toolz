@@ -9,6 +9,8 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { num } from "@/lib/format";
 import { useCurrencySymbol } from "@/components/site/currency";
+import { ToolbarPortal, useInToolPage } from "@/components/site/tool-toolbar";
+import { ResultValue } from "./result-value";
 import {
   Select,
   SelectContent,
@@ -28,41 +30,40 @@ export function CalcLayout({
   inputs,
   results,
   actions,
+  inputFirst,
 }: {
   inputs: React.ReactNode;
   results: React.ReactNode;
   actions?: React.ReactNode;
+  /** On phones the result leads, except where there is nothing to show until something is pasted or dropped. */
+  inputFirst?: boolean;
 }) {
   const [invalid, setInvalid] = React.useState<Record<string, boolean>>({});
   const report = React.useCallback((id: string, bad: boolean) => {
     setInvalid((prev) => (Boolean(prev[id]) === bad ? prev : { ...prev, [id]: bad }));
   }, []);
   const hasInvalid = Object.values(invalid).some(Boolean);
+  const inToolPage = useInToolPage();
 
   return (
     <CalcValidityContext.Provider value={report}>
       <div className="space-y-4">
-        {actions && <div className="no-print flex flex-wrap items-center justify-end gap-2">{actions}</div>}
-        <div className="grid gap-5 lg:grid-cols-5">
-          <div className="lg:col-span-3">
-            <section
-              aria-label="Inputs"
-              className="rounded-xl border bg-card p-4 shadow-lark-sm sm:p-5"
-            >
-              <p className="mb-4 text-sm font-semibold text-muted-foreground">
-                Inputs
-              </p>
+        {actions &&
+          (inToolPage ? (
+            <ToolbarPortal>{actions}</ToolbarPortal>
+          ) : (
+            <div className="no-print flex flex-wrap items-center justify-end gap-2">{actions}</div>
+          ))}
+        <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
+          <div className="min-w-0">
+            <section aria-label="Inputs" className="h-full rounded-xl bg-card p-4 sm:p-5">
+              <p className="mb-4 font-semibold">In</p>
               {inputs}
             </section>
           </div>
-          <div className="lg:col-span-2">
-            <section
-              aria-label="Results"
-              className="relative rounded-xl border bg-card p-4 shadow-lark-sm h-full sm:p-5"
-            >
-              <p className="mb-4 text-sm font-semibold text-muted-foreground">
-                Results
-              </p>
+          <div className={cn("min-w-0", !inputFirst && "order-first lg:order-none")}>
+            <section aria-label="Results" className="relative h-full rounded-xl bg-card p-4 sm:p-5">
+              <p className="mb-4 font-semibold">Out</p>
               {hasInvalid ? (
                 <div
                   role="status"
@@ -281,7 +282,6 @@ export function ResultHero({
   label,
   value,
   sub,
-  copyText,
 }: {
   label: string;
   value: string;
@@ -289,15 +289,10 @@ export function ResultHero({
   copyText?: string;
 }) {
   return (
-    <div
-      className="rounded-lg bg-ink px-4 py-5 text-[#fef5de] mb-4"
-      role="status"
-      aria-live="polite"
-      aria-atomic="true"
-    >
-      <p className="text-sm font-medium text-[#fef5de]/75">{label}</p>
-      <p className="tnum mt-1 text-3xl font-bold tracking-tight sm:text-4xl">{value}</p>
-      {sub && <p className="mt-1.5 text-sm text-[#fef5de]/80">{sub}</p>}
+    <div className="mb-4" role="status" aria-live="polite" aria-atomic="true">
+      <p className="text-sm text-muted-foreground">{label}</p>
+      <ResultValue className="mt-1">{value}</ResultValue>
+      {sub && <p className="mt-2 text-sm text-muted-foreground">{sub}</p>}
     </div>
   );
 }
@@ -373,7 +368,7 @@ export function ShareBar({
           style={{ width: `${a}%` }}
         />
         <div
-          className="absolute top-0 h-full w-0.5 bg-ink/70"
+          className="absolute top-0 h-full w-0.5 bg-foreground ring-1 ring-card"
           style={{ left: `${Math.max(0, Math.min(100, target))}%` }}
           aria-hidden
         />
@@ -577,7 +572,7 @@ export function OutputPanel({
         role="region"
         aria-label={ariaLabel ?? "Generated output"}
         className={cn(
-          "overflow-auto rounded-lg bg-ink p-4 font-mono text-[12.5px] leading-relaxed text-white/90",
+          "overflow-auto rounded-md bg-muted p-4 font-mono text-sm leading-relaxed text-foreground",
           maxHeight
         )}
       >

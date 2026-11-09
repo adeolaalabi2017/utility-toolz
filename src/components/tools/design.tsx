@@ -762,12 +762,12 @@ export function AspectRatioCalculator() {
       }
       results={
         <div className="space-y-4">
-          <div className="rounded-lg bg-ink px-4 py-5 text-white">
-            <p className="text-sm font-medium text-white/60">Aspect ratio</p>
+          <div className="rounded-lg bg-highlight px-4 py-5 text-on-highlight">
+            <p className="text-sm font-medium text-on-highlight">Aspect ratio</p>
             <p className="tnum mt-1 text-3xl font-bold tracking-tight sm:text-4xl">
               {rw}:{rh}
             </p>
-            <p className="mt-1.5 text-sm text-white/70">
+            <p className="mt-1.5 text-sm text-on-highlight">
               ≈ {actual.toFixed(3)} — closest standard: {closest.label}
             </p>
           </div>

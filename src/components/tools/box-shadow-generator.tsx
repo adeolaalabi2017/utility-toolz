@@ -87,7 +87,7 @@ export function BoxShadowGenerator() {
         {/* Left: Controls (7 cols) */}
         <div className="space-y-5 lg:col-span-7">
           {/* Presets */}
-          <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+          <div className="rounded-xl bg-card p-4 shadow-lark-sm">
             <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
               <Sparkles className="h-3.5 w-3.5 text-deep-orange" /> Presets
             </span>
@@ -99,7 +99,7 @@ export function BoxShadowGenerator() {
                     setLayers(PRESETS[pName]);
                     setActiveLayer(0);
                   }}
-                  className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground transition-colors hover:border-lf-purple hover:text-deep-purple"
+                  className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground transition-colors hover:border-input hover:text-foreground"
                 >
                   {pName}
                 </button>
@@ -108,10 +108,10 @@ export function BoxShadowGenerator() {
           </div>
 
           {/* Layer Selector & Adjusters */}
-          <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
+          <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4">
             <div className="flex items-center justify-between border-b border-border/60 pb-3">
               <div className="flex items-center gap-2">
-                <Layers className="h-4 w-4 text-lf-purple" />
+                <Layers className="h-4 w-4 text-muted-foreground" />
                 <span className="text-sm font-semibold text-foreground">
                   Shadow layers ({layers.length})
                 </span>
@@ -123,7 +123,7 @@ export function BoxShadowGenerator() {
                     onClick={() => setActiveLayer(i)}
                     className={`rounded-md px-2.5 py-1 text-xs font-semibold transition-colors ${
                       activeLayer === i
-                        ? "bg-lf-purple text-white"
+                        ? "bg-primary text-primary-foreground"
                         : "border border-border bg-background text-muted-foreground"
                     }`}
                   >
@@ -240,7 +240,7 @@ export function BoxShadowGenerator() {
 
         {/* Right: Live Interactive Canvas (5 cols) */}
         <div className="space-y-4 lg:col-span-5">
-          <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col h-full">
+          <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col h-full">
             <div className="flex items-center justify-between pb-3">
               <span className="text-sm font-semibold text-muted-foreground">
                 Live preview
@@ -274,7 +274,7 @@ export function BoxShadowGenerator() {
                   ? "bg-muted/60"
                   : previewBg === "white"
                   ? "bg-white"
-                  : "bg-ink text-[#fef5de]"
+                  : "bg-ink text-[#f2f2ec]"
               }`}
             >
               <div
@@ -295,7 +295,7 @@ export function BoxShadowGenerator() {
 
       {/* Generated Code Blocks */}
       <div className="grid gap-4 sm:grid-cols-2">
-        <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+        <div className="rounded-xl bg-card p-4 shadow-lark-sm">
           <div className="flex items-center justify-between pb-2">
             <span className="text-sm font-semibold text-muted-foreground">
               CSS `box-shadow`
@@ -315,7 +315,7 @@ export function BoxShadowGenerator() {
           </pre>
         </div>
 
-        <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+        <div className="rounded-xl bg-card p-4 shadow-lark-sm">
           <div className="flex items-center justify-between pb-2">
             <span className="text-sm font-semibold text-muted-foreground">
               Tailwind arbitrary class

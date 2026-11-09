@@ -1,5 +1,6 @@
 "use client";
 
+import { ResultValue } from "./result-value";
 import React, { useState, useMemo } from "react";
 import { fmtNum, fmtPct } from "@/lib/format";
 import { TrendingUp, BarChart, Sparkles } from "lucide-react";
@@ -74,7 +75,7 @@ export function CorrelationCalculator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
               <TrendingUp className="h-4 w-4 text-deep-orange" /> Paired data series (X and Y)
@@ -120,7 +121,7 @@ export function CorrelationCalculator() {
         </div>
 
         {/* Results Banner (5 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
           <span className="text-sm font-semibold text-muted-foreground">
             Pearson correlation
           </span>
@@ -129,9 +130,9 @@ export function CorrelationCalculator() {
             <div className="my-4 space-y-4">
               <div className="rounded-lg bg-muted/50 p-4 text-center">
                 <span className="text-xs text-muted-foreground">Correlation Coefficient (r)</span>
-                <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
+                <ResultValue compact live className="mt-1">
                   {stats.r >= 0 ? `+${stats.r.toFixed(3)}` : stats.r.toFixed(3)}
-                </p>
+                </ResultValue>
                 <span className="text-xs font-semibold text-foreground mt-1 block">
                   {stats.strength}
                 </span>
@@ -140,7 +141,7 @@ export function CorrelationCalculator() {
               <div className="grid grid-cols-2 gap-3 text-center">
                 <div className="rounded-lg bg-muted/50 p-3">
                   <span className="text-[11px] text-muted-foreground block">Variance Explained (R²)</span>
-                  <span className="tnum font-display text-display-sm text-deep-purple font-bold">
+                  <span className="tnum font-display text-display-sm text-foreground font-bold">
                     {(stats.r2 * 100).toFixed(1)}%
                   </span>
                 </div>

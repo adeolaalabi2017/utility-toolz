@@ -1,5 +1,6 @@
 "use client";
 
+import { ResultValue } from "./result-value";
 import React, { useState, useMemo } from "react";
 import { fmtUSD, fmtNum } from "@/lib/format";
 import { Clock, DollarSign, Calendar, RefreshCw } from "lucide-react";
@@ -72,7 +73,7 @@ export function TimesheetCalculator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Daily Schedule (8 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-8">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-8">
           <div className="flex flex-wrap items-center justify-between gap-2 border-b border-border/60 pb-3">
             <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
               <Calendar className="h-4 w-4 text-deep-orange" /> Weekly working hours
@@ -143,7 +144,7 @@ export function TimesheetCalculator() {
         </div>
 
         {/* Results Banner (4 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-4">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-4">
           <span className="text-sm font-semibold text-muted-foreground">
             Weekly pay summary
           </span>
@@ -151,9 +152,9 @@ export function TimesheetCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Gross Weekly Earnings</span>
-              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
+              <ResultValue compact live className="mt-1">
                 {fmtUSD(calc.totalPay, 2)}
-              </p>
+              </ResultValue>
               <span className="text-xs text-muted-foreground mt-1 block">
                 Total: <strong className="text-foreground">{calc.totalHours.toFixed(2)} hours worked</strong>
               </span>
