@@ -176,6 +176,9 @@ describe("Rounding", () => {
 
   test("nearest multiple", () => {
     expect(roundToMultiple(7.33, 0.05, "half-up")).toBe(7.35);
+    expect(roundToMultiple(0.7, 0.1, "down")).toBe(0.7);
+    expect(roundToMultiple(0.7, 0.1, "truncate")).toBe(0.7);
+    expect(roundToMultiple(0.75, 0.1, "down")).toBe(0.7);
     expect(roundToMultiple(1234, 50, "half-up")).toBe(1250);
     expect(roundToMultiple(12.1, 0.25, "up")).toBe(12.25);
   });

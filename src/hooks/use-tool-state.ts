@@ -48,8 +48,9 @@ export function useToolState<T extends Record<string, string | number | boolean>
   // Start from defaults so the first client render matches the prerendered HTML
   const [state, setStateInternal] = useState<T>(defaults);
 
-  const isMountedRef = useRef(false);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  // Only visitor edits write to the URL, not defaults or share-link params on load.
+  const editedRef = useRef(false);
+  const defaultsRef = useRef(defaults);
 
   // Apply share-link params after hydration but before paint, so defaults never flash
   useLayoutEffect(() => {
@@ -59,45 +60,33 @@ export function useToolState<T extends Record<string, string | number | boolean>
     // Defaults are usually inline literals; read the URL once on mount
   }, []);
 
-  useEffect(() => {
-    isMountedRef.current = true;
-    return () => {
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, []);
-
   // Debounced URL state update
-  const setState = useCallback(
-    (updates: Partial<T> | ((prev: T) => T)) => {
-      setStateInternal((prev) => {
-        const next = typeof updates === "function" ? updates(prev) : { ...prev, ...updates };
-
-        if (typeof window !== "undefined" && isMountedRef.current) {
-          if (timerRef.current) clearTimeout(timerRef.current);
-          timerRef.current = setTimeout(() => {
-            const params = new URLSearchParams();
-            Object.entries(next).forEach(([k, v]) => {
-              if (v !== defaults[k] && v !== undefined && v !== "") {
-                params.set(k, String(v));
-              }
-            });
-            const query = params.toString();
-            const newUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname;
-            window.history.replaceState(null, "", newUrl);
-          }, 300);
+  useEffect(() => {
+    if (!editedRef.current) return;
+    const timer = setTimeout(() => {
+      const params = new URLSearchParams();
+      Object.entries(state).forEach(([k, v]) => {
+        if (v !== defaultsRef.current[k] && v !== undefined && v !== "") {
+          params.set(k, String(v));
         }
-
-        return next;
       });
-    },
-    [defaults]
-  );
+      const query = params.toString();
+      const newUrl = query ? `${window.location.pathname}?${query}` : window.location.pathname;
+      window.history.replaceState(null, "", newUrl);
+    }, 300);
+    return () => clearTimeout(timer);
+  }, [state]);
+
+  const setState = useCallback((updates: Partial<T> | ((prev: T) => T)) => {
+    editedRef.current = true;
+    setStateInternal((prev) => (typeof updates === "function" ? updates(prev) : { ...prev, ...updates }));
+  }, []);
 
   // Reset to default parameters
   const resetState = useCallback(() => {
+    editedRef.current = false;
     setStateInternal(defaults);
     if (typeof window !== "undefined") {
-      if (timerRef.current) clearTimeout(timerRef.current);
       window.history.replaceState(null, "", window.location.pathname);
     }
   }, [defaults]);

@@ -41,6 +41,17 @@ describe("Paint", () => {
     expect(bestTins(1.6, [1, 0.25])).toEqual({ counts: [2, 0], total: 2 });
     expect(bestTins(1.2, [1, 0.25])).toEqual({ counts: [1, 1], total: 1.25 });
   });
+
+  test("bestTins refuses impossible needs and stays fast on huge ones", () => {
+    expect(bestTins(NaN, [5, 2.5, 1])).toBeNull();
+    expect(bestTins(Infinity, [5, 2.5, 1])).toBeNull();
+    expect(bestTins(5, [])).toBeNull();
+    const start = performance.now();
+    const big = bestTins(100_001, [5, 2.5, 1])!;
+    expect(performance.now() - start).toBeLessThan(1000);
+    expect(big.total).toBeGreaterThanOrEqual(100_001);
+    expect(big.total).toBeLessThan(100_001 + 1);
+  });
 });
 
 describe("Tile and flooring", () => {

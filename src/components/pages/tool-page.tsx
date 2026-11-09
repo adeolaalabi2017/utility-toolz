@@ -20,6 +20,7 @@ import { Badge } from "@/components/ui/badge";
 import { ArrowLeft, Lightbulb, RotateCcw } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { BookmarkButton } from "@/components/site/bookmarks";
+import { useCurrency } from "@/components/site/currency";
 import type { Tool, ToolContent } from "@/lib/registry/types";
 import { domainBySlug, relatedTools, toolBySlug } from "@/lib/registry";
 import { TOOL_COMPONENTS } from "@/lib/registry/tool-components";
@@ -44,6 +45,8 @@ export function ToolPage({
   const tool = toolProp || (toolSlug ? toolBySlug(toolSlug) : undefined);
   // Hooks run before the early return so their order never changes between renders.
   const [resetKey, setResetKey] = React.useState(0);
+  // Re-renders the tool with the new symbol when the display currency changes.
+  useCurrency();
   if (!tool) return null;
   const domain = domainBySlug(tool.domain);
   const Icon = domain?.icon;

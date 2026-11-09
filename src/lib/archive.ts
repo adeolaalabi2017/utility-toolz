@@ -40,14 +40,14 @@ function readOctal(buf: Uint8Array, offset: number, length: number): number {
 /** Key/value records of a pax extended header ("27 path=some/long/name\n"). */
 function parsePax(data: Uint8Array): Record<string, string> {
   const out: Record<string, string> = {};
-  const text = decoder.decode(data);
   let i = 0;
-  while (i < text.length) {
-    const space = text.indexOf(" ", i);
+  // Record lengths count bytes, so walk the bytes and decode one record at a time.
+  while (i < data.length) {
+    const space = data.indexOf(0x20, i);
     if (space === -1) break;
-    const len = parseInt(text.slice(i, space), 10);
-    if (!len) break;
-    const record = text.slice(space + 1, i + len - 1);
+    const len = parseInt(decoder.decode(data.subarray(i, space)), 10);
+    if (!(len > 0)) break;
+    const record = decoder.decode(data.subarray(space + 1, i + len - 1));
     const eq = record.indexOf("=");
     if (eq > 0) out[record.slice(0, eq)] = record.slice(eq + 1);
     i += len;
@@ -187,18 +187,36 @@ const isGzip = (b: Uint8Array) => b[0] === 0x1f && b[1] === 0x8b;
 export type DetectedFormat = "zip" | "tar" | "tar.gz" | "gz" | "unknown";
 
 /** Format from the file's own bytes; the extension is only used to name a lone .gz file. */
-export function detectFormat(bytes: Uint8Array): DetectedFormat {
-  if (isZip(bytes)) return "zip";
+export const detectFormat = (bytes: Uint8Array): DetectedFormat => sniff(bytes).format;
+
+/** Telling tar.gz from gz means unpacking the file, so the result is kept for readArchive. */
+function sniff(bytes: Uint8Array): { format: DetectedFormat; unpacked?: Uint8Array } {
+  if (isZip(bytes)) return { format: "zip" };
   if (isGzip(bytes)) {
     try {
-      return isTar(gunzipSync(bytes)) ? "tar.gz" : "gz";
+      const unpacked = gunzipSync(bytes);
+      return { format: isTar(unpacked) ? "tar.gz" : "gz", unpacked };
     } catch {
-      return "unknown";
+      return { format: "unknown" };
     }
   }
-  if (isTar(bytes)) return "tar";
-  return "unknown";
+  return { format: isTar(bytes) ? "tar" : "unknown" };
 }
+
+/** The most an archive may unpack to: the data is held in memory, so a zip bomb would crash the tab. */
+export const MAX_EXTRACTED_BYTES = 1024 ** 3;
+
+function assertExtractable(bytes: number, limit: number) {
+  if (bytes > limit) {
+    throw new ArchiveError(`This archive unpacks to more than ${fmtBytes(limit)}, too much to open in a browser`);
+  }
+}
+
+/** A gzip file's unpacked size, from its trailer. fflate sizes its output buffer from the same field. */
+const gzipSize = (b: Uint8Array) => {
+  const l = b.length;
+  return (b[l - 4] | (b[l - 3] << 8) | (b[l - 2] << 16) | (b[l - 1] << 24)) >>> 0;
+};
 
 export const FORMAT_LABELS: Record<DetectedFormat, string> = {
   zip: "ZIP",
@@ -209,14 +227,28 @@ export const FORMAT_LABELS: Record<DetectedFormat, string> = {
 };
 
 /** Every file in a ZIP, TAR, TAR.GZ/TGZ or single-file GZ archive. */
-export function readArchive(fileName: string, bytes: Uint8Array): { format: DetectedFormat; entries: ArchiveEntry[] } {
-  const format = detectFormat(bytes);
+export function readArchive(
+  fileName: string,
+  bytes: Uint8Array,
+  maxBytes = MAX_EXTRACTED_BYTES
+): { format: DetectedFormat; entries: ArchiveEntry[] } {
+  if (isGzip(bytes)) assertExtractable(gzipSize(bytes), maxBytes);
+  const { format, unpacked } = sniff(bytes);
   switch (format) {
     case "zip": {
       let files: Record<string, Uint8Array>;
       try {
-        files = unzipSync(bytes);
+        let total = 0;
+        files = unzipSync(bytes, {
+          // Runs before each entry is inflated; fflate won't write past the declared size.
+          filter: (f) => {
+            total += f.originalSize;
+            assertExtractable(total, maxBytes);
+            return true;
+          },
+        });
       } catch (e) {
+        if (e instanceof ArchiveError) throw e;
         throw new ArchiveError(
           String(e).includes("encrypt") || String(e).includes("compression")
             ? "This ZIP uses encryption or a compression method browsers can't open"
@@ -231,9 +263,9 @@ export function readArchive(fileName: string, bytes: Uint8Array): { format: Dete
     case "tar":
       return { format, entries: parseTar(bytes) };
     case "tar.gz":
-      return { format, entries: parseTar(gunzipSync(bytes)) };
+      return { format, entries: parseTar(unpacked!) };
     case "gz":
-      return { format, entries: [{ name: fileName.replace(/\.gz$/i, "") || "file", data: gunzipSync(bytes) }] };
+      return { format, entries: [{ name: fileName.replace(/\.gz$/i, "") || "file", data: unpacked! }] };
     default:
       throw new ArchiveError("This isn't a ZIP, TAR, TAR.GZ or GZ file");
   }

@@ -33,29 +33,40 @@ export const paintLitres = (area: number, coats: number, coverage: number) => (c
  */
 const tinCost = (size: number) => size ** 0.65;
 
+/** Past this many of the largest tin the search is cut short, because only the remainder changes the mix. */
+const SEARCH_WINDOW_TINS = 20;
+const MAX_TIN_NEED = 1e9;
+
 /**
  * The likely cheapest mix of tin sizes that covers what's needed, by the cost
  * model above; on a tie, the mix with less paint left over. Sizes are in the
  * same unit as need.
  */
-export function bestTins(need: number, sizes: number[]): { counts: number[]; total: number } {
+export function bestTins(need: number, sizes: number[]): { counts: number[]; total: number } | null {
+  if (!Number.isFinite(need) || need < 0 || need > MAX_TIN_NEED || sizes.length === 0) return null;
   const sorted = [...sizes].sort((a, b) => b - a);
+  // The largest tin is the cheapest per unit, so a big job is mostly those tins.
+  // Take them up front; the exhaustive search below gets slow very quickly.
+  const bulk = Math.max(0, Math.ceil(need / sorted[0] - SEARCH_WINDOW_TINS));
+  const remainder = need - bulk * sorted[0];
   let best: { counts: number[]; total: number; cost: number } | null = null;
   const search = (i: number, counts: number[], total: number, cost: number) => {
     if (i === sorted.length) {
-      if (total + 1e-9 < need) return;
+      if (total + 1e-9 < remainder) return;
       if (!best || cost < best.cost - 1e-9 || (Math.abs(cost - best.cost) < 1e-9 && total < best.total)) {
         best = { counts: [...counts], total, cost };
       }
       return;
     }
-    const max = Math.ceil(Math.max(0, need - total) / sorted[i] - 1e-9) + (i === sorted.length - 1 ? 0 : 1);
+    const max = Math.ceil(Math.max(0, remainder - total) / sorted[i] - 1e-9) + (i === sorted.length - 1 ? 0 : 1);
     for (let n = 0; n <= max; n++) search(i + 1, [...counts, n], total + n * sorted[i], cost + n * tinCost(sorted[i]));
   };
   search(0, [], 0, 0);
   const found = best as { counts: number[]; total: number } | null;
+  if (!found) return null;
+  found.counts[0] += bulk;
   // Report counts in the caller's order of sizes.
-  return { counts: sizes.map((s) => found!.counts[sorted.indexOf(s)]), total: found!.total };
+  return { counts: sizes.map((s) => found.counts[sorted.indexOf(s)]), total: found.total + bulk * sorted[0] };
 }
 
 /* ------------------------------------------------------------------ */

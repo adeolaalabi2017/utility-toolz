@@ -65,6 +65,8 @@ export const smsPayload = (phone: string, message: string) =>
 export function normalizeUrl(s: string): string {
   const t = s.trim();
   if (!t) return "";
+  // "example.com:8080" looks like a scheme to the test below, but it is a host and port.
+  if (/^(?:localhost|[a-z\d-]+(?:\.[a-z\d-]+)+):\d+(?:[/?#]|$)/i.test(t)) return `https://${t}`;
   return /^[a-z][a-z\d+.-]*:/i.test(t) ? t : `https://${t}`;
 }
 
@@ -136,6 +138,15 @@ function describeVcard(text: string): DescribedPayload {
   return { kind: "contact", label: "Contact card", fields };
 }
 
+/** A stray "%" is not valid percent-encoding, so show such text as written. */
+function safeDecode(s: string): string {
+  try {
+    return decodeURIComponent(s);
+  } catch {
+    return s;
+  }
+}
+
 export function describePayload(raw: string): DescribedPayload {
   const text = raw.trim();
   const lower = text.toLowerCase();
@@ -144,7 +155,7 @@ export function describePayload(raw: string): DescribedPayload {
   if (lower.startsWith("mailto:")) {
     const [addr, query = ""] = text.slice(7).split("?");
     const params = new URLSearchParams(query);
-    const fields: [string, string][] = [["To", decodeURIComponent(addr)]];
+    const fields: [string, string][] = [["To", safeDecode(addr)]];
     if (params.get("subject")) fields.push(["Subject", params.get("subject")!]);
     if (params.get("body")) fields.push(["Message", params.get("body")!]);
     return { kind: "email", label: "Email", fields };

@@ -22,8 +22,9 @@ const CurrencyContext = React.createContext<{
 
 /**
  * Holds the visitor's display currency. Formatting helpers read it from
- * lib/format, so the tool tree is re-keyed when it changes: every tool
- * re-renders with the new symbol without each one subscribing.
+ * lib/format and don't subscribe, so whichever component renders a tool or
+ * calls them directly must call useCurrency() to re-render on a change.
+ * Don't re-key the tree instead: a remount wipes inputs and loaded files.
  */
 export function CurrencyProvider({ children }: { children: React.ReactNode }) {
   const [code, setCodeState] = React.useState("USD");
@@ -50,7 +51,7 @@ export function CurrencyProvider({ children }: { children: React.ReactNode }) {
 
   return (
     <CurrencyContext.Provider value={{ code, setCode }}>
-      <React.Fragment key={code}>{children}</React.Fragment>
+      {children}
     </CurrencyContext.Provider>
   );
 }

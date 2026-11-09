@@ -11,7 +11,7 @@ import { domainAccent } from "@/lib/registry/accents";
 import { ToolCard } from "@/components/site/tool-card";
 import { useSearch } from "@/components/site/search-dialog";
 import { PinnedToolsBar } from "@/components/site/bookmarks";
-import { Cur } from "@/components/site/currency";
+import { Cur, useCurrency } from "@/components/site/currency";
 import { cn } from "@/lib/utils";
 import { fmtPct, fmtUSD, num } from "@/lib/format";
 import gsap from "gsap";
@@ -77,6 +77,8 @@ function QuickField({
 }
 
 function HeroWorkbench() {
+  // fmtUSD below reads the display currency without subscribing to it.
+  useCurrency();
   const [tab, setTab] = useState<QuickTab>("margin");
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
 

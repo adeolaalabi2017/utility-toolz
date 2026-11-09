@@ -117,7 +117,7 @@ export function DepreciationCalculator() {
                 min="1"
                 max="50"
                 value={usefulLife}
-                onChange={(e) => setUsefulLife(Number(e.target.value) || 1)}
+                onChange={(e) => setUsefulLife(Math.min(50, Math.max(1, Number(e.target.value) || 1)))}
                 className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               <span className="text-[11px] text-muted-foreground mt-0.5 block">Standard: 3 (computers), 5 (vehicles), 7 (equipment)</span>
