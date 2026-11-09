@@ -62,6 +62,33 @@ export const TOOL_CONTENT: Record<string, ToolContent> = {
       },
     ],
   },
+  "investment-calculator": {
+    howItWorks: [
+      "Each month the balance earns the return after fees, then your contribution is added. Fees come off the return itself, so they compound against you in the same way growth compounds for you.",
+      "Your monthly contribution rises once a year by the percentage you set, which models paying in more as your income grows.",
+      "The balance is also shown in today's money by removing inflation. That is the better guide to what the money could actually buy. The cost of fees compares your result with the same plan at no fee.",
+    ],
+    example:
+      "Start with $10,000 and add $500 a month, rising 3% a year, for 25 years at a 7% return with 0.5% fees. You put in about $228,756 and end with about $528,115, or about $284,861 in today's money at 2.5% inflation. The fees cost about $42,054.",
+    faqs: [
+      {
+        q: "What return should I use?",
+        a: "Use a rate that fits what you hold, and try a lower one too. This tool applies one steady rate, while real returns vary from year to year and can be negative.",
+      },
+      {
+        q: "How is this different from the Compound Interest Calculator?",
+        a: "That tool shows pure compounding at a chosen frequency. This one adds fees, inflation, rising contributions and a year-by-year table.",
+      },
+      {
+        q: "Why do small fees matter so much?",
+        a: "A fee is charged every year on the whole balance, including past growth. Over decades that lost money would itself have grown, so the cost is far more than the fee looks.",
+      },
+      {
+        q: "Does this include tax?",
+        a: "No. Tax depends on your country and account type, so add it separately. This is an estimate for planning, not financial advice.",
+      },
+    ],
+  },
   "compound-interest-calculator": {
     howItWorks: [
       "Interest compounds when earned interest starts earning its own interest. The calculator steps through every month, applying your compounding frequency before adding each contribution.",
@@ -1929,6 +1956,29 @@ export const TOOL_CONTENT: Record<string, ToolContent> = {
       },
     ],
   },
+  "percentage-difference-calculator": {
+    howItWorks: [
+      "Percentage difference divides the gap between two values by their average: |A − B| ÷ ((|A| + |B|) ÷ 2) × 100. The average is the reference, so neither value is treated as the baseline.",
+      "Because of that, swapping the two values gives the same answer. Percentage change does not: it measures against the first value, so the answer depends on the direction.",
+      "The result is shown alongside the change in each direction, so you can see how the three figures relate.",
+    ],
+    example:
+      "Compare 120 and 150. The gap is 30 and the average is 135, so the percentage difference is 22.22%. By contrast, going from 120 to 150 is +25%, and from 150 to 120 is −20%.",
+    faqs: [
+      {
+        q: "When should I use percentage difference instead of percentage change?",
+        a: "Use difference to compare two values on equal terms, such as two suppliers' prices. Use change when one came first, such as last year's sales against this year's.",
+      },
+      {
+        q: "Can the result be over 100%?",
+        a: "Yes. It can reach 200%, which happens when one value is zero or when the two have opposite signs.",
+      },
+      {
+        q: "What if both values are zero?",
+        a: "They are identical, so the difference is 0%.",
+      },
+    ],
+  },
   "percentage-calculator": {
     howItWorks: [
       "X% of Y multiplies: percent × value ÷ 100 — the discount and tax calculation. The extras show the value after increasing or decreasing Y by X% in one step.",
@@ -1980,6 +2030,33 @@ export const TOOL_CONTENT: Record<string, ToolContent> = {
       {
         q: "Is the access date required?",
         a: "MLA wants access dates for undated web sources; APA dropped the practice. That is why the field only appears for MLA websites.",
+      },
+    ],
+  },
+  "years-months-days-calculator": {
+    howItWorks: [
+      "The calculator counts whole months from the start date first, then counts the days left over. Years are every 12 of those months, so the answer follows the calendar rather than an average month length.",
+      "When a month is too short for the start day, the count uses that month's last day. January 31 plus one month lands on February 28 (or 29 in a leap year), and the remaining days are counted from there.",
+      "The end date is not counted by default, so one date to the next is 1 day. Choose to count it when both the first and last day should be included, as with a Monday to Friday booking.",
+    ],
+    example:
+      "From January 31 2024 to March 1 2026 is 2 years, 1 month and 1 day. The same span is 25 months and 1 day, 108 weeks and 4 days, or 760 days in total.",
+    faqs: [
+      {
+        q: "Why isn't it just the total days divided by 365?",
+        a: "Months run from 28 to 31 days and leap years add a day, so dividing gives an approximation. This tool walks the actual calendar between your two dates.",
+      },
+      {
+        q: "What if the end date is before the start date?",
+        a: "The dates are counted in date order and the result says so, so you get the same span either way.",
+      },
+      {
+        q: "Should I count the end date?",
+        a: "Leave it off for elapsed time, such as how long ago something happened. Count it for durations where the last day is used, such as a leave period or a contract's final day.",
+      },
+      {
+        q: "How is this different from the Age Calculator?",
+        a: "It uses the same calendar counting, but for any two dates. The Age Calculator adds birthday details such as the weekday you were born and your next birthday.",
       },
     ],
   },

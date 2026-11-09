@@ -1,7 +1,7 @@
 import { describe, expect, test } from "bun:test";
 import { gzipSync, strToU8, zipSync } from "fflate";
 import { ArchiveError, createTar, parseTar, readArchive } from "@/lib/archive";
-import { diffYMD } from "@/lib/datetime";
+import { dateSpan, daysBetween, diffYMD } from "@/lib/datetime";
 import { describePayload, normalizeUrl } from "@/lib/qr";
 import { htmlToMd, mdToHtml } from "@/components/tools/markdown-converter";
 
@@ -16,6 +16,25 @@ describe("diffYMD", () => {
     expect(diffYMD(day(2000, 5, 15), day(2025, 5, 15))).toEqual({ y: 25, m: 0, d: 0 });
     expect(diffYMD(day(2000, 5, 15), day(2025, 7, 20))).toEqual({ y: 25, m: 2, d: 5 });
     expect(diffYMD(day(2024, 12, 20), day(2025, 1, 10))).toEqual({ y: 0, m: 0, d: 21 });
+  });
+});
+
+describe("dateSpan", () => {
+  test("gives the exact span and its totals", () => {
+    expect(dateSpan(day(2024, 1, 31), day(2026, 3, 1))).toEqual({ y: 2, m: 1, d: 1, totalMonths: 25, totalDays: 760, swapped: false });
+  });
+  test("counts either order the same and says so", () => {
+    expect(dateSpan(day(2026, 3, 1), day(2024, 1, 31))).toEqual({ y: 2, m: 1, d: 1, totalMonths: 25, totalDays: 760, swapped: true });
+  });
+  test("same day is zero, or one when the end date counts", () => {
+    expect(dateSpan(day(2025, 5, 5), day(2025, 5, 5)).totalDays).toBe(0);
+    expect(dateSpan(day(2025, 5, 5), day(2025, 5, 5), true)).toMatchObject({ y: 0, m: 0, d: 1, totalDays: 1 });
+  });
+  test("counting the end date can roll into the next month", () => {
+    expect(dateSpan(day(2025, 1, 1), day(2025, 1, 31), true)).toMatchObject({ y: 0, m: 1, d: 0, totalDays: 31 });
+  });
+  test("daylight saving doesn't lose a day", () => {
+    expect(daysBetween(day(2025, 1, 15), day(2025, 7, 15))).toBe(181);
   });
 });
 

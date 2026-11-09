@@ -46,6 +46,30 @@ export function diffYMD(from: Date, to: Date): { y: number; m: number; d: number
   return { y: Math.trunc(months / 12), m: months % 12, d };
 }
 
+/** Whole calendar days from `from` to `to`, unaffected by daylight-saving changes. */
+export function daysBetween(from: Date, to: Date): number {
+  return Math.round(
+    (Date.UTC(to.getFullYear(), to.getMonth(), to.getDate()) -
+      Date.UTC(from.getFullYear(), from.getMonth(), from.getDate())) /
+      86_400_000
+  );
+}
+
+/**
+ * The exact span between two dates, in either order. With `includeEnd` the
+ * last day counts too, as it does for "Monday to Friday is 5 days".
+ */
+export function dateSpan(a: Date, b: Date, includeEnd = false) {
+  const swapped = a > b;
+  const from = swapped ? b : a;
+  const earlierTo = swapped ? a : b;
+  const to = includeEnd
+    ? new Date(earlierTo.getFullYear(), earlierTo.getMonth(), earlierTo.getDate() + 1)
+    : earlierTo;
+  const { y, m, d } = diffYMD(from, to);
+  return { y, m, d, totalMonths: y * 12 + m, totalDays: daysBetween(from, to), swapped };
+}
+
 /** Add months, clamping the day (Jan 31 + 1 month -> Feb 28). */
 export function addMonthsSafe(start: Date, months: number): Date {
   const y = start.getFullYear();

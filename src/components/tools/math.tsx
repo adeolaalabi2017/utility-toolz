@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 import {
   CalcLayout,
   CopyButton,
@@ -26,6 +27,7 @@ import {
   isPrime,
   lcmAll,
   nextPrime,
+  percentDifference,
   permutations,
   previousPrime,
   primeFactors,
@@ -733,6 +735,56 @@ export function PermutationCombinationCalculator() {
               <StatRow label="Digits in the exact answer" value={fmtNum(main.toString().length)} />
             </div>
             {main.toString().length > 21 && <CopyButton text={main.toString()} label="Copy exact value" />}
+          </div>
+        )
+      }
+    />
+  );
+}
+
+/* ================================================================== */
+/* Percentage difference calculator                                    */
+/* ================================================================== */
+
+export function PercentageDifferenceCalculator() {
+  const [params, setParams] = useToolState({ a: "120", b: "150" });
+  const a = num(params.a, NaN);
+  const b = num(params.b, NaN);
+  const diff = percentDifference(a, b);
+  const change = (from: number, to: number) => {
+    if (from === 0) return "—";
+    const pct = ((to - from) / Math.abs(from)) * 100;
+    return `${pct > 0 ? "+" : ""}${fmtNum(pct, 2)}%`;
+  };
+
+  return (
+    <CalcLayout
+      actions={<ToolShareBar />}
+      inputs={
+        <FieldGrid>
+          <NumberField label="First value" value={params.a} onChange={(v) => setParams({ a: v })} />
+          <NumberField label="Second value" value={params.b} onChange={(v) => setParams({ b: v })} />
+        </FieldGrid>
+      }
+      results={
+        diff === null ? (
+          <Verdict tone="neutral">Enter two numbers to compare.</Verdict>
+        ) : (
+          <div className="space-y-4">
+            <ResultHero label="Percentage difference" value={`${fmtNum(diff, 2)}%`} />
+            <div>
+              <StatRow label="Actual difference" value={fmtNum(Math.abs(a - b), 2)} />
+              <StatRow label="Average of the two" value={fmtNum((Math.abs(a) + Math.abs(b)) / 2, 2)} />
+              <StatRow label="Change from first to second" value={change(a, b)} />
+              <StatRow label="Change from second to first" value={change(b, a)} />
+            </div>
+            <Verdict tone="neutral">
+              Use this when neither value is the starting point. If one came first, use the{" "}
+              <Link href="/data/percentage-change-calculator" className="underline underline-offset-[3px]">
+                Percentage Change Calculator
+              </Link>
+              .
+            </Verdict>
           </div>
         )
       }

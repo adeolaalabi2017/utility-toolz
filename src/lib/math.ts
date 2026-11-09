@@ -301,6 +301,16 @@ export function toggleLastSign(expr: string): string {
   return `${before}-${m[0]}`;
 }
 
+/**
+ * How far apart two values are, relative to their average. Symmetric: swapping
+ * them gives the same answer. Null when either value isn't a number.
+ */
+export function percentDifference(a: number, b: number): number | null {
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return null;
+  const average = (Math.abs(a) + Math.abs(b)) / 2;
+  return average === 0 ? 0 : (Math.abs(a - b) / average) * 100;
+}
+
 /* ------------------------------------------------------------------ */
 /* Number theory                                                       */
 /* ------------------------------------------------------------------ */

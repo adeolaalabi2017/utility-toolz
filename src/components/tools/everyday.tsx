@@ -22,6 +22,8 @@ import { Button } from "@/components/ui/button";
 import {
   addMonthsSafe,
   countWeekendDays,
+  dateSpan,
+  daysBetween,
   diffYMD,
   fmtDate,
   parseISODate,
@@ -49,7 +51,7 @@ export function AgeCalculator() {
     content = <Verdict tone="bad">The date of birth is after the &quot;as of&quot; date.</Verdict>;
   } else {
     const { y, m, d } = diffYMD(birthD, asOfD);
-    const totalDays = Math.floor((asOfD.getTime() - birthD.getTime()) / 86_400_000);
+    const totalDays = daysBetween(birthD, asOfD);
     const totalMonths = y * 12 + m;
 
     // Next birthday (Feb 29 rolls to Mar 1 in non-leap years)
@@ -60,7 +62,7 @@ export function AgeCalculator() {
       next.getMonth() === asOfD.getMonth() &&
       next.getDate() === asOfD.getDate();
     if (next < asOfD && !isToday) next = new Date(asOfD.getFullYear() + 1, bm, bd);
-    const daysToNext = Math.ceil((next.getTime() - asOfD.getTime()) / 86_400_000);
+    const daysToNext = daysBetween(asOfD, next);
 
     content = (
       <div className="space-y-4">
@@ -120,6 +122,74 @@ export function AgeCalculator() {
         </div>
       }
       results={content}
+    />
+  );
+}
+
+/* ================================================================== */
+/* Date to years, months and days                                      */
+/* ================================================================== */
+
+const plural = (n: number, word: string) => `${fmtNum(n)} ${word}${n === 1 ? "" : "s"}`;
+
+export function YearsMonthsDaysCalculator() {
+  const [params, setParams] = useToolState({ start: "2024-01-31", end: "2026-03-01", count: "no" });
+  const from = parseISODate(params.start);
+  const to = parseISODate(params.end);
+  const span = from && to ? dateSpan(from, to, params.count === "yes") : null;
+
+  return (
+    <CalcLayout
+      actions={<ToolShareBar />}
+      inputs={
+        <div className="space-y-4">
+          <FieldGrid>
+            <div className="space-y-1.5">
+              <Label htmlFor="ymd-start" className="text-sm font-medium">Start date</Label>
+              <Input id="ymd-start" type="date" value={params.start} onChange={(e) => setParams({ start: e.target.value })} className="tnum" />
+            </div>
+            <div className="space-y-1.5">
+              <Label htmlFor="ymd-end" className="text-sm font-medium">End date</Label>
+              <Input id="ymd-end" type="date" value={params.end} onChange={(e) => setParams({ end: e.target.value })} className="tnum" />
+            </div>
+          </FieldGrid>
+          <SelectField
+            label="Last day"
+            value={params.count}
+            onChange={(v) => setParams({ count: v })}
+            options={[
+              { value: "no", label: "Don't count the end date" },
+              { value: "yes", label: "Count the end date as a full day" },
+            ]}
+          />
+        </div>
+      }
+      results={
+        !span ? (
+          <Verdict tone="neutral">Enter a start date and an end date.</Verdict>
+        ) : (
+          <div className="space-y-4">
+            <ResultHero
+              label="Time between the dates"
+              value={`${span.y} yrs ${span.m} mo ${span.d} d`}
+              sub={span.swapped ? "The end date is before the start date, so they were counted in date order." : undefined}
+            />
+            <div>
+              <StatRow
+                label="Exact span"
+                value={`${plural(span.y, "year")}, ${plural(span.m, "month")}, ${plural(span.d, "day")}`}
+                emphasis
+              />
+              <StatRow label="In months and days" value={`${plural(span.totalMonths, "month")}, ${plural(span.d, "day")}`} />
+              <StatRow
+                label="In weeks and days"
+                value={`${plural(Math.floor(span.totalDays / 7), "week")}, ${plural(span.totalDays % 7, "day")}`}
+              />
+              <StatRow label="Total days" value={fmtNum(span.totalDays)} emphasis />
+            </div>
+          </div>
+        )
+      }
     />
   );
 }

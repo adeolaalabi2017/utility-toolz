@@ -18,6 +18,7 @@ import { fmtDuration, fmtMoney, fmtNum, fmtPct, fmtUSD, num } from "@/lib/format
 import { ExportToolbar } from "@/components/site/export-toolbar";
 import { useToolState } from "@/hooks/use-tool-state";
 import { ToolShareBar } from "@/components/site/tool-share-bar";
+import { projectInvestment, type InvestmentYear } from "@/lib/investing";
 
 /* ================================================================== */
 /* 1. Budget & expense calculator                                      */
@@ -1150,6 +1151,94 @@ export function RetirementSavingsCalculator() {
             Figures are in nominal terms, so they do not adjust for inflation. Results are projections, not guarantees.
           </Verdict>
         </div>
+      }
+    />
+  );
+}
+
+/* ================================================================== */
+/* Investment calculator                                               */
+/* ================================================================== */
+
+const INVESTMENT_COLUMNS: { header: string; key: (r: InvestmentYear) => string | number }[] = [
+  { header: "Year", key: (r) => r.year },
+  { header: "Added", key: (r) => r.contributed.toFixed(2) },
+  { header: "Growth", key: (r) => r.growth.toFixed(2) },
+  { header: "Balance", key: (r) => r.balance.toFixed(2) },
+  { header: "In today's money", key: (r) => r.realBalance.toFixed(2) },
+];
+
+export function InvestmentCalculator() {
+  const [params, setParams] = useToolState({
+    initial: "10,000",
+    monthly: "500",
+    returnRate: "7",
+    fee: "0.5",
+    inflation: "2.5",
+    years: "25",
+    raise: "3",
+  });
+  const plan = projectInvestment({
+    initial: num(params.initial),
+    monthly: num(params.monthly),
+    annualReturnPct: num(params.returnRate, NaN),
+    annualFeePct: num(params.fee),
+    inflationPct: num(params.inflation),
+    years: num(params.years, NaN),
+    contributionGrowthPct: num(params.raise),
+  });
+
+  return (
+    <CalcLayout
+      actions={
+        <>
+          <ToolShareBar />
+          <ExportToolbar filename="investment-projection" columns={INVESTMENT_COLUMNS} rows={plan?.rows ?? []} enablePrint={false} />
+        </>
+      }
+      inputs={
+        <FieldGrid>
+          <NumberField label="Starting amount" value={params.initial} onChange={(v) => setParams({ initial: v })} prefix="$" min={0} />
+          <NumberField label="Monthly contribution" value={params.monthly} onChange={(v) => setParams({ monthly: v })} prefix="$" min={0} />
+          <NumberField label="Expected annual return" value={params.returnRate} onChange={(v) => setParams({ returnRate: v })} suffix="%" />
+          <NumberField label="Annual fees" value={params.fee} onChange={(v) => setParams({ fee: v })} suffix="%" min={0} hint="Fund and platform charges" />
+          <NumberField label="Inflation" value={params.inflation} onChange={(v) => setParams({ inflation: v })} suffix="%" />
+          <NumberField label="Years invested" value={params.years} onChange={(v) => setParams({ years: v })} suffix="yrs" min={0} />
+          <NumberField
+            label="Yearly rise in contributions"
+            value={params.raise}
+            onChange={(v) => setParams({ raise: v })}
+            suffix="%"
+            className="sm:col-span-2"
+          />
+        </FieldGrid>
+      }
+      results={
+        !plan ? (
+          <Verdict tone="neutral">Enter an amount to invest, a return, and a period of up to 100 years.</Verdict>
+        ) : (
+          <div className="space-y-4">
+            <ResultHero
+              label="Projected balance"
+              value={fmtUSD(plan.balance)}
+              sub={`About ${fmtUSD(plan.realBalance)} in today's money`}
+            />
+            <div>
+              <StatRow label="Total you put in" value={fmtUSD(plan.totalContributed)} />
+              <StatRow label="Investment growth" value={fmtUSD(plan.growth)} emphasis />
+              <StatRow label="Cost of fees" value={fmtUSD(plan.feesCost)} />
+            </div>
+            <div className="max-h-80 overflow-auto">
+              <MiniTable
+                head={["Year", "Added", "Growth", "Balance"]}
+                rows={plan.rows.map((r) => [r.year, fmtUSD(r.contributed), fmtUSD(r.growth), fmtUSD(r.balance)])}
+              />
+            </div>
+            <Verdict tone="neutral">
+              This assumes the same return every year. Real markets rise and fall, so treat it as an estimate, not a forecast.
+            </Verdict>
+          </div>
+        )
       }
     />
   );
