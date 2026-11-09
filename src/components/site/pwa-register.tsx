@@ -11,12 +11,16 @@ export function PwaRegister() {
     if (typeof window === "undefined") return;
 
     // 1. Register service worker
-    if ("serviceWorker" in navigator && process.env.NODE_ENV === "production") {
-      window.addEventListener("load", () => {
-        navigator.serviceWorker
-          .register("/sw.js")
-          .catch((err) => console.debug("ServiceWorker registration failed:", err));
-      });
+    const registerSw = () => {
+      navigator.serviceWorker
+        .register("/sw.js")
+        .catch((err) => console.debug("ServiceWorker registration failed:", err));
+    };
+    const canRegister = "serviceWorker" in navigator && process.env.NODE_ENV === "production";
+    // This effect can run after the load event, which would then never fire.
+    if (canRegister) {
+      if (document.readyState === "complete") registerSw();
+      else window.addEventListener("load", registerSw, { once: true });
     }
 
     // 2. Monitor online/offline state
@@ -40,6 +44,7 @@ export function PwaRegister() {
     window.addEventListener("offline", handleOffline);
 
     return () => {
+      window.removeEventListener("load", registerSw);
       window.removeEventListener("online", handleOnline);
       window.removeEventListener("offline", handleOffline);
     };

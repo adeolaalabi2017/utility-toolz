@@ -202,7 +202,7 @@ export function CurlToCode() {
   return (
     <div className="grid gap-6 lg:grid-cols-2">
       {/* Input */}
-      <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
+      <div className="rounded-xl bg-card p-5 shadow-lark-sm">
         <div className="flex items-center justify-between pb-3">
           <span className="text-sm font-semibold text-foreground flex items-center gap-2">
             <Terminal className="h-4 w-4 text-deep-orange" />
@@ -232,7 +232,7 @@ export function CurlToCode() {
       </div>
 
       {/* Output */}
-      <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col">
+      <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col">
         <div className="flex items-center justify-between border-b border-border/60 pb-3">
           <div className="flex rounded-lg bg-muted/60 p-0.5 text-xs font-medium">
             <button aria-pressed={tab === "fetch"} type="button"

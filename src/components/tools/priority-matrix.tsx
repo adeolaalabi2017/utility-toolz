@@ -85,7 +85,7 @@ export function PriorityMatrix() {
   ) => {
     const list = tasks.filter((t) => t.quadrant === qId);
     return (
-      <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm flex flex-col justify-between">
+      <div className="rounded-xl bg-card p-4 shadow-lark-sm flex flex-col justify-between">
         <div>
           <div className="flex items-center justify-between border-b border-border/60 pb-2.5">
             <div>
@@ -152,7 +152,7 @@ export function PriorityMatrix() {
   return (
     <div className="space-y-6">
       {/* Add Task Bar */}
-      <form onSubmit={addTask} className="rounded-xl border border-border bg-card p-4 shadow-lark-sm flex flex-col sm:flex-row gap-3 items-center">
+      <form onSubmit={addTask} className="rounded-xl bg-card p-4 shadow-lark-sm flex flex-col sm:flex-row gap-3 items-center">
         <input
           aria-label="New task"
           type="text"

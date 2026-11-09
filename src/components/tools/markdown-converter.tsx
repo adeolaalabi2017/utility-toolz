@@ -17,7 +17,7 @@ We are releasing the **Utility Toolz** platform across **13 domains**.
 
 Check the [documentation](https://utilitytoolz.example) for more details.`;
 
-function mdToHtml(md: string): string {
+export function mdToHtml(md: string): string {
   let html = md
     // Escape raw HTML entities
     .replace(/&/g, "&amp;")
@@ -41,7 +41,7 @@ function mdToHtml(md: string): string {
 
   // Lists
   html = html.replace(/^\- (.*$)/gim, "<li>$1</li>");
-  html = html.replace(/(<li>[\s\S]*?<\/li>)/gm, "<ul>$1</ul>");
+  html = html.replace(/^<li>.*<\/li>(?:\r?\n<li>.*<\/li>)*/gm, "<ul>$&</ul>");
 
   // Paragraphs
   html = html
@@ -63,20 +63,21 @@ function mdToHtml(md: string): string {
   return html;
 }
 
-function htmlToMd(html: string): string {
+export function htmlToMd(html: string): string {
   let md = html;
   md = md.replace(/<h1[^>]*>(.*?)<\/h1>/gi, "# $1\n\n");
   md = md.replace(/<h2[^>]*>(.*?)<\/h2>/gi, "## $1\n\n");
   md = md.replace(/<h3[^>]*>(.*?)<\/h3>/gi, "### $1\n\n");
   md = md.replace(/<blockquote[^>]*>(.*?)<\/blockquote>/gi, "> $1\n\n");
   md = md.replace(/<strong[^>]*>(.*?)<\/strong>/gi, "**$1**");
-  md = md.replace(/<b[^>]*>(.*?)<\/b>/gi, "**$1**");
-  md = md.replace(/<em[^>]*>(.*?)<\/em>/gi, "*$1*");
-  md = md.replace(/<i[^>]*>(.*?)<\/i>/gi, "*$1*");
-  md = md.replace(/<a[^>]*href=["'](.*?)["'][^>]*>(.*?)<\/a>/gi, "[$2]($1)");
-  md = md.replace(/<li[^>]*>(.*?)<\/li>/gi, "- $1\n");
+  // The (?:\s…) stops <b from matching <br>, <i from <img>, <p from <pre>, <li from <link>.
+  md = md.replace(/<b(?:\s[^>]*)?>(.*?)<\/b>/gi, "**$1**");
+  md = md.replace(/<em(?:\s[^>]*)?>(.*?)<\/em>/gi, "*$1*");
+  md = md.replace(/<i(?:\s[^>]*)?>(.*?)<\/i>/gi, "*$1*");
+  md = md.replace(/<a\s[^>]*href=["'](.*?)["'][^>]*>(.*?)<\/a>/gi, "[$2]($1)");
+  md = md.replace(/<li(?:\s[^>]*)?>(.*?)<\/li>/gi, "- $1\n");
   md = md.replace(/<ul[^>]*>|<\/ul>/gi, "\n");
-  md = md.replace(/<p[^>]*>(.*?)<\/p>/gi, "$1\n\n");
+  md = md.replace(/<p(?:\s[^>]*)?>(.*?)<\/p>/gi, "$1\n\n");
   md = md.replace(/<br\s*[\/]?>/gi, "\n");
   return md.trim();
 }
@@ -136,7 +137,7 @@ export function MarkdownConverter() {
 
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Input */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col">
           <span id="markdown-converter-heading-1" className="text-sm font-semibold text-muted-foreground pb-2">
             {direction === "md2html" ? "Input Markdown" : "Input raw HTML"}
           </span>
@@ -150,7 +151,7 @@ export function MarkdownConverter() {
         </div>
 
         {/* Output */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col">
           <span id="markdown-converter-heading-2" className="text-sm font-semibold text-muted-foreground pb-2">
             {direction === "md2html" ? "Generated HTML" : "Generated Markdown"}
           </span>

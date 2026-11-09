@@ -72,7 +72,7 @@ export function TimestampConverter() {
   return (
     <div className="space-y-6">
       {/* Current Live Epoch Banner */}
-      <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
+      <div className="rounded-xl bg-card p-5 shadow-lark-sm">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-center gap-3">
             <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-lf-green/15 text-deep-green">
@@ -117,7 +117,7 @@ export function TimestampConverter() {
       {/* Two-Column Converters */}
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Epoch -> Human Date */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4">
           <span className="text-sm font-semibold text-muted-foreground">
             1. Convert epoch to human date
           </span>
@@ -172,7 +172,7 @@ export function TimestampConverter() {
         </div>
 
         {/* Human Date -> Epoch */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4">
           <span className="text-sm font-semibold text-muted-foreground">
             2. Convert date & time to epoch
           </span>

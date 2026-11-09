@@ -51,7 +51,7 @@ export function UtmBuilder() {
   return (
     <div className="space-y-6">
       {/* Top Generated URL Banner */}
-      <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
+      <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-3">
         <div className="flex items-center justify-between">
           <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
             <Link2 className="h-4 w-4 text-deep-orange" /> Generated campaign tracking URL
@@ -76,14 +76,14 @@ export function UtmBuilder() {
         <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px]">
           <span className="text-muted-foreground font-medium">Tracking tags:</span>
           {source && <span className="rounded bg-lf-green/15 px-2 py-0.5 font-semibold text-deep-green">source: {source}</span>}
-          {medium && <span className="rounded bg-lf-purple/15 px-2 py-0.5 font-semibold text-deep-purple">medium: {medium}</span>}
+          {medium && <span className="rounded bg-muted px-2 py-0.5 font-semibold text-foreground">medium: {medium}</span>}
           {campaign && <span className="rounded bg-lf-orange/15 px-2 py-0.5 font-semibold text-deep-orange">campaign: {campaign}</span>}
         </div>
       </div>
 
       {/* Input parameters & Presets */}
       <div className="grid gap-6 lg:grid-cols-12">
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-8">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-8">
           <div>
             <label htmlFor="utm-builder-1" className="text-xs font-medium text-foreground">Target Destination URL</label>
             <input id="utm-builder-1"
@@ -159,7 +159,7 @@ export function UtmBuilder() {
         </div>
 
         {/* Quick Channel Presets (4 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3 lg:col-span-4">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-3 lg:col-span-4">
           <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
             <Sparkles className="h-4 w-4 text-deep-orange" /> Channel presets
           </span>
@@ -175,7 +175,7 @@ export function UtmBuilder() {
                   setSource(p.source);
                   setMedium(p.medium);
                 }}
-                className="w-full text-left rounded-lg border border-border bg-background p-2.5 text-xs transition-colors hover:border-lf-purple hover:bg-muted/50"
+                className="w-full text-left rounded-lg border border-border bg-background p-2.5 text-xs transition-colors hover:border-input hover:bg-muted/50"
               >
                 <span className="font-semibold text-foreground block">{p.name}</span>
                 <span className="font-mono text-[11px] text-muted-foreground">

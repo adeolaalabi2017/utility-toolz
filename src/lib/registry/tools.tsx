@@ -31,6 +31,16 @@ export const TOOLS: Tool[] = [
     popular: true,
   },
   {
+    slug: "investment-calculator",
+    name: "Investment Calculator",
+    domain: "finance",
+    category: "Investing",
+    tagline: "What your investments could grow to after fees and inflation, year by year.",
+    description:
+      "Project an investment from a starting amount and monthly contributions, with fees, inflation, rising contributions and a yearly breakdown you can export.",
+    tags: ["investment calculator", "investing", "investment growth", "fees", "inflation", "returns"],
+  },
+  {
     slug: "compound-interest-calculator",
     name: "Compound Interest Calculator",
     domain: "finance",
@@ -821,6 +831,16 @@ export const TOOLS: Tool[] = [
     popular: true,
   },
   {
+    slug: "years-months-days-calculator",
+    name: "Date to Years, Months & Days Calculator",
+    domain: "everyday",
+    category: "Dates & Ages",
+    tagline: "The exact years, months and days between any two dates.",
+    description:
+      "Enter two dates to get the precise span in years, months and days, plus the same span in total months, weeks and days.",
+    tags: ["date difference", "years months days", "time between dates", "dates", "calculator"],
+  },
+  {
     slug: "date-calculator",
     name: "Date Calculator",
     domain: "everyday",
@@ -1360,6 +1380,16 @@ export const TOOLS: Tool[] = [
       "Type a full expression such as 2sin(30) + √16 and get the answer as you type. Supports brackets, powers, logs, factorials, π, e and the last answer.",
     tags: ["scientific calculator", "trigonometry", "logarithm", "exponent", "square root", "math"],
     popular: true,
+  },
+  {
+    slug: "percentage-difference-calculator",
+    name: "Percentage Difference Calculator",
+    domain: "math",
+    category: "Arithmetic",
+    tagline: "How far apart two values are, when neither is the starting point.",
+    description:
+      "Compare two numbers with the percentage difference formula, plus the actual difference, their average and the percentage change in each direction.",
+    tags: ["percentage difference", "percent difference", "compare values", "percentage", "math"],
   },
   {
     slug: "percentage-calculator",

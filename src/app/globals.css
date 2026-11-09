@@ -3,13 +3,6 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ------------------------------------------------------------------ */
-/* Larkfield-adapted design language — semantic token layer            */
-/* Sources: Larkfield screenshot + design.md (WCAG 2.2 AA target)      */
-/* Page surface.strong #fff6e0 · cards surface.muted #faf5ea ·         */
-/* ink/borders deep green #1f4a3f / #24443b · purple inverse #3f346f   */
-/* ------------------------------------------------------------------ */
-
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
@@ -45,198 +38,177 @@
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
   --color-ink: var(--ink);
+  --color-highlight: var(--highlight);
+  --color-on-highlight: var(--on-highlight);
   --color-teal: var(--teal);
   /* Larkfield accent system (from screenshot; design.md text.inverse = purple) */
-  --color-lf-purple: var(--lf-purple);
-  --color-lf-purple-deep: var(--lf-purple-deep);
   --color-lf-green: var(--lf-green);
   --color-lf-green-deep: var(--lf-green-deep);
   --color-lf-coral: var(--lf-coral);
-  --color-lf-pink: var(--lf-pink);
   --color-lf-orange: var(--lf-orange);
-  --color-lf-rust: var(--lf-rust);
   --color-lf-cream: var(--lf-cream);
   /* Text-safe deep accents: dark on cream, light on Night Desk (WCAG AA both) */
   --color-deep-green: var(--deep-green);
-  --color-deep-purple: var(--deep-purple);
   --color-deep-coral: var(--deep-coral);
   --color-deep-orange: var(--deep-orange);
-  --color-deep-pink: var(--deep-pink);
-  --color-deep-rust: var(--deep-rust);
 }
 
-/* Design.md scale + display sizes (serif). Mapping documented in DESIGN.md:
-   xs=11.5 · sm=12.5(design md) · base=16(design base, lh 24) · lg=16.5(design 4xl) */
 @theme {
-  --text-xs: 11.5px;
+  --text-xs: 13px;
   --text-xs--line-height: 1.45;
-  --text-sm: 12.5px;
-  --text-sm--line-height: 1.55;
+  --text-sm: 14px;
+  --text-sm--line-height: 1.5;
   --text-base: 16px;
   --text-base--line-height: 1.5;
-  --text-lg: 16.5px;
-  --text-lg--line-height: 1.6;
-  --text-xl: 18px;
-  --text-xl--line-height: 1.5;
-  --text-2xl: 20px;
-  --text-2xl--line-height: 1.35;
-  --text-3xl: 24px;
-  --text-3xl--line-height: 1.3;
-  --text-4xl: 30px;
-  --text-4xl--line-height: 1.2;
-  --text-5xl: 38px;
-  --text-5xl--line-height: 1.15;
-  --text-6xl: 46px;
-  --text-6xl--line-height: 1.1;
+  --text-lg: 18px;
+  --text-lg--line-height: 1.4;
+  --text-xl: 20px;
+  --text-xl--line-height: 1.35;
+  --text-2xl: 22px;
+  --text-2xl--line-height: 1.3;
+  --text-3xl: 26px;
+  --text-3xl--line-height: 1.25;
+  --text-4xl: 32px;
+  --text-4xl--line-height: 1.15;
+  --text-5xl: 40px;
+  --text-5xl--line-height: 1.1;
+  --text-6xl: 48px;
+  --text-6xl--line-height: 1.05;
 
-  /* Serif display sizes for headings (screenshot-derived) */
-  --text-display-sm: 1.375rem;
-  --text-display-sm--line-height: 1.3;
-  --text-display-md: 1.75rem;
-  --text-display-md--line-height: 1.22;
-  --text-display-lg: 2.125rem;
-  --text-display-lg--line-height: 1.16;
-  --text-display-xl: clamp(2.25rem, 4.6vw, 3.125rem);
-  --text-display-xl--line-height: 1.08;
+  --text-display-sm: 1.625rem;
+  --text-display-sm--line-height: 1.2;
+  --text-display-md: 2rem;
+  --text-display-md--line-height: 1.12;
+  --text-display-lg: clamp(2.25rem, 4.4vw, 3.75rem);
+  --text-display-lg--line-height: 1.05;
+  --text-display-xl: clamp(3rem, 7vw, 6.25rem);
+  --text-display-xl--line-height: 1;
 
-  /* Radius tokens: xs 7 · md 12 · lg 14 · xl 22 (design.md) */
-  --radius-sm: 7px;
-  --radius-md: 12px;
-  --radius-lg: 14px;
-  --radius-xl: 22px;
-  --radius-2xl: 22px;
+  /* Controls 10, cards 16, chips full */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 10px;
+  --radius-xl: 16px;
+  --radius-2xl: 16px;
 
-  /* Shadow token: shadow.1 = rgba(31,74,63,.42) 0 24px 48px -32px */
-  --shadow-lark: 0 24px 48px -32px rgb(31 74 63 / 0.42);
-  --shadow-lark-sm: 0 10px 22px -16px rgb(31 74 63 / 0.35);
+  /* Information sits on tone alone; only overlays cast a shadow */
+  --shadow-lark: none;
+  --shadow-lark-sm: none;
 }
 
+/* Highlighter tokens. Rules and rationale: agent-ctx/DESIGN.md. */
 :root {
-  /* font stacks (gpt-taste compliant: Geist Sans + Outfit Display) */
   --font-app-sans: var(--font-geist-sans), -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
     "Helvetica Neue", Arial, sans-serif;
   --font-app-serif: var(--font-outfit), var(--font-geist-sans), ui-sans-serif, system-ui,
     sans-serif;
 
-  /* Larkfield surfaces */
-  --background: #fff6e0; /* surface.strong — page */
-  --foreground: #1f4a3f; /* deep green ink */
-  --card: #faf5ea; /* surface.muted — cards */
-  --card-foreground: #1f4a3f;
-  --popover: #fffcf2;
-  --popover-foreground: #1f4a3f;
-  --primary: #1f4a3f; /* dark-green filled controls */
-  --primary-foreground: #fef5de;
-  --secondary: #f3ecd7; /* cream chip */
-  --secondary-foreground: #1f4a3f;
-  --muted: #f5efdb;
-  --muted-foreground: #365a4f; /* text.tertiary */
-  --accent: #f3ead1;
-  --accent-foreground: #1f4a3f;
-  --destructive: #cf4f43;
-  --border: #e6ddc4; /* warm hairline (measured #e2e0d5) */
-  --input: #d9cfb2;
-  --ring: #6b5faf; /* purple focus indicator (design.md text.inverse family) */
+  /* Surfaces step page -> card -> inset by tone alone */
+  --background: #f3f3ef;
+  --card: #ffffff;
+  --muted: #e6e6e0;
+  --foreground: #111210;
+  --card-foreground: #111210;
+  --muted-foreground: #555952;
+  --popover: #ffffff;
+  --popover-foreground: #111210;
+  --primary: #111210;
+  --primary-foreground: #ffffff;
+  --secondary: #e6e6e0;
+  --secondary-foreground: #111210;
+  --accent: #ebebe6;
+  --accent-foreground: #111210;
+  --destructive: #b3261e;
+  /* --border is a quiet divider; --input is the ink edge that means "touchable" */
+  --border: #dcdcd6;
+  --input: #111210;
+  --ring: #111210;
 
-  /* legacy token names kept — values now carry the Larkfield brand */
-  --ink: #1f4a3f;
-  --teal: #308f68;
+  /* The one accent: always a fill behind ink text, once per screen */
+  --highlight: #d4f53c;
+  --on-highlight: #111210;
 
-  /* accent set sampled from the screenshot */
-  --lf-purple: #6b5faf;
-  --lf-purple-deep: #3f346f;
-  --lf-green: #308f68;
-  --lf-green-deep: #1f5f45;
-  --lf-coral: #cf4f43;
-  --lf-pink: #d1548a;
-  --lf-orange: #e07a3c;
-  --lf-rust: #c9603c;
-  --lf-cream: #fef5de; /* warm text on dark green / colored cards */
+  --ink: #111210;
+  --teal: #111210;
 
-  --deep-green: #1f5f45;
-  --deep-purple: #3f346f;
-  --deep-coral: #a83a30;
-  --deep-orange: #a4502c;
-  --deep-pink: #a83a67;
-  --deep-rust: #9c4726;
+  /* State colours only: good, warn, bad. */
+  --lf-green: #2e7d4f;
+  --lf-green-deep: #1f5f3a;
+  --lf-coral: #c8372d;
+  --lf-orange: #c77700;
+  --lf-cream: #f2f2ec;
 
-  --chart-1: #1f4a3f;
-  --chart-2: #308f68;
-  --chart-3: #e07a3c;
-  --chart-4: #6b5faf;
-  --chart-5: #d1548a;
+  --deep-green: #1d6b3d;
+  --deep-coral: #a82a20;
+  --deep-orange: #8a5200;
 
-  --sidebar: #faf5ea;
-  --sidebar-foreground: #1f4a3f;
-  --sidebar-primary: #1f4a3f;
-  --sidebar-primary-foreground: #fef5de;
-  --sidebar-accent: #f3ead1;
-  --sidebar-accent-foreground: #1f4a3f;
-  --sidebar-border: #e6ddc4;
-  --sidebar-ring: #6b5faf;
+  --chart-1: #111210;
+  --chart-2: #6f736a;
+  --chart-3: #a9ada3;
+  --chart-4: #4a4d47;
+  --chart-5: #c9ccc3;
 
-  /* motion tokens (design.md) */
-  --duration-instant: 300ms;
-  --duration-fast: 400ms;
-  --duration-normal: 450ms;
+  --sidebar: #ffffff;
+  --sidebar-foreground: #111210;
+  --sidebar-primary: #111210;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ebebe6;
+  --sidebar-accent-foreground: #111210;
+  --sidebar-border: #dcdcd6;
+  --sidebar-ring: #111210;
+
+  --duration-instant: 150ms;
+  --duration-fast: 250ms;
+  --duration-normal: 350ms;
 }
 
 .dark {
-  /* Larkfield "Night Desk" dark mode palette (WCAG 2.2 AA compliant) */
-  --background: #0d1520;
-  --foreground: #fef5de;
-  --card: #131f2d;
-  --card-foreground: #fef5de;
-  --popover: #131f2d;
-  --popover-foreground: #fef5de;
-  --primary: #24805b;
-  --primary-foreground: #ffffff;
-  --secondary: #1a2a3b;
-  --secondary-foreground: #fef5de;
-  --muted: #182635;
-  --muted-foreground: #94a3b8;
-  --accent: #1e3247;
-  --accent-foreground: #fef5de;
-  --destructive: #f87171;
-  --border: #233649;
-  --input: #233649;
-  --ring: #8b7ed8;
+  --background: #131412;
+  --card: #1e1f1c;
+  --muted: #2a2b27;
+  --foreground: #f2f2ec;
+  --card-foreground: #f2f2ec;
+  --muted-foreground: #adb0a7;
+  --popover: #1e1f1c;
+  --popover-foreground: #f2f2ec;
+  --primary: #f2f2ec;
+  --primary-foreground: #131412;
+  --secondary: #2a2b27;
+  --secondary-foreground: #f2f2ec;
+  --accent: #2a2b27;
+  --accent-foreground: #f2f2ec;
+  --destructive: #ff8a80;
+  --border: #383a34;
+  --input: #f2f2ec;
+  --ring: #f2f2ec;
 
-  /* Result panels and brand tiles keep the deep green surface in both themes */
-  --ink: #1f4a3f;
-  --teal: #4ade80;
+  --ink: #2a2b27;
+  --teal: #f2f2ec;
 
-  --lf-purple: #8b7ed8;
-  --lf-purple-deep: #63539e;
-  --lf-green: #308f68;
-  --lf-green-deep: #226b4e;
-  --lf-coral: #fb7185;
-  --lf-pink: #f472b6;
-  --lf-orange: #fb923c;
-  --lf-rust: #ea580c;
-  --lf-cream: #fef5de;
+  --lf-green: #5fce8f;
+  --lf-green-deep: #3f9e68;
+  --lf-coral: #ff8a80;
+  --lf-orange: #f0b35a;
+  --lf-cream: #f2f2ec;
 
-  --deep-green: #6fd3a2;
-  --deep-purple: #b9aff2;
-  --deep-coral: #f7a097;
-  --deep-orange: #f5a66e;
-  --deep-pink: #f290bd;
-  --deep-rust: #f2a481;
+  --deep-green: #7fdca6;
+  --deep-coral: #ffb0a8;
+  --deep-orange: #f5c27a;
 
-  --chart-1: #308f68;
-  --chart-2: #8b7ed8;
-  --chart-3: #fb923c;
-  --chart-4: #38bdf8;
-  --chart-5: #f472b6;
+  --chart-1: #f2f2ec;
+  --chart-2: #adb0a7;
+  --chart-3: #6f736a;
+  --chart-4: #8d9087;
+  --chart-5: #4a4d47;
 
-  --sidebar: #131f2d;
-  --sidebar-foreground: #fef5de;
-  --sidebar-primary: #24805b;
-  --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #1e3247;
-  --sidebar-accent-foreground: #fef5de;
-  --sidebar-border: #233649;
-  --sidebar-ring: #8b7ed8;
+  --sidebar: #1e1f1c;
+  --sidebar-foreground: #f2f2ec;
+  --sidebar-primary: #f2f2ec;
+  --sidebar-primary-foreground: #131412;
+  --sidebar-accent: #2a2b27;
+  --sidebar-accent-foreground: #f2f2ec;
+  --sidebar-border: #383a34;
+  --sidebar-ring: #f2f2ec;
 }
 
 @layer base {
@@ -250,18 +222,17 @@
     scroll-behavior: smooth;
   }
 
-  /* Serif display headings: regular weight like the reference */
   h1, h2, h3 {
-    @apply font-display font-normal;
+    @apply font-display font-medium;
+    letter-spacing: -0.03em;
   }
 
-  /* Keyboard-first focus: always visible, purple ring token */
+  /* Keyboard-first focus: always visible */
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
   }
 
-  /* design.md motion.instant on interactive color/edge changes */
   a, button, [role="button"], input, select, textarea, summary {
     transition-property: color, background-color, border-color, box-shadow, outline-color;
     transition-duration: var(--duration-instant);
@@ -269,7 +240,8 @@
   }
 
   ::selection {
-    background: rgb(107 95 175 / 0.22); /* purple token @ 22% */
+    background: var(--highlight);
+    color: var(--on-highlight);
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -294,11 +266,8 @@
   height: 8px;
 }
 .thin-scroll::-webkit-scrollbar-thumb {
-  background: var(--input);
+  background: var(--border);
   border-radius: 8px;
-}
-.dark .thin-scroll::-webkit-scrollbar-thumb {
-  background: #233649;
 }
 .thin-scroll::-webkit-scrollbar-track {
   background: transparent;
@@ -346,49 +315,4 @@
   thead {
     display: table-header-group;
   }
-}
-
-/* ------------------------------------------------------------------ */
-/* gpt-taste motion & ambient enhancements                            */
-/* ------------------------------------------------------------------ */
-
-@utility animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 100s linear infinite;
-}
-
-@keyframes marquee {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
-}
-
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marquee 100s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
-
-.ambient-radial-glow {
-  background-image: radial-gradient(
-    ellipse 80% 50% at 50% -20%,
-    rgba(48, 143, 104, 0.12),
-    transparent 70%
-  );
-}
-
-.dark .ambient-radial-glow {
-  background-image: radial-gradient(
-    ellipse 80% 50% at 50% -20%,
-    rgba(48, 143, 104, 0.18),
-    transparent 70%
-  );
 }

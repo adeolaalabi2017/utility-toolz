@@ -66,7 +66,7 @@ export function FaviconGenerator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Controls */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4">
           <span className="text-sm font-semibold text-muted-foreground">
             Icon design & generator
           </span>
@@ -151,7 +151,7 @@ export function FaviconGenerator() {
         </div>
 
         {/* Browser Tab Simulator */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between">
           <div>
             <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5 pb-3">
               <Monitor className="h-4 w-4 text-deep-green" /> Browser tab mockup
@@ -200,7 +200,7 @@ export function FaviconGenerator() {
       </div>
 
       {/* Export Sizes Grid */}
-      <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
+      <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4">
         <span className="text-sm font-semibold text-muted-foreground">
           Download platform favicons (PNG)
         </span>
@@ -227,7 +227,7 @@ export function FaviconGenerator() {
       </div>
 
       {/* HTML Meta snippet */}
-      <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+      <div className="rounded-xl bg-card p-4 shadow-lark-sm">
         <div className="flex items-center justify-between pb-2">
           <span className="text-xs font-semibold text-foreground">HTML Header Tags</span>
           <Button

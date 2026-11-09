@@ -301,6 +301,16 @@ export function toggleLastSign(expr: string): string {
   return `${before}-${m[0]}`;
 }
 
+/**
+ * How far apart two values are, relative to their average. Symmetric: swapping
+ * them gives the same answer. Null when either value isn't a number.
+ */
+export function percentDifference(a: number, b: number): number | null {
+  if (!Number.isFinite(a) || !Number.isFinite(b)) return null;
+  const average = (Math.abs(a) + Math.abs(b)) / 2;
+  return average === 0 ? 0 : (Math.abs(a - b) / average) * 100;
+}
+
 /* ------------------------------------------------------------------ */
 /* Number theory                                                       */
 /* ------------------------------------------------------------------ */
@@ -541,8 +551,10 @@ export function roundTo(value: number, places: number, method: RoundMethod): num
 
 /** Round to the nearest multiple of step (0.05, 10, 0.25 …). */
 export function roundToMultiple(value: number, step: number, method: RoundMethod): number {
-  const decimals = (String(step).split(".")[1] ?? "").length;
-  const units = roundTo(value / step, 0, method);
+  const [mantissa, exp] = step.toExponential().split("e");
+  const decimals = Math.max(0, (mantissa.split(".")[1] ?? "").length - Number(exp));
+  // Divide as scaled decimals: 0.7 / 0.1 is 6.999… in binary, but 7 / 1 is exact.
+  const units = roundTo(shift(value, decimals) / shift(step, decimals), 0, method);
   return Number((units * step).toFixed(decimals)) + 0;
 }
 

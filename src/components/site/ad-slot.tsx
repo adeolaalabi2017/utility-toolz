@@ -30,7 +30,7 @@ export function AdSlot({ slot, className }: AdSlotProps) {
         aria-hidden
         data-ad-slot={slot}
         className={cn(
-          "ad-slot my-6 flex w-full items-center justify-center rounded-xl border border-dashed border-border/70 text-[11px] text-muted-foreground",
+          "ad-slot my-6 flex w-full items-center justify-center rounded-xl bg-muted text-[11px] text-muted-foreground",
           size,
           className
         )}

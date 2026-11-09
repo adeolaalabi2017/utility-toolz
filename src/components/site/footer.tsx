@@ -1,31 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { LayoutGrid } from "lucide-react";
 import { DOMAINS, PROFESSIONS, TOOLS } from "@/lib/registry";
 import { cn } from "@/lib/utils";
 
 export function Footer() {
   return (
     <footer className="mt-auto border-t border-border bg-card">
-      <div className="mx-auto max-w-6xl px-4 py-12 sm:px-6">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6">
         <div className="grid gap-10 md:grid-cols-[1.4fr_1fr_1fr_1fr]">
           {/* Brand */}
           <div>
             <Link href="/" className="flex items-center gap-2" aria-label="Utility Toolz home">
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-ink border border-transparent dark:border-border/60">
-                <LayoutGrid className="h-4.5 w-4.5 text-[#7fbb92]" />
-              </span>
-              <span className="font-display text-xl font-semibold tracking-tight text-foreground">
-                Utility<span className="text-deep-rust">Toolz</span>
-              </span>
+              <span className="font-display text-2xl font-medium tracking-tight text-foreground">Utility Toolz</span>
             </Link>
             <p className="mt-3 max-w-xs text-sm leading-relaxed text-foreground/80 dark:text-foreground/85">
               Professional tools organized by domain — finance, marketing, advertising, business
               and beyond. Built for people whose work depends on the numbers.
             </p>
             <p className="mt-4 inline-flex items-center gap-2 rounded-full border border-border bg-background px-3 py-1 text-xs text-foreground/80 dark:text-foreground/85">
-              <span className="h-1.5 w-1.5 rounded-full bg-lf-green" aria-hidden />
               {TOOLS.length} tools across {DOMAINS.length} domains
             </p>
           </div>
@@ -39,7 +32,7 @@ export function Footer() {
                   <Link
                     href={`/${d.slug}`}
                     className={cn(
-                      "text-sm transition-colors hover:text-deep-orange",
+                      "text-sm transition-colors hover:text-foreground hover:underline",
                       d.status === "live" ? "text-foreground/90 font-medium" : "text-foreground/60"
                     )}
                   >
@@ -65,7 +58,7 @@ export function Footer() {
                 <li key={p.slug}>
                   <Link
                     href={`/professions/${p.slug}`}
-                    className="text-sm text-foreground/90 font-medium transition-colors hover:text-deep-orange"
+                    className="text-sm text-foreground/90 font-medium transition-colors hover:text-foreground hover:underline"
                   >
                     {p.name}
                   </Link>

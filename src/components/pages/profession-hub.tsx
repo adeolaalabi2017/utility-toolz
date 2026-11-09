@@ -36,7 +36,7 @@ export function ProfessionHub({
     <article>
       {/* Breadcrumb */}
       <div className="border-b bg-muted/30">
-        <div className="mx-auto max-w-6xl px-4 py-3 sm:px-6">
+        <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6">
           <Breadcrumb>
             <BreadcrumbList>
               <BreadcrumbItem>
@@ -53,9 +53,9 @@ export function ProfessionHub({
         </div>
       </div>
 
-      <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12">
         <div className="flex items-start gap-4">
-          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-ink text-[#7fbb92]">
+          <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-ink text-[#f2f2ec]">
             <Icon className="h-7 w-7" />
           </span>
           <div>
@@ -71,7 +71,7 @@ export function ProfessionHub({
         {live.length > 0 ? (
           <section className="mt-10" aria-labelledby="ready">
             <h2 id="ready" className="flex items-center gap-2 font-display text-display-sm tracking-tight">
-              <Sparkles className="h-4.5 w-4.5 text-lf-rust" /> Ready now — {live.length} tools
+              <Sparkles className="h-4.5 w-4.5 text-muted-foreground" /> Ready now — {live.length} tools
             </h2>
             <div className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {live.map((t) => (
@@ -80,7 +80,7 @@ export function ProfessionHub({
             </div>
           </section>
         ) : (
-          <section className="mt-10 max-w-3xl rounded-xl border bg-card p-5 shadow-lark-sm sm:p-6">
+          <section className="mt-10 max-w-3xl rounded-xl bg-card p-5 shadow-lark-sm sm:p-6">
             <h2 className="font-display text-display-sm tracking-tight">Toolkit in development</h2>
             <p className="mt-2 leading-relaxed text-foreground/85">
               This profession&apos;s dedicated set lands in a later phase of the roadmap. The

@@ -58,7 +58,7 @@ export function FinalExamCalculator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
             <GraduationCap className="h-4 w-4 text-deep-orange" /> Grade & exam weighting (%)
           </span>
@@ -112,7 +112,7 @@ export function FinalExamCalculator() {
         </div>
 
         {/* Results Banner (5 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
           <span className="text-sm font-semibold text-muted-foreground">
             Target final exam score
           </span>
@@ -120,7 +120,7 @@ export function FinalExamCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Required Exam Score</span>
-              <p className={`tnum font-display text-display-lg mt-1 font-bold ${calc.color}`}>
+              <p className={`tnum font-display text-display-md mt-1 font-bold ${calc.color}`}>
                 {calc.requiredScore <= 0 ? "0%" : `${calc.requiredScore.toFixed(1)}%`}
               </p>
               <span className={`text-xs font-semibold mt-1 block ${calc.color}`}>
@@ -144,7 +144,7 @@ export function FinalExamCalculator() {
       </div>
 
       {/* Target Letter Grade Grid */}
-      <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
+      <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-3">
         <h4 className="text-sm font-semibold text-muted-foreground">
           Scores needed for alternative final grades
         </h4>

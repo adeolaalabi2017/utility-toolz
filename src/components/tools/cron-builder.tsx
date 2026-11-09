@@ -154,7 +154,7 @@ export function CronBuilder() {
   return (
     <div className="space-y-6">
       {/* Top Expression Banner */}
-      <div className="rounded-xl border border-border bg-card p-6 shadow-lark-sm">
+      <div className="rounded-xl bg-card p-6 shadow-lark-sm">
         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex-1">
             <span className="text-sm font-semibold text-muted-foreground">
@@ -192,7 +192,7 @@ export function CronBuilder() {
               <button type="button"
                 key={p.label}
                 onClick={() => setCron(p.expr)}
-                className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground transition-colors hover:border-lf-purple hover:text-deep-purple"
+                className="rounded-full border border-border bg-background px-3 py-1 text-xs font-medium text-foreground transition-colors hover:border-input hover:text-foreground"
               >
                 {p.label} ({p.expr})
               </button>
@@ -210,7 +210,7 @@ export function CronBuilder() {
           { label: "Month", hint: "1-12, *", val: parts.mon, idx: 3 },
           { label: "Day of Week", hint: "0-6 (0=Sun), 1-5", val: parts.dow, idx: 4 },
         ].map((f) => (
-          <div key={f.label} className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+          <div key={f.label} className="rounded-xl bg-card p-4 shadow-lark-sm">
             <span className="text-xs font-semibold text-foreground">{f.label}</span>
             <input
               aria-label={`${f.label} field`}
@@ -225,7 +225,7 @@ export function CronBuilder() {
       </div>
 
       {/* Next scheduled runs */}
-      <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm">
+      <div className="rounded-xl bg-card p-5 shadow-lark-sm">
         <h4 className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
           <Calendar className="h-4 w-4 text-deep-green" /> Next 5 scheduled executions
         </h4>

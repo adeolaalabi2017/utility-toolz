@@ -51,7 +51,7 @@ export function HreflangGenerator() {
 
   return (
     <div className="space-y-6">
-      <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
+      <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4">
         <div className="flex items-center justify-between border-b border-border/60 pb-3">
           <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
             <Globe className="h-4 w-4 text-deep-green" /> Regional URL variants
@@ -121,7 +121,7 @@ export function HreflangGenerator() {
       </div>
 
       {/* Generated Code Output */}
-      <div className="rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+      <div className="rounded-xl bg-card p-4 shadow-lark-sm">
         <div className="flex items-center justify-between pb-2">
           <span className="text-xs font-semibold text-foreground">Generated Hreflang Tags</span>
           <Button

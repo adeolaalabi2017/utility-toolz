@@ -34,18 +34,40 @@ export const daysInMonth = (y: number, mIdx: number): number => new Date(y, mIdx
 
 /** Calendar difference: full years, months and days from `from` to `to`. */
 export function diffYMD(from: Date, to: Date): { y: number; m: number; d: number } {
-  let y = to.getFullYear() - from.getFullYear();
-  let m = to.getMonth() - from.getMonth();
-  let d = to.getDate() - from.getDate();
-  if (d < 0) {
-    m -= 1;
-    d += daysInMonth(to.getFullYear(), to.getMonth() - 1);
-  }
-  if (m < 0) {
-    y -= 1;
-    m += 12;
-  }
-  return { y, m, d };
+  let months = (to.getFullYear() - from.getFullYear()) * 12 + to.getMonth() - from.getMonth();
+  if (addMonthsSafe(from, months) > to) months -= 1;
+  // Count the days from the last whole month, so Jan 31 -> Mar 1 is 1 month 1 day.
+  const anchor = addMonthsSafe(from, months);
+  const d = Math.round(
+    (Date.UTC(to.getFullYear(), to.getMonth(), to.getDate()) -
+      Date.UTC(anchor.getFullYear(), anchor.getMonth(), anchor.getDate())) /
+      86_400_000
+  );
+  return { y: Math.trunc(months / 12), m: months % 12, d };
+}
+
+/** Whole calendar days from `from` to `to`, unaffected by daylight-saving changes. */
+export function daysBetween(from: Date, to: Date): number {
+  return Math.round(
+    (Date.UTC(to.getFullYear(), to.getMonth(), to.getDate()) -
+      Date.UTC(from.getFullYear(), from.getMonth(), from.getDate())) /
+      86_400_000
+  );
+}
+
+/**
+ * The exact span between two dates, in either order. With `includeEnd` the
+ * last day counts too, as it does for "Monday to Friday is 5 days".
+ */
+export function dateSpan(a: Date, b: Date, includeEnd = false) {
+  const swapped = a > b;
+  const from = swapped ? b : a;
+  const earlierTo = swapped ? a : b;
+  const to = includeEnd
+    ? new Date(earlierTo.getFullYear(), earlierTo.getMonth(), earlierTo.getDate() + 1)
+    : earlierTo;
+  const { y, m, d } = diffYMD(from, to);
+  return { y, m, d, totalMonths: y * 12 + m, totalDays: daysBetween(from, to), swapped };
 }
 
 /** Add months, clamping the day (Jan 31 + 1 month -> Feb 28). */

@@ -1,5 +1,6 @@
 "use client";
 
+import { ResultValue } from "./result-value";
 import { Cur } from "@/components/site/currency";
 import React, { useMemo } from "react";
 import { fmtUSD, fmtPct, fmtNum } from "@/lib/format";
@@ -40,7 +41,7 @@ export function TargetCpaCalculator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
               <Target className="h-4 w-4 text-deep-orange" /> Product unit economics (<Cur />)
@@ -98,7 +99,7 @@ export function TargetCpaCalculator() {
         </div>
 
         {/* Results Banner (5 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
           <span className="text-sm font-semibold text-muted-foreground">
             Bidding targets
           </span>
@@ -106,9 +107,9 @@ export function TargetCpaCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Target Cost Per Acquisition (CPA)</span>
-              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
+              <ResultValue compact live className="mt-1">
                 {fmtUSD(calc.targetCpa, 2)}
-              </p>
+              </ResultValue>
               <span className="text-xs text-muted-foreground mt-1 block">
                 Target ROAS needed: <strong className="text-foreground">{calc.targetRoas.toFixed(2)}x</strong>
               </span>

@@ -76,7 +76,7 @@ export function GpaCalculator() {
   const gpa = credits > 0 ? points / credits : NaN;
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-3">
           <div className="hidden grid-cols-[1fr_110px_36px] gap-2 px-1 sm:grid">
@@ -163,7 +163,7 @@ export function GradeCalculator() {
   const tone = !isFinite(needed) ? "neutral" : needed <= 100 ? "good" : "bad";
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FieldGrid>
@@ -376,7 +376,7 @@ export function CitationFormatter() {
     sourceType === "website" ? "Site / publisher name" : sourceType === "journal" ? "Journal name" : "Publisher";
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <FieldGrid>

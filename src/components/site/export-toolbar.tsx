@@ -6,6 +6,7 @@ import { Download, Copy, Printer, Check } from "lucide-react";
 import { exportToCsv, copyAsMarkdownTable, printCurrentReport, type ExportColumn } from "@/lib/export";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
+import { ToolbarPortal, useInToolPage } from "./tool-toolbar";
 
 interface ExportToolbarProps<T> {
   filename: string;
@@ -28,6 +29,8 @@ export function ExportToolbar<T>({
 }: ExportToolbarProps<T>) {
   const { toast } = useToast();
   const [copied, setCopied] = React.useState(false);
+  // Spacing a tool passes is for its own layout, not the shared toolbar.
+  const inToolPage = useInToolPage();
 
   const handleCsv = () => {
     if (!rows.length) {
@@ -72,14 +75,15 @@ export function ExportToolbar<T>({
   };
 
   return (
-    <div className={cn("no-print flex flex-wrap items-center gap-2", className)}>
+    <ToolbarPortal>
+    <div className={cn("no-print flex items-center gap-2", inToolPage ? "flex-nowrap" : ["flex-wrap", className])}>
       {enableCsv && (
         <Button
           type="button"
           variant="outline"
           size="sm"
           onClick={handleCsv}
-          className="h-10 sm:h-8 gap-1.5 text-xs font-medium"
+          className="h-10 gap-1.5 text-xs font-medium"
         >
           <Download className="h-3.5 w-3.5 text-primary" />
           <span>Export CSV</span>
@@ -92,7 +96,7 @@ export function ExportToolbar<T>({
           variant="outline"
           size="sm"
           onClick={handleCopyMarkdown}
-          className="h-10 sm:h-8 gap-1.5 text-xs font-medium"
+          className="h-10 gap-1.5 text-xs font-medium"
         >
           {copied ? (
             <Check className="h-3.5 w-3.5 text-deep-green" />
@@ -109,7 +113,7 @@ export function ExportToolbar<T>({
           variant="ghost"
           size="sm"
           onClick={handlePrint}
-          className="h-10 sm:h-8 gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground"
+          className="h-10 gap-1.5 text-xs font-medium text-muted-foreground hover:text-foreground"
           title="Print or Save as PDF"
         >
           <Printer className="h-3.5 w-3.5" />
@@ -117,5 +121,6 @@ export function ExportToolbar<T>({
         </Button>
       )}
     </div>
+    </ToolbarPortal>
   );
 }

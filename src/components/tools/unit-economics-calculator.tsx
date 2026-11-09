@@ -46,7 +46,7 @@ export function UnitEconomicsCalculator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
               <DollarSign className="h-4 w-4 text-deep-orange" /> Per-Unit cost breakdown (<Cur />)
@@ -101,7 +101,7 @@ export function UnitEconomicsCalculator() {
                 type="number"
                 value={cac}
                 onChange={(e) => setParams({ cac: Number(e.target.value) || 0 })}
-                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-lf-purple focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
             </div>
 
@@ -118,7 +118,7 @@ export function UnitEconomicsCalculator() {
         </div>
 
         {/* Results Banner (5 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
           <span className="text-sm font-semibold text-muted-foreground">
             Contribution margin
           </span>
@@ -126,7 +126,7 @@ export function UnitEconomicsCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Net Unit Profit (After CAC)</span>
-              <p className={`tnum font-display text-display-lg mt-1 font-bold ${
+              <p className={`tnum font-display text-display-md mt-1 font-bold ${
                 calc.netUnitProfit >= 0 ? "text-deep-green" : "text-deep-coral"
               }`}>
                 {fmtUSD(calc.netUnitProfit, 2)}

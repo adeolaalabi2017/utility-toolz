@@ -112,7 +112,7 @@ export function PaintCalculator() {
   const walls = wallArea(L, W, H, openings);
   const area = walls + (params.ceiling === "yes" ? L * W : 0);
   const litres = paintLitres(area, Number(params.coats), coverage);
-  const ok = L > 0 && W > 0 && H > 0 && coverage > 0;
+  const ok = L > 0 && W > 0 && H > 0 && coverage > 0 && Number.isFinite(litres);
 
   const sizes = imperial ? [1, 0.25] : [5, 2.5, 1];
   const need = imperial ? litres / L_PER_US_GAL : litres;

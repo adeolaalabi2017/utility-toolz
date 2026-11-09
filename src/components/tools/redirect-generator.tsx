@@ -49,7 +49,7 @@ export function RedirectGenerator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-2">
         {/* Input */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4">
           <div className="flex items-center justify-between">
             <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
               <ArrowRightLeft className="h-4 w-4 text-deep-orange" /> URL migration pairs
@@ -96,7 +96,7 @@ export function RedirectGenerator() {
         </div>
 
         {/* Formatted Output */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-3">
               <div className="flex rounded-md bg-muted/60 p-0.5 text-xs font-medium">

@@ -15,6 +15,10 @@ type DiffLine = {
   modifiedLineNum?: number;
 };
 
+/** The LCS table holds one number per line pair, so its size is the product of the line counts. */
+const MAX_DIFF_CELLS = 10_000_000;
+const countLines = (s: string) => s.split(/\r?\n/).length;
+
 function computeDiff(original: string, modified: string, ignoreCase = false, ignoreWhitespace = false): DiffLine[] {
   const norm = (s: string) => {
     let res = s;
@@ -113,9 +117,10 @@ export function DiffChecker() {
   const [ignoreWhitespace, setIgnoreWhitespace] = React.useState(false);
   const [ignoreCase, setIgnoreCase] = React.useState(false);
 
+  const tooLarge = countLines(original) * countLines(modified) > MAX_DIFF_CELLS;
   const diff = React.useMemo(
-    () => computeDiff(original, modified, ignoreCase, ignoreWhitespace),
-    [original, modified, ignoreCase, ignoreWhitespace]
+    () => (tooLarge ? [] : computeDiff(original, modified, ignoreCase, ignoreWhitespace)),
+    [original, modified, ignoreCase, ignoreWhitespace, tooLarge]
   );
 
   const additions = diff.filter((d) => d.type === "add").length;
@@ -140,7 +145,7 @@ export function DiffChecker() {
   };
 
   return (
-    <CalcLayout
+    <CalcLayout inputFirst
       inputs={
         <div className="space-y-4">
           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -232,7 +237,14 @@ export function DiffChecker() {
             </div>
 
             <div className="max-h-80 overflow-auto rounded-lg bg-muted/50 p-2 font-mono text-xs leading-5">
-              {diff.length === 0 ? (
+              {tooLarge ? (
+                <div className="p-6 text-center">
+                  <p className="font-medium text-foreground">These texts are too long to compare here</p>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Compare a smaller section, up to about 3,000 lines on each side.
+                  </p>
+                </div>
+              ) : diff.length === 0 ? (
                 <div className="p-6 text-center">
                   <p className="font-medium text-foreground">No text to compare yet</p>
                   <p className="mt-1 text-xs text-muted-foreground">

@@ -1,5 +1,6 @@
 "use client";
 
+import { ResultValue } from "./result-value";
 import { Cur } from "@/components/site/currency";
 import React, { useState, useMemo } from "react";
 import { fmtUSD, fmtPct, fmtNum } from "@/lib/format";
@@ -82,7 +83,7 @@ export function DepreciationCalculator() {
     <div className="space-y-6">
       <div className="grid gap-6 lg:grid-cols-12">
         {/* Inputs (7 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-4 lg:col-span-7">
           <span className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
             <Calculator className="h-4 w-4 text-deep-orange" /> Asset cost & depreciation method
           </span>
@@ -117,7 +118,7 @@ export function DepreciationCalculator() {
                 min="1"
                 max="50"
                 value={usefulLife}
-                onChange={(e) => setUsefulLife(Number(e.target.value) || 1)}
+                onChange={(e) => setUsefulLife(Math.min(50, Math.max(1, Number(e.target.value) || 1)))}
                 className="mt-1 w-full rounded-md border border-input bg-background p-2 font-mono text-sm font-semibold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
               />
               <span className="text-[11px] text-muted-foreground mt-0.5 block">Standard: 3 (computers), 5 (vehicles), 7 (equipment)</span>
@@ -139,7 +140,7 @@ export function DepreciationCalculator() {
         </div>
 
         {/* Results Banner (5 cols) */}
-        <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
+        <div className="rounded-xl bg-card p-5 shadow-lark-sm flex flex-col justify-between lg:col-span-5">
           <span className="text-sm font-semibold text-muted-foreground">
             Depreciation summary
           </span>
@@ -147,9 +148,9 @@ export function DepreciationCalculator() {
           <div className="my-4 space-y-4">
             <div className="rounded-lg bg-muted/50 p-4 text-center">
               <span className="text-xs text-muted-foreground">Year 1 Write-Off Expense</span>
-              <p className="tnum font-display text-display-lg text-deep-green mt-1 font-bold">
+              <ResultValue compact live className="mt-1">
                 {fmtUSD(calc.year1Expense, 0)}
-              </p>
+              </ResultValue>
               <span className="text-xs text-muted-foreground mt-1 block">
                 Total Depreciable Base: <strong className="text-foreground">{fmtUSD(calc.depreciableBase, 0)}</strong>
               </span>
@@ -164,7 +165,7 @@ export function DepreciationCalculator() {
               </div>
               <div className="rounded-lg bg-muted/50 p-3">
                 <span className="text-[11px] text-muted-foreground block">Residual Book Value</span>
-                <span className="tnum font-display text-display-sm text-deep-purple font-bold">
+                <span className="tnum font-display text-display-sm text-foreground font-bold">
                   {fmtUSD(calc.endingBookValue, 0)}
                 </span>
               </div>
@@ -181,9 +182,9 @@ export function DepreciationCalculator() {
       </div>
 
       {/* Schedule Table */}
-      <div className="rounded-xl border border-border bg-card p-5 shadow-lark-sm space-y-3">
+      <div className="rounded-xl bg-card p-5 shadow-lark-sm space-y-3">
         <h4 className="text-sm font-semibold text-muted-foreground flex items-center gap-1.5">
-          <FileSpreadsheet className="h-4 w-4 text-lf-purple" /> Annual depreciation schedule
+          <FileSpreadsheet className="h-4 w-4 text-muted-foreground" /> Annual depreciation schedule
         </h4>
         <div className="overflow-x-auto">
           <table className="w-full text-left text-xs">

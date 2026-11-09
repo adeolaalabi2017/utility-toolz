@@ -16,8 +16,8 @@ export default function OpenGraphImage() {
           width: "100%",
           height: "100%",
           padding: "72px",
-          background: "#1f4a3f",
-          color: "#fef5de",
+          background: "#d4f53c",
+          color: "#111210",
           fontFamily: "sans-serif",
         }}
       >

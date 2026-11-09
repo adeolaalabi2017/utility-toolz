@@ -86,11 +86,11 @@ export function BookmarkButton({
       title={active ? "Starred — click to remove" : "Star to pin on the home page"}
       className={cn(
         "flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:bg-accent sm:h-8 sm:w-8",
-        active ? "text-lf-orange" : "text-muted-foreground hover:text-foreground",
+        active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
         className
       )}
     >
-      <Star className={cn("h-4 w-4", active && "fill-lf-orange")} aria-hidden />
+      <Star className={cn("h-4 w-4", active && "fill-foreground")} aria-hidden />
     </button>
   );
 }
@@ -103,9 +103,9 @@ export function PinnedToolsBar() {
   if (validTools.length === 0) return null;
 
   return (
-    <section aria-labelledby="pinned-title" className="mb-6 rounded-xl border border-border bg-card p-4 shadow-lark-sm">
+    <section aria-labelledby="pinned-title" className="mb-6 rounded-xl bg-card p-4 shadow-lark-sm">
       <div className="mb-3 flex items-center gap-2">
-        <Star className="h-4 w-4 fill-lf-orange text-lf-orange" aria-hidden />
+        <Star className="h-4 w-4 fill-foreground text-foreground" aria-hidden />
         <h2 id="pinned-title" className="font-sans text-sm font-semibold text-foreground/80">
           Starred tools ({validTools.length})
         </h2>
@@ -115,7 +115,7 @@ export function PinnedToolsBar() {
           <li key={t.slug}>
             <Link
               href={`/${t.domain}/${t.slug}`}
-              className="inline-flex min-h-10 items-center rounded-full border border-border bg-card px-3 text-xs font-medium text-foreground transition-colors hover:border-lf-purple hover:text-deep-purple"
+              className="inline-flex min-h-10 items-center rounded-full border border-border bg-card px-3 text-xs font-medium text-foreground transition-colors hover:border-input hover:text-foreground"
             >
               {t.name}
             </Link>
